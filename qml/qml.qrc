@@ -1,0 +1,14 @@
+<RCC>
+	<qresource prefix="/">
+		<file>main.qml</file>
+		<file>MainScreen.qml</file>
+		<file>Style.qml</file>
+		<file>MainPage.qml</file>
+		<file>BottomRow.qml</file>
+		<file>MenuButton.qml</file>
+		<file>Icon.qml</file>
+
+
+		<file>assets/shoe-sneaker.png</file>
+	</qresource>
+</RCC>

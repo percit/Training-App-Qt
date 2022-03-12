@@ -56,16 +56,20 @@ OpenSSL binaries location: home/percit/Android/Sdk/android_openssl
 ## Add this to .zshrc / .bashrc
 
 
+
 paths:
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export ANDROID_HOME=/home/percit/Android
 export ANDROID_SDK=/home/percit/Android/Sdk
 export ANDROID_NDK=/home/percit/Android/Sdk/ndk/21.3.6528147
 export ANDROID_NDK_TOOLCHAIN_ROOT=/home/percit/Android/Sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake
-
+export Qt5_host=home/percit/Qt/5.15.2
+export Qt5_android=/home/percit/Qt/5.15.2/android
 
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:$ANDROID_HOME
 export PATH=$PATH:$ANDROID_SDK
 export PATH=$PATH:$ANDROID_NDK 
 export PATH=$PATH:$ANDROID_NDK_TOOLCHAIN_ROOT
+export PATH=$PATH:$Qt5_host
+export PATH=$PATH:$Qt5_android
