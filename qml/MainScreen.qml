@@ -18,10 +18,9 @@ Item {
 		id: dummyPage1
 		text: "Google Maps \n"
 	  }
-	  MainPage {
+	  AchievementsPage {
 		id: dummyPage2
-		text: "Page2"
-		placeholder: true
+		placeholder: false
 	  }
 	  MainPage {
 		id: dummyPage3

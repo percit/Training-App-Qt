@@ -4,9 +4,12 @@ import QtQml 2.3
 
 Item {
   id: root
-  
+
   property bool placeholder:false 
   property string text: ""
+  Rectangle {
+	anchors.fill: parent
+	color: "grey"
   Text {
 	id: pageText
 	anchors.centerIn: parent
@@ -17,4 +20,5 @@ Item {
 	  pointSize: 20
 	}
   }
+ }
 }
