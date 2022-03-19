@@ -10,7 +10,7 @@ Item {
 	id: pagesRow
 	
 	anchors.fill: parent
-	currentIndex: 0
+	currentIndex: 2
 	interactive: false
 	ObjectModel {
 	  id: modelObject
@@ -20,17 +20,13 @@ Item {
 	  }
 	  AchievementsPage {
 		id: dummyPage2
-		placeholder: false
 	  }
-	  MainPage {
+	  WeeklyStatsPage {
 		id: dummyPage3
-		text: "Page 3"
-		placeholder: true
 	  }
-	  MainPage {
+	  MainPage {//settings
 		id: dummyPage4
 		text: "Page 4"
-		placeholder: true
 	  }
 	  MainPage {
 		id: dummyPage_DEBUG

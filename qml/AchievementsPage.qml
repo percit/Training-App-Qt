@@ -4,11 +4,11 @@ import QtQml 2.3
 
 MainPage {
   id: root
-  readonly property float weeklyDistance: 0.0
-  readonly property float longestDistance: 0.0
-  readonly property float bestPace: 0.0
+  readonly property double weeklyDistance: 0.0
+  readonly property double longestDistance: 0.0
+  readonly property double bestPace: 0.0
   readonly property string longestDuration: "0:00"
-  placeholder:true
+  placeholder:false
 
   Rectangle { 
 	width: 180; height: 180
@@ -24,7 +24,7 @@ MainPage {
 	  anchors.centerIn: parent
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
-		text: "Distane"
+		text: "Distance"
 		font: Style.fontNormal12
 	  }
 	  Text {
