@@ -3,7 +3,7 @@ import QtQuick 2.3
 Rectangle {
   id: root 
    
-  width: 375 * Style.scaleX //TODO recheck these values
+  width: 375 * Style.scaleX
   height: 64 * Style.scaleY
   // color: Style.backgroundColor
   color: "yellow"

@@ -14,28 +14,17 @@ Item {
 	interactive: false
 	ObjectModel {
 	  id: modelObject
-	  MainPage {
-		id: dummyPage1
-		text: "Page1"
+	  RunningPage {
+		text: "Google Maps \n"
 	  }
-	  MainPage {
-		id: dummyPage2
-		text: "Page2"
+	  AchievementsPage {
 	  }
-	  MainPage {
-		id: dummyPage3
-		text: "Page 3"
+	  WeeklyStatsPage {
 	  }
-	  MainPage {
-		id: dummyPage4
+	  MainPage {//settings
 		text: "Page 4"
 	  }
 	  MainPage {
-		id: dummyPage5
-		text: "Page 5"
-	  }
-	  MainPage {
-		id: dummyPage_DEBUG
 		text: "DEBUG"
 	  }
 	}
@@ -54,19 +43,19 @@ Item {
   BottomRow {
 	anchors.bottom: parent.bottom 
 	onPage1: {
-	  pagesRow.setCurrentIndex(1)
+	  pagesRow.setCurrentIndex(0)
 	}
 	onPage2: {
-	  pagesRow.setCurrentIndex(2)
+	  pagesRow.setCurrentIndex(1)
 	}
 	onPage3: {
-	  pagesRow.setCurrentIndex(3)
+	  pagesRow.setCurrentIndex(2)
 	}
 	onPage4: {
-	  pagesRow.setCurrentIndex(4)
+	  pagesRow.setCurrentIndex(3)
 	}
 	onPage5: {
-	  pagesRow.setCurrentIndex(5)
+	  pagesRow.setCurrentIndex(4)
 	}
   }
 

@@ -7,7 +7,12 @@
 		<file>BottomRow.qml</file>
 		<file>MenuButton.qml</file>
 		<file>Icon.qml</file>
-
+		<file>TextButton.qml</file>
+		<file>RunningPage.qml</file>
+		<file>AchievementsPage.qml</file>
+		<file>TextWithIcon.qml</file>
+		<file>WeeklyStatsPage.qml</file>
+		<file>ProgressBar.qml</file>
 
 		<file>assets/shoe-sneaker.png</file>
 	</qresource>

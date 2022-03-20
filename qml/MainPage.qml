@@ -4,17 +4,17 @@ import QtQml 2.3
 
 Item {
   id: root
-  
-  // property alias text:pageText.text 
+
+  property bool placeholder:false 
   property string text: ""
-  Text {
-	id: pageText
-	anchors.centerIn: parent
-	text: root.text + " Placeholder"
-	font {
-	  bold: true
-	  family: "Open Sans"
-	  pointSize: 20
+
+  Rectangle {
+	anchors.fill: parent
+	color: "grey"
+	Text {
+	  anchors.centerIn: parent
+	  text: placeholder ? (root.text + " Placeholder") : root.text 
+	  font: Style.fontBold16 
 	}
   }
 }
