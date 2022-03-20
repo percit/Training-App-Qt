@@ -10,28 +10,22 @@ Item {
 	id: pagesRow
 	
 	anchors.fill: parent
-	currentIndex: 2
+	currentIndex: 0
 	interactive: false
 	ObjectModel {
 	  id: modelObject
 	  RunningPage {
-		id: dummyPage1
 		text: "Google Maps \n"
 	  }
 	  AchievementsPage {
-		id: dummyPage2
 	  }
 	  WeeklyStatsPage {
-		id: dummyPage3
 	  }
 	  MainPage {//settings
-		id: dummyPage4
 		text: "Page 4"
 	  }
 	  MainPage {
-		id: dummyPage_DEBUG
 		text: "DEBUG"
-		placeholder: true
 	  }
 	}
 	Repeater {

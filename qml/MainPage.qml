@@ -7,18 +7,14 @@ Item {
 
   property bool placeholder:false 
   property string text: ""
+
   Rectangle {
 	anchors.fill: parent
 	color: "grey"
-  Text {
-	id: pageText
-	anchors.centerIn: parent
-	text: placeholder ? (root.text + " Placeholder") : root.text 
-	font {
-	  bold: true
-	  family: "Open Sans"
-	  pointSize: 20
+	Text {
+	  anchors.centerIn: parent
+	  text: placeholder ? (root.text + " Placeholder") : root.text 
+	  font: Style.fontBold16 
 	}
   }
- }
 }

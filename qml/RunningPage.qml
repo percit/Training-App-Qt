@@ -10,31 +10,31 @@ MainPage {
   placeholder:true
 
   Rectangle {
-  width: parent.width; height: 110
-  color: "blue"
-  anchors {
-	bottom: parent.bottom; bottomMargin: 64 * Style.scaleY
-  }
-  Column {
+	width: parent.width; height: 110
+	color: "blue"
 	anchors {
-	  left: parent.left; leftMargin: 10
-	  top: parent.top; topMargin: 5
+	  bottom: parent.bottom; bottomMargin: 64 * Style.scaleY
 	}
+	Column {
+	  anchors {
+		left: parent.left; leftMargin: 10
+		top: parent.top; topMargin: 5
+	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
-		text: distance  
+	    text: distance  
 		font: Style.fontBold16
 	  }
 	  Text {
 		text: "Distance (km)"
 		font: Style.fontDemiBold12
 	  }
-  }
-  Column {
-	anchors {
-	  right: parent.right; rightMargin: 10 
-	  top: parent.top; topMargin: 5
 	}
+	Column {
+	  anchors {
+		right: parent.right; rightMargin: 10 
+		top: parent.top; topMargin: 5
+	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: time 
@@ -44,14 +44,14 @@ MainPage {
 		text: "Time elapsed"
 		font: Style.fontDemiBold12
 	  }
-  }
-  TextButton {
-	anchors {
-	  horizontalCenter: parent.horizontalCenter
-	  bottom: parent.bottom; bottomMargin: 10
 	}
-	width: 200; height: 30
-	text: "Train"
-  }
+	TextButton {
+	  anchors {
+		horizontalCenter: parent.horizontalCenter
+		bottom: parent.bottom; bottomMargin: 10
+	  }
+	  width: 200; height: 30
+	  text: "Train"
+	}
   }
 }
