@@ -3,15 +3,15 @@ import QtQuick 2.3
 Rectangle {
   id: root
 
-  width: 64 * Style.scaleX
+  width: 64 * Style.scaleY
   height: 64 * Style.scaleY
   signal clicked
   property bool buttonOn: false
 
   color: buttonOn ? "green" : "red"
   Icon {
-	height: 40; width: 40
-	anchors.fill: parent
+	height: 50 * Style.scaleY; width: 50 * Style.ScaleY
+	anchors.centerIn: parent
 	source: "assets/shoe-sneaker.png" 
 	color: buttonOn ? "white" : "black"
   }
