@@ -87,106 +87,33 @@ MainPage {
 		top: parent.top; topMargin: 300
 	  }
 	  spacing: 25
-	  // ProgressBar { 	//TODO FIX 
-		 // // text: "Pn."
-	  // }
-	  Column {
-		spacing: 2
-		Rectangle {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  width: 25; height: 200
-		  color: "black"
-		}
-		Text {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  text: "Pn."
-		  font: Style.fontNormal11
-		  color: "green"
-		}
+	  ProgresBar {
+		dayName: "Pn."
+		progressValue: 0.2 
 	  }
-	  Column {
-		spacing: 2
-		Rectangle {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  width: 25; height: 200
-		  color: "black"
-		}
-		Text {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  text: "Wt."
-		  font: Style.fontNormal11
-		  color: "green"
-		}
+	  ProgresBar {
+		dayName: "Wt."
+		progressValue: 0.3 
 	  }
-	  Column {
-		spacing: 2
-		Rectangle {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  width: 25; height: 200
-		  color: "black"
-		}
-		Text {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  text: "Sr."
-		  font: Style.fontNormal11
-		  color: "green"
-		}
+	  ProgresBar { 
+		dayName: "Śr."
+		progressValue: 0.4 
 	  }
-	  Column {
-		spacing: 2
-		Rectangle {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  width: 25; height: 200
-		  color: "black"
-		}
-		Text {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  text: "Cw."
-		  font: Style.fontNormal11
-		  color: "green"
-		}
+	  ProgresBar { 
+		dayName: "Cz."
+		progressValue: 0.5 
 	  }
-	  Column {
-		spacing: 2
-		Rectangle {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  width: 25; height: 200
-		  color: "black"
-		}
-		Text {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  text: "Pt."
-		  font: Style.fontNormal11
-		  color: "green"
-		}
+	  ProgresBar { 
+		dayName: "Pt."
+		progressValue: 0.6 
 	  }
-	  Column {
-		spacing: 2
-		Rectangle {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  width: 25; height: 200
-		  color: "black"
-		}
-		Text {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  text: "Sb."
-		  font: Style.fontNormal11 
-		  color: "green"
-		}
+	  ProgresBar { 
+		dayName: "Sb."
+		progressValue: 0.8 
 	  }
-	  Column {
-		spacing: 2
-		Rectangle {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  width: 25; height: 200
-		  color: "black"
-		}
-		Text {
-		  anchors.horizontalCenter: parent.horizontalCenter
-		  text: "Nd."
-		  font: Style.fontNormal11
-		  color: "green"
-		}
+	  ProgresBar {
+		dayName: "Nd."
+		progressValue: 1.0 
 	  }
 	}
 }

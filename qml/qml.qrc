@@ -12,7 +12,7 @@
 		<file>AchievementsPage.qml</file>
 		<file>TextWithIcon.qml</file>
 		<file>WeeklyStatsPage.qml</file>
-		<file>ProgressBar.qml</file>
+		<file>ProgresBar.qml</file>
 
 		<file>assets/shoe-sneaker.png</file>
 	</qresource>
