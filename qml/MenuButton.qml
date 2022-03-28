@@ -9,13 +9,13 @@ Rectangle {
   property bool buttonOn: false
   property alias source: mainIcon.source
 
-  color: buttonOn ? Style.green : Style.red
+  color: "transparent"
   Icon {
 	id: mainIcon
 
 	height: 40 * Style.scaleX; width: 40 * Style.scaleX
 	anchors.centerIn: parent
-	color: buttonOn ? Style.white75 : Style.black75
+	color: buttonOn ? Style.green : Style.red
   }
 	MouseArea {
 	  anchors.fill: parent

@@ -5,8 +5,7 @@ Rectangle {
    
   width: 375 * Style.scaleX
   height: 64 * Style.scaleY
-  // color: Style.backgroundColor
-  color: Style.black30
+  color: Style.black50
   signal page1
   signal page2
   signal page3
@@ -24,7 +23,8 @@ Rectangle {
   }
   Row {
 	id: bottomRow
-	spacing: (root.width - 5 * menuButton1.width) / 4
+	spacing: (root.width - 30 - 5 * menuButton1.width) / 4 
+	anchors.left: parent.left; anchors.leftMargin: 15
 	MenuButton {
 	  id: menuButton1
 

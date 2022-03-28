@@ -11,21 +11,21 @@ MainPage {
   placeholder:false
 
   Rectangle { 
-	width: 200; height: 200
+	width: 230; height: 230
 	color: Style.black10
 	border.color: Style.white75
 	border.width: 10
 	radius: width * 0.5
     anchors {
 	  horizontalCenter: parent.horizontalCenter
-	  top: parent.top; topMargin: 80
+	  top: parent.top; topMargin: 30
 	}
 	Column {
 	  anchors.centerIn: parent
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: "Distance"
-		font: Style.fontNormal12
+		font: Style.fontNormal15
 		color: Style.black75
 	  }
 	  Text {
@@ -37,7 +37,7 @@ MainPage {
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: "Weekly Goal 5km"
-		font: Style.fontNormal8
+		font: Style.fontNormal12
 		color: Style.black75
 	  }
 	}
