@@ -10,7 +10,7 @@ Item {
 
   Rectangle {
 	anchors.fill: parent
-	color: "grey"
+	color: Style.black50
 	Text {
 	  anchors.centerIn: parent
 	  text: placeholder ? (root.text + " Placeholder") : root.text 

@@ -17,7 +17,7 @@ MainPage {
 		top: parent.top; topMargin: 10
 	  }	
 	  text: "My Progress"
-	  font: Style.fontBold16 //TODO make it bigger
+	  font: Style.fontBold22 //TODO make it bigger
 	}
 	Column {
 	  anchors {
@@ -26,11 +26,11 @@ MainPage {
 	  }
 	  Text {
 		text: totalKm
-		font: Style.fontBold16 //TODO make it bigger
+		font: Style.fontBold22 //TODO make it bigger
 	  }
 	  Text {
 		text: "Total km"
-		font: Style.fontNormal11//TODO make it smaller
+		font: Style.fontNormal8//TODO make it smaller
 	  }
 	}
  

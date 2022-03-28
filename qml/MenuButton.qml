@@ -8,12 +8,12 @@ Rectangle {
   signal clicked
   property bool buttonOn: false
 
-  color: buttonOn ? "green" : "red"
+  color: buttonOn ? Style.green : Style.red
   Icon {
 	height: 50 * Style.scaleY; width: 50 * Style.ScaleY
 	anchors.centerIn: parent
 	source: "assets/shoe-sneaker.png" 
-	color: buttonOn ? "white" : "black"
+	color: buttonOn ? Style.white75 : Style.black75
   }
 	MouseArea {
 	  anchors.fill: parent

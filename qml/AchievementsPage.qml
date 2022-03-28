@@ -11,9 +11,9 @@ MainPage {
   placeholder:false
 
   Rectangle { 
-	width: 180; height: 180
-	color: "grey" //TODO get background color somehow
-	border.color: "white"
+	width: 200; height: 200
+	color: Style.black10
+	border.color: Style.white75
 	border.width: 10
 	radius: width * 0.5
     anchors {
@@ -26,16 +26,19 @@ MainPage {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: "Distance"
 		font: Style.fontNormal12
+		color: Style.black75
 	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: weeklyDistance + "km"
-		font: Style.fontBold16 //TODO make it bigger
+		font: Style.fontBold22
+		color: Style.black75
 	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: "Weekly Goal 5km"
-		font: Style.fontNormal11//TODO make it smaller
+		font: Style.fontNormal8
+		color: Style.black75
 	  }
 	}
   }
@@ -45,7 +48,8 @@ MainPage {
 	  top: parent.top; topMargin: 300
 	}
 	text: "Best Records"
-	font: Style.fontBold16
+	font: Style.fontBold22
+	color: Style.black75
   }
  
   Column {
@@ -63,7 +67,7 @@ MainPage {
 	  Text {
 		text: longestDistance + " km"
 		font: Style.fontBold16
-		color: "green"
+		color: Style.green
 	  }
 	}
 	Column {
@@ -75,7 +79,7 @@ MainPage {
 	  Text {
 		text: bestPace + " min/km"
 		font: Style.fontBold16
-		color: "green"
+		color: Style.green
 	  }
 	}
 	Column {
@@ -87,7 +91,7 @@ MainPage {
 	  Text {
 		text: longestDuration
 		font: Style.fontBold16
-		color: "green"
+		color: Style.green
 	  }
 	}
   }

@@ -6,7 +6,7 @@ Rectangle {
   width: 375 * Style.scaleX
   height: 64 * Style.scaleY
   // color: Style.backgroundColor
-  color: "yellow"
+  color: Style.yellow
   signal page1
   signal page2
   signal page3

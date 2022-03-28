@@ -5,7 +5,7 @@ Row {
 
   property alias text: m_text.text
   property alias source: m_icon.source
-  property color mainColor: "black"
+  property color mainColor: Style.black75
   property alias font: m_text.font
 
   spacing: 5

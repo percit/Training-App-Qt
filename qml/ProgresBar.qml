@@ -8,20 +8,20 @@ Column {
 
 	anchors.horizontalCenter: parent.horizontalCenter
 	width: 25; height: 200
-	color: "black"
+	color: Style.black75
 	Rectangle {
 	  anchors {
 		bottom: parent.bottom
 		horizontalCenter: parent.horizontalCenter
 	  }
 	  width: mainBar.width; height: mainBar.height * progressValue
-	  color: "green"
+	  color: Style.green
 	}
   }
   Text {
 	text: dayName
 	anchors.horizontalCenter: parent.horizontalCenter
-	font: Style.fontNormal11
-	color: "red"
+	font: Style.fontNormal12
+	color: Style.red
   }
 }	
