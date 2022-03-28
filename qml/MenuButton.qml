@@ -3,16 +3,18 @@ import QtQuick 2.3
 Rectangle {
   id: root
 
-  width: 64 * Style.scaleY
-  height: 64 * Style.scaleY
+  width: 64 * Style.scaleX
+  height: 64 * Style.scaleX
   signal clicked
   property bool buttonOn: false
+  property alias source: mainIcon.source
 
   color: buttonOn ? Style.green : Style.red
   Icon {
-	height: 50 * Style.scaleY; width: 50 * Style.ScaleY
+	id: mainIcon
+
+	height: 40 * Style.scaleX; width: 40 * Style.scaleX
 	anchors.centerIn: parent
-	source: "assets/shoe-sneaker.png" 
 	color: buttonOn ? Style.white75 : Style.black75
   }
 	MouseArea {

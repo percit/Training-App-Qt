@@ -62,7 +62,7 @@ MainPage {
 	  TextWithIcon {
 		text: "Longest Distance"
 		font: Style.fontDemiBold12
-		source: "assets/shoe-sneaker.png"
+		source: "assets/route.png"
 	  }
 	  Text {
 		text: longestDistance + " km"
@@ -74,7 +74,7 @@ MainPage {
 	  TextWithIcon {
 		text: "Best Pace"
 		font: Style.fontDemiBold12
-		source: "assets/shoe-sneaker.png"
+		source: "assets/speed.png"
 	  }
 	  Text {
 		text: bestPace + " min/km"
@@ -86,7 +86,7 @@ MainPage {
 	  TextWithIcon {
 		text: "Longest Duration"
 		font: Style.fontDemiBold12
-		source: "assets/shoe-sneaker.png"
+		source: "assets/time.png"
 	  }
 	  Text {
 		text: longestDuration

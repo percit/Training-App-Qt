@@ -1,5 +1,5 @@
 pragma Singleton
-import QtQuick
+import QtQuick 2.3
 
 QtObject {
   // readonly property double scaleY: Screen.height / 612

@@ -15,5 +15,15 @@
 		<file>ProgresBar.qml</file>
 
 		<file>assets/shoe-sneaker.png</file>
+		<file>assets/achievement.png</file>
+		<file>assets/person.png</file>
+		<file>assets/run.png</file>
+		<file>assets/settings.png</file>
+		<file>assets/star.png</file>
+		<file>assets/tasks.png</file>
+		<file>assets/timer.png</file>
+		<file>assets/route.png</file>
+		<file>assets/time.png</file>
+		<file>assets/speed.png</file>
 	</qresource>
 </RCC>

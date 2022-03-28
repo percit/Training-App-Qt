@@ -10,7 +10,7 @@ Item {
 	id: pagesRow
 	
 	anchors.fill: parent
-	currentIndex: 2 
+	currentIndex: 0 
 	interactive: false
 	ObjectModel {
 	  id: modelObject
