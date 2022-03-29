@@ -11,31 +11,34 @@ MainPage {
   placeholder:false
 
   Rectangle { 
-	width: 180; height: 180
-	color: "grey" //TODO get background color somehow
-	border.color: "white"
+	width: 230; height: 230
+	color: Style.black10
+	border.color: Style.white75
 	border.width: 10
 	radius: width * 0.5
     anchors {
 	  horizontalCenter: parent.horizontalCenter
-	  top: parent.top; topMargin: 80
+	  top: parent.top; topMargin: 30
 	}
 	Column {
 	  anchors.centerIn: parent
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: "Distance"
-		font: Style.fontNormal12
+		font: Style.fontNormal15
+		color: Style.black75
 	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: weeklyDistance + "km"
-		font: Style.fontBold16 //TODO make it bigger
+		font: Style.fontBold22
+		color: Style.black75
 	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: "Weekly Goal 5km"
-		font: Style.fontNormal11//TODO make it smaller
+		font: Style.fontNormal12
+		color: Style.black75
 	  }
 	}
   }
@@ -45,7 +48,8 @@ MainPage {
 	  top: parent.top; topMargin: 300
 	}
 	text: "Best Records"
-	font: Style.fontBold16
+	font: Style.fontBold22
+	color: Style.black75
   }
  
   Column {
@@ -58,36 +62,36 @@ MainPage {
 	  TextWithIcon {
 		text: "Longest Distance"
 		font: Style.fontDemiBold12
-		source: "assets/shoe-sneaker.png"
+		source: "assets/route.png"
 	  }
 	  Text {
 		text: longestDistance + " km"
 		font: Style.fontBold16
-		color: "green"
+		color: Style.green
 	  }
 	}
 	Column {
 	  TextWithIcon {
 		text: "Best Pace"
 		font: Style.fontDemiBold12
-		source: "assets/shoe-sneaker.png"
+		source: "assets/speed.png"
 	  }
 	  Text {
 		text: bestPace + " min/km"
 		font: Style.fontBold16
-		color: "green"
+		color: Style.green
 	  }
 	}
 	Column {
 	  TextWithIcon {
 		text: "Longest Duration"
 		font: Style.fontDemiBold12
-		source: "assets/shoe-sneaker.png"
+		source: "assets/time.png"
 	  }
 	  Text {
 		text: longestDuration
 		font: Style.fontBold16
-		color: "green"
+		color: Style.green
 	  }
 	}
   }

@@ -4,16 +4,18 @@ Rectangle {
   id: root
 
   width: 64 * Style.scaleX
-  height: 64 * Style.scaleY
+  height: 64 * Style.scaleX
   signal clicked
   property bool buttonOn: false
+  property alias source: mainIcon.source
 
-  color: buttonOn ? "green" : "red"
+  color: "transparent"
   Icon {
-	height: 40; width: 40
-	anchors.fill: parent
-	source: "assets/shoe-sneaker.png" 
-	color: buttonOn ? "white" : "black"
+	id: mainIcon
+
+	height: 40 * Style.scaleX; width: 40 * Style.scaleX
+	anchors.centerIn: parent
+	color: buttonOn ? Style.green : Style.red
   }
 	MouseArea {
 	  anchors.fill: parent

@@ -5,8 +5,7 @@ Rectangle {
    
   width: 375 * Style.scaleX
   height: 64 * Style.scaleY
-  // color: Style.backgroundColor
-  color: "yellow"
+  color: Style.black50
   signal page1
   signal page2
   signal page3
@@ -24,7 +23,8 @@ Rectangle {
   }
   Row {
 	id: bottomRow
-	spacing: (root.width - 5 * menuButton1.width) / 4
+	spacing: (root.width - 30 - 5 * menuButton1.width) / 4 
+	anchors.left: parent.left; anchors.leftMargin: 15
 	MenuButton {
 	  id: menuButton1
 
@@ -33,6 +33,7 @@ Rectangle {
 		activeSouce = BottomRow.ActiveSource.PAGE1
 		root.page1()
 	  }
+	  source: "assets/timer.png" 
 	}
 	MenuButton {
 	  buttonOn: activeSouce === BottomRow.ActiveSource.PAGE2 
@@ -40,6 +41,7 @@ Rectangle {
 		activeSouce = BottomRow.ActiveSource.PAGE2
 		root.page2()
 	  }
+	  source: "assets/achievement.png" 
 	}
 	MenuButton {
 	  buttonOn: activeSouce === BottomRow.ActiveSource.PAGE3 
@@ -47,6 +49,7 @@ Rectangle {
 		activeSouce = BottomRow.ActiveSource.PAGE3
 		root.page3()
 	  }
+	  source: "assets/tasks.png" 
 	}
 	MenuButton {
 	  buttonOn: activeSouce === BottomRow.ActiveSource.PAGE4 
@@ -54,6 +57,7 @@ Rectangle {
 		activeSouce = BottomRow.ActiveSource.PAGE4
 		root.page4()
 	  }
+	  source: "assets/run.png" 
 	}
 	MenuButton {
 	  buttonOn: activeSouce === BottomRow.ActiveSource.PAGE5 
@@ -61,6 +65,7 @@ Rectangle {
 		activeSouce = BottomRow.ActiveSource.PAGE5
 		root.page5()
 	  }
+	  source: "assets/run.png" 
 	}
   }
 }

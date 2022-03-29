@@ -10,7 +10,7 @@ Item {
 	id: pagesRow
 	
 	anchors.fill: parent
-	currentIndex: 0
+	currentIndex: 0 
 	interactive: false
 	ObjectModel {
 	  id: modelObject
@@ -26,6 +26,7 @@ Item {
 	  }
 	  MainPage {
 		text: "DEBUG"
+		ProgresBar {}
 	  }
 	}
 	Repeater {

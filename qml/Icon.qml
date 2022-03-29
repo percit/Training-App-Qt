@@ -19,7 +19,7 @@ Image {
     }
 
     readonly property color transparentColor: "transparent"
-    // layer.enabled: color != transparentColor
+    layer.enabled: color != transparentColor
     cache: true
     smooth: true
 }

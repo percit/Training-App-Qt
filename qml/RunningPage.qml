@@ -11,7 +11,7 @@ MainPage {
 
   Rectangle {
 	width: parent.width; height: 110
-	color: "blue"
+	color: Style.black30
 	anchors {
 	  bottom: parent.bottom; bottomMargin: 64 * Style.scaleY
 	}
@@ -24,10 +24,12 @@ MainPage {
 		anchors.horizontalCenter: parent.horizontalCenter
 	    text: distance  
 		font: Style.fontBold16
+		color: Style.black75
 	  }
 	  Text {
 		text: "Distance (km)"
 		font: Style.fontDemiBold12
+		color: Style.black75
 	  }
 	}
 	Column {
@@ -39,10 +41,12 @@ MainPage {
 		anchors.horizontalCenter: parent.horizontalCenter
 		text: time 
 		font: Style.fontBold16
+		color: Style.black75
 	  }
 	  Text {
 		text: "Time elapsed"
 		font: Style.fontDemiBold12
+		color: Style.black75
 	  }
 	}
 	TextButton {

@@ -9,7 +9,7 @@ Rectangle {
   width: 70 * Style.scaleX
   height: 200 * Style.scaleY
   radius: root.width / 2
-  color: buttonOn ? "green" : "red"
+  color: buttonOn ? Style.green : Style.red
 
   signal clicked  
   
