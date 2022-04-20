@@ -33,6 +33,6 @@
 
 # build folder
 build*
-
+build-*
 # qt stuff
 !.ycm_extra_conf.py
