@@ -4,7 +4,7 @@ import QtQml 2.3
 
 MainPage {
   id: root
-  readonly property double weeklyDistance: 0.0
+  readonly property double weeklyDistance: 0.0 //tu bedzie zmienna z std::accumulate(array.begin(), array.end());
   readonly property double longestDistance: 0.0
   readonly property double bestPace: 0.0
   readonly property string longestDuration: "0:00"
@@ -36,7 +36,7 @@ MainPage {
 	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
-		text: "Weekly Goal 5km"
+		text: "Weekly Goal 20km"
 		font: Style.fontNormal12
 		color: Style.black75
 	  }
@@ -89,7 +89,7 @@ MainPage {
 		source: "assets/time.png"
 	  }
 	  Text {
-		text: longestDuration
+        text: longestDuration + " min"
 		font: Style.fontBold16
 		color: Style.green
 	  }

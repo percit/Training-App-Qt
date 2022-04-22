@@ -5,10 +5,10 @@ import QtQml 2.3
 MainPage {
   id: root
 
-  readonly property double totalKm: 0.0
-  readonly property double totalHours: 0.0
-  readonly property double totalKcal: 0.0
-  readonly property double avarageDuration: 0.0 //value in minutes
+  readonly property double totalKm: 0.0  //z achievements page
+  readonly property double totalHours: 0.0 //z achievements page razy 3600
+  readonly property double totalKcal: 0.0	//getWeeklyKmRun * 62, bc it's how many kcal per km
+  readonly property double averageDuration: 0.0 //value in minutes
   placeholder:false
 
 	Text {
@@ -62,7 +62,7 @@ MainPage {
 	}
 	Column {
 	  Text {
-		text: avarageDuration
+		text: averageDuration
 		font: Style.fontBold16
 	  }
 	  Text {
