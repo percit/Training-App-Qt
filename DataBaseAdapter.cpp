@@ -29,7 +29,13 @@ double DataBaseAdapter::getBestPace()
 }
 
 // weekly stats page
-double DataBaseAdapter::averageDuration()
+double DataBaseAdapter::getAverageDuration()
 {
     return std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 3600); // 3600 bc it's in sec
 }
+
+double DataBaseAdapter::getAllDuration()
+{
+    return std::accumulate(runningTime.begin(), runningTime.end(), 0) /  60; // 3600 bc it's in sec
+}
+//there have to be an update function, or like calling all functions in a viewmodel every 10 seconds or something

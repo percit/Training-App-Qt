@@ -5,10 +5,8 @@ import QtQml 2.3
 MainPage {
   id: root
 
-  readonly property double totalKm: 0.0  //z achievements page
-  readonly property double totalHours: 0.0 //z achievements page razy 3600
-  readonly property double totalKcal: 0.0	//getWeeklyKmRun * 62, bc it's how many kcal per km
-  readonly property double averageDuration: 0.0 //value in minutes
+  readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
+
   placeholder:false
 
 	Text {
@@ -25,7 +23,7 @@ MainPage {
 		top: parent.top; topMargin: 50
 	  }
 	  Text {
-		text: totalKm
+		text: root.viewModel.weeklyKmRun
 		font: Style.fontBold22 //TODO make it bigger
 	  }
 	  Text {
@@ -42,7 +40,7 @@ MainPage {
 	spacing: 15
 	Column {
 	  Text {
-		text: totalHours
+		text: root.viewModel.allDuration / 60
 		font: Style.fontBold16
 	  }
 	  Text {
@@ -52,7 +50,7 @@ MainPage {
 	}
 	Column {
 	  Text {
-		text: totalKcal
+		text: root.viewModel.weeklyKmRun * 62
 		font: Style.fontBold16
 	  }
 	  Text {
@@ -62,7 +60,7 @@ MainPage {
 	}
 	Column {
 	  Text {
-		text: averageDuration
+		text: root.viewModel.averageDuration
 		font: Style.fontBold16
 	  }
 	  Text {

@@ -4,10 +4,8 @@ import QtQml 2.3
 
 MainPage {
   id: root
-  readonly property double weeklyDistance: 0.0 //tu bedzie zmienna z std::accumulate(array.begin(), array.end());
-  readonly property double longestDistance: 0.0
-  readonly property double bestPace: 0.0
-  readonly property string longestDuration: "0:00"
+
+  readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
   placeholder:false
 
   Rectangle { 
@@ -30,7 +28,7 @@ MainPage {
 	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
-		text: weeklyDistance + "km"
+		text: root.viewModel.weeklyDistance + "km"
 		font: Style.fontBold22
 		color: Style.black75
 	  }
@@ -65,7 +63,7 @@ MainPage {
 		source: "assets/route.png"
 	  }
 	  Text {
-		text: longestDistance + " km"
+		text: root.viewModel.longestDistance + " km"
 		font: Style.fontBold16
 		color: Style.green
 	  }
@@ -77,7 +75,7 @@ MainPage {
 		source: "assets/speed.png"
 	  }
 	  Text {
-		text: bestPace + " min/km"
+		text: root.viewModel.bestPace + " min/km"
 		font: Style.fontBold16
 		color: Style.green
 	  }
@@ -89,7 +87,7 @@ MainPage {
 		source: "assets/time.png"
 	  }
 	  Text {
-        text: longestDuration + " min"
+        text: root.viewModel.longestDuration + " min"
 		font: Style.fontBold16
 		color: Style.green
 	  }

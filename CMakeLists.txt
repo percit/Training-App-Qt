@@ -19,6 +19,7 @@ set(
   main.cpp
   database.cpp
   DataBaseAdapter.cpp
+  batteryvalue.cpp
   qml/qml.qrc
 )
 
