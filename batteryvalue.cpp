@@ -1,119 +1,145 @@
 #include "batteryvalue.h"
 #include <QDebug>
-BatteryValue::BatteryValue(QObject *parent) :
-    QObject(parent),
-    m_timer(new QTimer(this)),
-    m_value(0),
-    m_up(true),
-    m_timer_ON(false)
+BatteryValue::BatteryValue(QObject *parent) : QObject(parent),
+                                              m_timer(new QTimer(this)),
+                                              m_value(0),
+                                              m_timer_ON(false),
+                                              m_weeklyKmRun(0),
+                                              m_longestDistance(0),
+                                              m_longestDuration(0),
+                                              m_bestPace(0),
+                                              m_averageDuration(0),
+                                              m_allDuration(0)
 {
     qDebug() << "created battery constructor";
-    m_timer->setInterval(10);
-    connect(m_timer, &QTimer::timeout, [=](){ //jesli skonczy sie ten czas 500ms, to sprawdza czy jest
-        if(m_up) {++m_value;} //true czy false i dodaje lub odejmuje
-        else {--m_value;}
-        emit valueChanged(m_value); //to nie potrzebuje body, to signal z Q_PROPERTY
-    });
-
+    // m_timer->setInterval(10);
+    // connect(m_timer, &QTimer::timeout, [=](){ //jesli skonczy sie ten czas 500ms, to sprawdza czy jest
+    //     if(m_up) {++m_value;} //true czy false i dodaje lub odejmuje
+    //     else {--m_value;}
+    //     emit valueChanged(m_value);
+    // });
 }
 
-//  achievements apge
-double BatteryValue::getWeeklyKmRun()
+qreal BatteryValue::weeklyKmRun()
 {
-    return std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
+    if (m_weeklyKmRun != std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
+    {
+        m_weeklyKmRun = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
+        emit weeklyKmRunChanged();
+    }
+    qDebug() << " m_weeklyKmRun ";
+    return m_weeklyKmRun;
 }
 
-double BatteryValue::getLongestDistance()
+qreal BatteryValue::longestDistance()
 {
-    return *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
+    if (m_longestDistance != *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
+    {
+        m_longestDistance = *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
+                                emit
+                                longestDistanceChanged();
+    }
+    qDebug() << " m_longestDistance ";
+    return m_longestDistance;
 }
 
-double BatteryValue::getLongestDuration()
+qreal BatteryValue::longestDuration()
 {
-    return *(std::max_element(runningTime.begin(), runningTime.end())) / 60;
+    if (m_longestDuration != *(std::max_element(runningTime.begin(), runningTime.end())) / 60)
+    { // this is in minutes
+        m_longestDuration = *(std::max_element(runningTime.begin(), runningTime.end())) / 60;
+        emit longestDurationChanged();
+    }
+    qDebug() << " m_longestDuration ";
+    return m_longestDuration;
 }
 
-double BatteryValue::getBestPace()
+qreal BatteryValue::bestPace()
 {
-    // return std::max_element(runningTime.begin(), runningTime.end());
     double bestPace = 0;
     for (int i = 0; i < 7; ++i)
     {
         if (runningTime[i] > 0)
             bestPace = std::max(kmRunInDay[i] / runningTime[i], bestPace);
     }
-    return bestPace;
+    if (m_bestPace != bestPace)
+    {
+        m_bestPace = bestPace;
+        emit bestPaceChanged();
+    }
+    qDebug() << " m_bestPace ";
+    return m_bestPace;
 }
 
-// weekly stats page
-double BatteryValue::getAverageDuration()
+qreal BatteryValue::averageDuration()
 {
-    return std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 3600); // 3600 bc it's in sec
+    if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 3600))
+    { // km/h
+        m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 3600);
+        emit averageDurationChanged();
+    }
+    qDebug() << " m_averageDuration ";
+    return m_averageDuration;
 }
 
-double BatteryValue::getAllDuration()
+qreal BatteryValue::allDuration()
 {
-    return std::accumulate(runningTime.begin(), runningTime.end(), 0) /  60; // 3600 bc it's in sec
+    return std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60; // in minutes
+    if (m_allDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60)
+    { // km/h
+        m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60;
+        emit allDurationChanged();
+    }
+    qDebug() << " m_allDuration ";
+    return m_allDuration;
 }
-//there have to be an update function, or like calling all functions in a viewmodel every 10 seconds or something
 
-int BatteryValue::value() const
+void BatteryValue::setWeeklyKmRun(qreal newWeeklyKmRun)
 {
-    if(m_value < 0) return 0;
-    else if(m_value > 100) return 100;
-    return m_value;
-}
-
-void BatteryValue::setValue(const int& newValue)
-{
-    if (m_value == newValue)
+    if (qFuzzyCompare(m_weeklyKmRun, newWeeklyKmRun))
         return;
-    m_value = newValue;
-    emit valueChanged(m_value);
+    m_weeklyKmRun = newWeeklyKmRun;
+    emit weeklyKmRunChanged();
 }
 
-bool BatteryValue::up() const
+void BatteryValue::setLongestDistance(qreal newLongestDistance)
 {
-    return m_up;
-}
-
-void BatteryValue::setUp(const bool& newUp)
-{
-    if (m_up == newUp)
+    if (qFuzzyCompare(m_longestDistance, newLongestDistance))
         return;
-    m_up = newUp;
-    emit upChanged(m_up);
+    m_longestDistance = newLongestDistance;
+    emit longestDistanceChanged();
 }
 
-void BatteryValue::start()
+void BatteryValue::setLongestDuration(qreal newLongestDuration)
 {
-    qDebug() << "mtimer started";
-    if(m_timer_ON == false){
-        m_timer->start();
-        m_timer_ON = true;
-    }
-    else{
-        m_timer->stop();
-        m_timer_ON = false;
-    }
+    if (qFuzzyCompare(m_longestDuration, newLongestDuration))
+        return;
+    m_longestDuration = newLongestDuration;
+    emit longestDurationChanged();
 }
 
-void BatteryValue::stop()
+void BatteryValue::setBestPace(qreal newBestPace)
 {
-    qDebug() << "mtimer stoped";
-    if(m_timer_ON == true){
-        m_timer->stop();
-        m_timer_ON = false;
-    }
-    else{
-        m_timer->start();
-        m_timer_ON = true;
-    }
+    if (qFuzzyCompare(m_bestPace, newBestPace))
+        return;
+    m_bestPace = newBestPace;
+    emit bestPaceChanged();
 }
 
-bool BatteryValue::timer_ON() const
+void BatteryValue::setAverageDuration(qreal newAverageDuration)
 {
-    return m_timer_ON;
+    if (qFuzzyCompare(m_averageDuration, newAverageDuration))
+        return;
+    m_averageDuration = newAverageDuration;
+    emit averageDurationChanged();
+}
+
+void BatteryValue::setAllDuration(qreal newAllDuration)
+{
+    if (qFuzzyCompare(m_allDuration, newAllDuration))
+        return;
+    m_allDuration = newAllDuration;
+    emit allDurationChanged();
 }
 
 void BatteryValue::setTimer_ON(bool newTimer_ON)
@@ -122,4 +148,26 @@ void BatteryValue::setTimer_ON(bool newTimer_ON)
         return;
     m_timer_ON = newTimer_ON;
     emit timer_ONChanged();
+}
+
+int BatteryValue::value() const
+{
+    if (m_value < 0)
+        return 0;
+    else if (m_value > 100)
+        return 100;
+    return m_value;
+}
+
+void BatteryValue::setValue(const int &newValue)
+{
+    if (m_value == newValue)
+        return;
+    m_value = newValue;
+    emit valueChanged(m_value);
+}
+
+bool BatteryValue::timer_ON() const
+{
+    return m_timer_ON;
 }

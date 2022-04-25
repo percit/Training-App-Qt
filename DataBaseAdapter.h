@@ -1,11 +1,12 @@
 #ifndef DATABASE_ADAPTER_H
 #define DATABASE_ADAPTER_H
+#include <QObject>
+#include <iostream>
 #include <array>
-#include <string>
 #include <algorithm>
 #include "database.h"
 
-class DataBaseAdapter
+class DataBaseAdapter : public QObject
 {
 private:
     std::array<double, 7> kmRunInDay = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
@@ -14,8 +15,10 @@ private:
 //    DataBase db("database9.db");
 
 public:
-    //   DataBase(const QString &name);
-    //   ~DataBase();
+    //    DataBaseAdapter();
+       explicit DataBaseAdapter(QObject *parent = nullptr);
+
+       ~DataBaseAdapter();
 
     // achievements page
     double getWeeklyKmRun();
@@ -24,7 +27,8 @@ public:
     double getBestPace();
 
     // weekly stats page
-    double averageDuration();
+    double getAverageDuration();
+    double getAllDuration();
 };
 
 #endif // DATABASE_ADAPTER_H
