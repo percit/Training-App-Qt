@@ -6,37 +6,30 @@
 #include "DataBaseAdapter.h"
 #include "batteryvalue.h"
 
-
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
     qmlRegisterSingletonType(QUrl("qrc:///Style.qml"), "App", 1, 0, "Style");
 
-//    DataBase db("database9.db");
-//    if (db.isOpen())
-//    {
-//        db.createTable();
-//        db.addElement("Monday", 10.5, 1000);
-//        db.addElement("Tuesday", 20.5, 1500);
-//        db.addElement("Wednesday", 30.5, 2000);
+    //    DataBase db("database9.db");
+    //    if (db.isOpen())
+    //    {
+    //        db.createTable();
+    //        db.addElement("Monday", 10.5, 1000);
+    //        db.addElement("Tuesday", 20.5, 1500);
+    //        db.addElement("Wednesday", 30.5, 2000);
 
-//        db.printAll();
-//        db.removeElement("Monday");
-//        db.printAll();
-//        db.clearDataBase();
-//        qDebug() << "End";
-//    }
-//    else
-//        qDebug() << "Database is not open!";
+    //        db.printAll();
+    //        db.removeElement("Monday");
+    //        db.printAll();
+    //        db.clearDataBase();
+    //        qDebug() << "End";
+    //    }
+    //    else
+    //        qDebug() << "Database is not open!";
 
-
-qmlRegisterType<BatteryValue>("com.blikoon.batteryvalue", 1,0, "Battery");
-    // DataBaseAdapter model; //juz na sam ten obiekt narzeka
-    // engine.rootContext()->setContextProperty("DbModel", &model); // i jako DbModel.costam bedzie to dostepne
-
-    // qmlRegisterType<DataBaseAdapter>("CustomControls", 1, 0, "RadialBar");
-//    qmlRegisterType<DataBaseAdapter>("com.blikoon.batteryvalue", 1, 0, "Battery");
+    qmlRegisterType<BatteryValue>("DataBaseModel", 1, 0, "DbModel"); // to nasz database adapter
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

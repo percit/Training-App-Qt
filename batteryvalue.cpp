@@ -4,12 +4,12 @@ BatteryValue::BatteryValue(QObject *parent) : QObject(parent),
                                               m_timer(new QTimer(this)),
                                               m_value(0),
                                               m_timer_ON(false),
-                                              m_weeklyKmRun(0),
-                                              m_longestDistance(0),
-                                              m_longestDuration(0),
-                                              m_bestPace(0),
-                                              m_averageDuration(0),
-                                              m_allDuration(0)
+                                              m_weeklyKmRun(1),
+                                              m_longestDistance(2),
+                                              m_longestDuration(3),
+                                              m_bestPace(4),
+                                              m_averageDuration(5),
+                                              m_allDuration(6)
 {
     qDebug() << "created battery constructor";
     // m_timer->setInterval(10);
@@ -25,7 +25,7 @@ qreal BatteryValue::weeklyKmRun()
     if (m_weeklyKmRun != std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
     {
         m_weeklyKmRun = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
-        emit weeklyKmRunChanged();
+        // emit weeklyKmRunChanged();
     }
     qDebug() << " m_weeklyKmRun ";
     return m_weeklyKmRun;
@@ -36,8 +36,7 @@ qreal BatteryValue::longestDistance()
     if (m_longestDistance != *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
     {
         m_longestDistance = *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
-                                emit
-                                longestDistanceChanged();
+        // emit longestDistanceChanged();
     }
     qDebug() << " m_longestDistance ";
     return m_longestDistance;
@@ -48,7 +47,7 @@ qreal BatteryValue::longestDuration()
     if (m_longestDuration != *(std::max_element(runningTime.begin(), runningTime.end())) / 60)
     { // this is in minutes
         m_longestDuration = *(std::max_element(runningTime.begin(), runningTime.end())) / 60;
-        emit longestDurationChanged();
+        // emit longestDurationChanged();
     }
     qDebug() << " m_longestDuration ";
     return m_longestDuration;
@@ -65,7 +64,7 @@ qreal BatteryValue::bestPace()
     if (m_bestPace != bestPace)
     {
         m_bestPace = bestPace;
-        emit bestPaceChanged();
+        // emit bestPaceChanged();
     }
     qDebug() << " m_bestPace ";
     return m_bestPace;
@@ -73,10 +72,10 @@ qreal BatteryValue::bestPace()
 
 qreal BatteryValue::averageDuration()
 {
-    if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 3600))
+    if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 60))
     { // km/h
-        m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 3600);
-        emit averageDurationChanged();
+        m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 60);
+        // emit averageDurationChanged();
     }
     qDebug() << " m_averageDuration ";
     return m_averageDuration;
@@ -88,7 +87,7 @@ qreal BatteryValue::allDuration()
     if (m_allDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60)
     { // km/h
         m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60;
-        emit allDurationChanged();
+        // emit allDurationChanged();
     }
     qDebug() << " m_allDuration ";
     return m_allDuration;

@@ -1,5 +1,5 @@
 import QtQuick 2.3
-import com.blikoon.batteryvalue 1.0//nasz url
+import DataBaseModel 1.0
 
 
 QtObject {
@@ -7,20 +7,23 @@ QtObject {
 
 
 
-    readonly property double weeklyKmRun: 0//DbModel.getWeeklyKmRun()
-    readonly property double longestDistance: 0//DbModel.getLongestDistance()
-    readonly property double longestDuration: 0//DbModel.getLongestDuration()
-    readonly property double bestPace: 0//DbModel.getBestPace()
-    readonly property double averageDuration: 0//DbModel.getAverageDuration()
-    readonly property double allDuration: 0//DbModel.getAllDuration()
-    // property var priv: QtObject {
-    //     id: d 
+    readonly property double weeklyKmRun: Math.round(d.dbModel.weeklyKmRun * 100) / 100 
+    readonly property double longestDistance: Math.round(d.dbModel.longestDistance * 100) / 100 
+    readonly property double longestDuration: Math.round(d.dbModel.longestDuration * 100) / 100 
+    readonly property double bestPace: Math.round(d.dbModel.bestPace * 100) / 100 
+    readonly property double averageDuration: Math.round(d.dbModel.averageDuration * 100) / 100 
+    readonly property double allDuration: Math.round(d.dbModel.allDuration * 100) / 100 
 
 
-    //     readonly property double getWeeklyKmRun: DbModel.getWeeklyKmRun()
-    // }
+    property var priv: QtObject {
+        id: d
 
-    readonly property Battery mBattery: Battery {}
+        readonly property DbModel dbModel: DbModel {}
+    }
 
-    //tu by byl timer, albo serio dac q_property do tych wartosci 
+
 }
+
+
+//total hours nie dziala
+// distance undefined km

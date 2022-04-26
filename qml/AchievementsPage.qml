@@ -3,8 +3,6 @@ import QtQuick.Controls 2.3
 import QtQml 2.3
 
 MainPage {
-  id: root
-
   readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
   placeholder:false
 
@@ -28,7 +26,7 @@ MainPage {
 	  }
 	  Text {
 		anchors.horizontalCenter: parent.horizontalCenter
-		text: root.viewModel.weeklyDistance + "km"
+		text: viewModel.weeklyKmRun + "km"
 		font: Style.fontBold22
 		color: Style.black75
 	  }
@@ -63,7 +61,7 @@ MainPage {
 		source: "assets/route.png"
 	  }
 	  Text {
-		text: root.viewModel.longestDistance + " km"
+		text: viewModel.longestDistance + " km"
 		font: Style.fontBold16
 		color: Style.green
 	  }
@@ -75,7 +73,7 @@ MainPage {
 		source: "assets/speed.png"
 	  }
 	  Text {
-		text: root.viewModel.bestPace + " min/km"
+		text: viewModel.bestPace + " min/km"
 		font: Style.fontBold16
 		color: Style.green
 	  }
@@ -87,7 +85,7 @@ MainPage {
 		source: "assets/time.png"
 	  }
 	  Text {
-        text: root.viewModel.longestDuration + " min"
+        text: viewModel.longestDuration + " min"
 		font: Style.fontBold16
 		color: Style.green
 	  }

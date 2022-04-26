@@ -113,30 +113,3 @@ bool DataBase::clearDataBase()
 
     return false;
 }
- 
-// //  achievements apge
-// double DataBase::getWeeklyKmRun() {
-//     return std::accumulate(kmRunInDay.begin(), kmRunInDay.end());
-// }
-
-// double DataBase::getLongestDistance() {
-//     return std::max_element(kmRunInDay.begin(), kmRunInDay.end());
-// }
-
-// double DataBase::getLongestDuration() {
-//     return std::max_element(runningTime.begin(), runningTime.end()) / 60;
-// }
-
-// double DataBase::getBestPace() {
-//    // return std::max_element(runningTime.begin(), runningTime.end());
-//     double bestPace = 0;
-//     for(int i = 0; i < 7; ++i) {
-//         if(runningTime[i] > 0) bestPace = std::max(kmRunInDay[i] / runningTime[i], bestPace);
-//     }
-//    return bestPace;
-// }
-
-// //weekly stats page
-// double DataBase::averageDuration() {
-//     return std::accumulate(runningTime.begin(), runningTime.end()) / (7 * 3600); //3600 bc it's in sec
-// }

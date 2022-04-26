@@ -3,8 +3,6 @@ import QtQuick.Controls 2.3
 import QtQml 2.3
 
 MainPage {
-  id: root
-
   readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
 
   placeholder:false
@@ -23,7 +21,7 @@ MainPage {
 		top: parent.top; topMargin: 50
 	  }
 	  Text {
-		text: root.viewModel.weeklyKmRun
+		text: viewModel.weeklyKmRun
 		font: Style.fontBold22 //TODO make it bigger
 	  }
 	  Text {
@@ -40,7 +38,7 @@ MainPage {
 	spacing: 15
 	Column {
 	  Text {
-		text: root.viewModel.allDuration / 60
+		text: Math.round((viewModel.allDuration / 60) * 100) / 100
 		font: Style.fontBold16
 	  }
 	  Text {
@@ -50,7 +48,7 @@ MainPage {
 	}
 	Column {
 	  Text {
-		text: root.viewModel.weeklyKmRun * 62
+		text: viewModel.weeklyKmRun * 62
 		font: Style.fontBold16
 	  }
 	  Text {
@@ -60,7 +58,7 @@ MainPage {
 	}
 	Column {
 	  Text {
-		text: root.viewModel.averageDuration
+		text: viewModel.averageDuration + " min"
 		font: Style.fontBold16
 	  }
 	  Text {
