@@ -10,16 +10,16 @@ Row {
 
   spacing: 5
   Icon {
-	id: m_icon
+    id: m_icon
 
-	anchors.verticalCenter: root.verticalCenter
-	width: m_text.height; height: m_text.height
-	color: mainColor
-  }  
+    anchors.verticalCenter: root.verticalCenter
+    width: m_text.height; height: m_text.height
+    color: mainColor
+  }
   Text {
-	id: m_text
+    id: m_text
 
-	anchors.verticalCenter: root.verticalCenter
-	color: mainColor
+    anchors.verticalCenter: root.verticalCenter
+    color: mainColor
   }
 }

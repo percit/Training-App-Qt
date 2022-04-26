@@ -79,4 +79,4 @@ QtObject {
         weight: Font.Bold,
         pointSize: 22
 	  })
-  }
+}

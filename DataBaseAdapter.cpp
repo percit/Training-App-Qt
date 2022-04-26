@@ -36,6 +36,5 @@ double DataBaseAdapter::getAverageDuration()
 
 double DataBaseAdapter::getAllDuration()
 {
-    return std::accumulate(runningTime.begin(), runningTime.end(), 0) /  60; // 3600 bc it's in sec
+    return std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60; // 3600 bc it's in sec
 }
-//there have to be an update function, or like calling all functions in a viewmodel every 10 seconds or something
