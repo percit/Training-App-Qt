@@ -9,8 +9,13 @@ MainPage {
 	readonly property string time: "0: 00"
 	placeholder: true
 
+
+	MapModel {
+		anchors.top: parent.top
+	}
+
 	Rectangle {
-		width: parent.width; height: 110
+		width: parent.width; height: 110 * Style.scaleY
 		color: Style.black30
 		anchors {
 			bottom: parent.bottom; bottomMargin: 64 * Style.scaleY
