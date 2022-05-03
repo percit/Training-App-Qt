@@ -13,6 +13,8 @@
 		<file>TextWithIcon.qml</file>
 		<file>WeeklyStatsPage.qml</file>
 		<file>ProgresBar.qml</file>
+		<file>DataBaseViewModel.qml</file>
+		<file>MapModel.qml</file>
 
 		<file>assets/shoe-sneaker.png</file>
 		<file>assets/achievement.png</file>
