@@ -15,6 +15,7 @@
 		<file>ProgresBar.qml</file>
 		<file>DataBaseViewModel.qml</file>
 		<file>MapModel.qml</file>
+		<file>Helper.js</file>
 
 		<file>assets/shoe-sneaker.png</file>
 		<file>assets/achievement.png</file>
