@@ -1,17 +1,17 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.4
 import QtPositioning 5.6
-import QtLocation 5.9
+import QtLocation 5.11
 
 Item {
     id: win
     visible: true
     width: 375 * Style.scaleX
-    height: 442 * Style.scaleY
+    height: 438 * Style.scaleY
 
     Plugin {
         id: plugin
-        name: "mapboxgl"
+        name: "osm" //mapboxgl not working for routing right now, when working, use map.supportedMapTypes[3]
     }
 
     Map {
@@ -19,48 +19,37 @@ Item {
         gesture.enabled: true
         anchors.fill: parent
         plugin: plugin
-        center: QtPositioning.coordinate(0, 180)
+        zoomLevel: 15
+        center { // Arcady Capitol
+            latitude: 51.099695
+            longitude: 17.028648
+        }
         activeMapType: map.supportedMapTypes[0]
-        zoomLevel: 8
-        copyrightsVisible: true
-
+        copyrightsVisible: false
         RouteModel {
-            id: routeModel
+            id: rm
+            plugin: plugin
+            query: RouteQuery {id: routeQuery }
+            Component.onCompleted: {
+                routeQuery.addWaypoint(QtPositioning.coordinate(51.099695, 17.028648));
+                routeQuery.addWaypoint(QtPositioning.coordinate(51.054788, 16.970955)); 
+                update();
+            } //TUTAJ POWINIENEM DODAWAC DUZO WAYPOINTOW, JAKAS FUNKCJA LADUJACA JE DO LISTVIEW CZY COS
+
         }
 
         MapItemView {
-            model: routeModel
-            delegate: routeDelegate
-        }
-
-        Component {
-            id: routeDelegate
-
-            MapRoute {
-                route: routeData
-                line.color: "blue"
-                line.width: 5
-                smooth: true
-                opacity: 0.8
+            model: rm
+            delegate: Component{
+                MapRoute {
+                    route: routeData
+                    line.color: "green"
+                    line.width: 4
+                    smooth: true
+                }
             }
         }
+        //zeby uzyskac czas i wsrzucic to do listy to jest plik RouteList
 
-        // MapPolyline {
-        //     line.color: 'red'
-        //     line.width: 10
-        //     path: [
-        //     { latitude: 1, longitude: 179 },
-        //     { latitude: 1, longitude: -179 }
-        //     ]
-        // }
-
-        // MapPolyline {
-        //     line.color: 'blue'
-        //     line.width: 10
-        //     path: [
-        //     { latitude: -1, longitude: -179 },
-        //     { latitude: -1, longitude: 179 }
-        //     ]
-        // }
-    }
-}
+    } //map
+} //item
