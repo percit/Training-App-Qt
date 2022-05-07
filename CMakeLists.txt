@@ -18,8 +18,7 @@ set(
   PROJECT_SOURCES
   main.cpp
   database.cpp
-  DataBaseAdapter.cpp
-  batteryvalue.cpp
+  DataBaseModel.cpp
   qml/qml.qrc
 )
 
