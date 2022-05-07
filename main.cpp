@@ -3,14 +3,13 @@
 #include <QQmlContext>
 
 #include "database.h"
-#include "DataBaseAdapter.h"
-#include "batteryvalue.h"
+//#include "DataBaseAdapter.h"
+#include "DataBaseModel.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
-    qmlRegisterSingletonType(QUrl("qrc:///Style.qml"), "App", 1, 0, "Style");
 
     //    DataBase db("database9.db");
     //    if (db.isOpen())
@@ -29,8 +28,9 @@ int main(int argc, char *argv[])
     //    else
     //        qDebug() << "Database is not open!";
 
-    qmlRegisterType<BatteryValue>("DataBaseModel", 1, 0, "DbModel"); // to nasz database adapter
+    qmlRegisterType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel"); // to nasz database adapter
 
+    qmlRegisterSingletonType(QUrl("qrc:///Style.qml"), "App", 1, 0, "Style");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated,
