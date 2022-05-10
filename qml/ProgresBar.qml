@@ -7,7 +7,7 @@ Column {
 		id: mainBar
 
 		anchors.horizontalCenter: parent.horizontalCenter
-		width: 25; height: 200
+		width: 25 * Style.scaleX; height: 200 * Style.scaleY
 		color: Style.black75
 		Rectangle {
 			anchors {

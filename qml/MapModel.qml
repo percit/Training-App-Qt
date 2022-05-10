@@ -5,10 +5,9 @@ import QtLocation 5.11
 import "Helper.js" as Helper
 
 Item {
-    id: win
     visible: true
     width: 375 * Style.scaleX
-    height: 438 * Style.scaleY
+    height: 418 * Style.scaleY
 
     Plugin {
         id: plugin
@@ -90,3 +89,9 @@ Item {
 } //item
 // property variant toCoordinate: QtPositioning.coordinate(59.9645, 10.671)
 //routeQuery.clearWaypoints();
+
+
+//liczenie odleglosci
+//zbindowanie timera z przyciskiem
+//for loop z dodawaniem nowych x, y
+//deployment na android

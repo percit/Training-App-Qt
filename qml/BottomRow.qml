@@ -24,7 +24,7 @@ Rectangle {
 	Row {
 		id: bottomRow
 		spacing: (root.width - 30 - 5 * menuButton1.width) / 4
-		anchors.left: parent.left; anchors.leftMargin: 15
+		anchors.left: parent.left; anchors.leftMargin: 15 * Style.scaleX
 		MenuButton {
 			id: menuButton1
 

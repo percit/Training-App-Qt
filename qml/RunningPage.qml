@@ -7,7 +7,7 @@ MainPage {
 
 	readonly property double distance: 0.0
 	readonly property string time: "0: 00"
-	placeholder: true
+	placeholder: false
 
 
 	MapModel {
@@ -22,8 +22,8 @@ MainPage {
 		}
 		Column {
 			anchors {
-				left: parent.left; leftMargin: 10
-				top: parent.top; topMargin: 5
+				left: parent.left; leftMargin: 10 * Style.scaleX
+				top: parent.top; topMargin: 5 * Style.scaleY
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
@@ -39,8 +39,8 @@ MainPage {
 		}
 		Column {
 			anchors {
-				right: parent.right; rightMargin: 10
-				top: parent.top; topMargin: 5
+				right: parent.right; rightMargin: 10 * Style.scaleX
+				top: parent.top; topMargin: 5 * Style.scaleY
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
@@ -57,9 +57,9 @@ MainPage {
 		TextButton {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
-				bottom: parent.bottom; bottomMargin: 10
+				bottom: parent.bottom; bottomMargin: 10 * Style.scaleY
 			}
-			width: 200; height: 30
+			width: 200 * Style.scaleX; height: 30 * Style.scaleY
 			text: "Train"
 		}
 	}
