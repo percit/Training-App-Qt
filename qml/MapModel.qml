@@ -8,7 +8,7 @@ Item {
     property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
     property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
     property double fullDistance: 0.0
-    property variant markers //to bylo w obiekcie map
+    property variant markers //konetner z Qt.position
     property double time_elapsed: 0.0
     property double startTime: 0.0
 
@@ -36,7 +36,7 @@ Item {
             Component.onCompleted: {
                 routeQuery.addWaypoint(fromCoordinate);
                 //tutaj by byl for loop z wielkosca kontenera, ktory dodaje waypointy, a waypointy bierzemy z lokacji co 10s
-                // for (var i = 0; i<markers.size(); i++){
+                // for (var i = 0; i<markers.length; i++){
                 //     routeQuery.addWaypoint(markers[i]) //markers musi zwracac te QtPositioning.coordinate
                 // }
                 routeQuery.addWaypoint(QtPositioning.coordinate(51.087586, 17.013730));
@@ -93,6 +93,8 @@ Item {
             }
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
+
+            //jak chcemy ciagle wyswietlac czas to mozemy dodawac z tego timera co 10 sekund czas
         }
     }
     Button {
@@ -102,6 +104,7 @@ Item {
             } else {
                 time_elapsed = (new Date().getTime() - startTime) / (60 * 1000) //change to min from ms
                 startTime = 0.0
+                routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
             }
         }
     }
@@ -135,17 +138,15 @@ Item {
 //     }
 
 
-// //timer:
-//     odpalam timer1 liczacy caly bieg
-//     jak timer1 jest running, to timer2 jest running
-//     timer2 ma czas 10 sekund
-//     timer2 odczytuje wartosc, tworzy waypoint i pakuje do listy
-//     timer1 wciskamy, wylacza nam timer2, liczy nam odleglosc, odpala routeQuery.clearWaypoints();
-//     no i timer1 jest zbindowany z przyciskiem run
-
 
 // //deployment na androida:
 //     usun te wersje placeholderowe
 //     przejrzyj kod, zeby byl ladny
 //     dodaj viewmodele i podziel na foldery
 //     dodaj readme jak budowac apk i update starego readme 
+
+
+
+// MUSZE ZBINDOWAC TEXTY Z MAPMODEL DO RUNNING PAGE
+//ODPALANIE PRZYCISKIEM Z RUNNING PAGE NASZ CZAS TUTAJ
+//OGARNIJ TO DODAWANIE WAYPOINTOW DO ARRAYA CZYLI ADDMARKER
