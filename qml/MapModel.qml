@@ -5,10 +5,6 @@ import QtLocation 5.11
 import "Helper.js" as Helper
 
 Item {
-    visible: true
-    // width: 375 * Style.scaleX
-    // height: 418 * Style.scaleY
-
     property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
     property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
     property double fullDistance: 0.0

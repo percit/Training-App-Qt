@@ -12,9 +12,13 @@ MainPage {
 
 	MapModel {
 		anchors.top: parent.top
+		width: 375 * Style.scaleX
+		height: (parent.height - runningMenu.height - 64 * Style.scaleY) * Style.scaleY
 	}
 
 	Rectangle {
+		id: runningMenu
+
 		width: parent.width; height: 110 * Style.scaleY
 		color: Style.black30
 		anchors {
