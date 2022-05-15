@@ -5,12 +5,13 @@ import QtQml 2.3
 MainPage {
 	id: root
 
-	readonly property double distance: 0.0
-	readonly property string time: "0: 00"
+	readonly property double distance: mapModel.fullDistance
+	readonly property double time: mapModel.currentlyElapsedTime * 10 / 60 //shows in minutes
 	placeholder: false
 
-
 	MapModel {
+		id: mapModel
+		
 		anchors.top: parent.top
 		width: 375 * Style.scaleX
 		height: (parent.height - runningMenu.height - 64 * Style.scaleY) * Style.scaleY
@@ -65,6 +66,9 @@ MainPage {
 			}
 			width: 200 * Style.scaleX; height: 30 * Style.scaleY
 			text: "Train"
+			onClicked: {
+				mapModel.trainButtonClicked()
+			}
 		}
 	}
 }

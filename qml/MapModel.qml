@@ -9,8 +9,13 @@ Item {
     property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
     property double fullDistance: 0.0
     property variant markers //konetner z Qt.position
+
+    //showing time
     property double time_elapsed: 0.0
     property double startTime: 0.0
+    property double currentlyElapsedTime: 0
+
+    signal trainButtonClicked
 
     Plugin {
         id: plugin
@@ -78,34 +83,37 @@ Item {
     } //map
 
     Timer { 
-        interval: 10 * 1000 //10 sekund
-        running: startTime > 0.0
+        interval: 10 * 1000 //10 sec
+        running: startTime > 0
         repeat: true
         onTriggered: {
-            markers.addMarker() // co 10 sekund dodaje jakis marker
+            //markers.addMarker() // co 10 sekund dodaje jakis marker
 
             //counting distance
-            var temporaryDistance = 0.0
-            for (var i = 0; i < markers.length - 1; i++) {
-                var coordinate1 = markers[i].coordinate;
-                var coordinate2 = markers[i+1].coordinate;
-                temporaryDistance += Helper.formatDistance(coordinate1.distanceTo(coordinate2));
-            }
-            fullDistance = temporaryDistance
-            temporaryDistance = 0.0
+            // var temporaryDistance = 0.0
+            // for (var i = 0; i < markers.length - 1; i++) {
+            //     var coordinate1 = markers[i];
+            //     var coordinate2 = markers[i+1];
+            //     temporaryDistance += Helper.formatDistance(coordinate1.distanceTo(coordinate2));
+            // }
+            // fullDistance = temporaryDistance
+            // temporaryDistance = 0.0
 
-            //jak chcemy ciagle wyswietlac czas to mozemy dodawac z tego timera co 10 sekund czas
+            //showing time
+            currentlyElapsedTime++
         }
     }
-    Button {
-        onClicked: {
-            if(time_elapsed === 0.0){
-                time_elapsed = new Date().getTime()
-            } else {
-                time_elapsed = (new Date().getTime() - startTime) / (60 * 1000) //change to min from ms
-                startTime = 0.0
-                routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
-            }
+
+    onTrainButtonClicked: { 
+        if(startTime === 0.0) { //timer wylaczony, nie zaczelismy biegac
+            time_elapsed = 0.0
+            currentlyElapsedTime = 0
+            startTime = new Date().getTime()
+        }
+        else {
+            time_elapsed = (new Date().getTime() - startTime) / 1000//(60 * 1000) //change to min from ms
+            startTime = 0.0
+            routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
         }
     }
     function addMarker()
@@ -147,6 +155,4 @@ Item {
 
 
 
-// MUSZE ZBINDOWAC TEXTY Z MAPMODEL DO RUNNING PAGE
-//ODPALANIE PRZYCISKIEM Z RUNNING PAGE NASZ CZAS TUTAJ
 //OGARNIJ TO DODAWANIE WAYPOINTOW DO ARRAYA CZYLI ADDMARKER
