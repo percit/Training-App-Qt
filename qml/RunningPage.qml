@@ -1,12 +1,13 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQml 2.3
+import "Helper.js" as Helper
 
 MainPage {
 	id: root
 
-	readonly property double distance: mapModel.fullDistance
-	readonly property double time: mapModel.currentlyElapsedTime * 10 / 60 //shows in minutes
+	readonly property double distance: Helper.roundNumber((mapModel.fullDistance / 1000), 2)
+	readonly property double time: Helper.roundNumber((mapModel.currentlyElapsedTime / 6), 2) //shows in minutes
 	placeholder: false
 
 	MapModel {

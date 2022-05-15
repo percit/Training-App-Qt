@@ -5,10 +5,16 @@ import QtLocation 5.11
 import "Helper.js" as Helper
 
 Item {
+
+    //counting distance
     property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
     property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
-    property double fullDistance: 0.0
-    property variant markers //konetner z Qt.position
+    property double fullDistance: 0.0  //to jest w metrach
+    property double temporaryDistance: 0.0
+    property variant markers: [
+        fromCoordinate, QtPositioning.coordinate(51.087586, 17.013730), QtPositioning.coordinate(51.060790, 16.994307), toCoordinate
+    ]
+    property variant currentCoordinate
 
     //showing time
     property double time_elapsed: 0.0
@@ -73,10 +79,7 @@ Item {
             }
             onLocationsChanged:
             {
-                if (count == 1) {
-                    map.center.latitude = get(0).coordinate.latitude
-                    map.center.longitude = get(0).coordinate.longitude
-                }
+                currentCoordinate = QtPositioning.coordinate(get(0).coordinate.latitude, get(0).coordinate.longitude)
             }
         }
 
@@ -88,19 +91,18 @@ Item {
         repeat: true
         onTriggered: {
             //markers.addMarker() // co 10 sekund dodaje jakis marker
-
-            //counting distance
-            // var temporaryDistance = 0.0
-            // for (var i = 0; i < markers.length - 1; i++) {
-            //     var coordinate1 = markers[i];
-            //     var coordinate2 = markers[i+1];
-            //     temporaryDistance += Helper.formatDistance(coordinate1.distanceTo(coordinate2));
-            // }
-            // fullDistance = temporaryDistance
-            // temporaryDistance = 0.0
+            
+            routeQuery.addWaypoint(currentCoordinate);
 
             //showing time
             currentlyElapsedTime++
+
+            //counting distance
+            for (var i = 0; i < markers.length - 1; i++) {
+                temporaryDistance += markers[i].distanceTo(markers[i+1])
+            }
+            fullDistance = temporaryDistance
+            temporaryDistance = 0.0
         }
     }
 
@@ -108,10 +110,11 @@ Item {
         if(startTime === 0.0) { //timer wylaczony, nie zaczelismy biegac
             time_elapsed = 0.0
             currentlyElapsedTime = 0
+            fullDistance = 0.0
             startTime = new Date().getTime()
         }
         else {
-            time_elapsed = (new Date().getTime() - startTime) / 1000//(60 * 1000) //change to min from ms
+            time_elapsed = (new Date().getTime() - startTime) / 1000
             startTime = 0.0
             routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
         }
