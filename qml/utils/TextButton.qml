@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import StyleSingleton 1.0
 
 Rectangle {
   id: root

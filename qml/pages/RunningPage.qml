@@ -1,13 +1,14 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQml 2.3
-import "Helper.js" as Helper
+import StyleSingleton 1.0
+import "../Helper.js" as Helper
+import "../utils"
+import "../viewmodels"
 
 MainPage {
 	id: root
 
-	readonly property double distance: Helper.roundNumber((mapModel.fullDistance / 1000), 2)
-	readonly property double time: Helper.roundNumber((mapModel.currentlyElapsedTime / 6), 2) //shows in minutes
 	placeholder: false
 
 	MapModel {
@@ -33,7 +34,7 @@ MainPage {
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
-				text: distance
+				text: Helper.roundNumber((mapModel.fullDistance / 1000), 2)
 				font: Style.fontBold16
 				color: Style.black75
 			}
@@ -50,7 +51,7 @@ MainPage {
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
-				text: time
+				text: Helper.roundNumber((mapModel.currentlyElapsedTime / 6), 2) //shows in minutes
 				font: Style.fontBold16
 				color: Style.black75
 			}

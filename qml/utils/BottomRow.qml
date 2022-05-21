@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import StyleSingleton 1.0
 
 Rectangle {
 	id: root
@@ -33,7 +34,7 @@ Rectangle {
 				activeSouce = BottomRow.ActiveSource.PAGE1
 				root.page1()
 			}
-			source: "assets/timer.png"
+			source: "qrc:/assets/timer.png"
 		}
 		MenuButton {
 			buttonOn: activeSouce === BottomRow.ActiveSource.PAGE2
@@ -41,7 +42,7 @@ Rectangle {
 				activeSouce = BottomRow.ActiveSource.PAGE2
 				root.page2()
 			}
-			source: "assets/achievement.png"
+			source: "qrc:/assets/achievement.png"
 		}
 		MenuButton {
 			buttonOn: activeSouce === BottomRow.ActiveSource.PAGE3
@@ -49,7 +50,7 @@ Rectangle {
 				activeSouce = BottomRow.ActiveSource.PAGE3
 				root.page3()
 			}
-			source: "assets/tasks.png"
+			source: "qrc:/assets/tasks.png"
 		}
 		MenuButton {
 			buttonOn: activeSouce === BottomRow.ActiveSource.PAGE4
@@ -57,7 +58,7 @@ Rectangle {
 				activeSouce = BottomRow.ActiveSource.PAGE4
 				root.page4()
 			}
-			source: "assets/run.png"
+			source: "qrc:/assets/run.png"
 		}
 		MenuButton {
 			buttonOn: activeSouce === BottomRow.ActiveSource.PAGE5
@@ -65,7 +66,7 @@ Rectangle {
 				activeSouce = BottomRow.ActiveSource.PAGE5
 				root.page5()
 			}
-			source: "assets/run.png"
+			source: "qrc:/assets/run.png"
 		}
 	}
 }

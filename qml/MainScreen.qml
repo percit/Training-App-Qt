@@ -1,6 +1,10 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQml.Models 2.15
+import "utils"
+import "pages"
+
+
 Item {
 	id: root
 

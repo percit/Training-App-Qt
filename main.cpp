@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel"); // to nasz database adapter
 
-    qmlRegisterSingletonType(QUrl("qrc:///Style.qml"), "App", 1, 0, "Style");
+    qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0, "Style");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated,
