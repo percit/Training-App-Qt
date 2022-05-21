@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 
 enable_testing()
