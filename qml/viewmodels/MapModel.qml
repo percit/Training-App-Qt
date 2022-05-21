@@ -40,25 +40,21 @@ Item {
         activeMapType: map.supportedMapTypes[0]
         copyrightsVisible: false
         RouteModel {
-            id: rm
+            id: routeModel
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
-                routeQuery.addWaypoint(fromCoordinate);
-                //tutaj by byl for loop z wielkosca kontenera, ktory dodaje waypointy, a waypointy bierzemy z lokacji co 10s
-                // for (var i = 0; i<markers.length; i++){
-                //     routeQuery.addWaypoint(markers[i]) //markers musi zwracac te QtPositioning.coordinate
-                // }
-                routeQuery.addWaypoint(QtPositioning.coordinate(51.087586, 17.013730));
-                routeQuery.addWaypoint(QtPositioning.coordinate(51.060790, 16.994307));
-                routeQuery.addWaypoint(toCoordinate);
+                // routeQuery.addWaypoint(fromCoordinate);
+                // routeQuery.addWaypoint(QtPositioning.coordinate(51.087586, 17.013730));
+                // routeQuery.addWaypoint(QtPositioning.coordinate(51.060790, 16.994307));
+                // routeQuery.addWaypoint(toCoordinate);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
             }
         }
 
         MapItemView {
-            model: rm
+            model: routeModel
             delegate: Component{
                 MapRoute {
                     route: routeData
@@ -69,7 +65,7 @@ Item {
             }
         }
 
-        GeocodeModel { //chyba z tego moge wyciagnac dana pozycje
+        GeocodeModel {//retest it
             id: geocodeModel
             plugin: map.plugin
             onStatusChanged: {
@@ -89,9 +85,9 @@ Item {
         running: startTime > 0
         repeat: true
         onTriggered: {
-            //markers.addMarker(currentCoordinate) // co 10 sekund dodaje jakis marker
+            markers.addMarker(currentCoordinate) // every 10 second a marker is added
             
-            routeQuery.addWaypoint(currentCoordinate);
+            routeQuery.addWaypoint(currentCoordinate); //rm.routeQuery.addWaypoint(currentCoordinate);
 
             //showing time
             currentlyElapsedTime++
@@ -106,52 +102,33 @@ Item {
     }
 
     onTrainButtonClicked: { 
-        if(startTime === 0.0) { //timer wylaczony, nie zaczelismy biegac
+        if(startTime === 0.0) { //we start running
+            routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
             time_elapsed = 0.0
             currentlyElapsedTime = 0
             fullDistance = 0.0
             startTime = new Date().getTime()
         }
-        else {
+        else { //we stop running
             time_elapsed = (new Date().getTime() - startTime) / 1000
             startTime = 0.0
-            routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
         }
     }
-    function addMarker()
+
+    function addMarker(currentCoordinate)
     {
-        console.log("addMarker fun")
+        myArray.push(currentCoordinate)
+
+
+        // marker = currentCoordinate
+        // //update list of markers
+        // var myArray = new Array()
+        // for (var i = 0; i<count; i++){
+        //     myArray.push(markers[i])
+        // }
+        // myArray.push(marker)
+        // markers = myArray
     }
 } //item
 
 
-// liczenie dystansu:
-     
-
-
-//     function addMarker(currentCoordinate)
-//     {
-//         var count = map.markers.length
-//         markerCounter++
-//         marker = currentCoordinate
-
-//         //update list of markers
-//         var myArray = new Array()
-//         for (var i = 0; i<count; i++){
-//             myArray.push(markers[i])
-//         }
-//         myArray.push(marker)
-//         markers = myArray
-//     }
-
-
-
-// //deployment na androida:
-//     usun te wersje placeholderowe
-//     przejrzyj kod, zeby byl ladny
-//     dodaj viewmodele i podziel na foldery
-//     dodaj readme jak budowac apk i update starego readme 
-
-
-
-//OGARNIJ TO DODAWANIE WAYPOINTOW DO ARRAYA CZYLI ADDMARKER
