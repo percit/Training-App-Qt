@@ -9,7 +9,7 @@ Technology stack:
 3. Mapbox - creating a map, getting GPS data, drawing routes, getting data from routes such as distance and so on
 4. SQLite - local database
 5. Android SDK - deployment on mobile
-6. GTest, GMock - testing (in the future)
+6. GTest - testing
 7. CMake - build automation
 
 ![Getting Started](images/map-image.png)

@@ -14,10 +14,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 
-# option(test "Build all tests." ON)
-# enable_testing()
-# add_subdirectory(tests)
-
+enable_testing()
+add_subdirectory(test)
 
 set(
   PROJECT_SOURCES
@@ -26,7 +24,6 @@ set(
   DataBaseModel.cpp
   qml/qml.qrc
 )
-
 
 if(ANDROID)
 add_library(
