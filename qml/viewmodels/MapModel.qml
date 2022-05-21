@@ -1,5 +1,4 @@
 import QtQuick 2.3
-import QtQuick.Controls 1.4
 import QtPositioning 5.6
 import QtLocation 5.11
 import "../Helper.js" as Helper
