@@ -10,13 +10,19 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_FLAGS “-Wall -Werror -Wno-missing-braces”)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 
-add_subdirectory(googletest)
+
+# include(FetchContent)
+# FetchContent_Declare(
+#   googletest
+#   URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+# )
 enable_testing()
-add_subdirectory(tests)
+add_subdirectory(test)
 
 set(
   PROJECT_SOURCES
@@ -56,6 +62,7 @@ target_link_libraries(
   Training-app
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::Sql
+  tests
 )
 set_target_properties(
   Training-app PROPERTIES
