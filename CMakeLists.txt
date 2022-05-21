@@ -14,6 +14,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 
+add_subdirectory(googletest)
+enable_testing()
+add_subdirectory(tests)
+
 set(
   PROJECT_SOURCES
   main.cpp
