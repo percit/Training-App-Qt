@@ -1,20 +1,26 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQml 2.3
+import "Helper.js" as Helper
 
 MainPage {
 	id: root
 
-	readonly property double distance: 0.0
-	readonly property string time: "0: 00"
-	placeholder: true
-
+	readonly property double distance: Helper.roundNumber((mapModel.fullDistance / 1000), 2)
+	readonly property double time: Helper.roundNumber((mapModel.currentlyElapsedTime / 6), 2) //shows in minutes
+	placeholder: false
 
 	MapModel {
+		id: mapModel
+		
 		anchors.top: parent.top
+		width: 375 * Style.scaleX
+		height: (parent.height - runningMenu.height - 64 * Style.scaleY) * Style.scaleY
 	}
 
 	Rectangle {
+		id: runningMenu
+
 		width: parent.width; height: 110 * Style.scaleY
 		color: Style.black30
 		anchors {
@@ -22,8 +28,8 @@ MainPage {
 		}
 		Column {
 			anchors {
-				left: parent.left; leftMargin: 10
-				top: parent.top; topMargin: 5
+				left: parent.left; leftMargin: 10 * Style.scaleX
+				top: parent.top; topMargin: 5 * Style.scaleY
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
@@ -39,8 +45,8 @@ MainPage {
 		}
 		Column {
 			anchors {
-				right: parent.right; rightMargin: 10
-				top: parent.top; topMargin: 5
+				right: parent.right; rightMargin: 10 * Style.scaleX
+				top: parent.top; topMargin: 5 * Style.scaleY
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
@@ -57,10 +63,13 @@ MainPage {
 		TextButton {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
-				bottom: parent.bottom; bottomMargin: 10
+				bottom: parent.bottom; bottomMargin: 10 * Style.scaleY
 			}
-			width: 200; height: 30
+			width: 200 * Style.scaleX; height: 30 * Style.scaleY
 			text: "Train"
+			onClicked: {
+				mapModel.trainButtonClicked()
+			}
 		}
 	}
 }

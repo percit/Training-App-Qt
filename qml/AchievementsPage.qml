@@ -7,14 +7,14 @@ MainPage {
 	placeholder: false
 
 	Rectangle {
-		width: 230; height: 230
+		width: 230 * Style.scaleY; height: 230 * Style.scaleY
 		color: Style.black10
 		border.color: Style.white75
-		border.width: 10
+		border.width: 10 * Style.scaleY
 		radius: width * 0.5
 		anchors {
 			horizontalCenter: parent.horizontalCenter
-			top: parent.top; topMargin: 30
+			top: parent.top; topMargin: 30 * Style.scaleY
 		}
 		Column {
 			anchors.centerIn: parent
@@ -40,8 +40,8 @@ MainPage {
 	}
 	Text {
 		anchors {
-			left: parent.left; leftMargin: 10
-			top: parent.top; topMargin: 300
+			left: parent.left; leftMargin: 10 * Style.scaleX
+			top: parent.top; topMargin: 300 * Style.scaleY
 		}
 		text: "Best Records"
 		font: Style.fontBold22
@@ -50,8 +50,8 @@ MainPage {
 
 	Column {
 		anchors {
-			left: parent.left; leftMargin: 10
-			top: parent.top; topMargin: 350
+			left: parent.left; leftMargin: 10 * Style.scaleX
+			top: parent.top; topMargin: 350 * Style.scaleY
 		}
 		spacing: 15
 		Column {

@@ -1,9 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-
 #include "database.h"
-//#include "DataBaseAdapter.h"
 #include "DataBaseModel.h"
 
 int main(int argc, char *argv[])

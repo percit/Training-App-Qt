@@ -9,16 +9,16 @@ MainPage {
 
 	Text {
 		anchors {
-			left: parent.left; leftMargin: 20
-			top: parent.top; topMargin: 10
+			left: parent.left; leftMargin: 20 * Style.scaleX
+			top: parent.top; topMargin: 10 * Style.scaleY
 		}
 		text: "My Progress"
 		font: Style.fontBold22 //TODO make it bigger
 	}
 	Column {
 		anchors {
-			left: parent.left; leftMargin: 20
-			top: parent.top; topMargin: 50
+			left: parent.left; leftMargin: 20 * Style.scaleX
+			top: parent.top; topMargin: 50 * Style.scaleY
 		}
 		Text {
 			text: viewModel.weeklyKmRun
@@ -32,8 +32,8 @@ MainPage {
 
 	Row {
 		anchors {
-			left: parent.left; leftMargin: 20
-			top: parent.top; topMargin: 120
+			left: parent.left; leftMargin: 20 * Style.scaleX
+			top: parent.top; topMargin: 120 * Style.scaleY
 		}
 		spacing: 15
 		Column {
@@ -43,7 +43,7 @@ MainPage {
 			}
 			Text {
 				text: "Total Hours"
-				font: Style.fontDemiBold12
+				font: Style.fontDemiBold10
 			}
 		}
 		Column {
@@ -53,7 +53,7 @@ MainPage {
 			}
 			Text {
 				text: "Total Kcal"
-				font: Style.fontDemiBold12
+				font: Style.fontDemiBold10
 			}
 		}
 		Column {
@@ -63,14 +63,14 @@ MainPage {
 			}
 			Text {
 				text: "Avg Duration"
-				font: Style.fontDemiBold12
+				font: Style.fontDemiBold10
 			}
 		}
 	}
 	Text {
 		anchors {
-			left: parent.left; leftMargin: 20
-			top: parent.top; topMargin: 250
+			left: parent.left; leftMargin: 20 * Style.scaleX
+			top: parent.top; topMargin: 250 * Style.scaleY
 		}
 		text: "Weekly Chart"
 		font: Style.fontBold16 //TODO make it bigger
@@ -80,7 +80,7 @@ MainPage {
 	Row {
 		anchors {
 			horizontalCenter: parent.horizontalCenter
-			top: parent.top; topMargin: 300
+			top: parent.top; topMargin: 300 * Style.scaleY
 		}
 		spacing: 25
 		ProgresBar {
