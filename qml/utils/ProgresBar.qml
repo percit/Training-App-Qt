@@ -1,4 +1,6 @@
 import QtQuick 2.3
+import StyleSingleton 1.0
+
 Column {
 	property string dayName: "Pn"
 	property double progressValue: 0.5 // 50%

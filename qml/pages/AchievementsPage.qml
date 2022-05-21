@@ -1,6 +1,9 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQml 2.3
+import StyleSingleton 1.0
+import "../utils"
+import "../viewmodels"
 
 MainPage {
 	readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
@@ -58,7 +61,7 @@ MainPage {
 			TextWithIcon {
 				text: "Longest Distance"
 				font: Style.fontDemiBold12
-				source: "assets/route.png"
+				source: "qrc:/assets/route.png"
 			}
 			Text {
 				text: viewModel.longestDistance + " km"
@@ -70,7 +73,7 @@ MainPage {
 			TextWithIcon {
 				text: "Best Pace"
 				font: Style.fontDemiBold12
-				source: "assets/speed.png"
+				source: "qrc:/assets/speed.png"
 			}
 			Text {
 				text: viewModel.bestPace + " min/km"
@@ -82,7 +85,7 @@ MainPage {
 			TextWithIcon {
 				text: "Longest Duration"
 				font: Style.fontDemiBold12
-				source: "assets/time.png"
+				source: "qrc:/assets/time.png"
 			}
 			Text {
 				text: viewModel.longestDuration + " min"

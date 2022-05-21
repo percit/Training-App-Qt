@@ -1,6 +1,9 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQml 2.3
+import StyleSingleton 1.0
+import "../utils"
+import "../viewmodels"
 
 MainPage {
 	readonly property DataBaseViewModel viewModel: DataBaseViewModel {}

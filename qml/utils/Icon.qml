@@ -1,4 +1,5 @@
 import QtQuick 2.3
+
 Image {
     id: root
     //TODO fix coloring (there are errors when layer.enabled: true)
