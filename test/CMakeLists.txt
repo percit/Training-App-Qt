@@ -1,0 +1,7 @@
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest")
+  option(test "Build all tests." ON)
+  add_subdirectory(googletest)
+  add_subdirectory(tests)
+else()
+  option(test "Building all tests stopped." OFF)
+endif()
