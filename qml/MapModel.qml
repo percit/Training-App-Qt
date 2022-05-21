@@ -90,7 +90,7 @@ Item {
         running: startTime > 0
         repeat: true
         onTriggered: {
-            //markers.addMarker() // co 10 sekund dodaje jakis marker
+            //markers.addMarker(currentCoordinate) // co 10 sekund dodaje jakis marker
             
             routeQuery.addWaypoint(currentCoordinate);
 
@@ -130,14 +130,11 @@ Item {
      
 
 
-//     function addMarker()
+//     function addMarker(currentCoordinate)
 //     {
 //         var count = map.markers.length
 //         markerCounter++
-//         var marker = Qt.createQmlObject ('Marker {}', map)
-//         map.addMapItem(marker)
-//         marker.z = map.z+1
-//         marker.coordinate = mouseArea.lastCoordinate
+//         marker = currentCoordinate
 
 //         //update list of markers
 //         var myArray = new Array()
