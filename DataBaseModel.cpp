@@ -126,3 +126,44 @@ void DataBaseModel::setAllDuration(qreal newAllDuration)
     emit allDurationChanged();
 }
 
+
+const Day &DataBaseModel::monday() const
+{
+    return m_monday;
+}
+
+void DataBaseModel::setMonday(const Day& newMonday)
+{
+    // if (m_monday == newMonday)
+    //     return;
+    m_monday = newMonday;
+    emit mondayChanged();
+}
+
+int DataBaseModel::monday_km() const
+{
+    return m_monday_km;
+}
+
+void DataBaseModel::setMonday_km(int newMonday_km)
+{
+    if (m_monday_km == newMonday_km)
+        return;
+    m_monday_km = newMonday_km;
+    qDebug() << m_monday_km;
+    emit monday_kmChanged();
+}
+
+int DataBaseModel::monday_time() const
+{
+    return m_monday_time;
+}
+
+void DataBaseModel::setMonday_time(int newMonday_time)
+{
+    if (m_monday_time == newMonday_time)
+        return;
+    m_monday_time = newMonday_time;
+    qDebug() << m_monday_time;
+    emit monday_timeChanged();
+}
