@@ -126,19 +126,8 @@ void DataBaseModel::setAllDuration(qreal newAllDuration)
     emit allDurationChanged();
 }
 
-
-const Day &DataBaseModel::monday() const
-{
-    return m_monday;
-}
-
-void DataBaseModel::setMonday(const Day& newMonday)
-{
-    // if (m_monday == newMonday)
-    //     return;
-    m_monday = newMonday;
-    emit mondayChanged();
-}
+// /////////////////////////////////////////////////////////////////////
+//DAYS
 
 int DataBaseModel::monday_km() const
 {
@@ -166,4 +155,160 @@ void DataBaseModel::setMonday_time(int newMonday_time)
     m_monday_time = newMonday_time;
     qDebug() << m_monday_time;
     emit monday_timeChanged();
+}
+
+int DataBaseModel::tuesday_km() const
+{
+    return m_tuesday_km;
+}
+
+void DataBaseModel::setTuesday_km(int newTuesday_km)
+{
+    if (m_tuesday_km == newTuesday_km)
+        return;
+    m_tuesday_km = newTuesday_km;
+    emit tuesday_kmChanged();
+}
+
+int DataBaseModel::tuesday_time() const
+{
+    return m_tuesday_time;
+}
+
+void DataBaseModel::setTuesday_time(int newTuesday_time)
+{
+    if (m_tuesday_time == newTuesday_time)
+        return;
+    m_tuesday_time = newTuesday_time;
+    emit tuesday_timeChanged();
+}
+
+int DataBaseModel::wednesday_km() const
+{
+    return m_wednesday_km;
+}
+
+void DataBaseModel::setWednesday_km(int newWednesday_km)
+{
+    if (m_wednesday_km == newWednesday_km)
+        return;
+    m_wednesday_km = newWednesday_km;
+    emit wednesday_kmChanged();
+}
+
+int DataBaseModel::wednesday_time() const
+{
+    return m_wednesday_time;
+}
+
+void DataBaseModel::setWednesday_time(int newWednesday_time)
+{
+    if (m_wednesday_time == newWednesday_time)
+        return;
+    m_wednesday_time = newWednesday_time;
+    emit wednesday_timeChanged();
+}
+
+int DataBaseModel::thursday_km() const
+{
+    return m_thursday_km;
+}
+
+void DataBaseModel::setThursday_km(int newThursday_km)
+{
+    if (m_thursday_km == newThursday_km)
+        return;
+    m_thursday_km = newThursday_km;
+    emit thursday_kmChanged();
+}
+
+int DataBaseModel::thursday_time() const
+{
+    return m_thursday_time;
+}
+
+void DataBaseModel::setThursday_time(int newThursday_time)
+{
+    if (m_thursday_time == newThursday_time)
+        return;
+    m_thursday_time = newThursday_time;
+    emit thursday_timeChanged();
+}
+
+int DataBaseModel::friday_km() const
+{
+    return m_friday_km;
+}
+
+void DataBaseModel::setFriday_km(int newFriday_km)
+{
+    if (m_friday_km == newFriday_km)
+        return;
+    m_friday_km = newFriday_km;
+    emit friday_kmChanged();
+}
+
+int DataBaseModel::friday_time() const
+{
+    return m_friday_time;
+}
+
+void DataBaseModel::setFriday_time(int newFriday_time)
+{
+    if (m_friday_time == newFriday_time)
+        return;
+    m_friday_time = newFriday_time;
+    emit friday_timeChanged();
+}
+
+int DataBaseModel::saturday_km() const
+{
+    return m_saturday_km;
+}
+
+void DataBaseModel::setSaturday_km(int newSaturday_km)
+{
+    if (m_saturday_km == newSaturday_km)
+        return;
+    m_saturday_km = newSaturday_km;
+    emit saturday_kmChanged();
+}
+
+int DataBaseModel::saturday_time() const
+{
+    return m_saturday_time;
+}
+
+void DataBaseModel::setSaturday_time(int newSaturday_time)
+{
+    if (m_saturday_time == newSaturday_time)
+        return;
+    m_saturday_time = newSaturday_time;
+    emit saturday_timeChanged();
+}
+
+int DataBaseModel::sunday_km() const
+{
+    return m_sunday_km;
+}
+
+void DataBaseModel::setSunday_km(int newSunday_km)
+{
+    if (m_sunday_km == newSunday_km)
+        return;
+    m_sunday_km = newSunday_km;
+    emit sunday_kmChanged();
+}
+
+int DataBaseModel::sunday_time() const
+{
+    return m_sunday_time;
+}
+
+void DataBaseModel::setSunday_time(int newSunday_time)
+{
+    if (m_sunday_time == newSunday_time)
+        return;
+    m_sunday_time = newSunday_time;
+    emit sunday_timeChanged();
 }

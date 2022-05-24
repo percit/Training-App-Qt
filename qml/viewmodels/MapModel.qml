@@ -4,11 +4,15 @@ import QtLocation 5.11
 import "../Helper.js" as Helper
 
 Item {
+    id: root
+
     property DataBaseViewModel viewmodel: DataBaseViewModel {}
 
     property double fullDistance: 0.0  //distance in meters
     property double fullRunTime: timerTriggered * 10 //time in seconds
-    onFullRunTimeChanged: {viewmodel.dbModel.setMonday_time(fullRunTime * 10)}
+    property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+    property var now: new Date()
+    readonly property string dateString: days[ now.getDay() ]
 
     //counting distance helper properties
     property double temporaryDistance: 0.0
@@ -104,7 +108,30 @@ Item {
             }
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
-            viewmodel.dbModel.setMonday_km(fullDistance) //tutaj powinnismy dostawac nasze wartosci, ale nie dostajemy
+
+            switch(root.dateString) {
+                case 'Monday':
+                    viewmodel.dbModel.setMonday_time(fullRunTime * 10)
+                    viewmodel.dbModel.setMonday_km(fullDistance)
+                case 'Tuesday':
+                    viewmodel.dbModel.setTuesday_time(fullRunTime * 10)
+                    viewmodel.dbModel.setTuesday_km(fullDistance)
+                case 'Wednesday':
+                    viewmodel.dbModel.setWednesday_time(fullRunTime * 10)
+                    viewmodel.dbModel.setWednesday_km(fullDistance)
+                case 'Thursday':
+                    viewmodel.dbModel.setThursday_time(fullRunTime * 10)
+                    viewmodel.dbModel.setThursday_km(fullDistance)
+                case 'Friday':
+                    viewmodel.dbModel.setFriday_time(fullRunTime * 10)
+                    viewmodel.dbModel.setFriday_km(fullDistance)
+                case 'Saturday':
+                    viewmodel.dbModel.setSaturday_time(fullRunTime * 10)
+                    viewmodel.dbModel.setSaturday_km(fullDistance)
+                case 'Sunday':
+                    viewmodel.dbModel.setSunday_time(fullRunTime * 10)
+                    viewmodel.dbModel.setSunday_km(fullDistance)
+            }
         }
     }
 
@@ -141,7 +168,8 @@ Item {
 
 
 // lista zadan:
-// - dodanie czasu i odleglosci w jakis sposob do cpp
-// - dodanie tych wartosci z cpp do bazy danych
 // - deployment
-// - dodawanie wartosci w zaleznosci od dnia tygodnia
+// easy logging
+// refactor codu
+// moduly
+// testowanie przez gtest
