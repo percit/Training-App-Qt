@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QQmlProperty> //for reading from qml file
+#include <QQuickView>
 #include "database.h"
 #include "DataBaseModel.h"
 
@@ -26,7 +28,9 @@ int main(int argc, char *argv[])
     //    else
     //        qDebug() << "Database is not open!";
 
-    qmlRegisterType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel"); // to nasz database adapter
+
+    qmlRegisterType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel"); // to nasz database adapter, TU CHYBA POWINIEN BYC SINGLETON
+    qRegisterMetaType<Day>();
 
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0, "Style");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
