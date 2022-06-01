@@ -29,8 +29,16 @@ Item {
 				text: "Page 4"
 			}
 			MainPage {
+				id: debugPage
 				text: "DEBUG"
 				ProgresBar { }
+				property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+				property var now: new Date();
+				property string dateString: debugPage.days[ now.getDay() ];
+				Text {
+					anchors.horizontalCenter: parent.horizontalCenter
+					text: debugPage.dateString
+				}
 			}
 		}
 		Repeater {
