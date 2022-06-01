@@ -96,7 +96,7 @@ MainPage {
 		}
 		ProgresBar {
 			dayName: "Śr."
-			progressValue: 0.4
+			progressValue: (viewModel.dbModel.wednesday_km / 20 > 1) ? 1 : viewModel.dbModel.wednesday_km / 20
 		}
 		ProgresBar {
 			dayName: "Cz."

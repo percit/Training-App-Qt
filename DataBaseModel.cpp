@@ -139,7 +139,7 @@ void DataBaseModel::setMonday_km(int newMonday_km)
     if (m_monday_km == newMonday_km)
         return;
     m_monday_km = newMonday_km;
-    qDebug() << m_monday_km;
+    kmRunInDay[0] = m_monday_km;
     emit monday_kmChanged();
 }
 
@@ -153,7 +153,7 @@ void DataBaseModel::setMonday_time(int newMonday_time)
     if (m_monday_time == newMonday_time)
         return;
     m_monday_time = newMonday_time;
-    qDebug() << m_monday_time;
+    runningTime[0] = m_monday_time;
     emit monday_timeChanged();
 }
 
@@ -167,6 +167,7 @@ void DataBaseModel::setTuesday_km(int newTuesday_km)
     if (m_tuesday_km == newTuesday_km)
         return;
     m_tuesday_km = newTuesday_km;
+    kmRunInDay[1] = m_tuesday_km;
     emit tuesday_kmChanged();
 }
 
@@ -180,6 +181,7 @@ void DataBaseModel::setTuesday_time(int newTuesday_time)
     if (m_tuesday_time == newTuesday_time)
         return;
     m_tuesday_time = newTuesday_time;
+    runningTime[1] = m_tuesday_time;
     emit tuesday_timeChanged();
 }
 
@@ -193,6 +195,7 @@ void DataBaseModel::setWednesday_km(int newWednesday_km)
     if (m_wednesday_km == newWednesday_km)
         return;
     m_wednesday_km = newWednesday_km;
+    kmRunInDay[2] = m_wednesday_km;
     emit wednesday_kmChanged();
 }
 
@@ -206,6 +209,7 @@ void DataBaseModel::setWednesday_time(int newWednesday_time)
     if (m_wednesday_time == newWednesday_time)
         return;
     m_wednesday_time = newWednesday_time;
+    runningTime[2] = m_wednesday_time;
     emit wednesday_timeChanged();
 }
 
@@ -219,6 +223,7 @@ void DataBaseModel::setThursday_km(int newThursday_km)
     if (m_thursday_km == newThursday_km)
         return;
     m_thursday_km = newThursday_km;
+    kmRunInDay[3] = m_thursday_km;
     emit thursday_kmChanged();
 }
 
@@ -232,6 +237,7 @@ void DataBaseModel::setThursday_time(int newThursday_time)
     if (m_thursday_time == newThursday_time)
         return;
     m_thursday_time = newThursday_time;
+    runningTime[3] = m_thursday_time;
     emit thursday_timeChanged();
 }
 
@@ -245,6 +251,7 @@ void DataBaseModel::setFriday_km(int newFriday_km)
     if (m_friday_km == newFriday_km)
         return;
     m_friday_km = newFriday_km;
+    kmRunInDay[4] = m_friday_km;
     emit friday_kmChanged();
 }
 
@@ -258,6 +265,7 @@ void DataBaseModel::setFriday_time(int newFriday_time)
     if (m_friday_time == newFriday_time)
         return;
     m_friday_time = newFriday_time;
+    runningTime[4] = m_friday_time;
     emit friday_timeChanged();
 }
 
@@ -271,6 +279,7 @@ void DataBaseModel::setSaturday_km(int newSaturday_km)
     if (m_saturday_km == newSaturday_km)
         return;
     m_saturday_km = newSaturday_km;
+    kmRunInDay[5] = m_saturday_km;
     emit saturday_kmChanged();
 }
 
@@ -284,6 +293,7 @@ void DataBaseModel::setSaturday_time(int newSaturday_time)
     if (m_saturday_time == newSaturday_time)
         return;
     m_saturday_time = newSaturday_time;
+    runningTime[5] = m_saturday_time;
     emit saturday_timeChanged();
 }
 
@@ -297,6 +307,7 @@ void DataBaseModel::setSunday_km(int newSunday_km)
     if (m_sunday_km == newSunday_km)
         return;
     m_sunday_km = newSunday_km;
+    kmRunInDay[6] = m_sunday_km;
     emit sunday_kmChanged();
 }
 
@@ -310,5 +321,6 @@ void DataBaseModel::setSunday_time(int newSunday_time)
     if (m_sunday_time == newSunday_time)
         return;
     m_sunday_time = newSunday_time;
+    runningTime[6] = m_sunday_time;
     emit sunday_timeChanged();
 }

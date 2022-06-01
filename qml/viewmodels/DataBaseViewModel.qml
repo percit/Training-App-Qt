@@ -10,6 +10,7 @@ QtObject {
     readonly property double averageDuration: Math.round(dbModel.averageDuration * 100) / 100
     readonly property double allDuration: Math.round(dbModel.allDuration * 100) / 100
 
+
     property DbModel dbModel: DbModel {}
 
     // // property var monday: d.dbModel.monday[fullDistance, fullRunTime]

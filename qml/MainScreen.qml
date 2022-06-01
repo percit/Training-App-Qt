@@ -3,12 +3,16 @@ import QtQuick.Controls 2.3
 import QtQml.Models 2.15
 import "utils"
 import "pages"
+//temporary
+import "viewmodels" 
 
 
 Item {
 	id: root
 
 	anchors.fill: parent
+
+	property DataBaseViewModel viewmodel: DataBaseViewModel {}
 
 	SwipeView {
 		id: pagesRow
@@ -35,10 +39,15 @@ Item {
 				property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 				property var now: new Date();
 				property string dateString: debugPage.days[ now.getDay() ];
-				Text {
+				// Text {
+				// 	anchors.horizontalCenter: parent.horizontalCenter
+				// 	text: debugPage.dateString
+				// }
+				Text { //brak tekstu
 					anchors.horizontalCenter: parent.horizontalCenter
-					text: debugPage.dateString
+					text: root.viewmodel.wednesday_km
 				}
+
 			}
 		}
 		Repeater {

@@ -40,10 +40,11 @@ Item {
         anchors.fill: parent
         plugin: plugin
         zoomLevel: 15
-        center { // Arcady Capitol
-            latitude: 51.099695
-            longitude: 17.028648
-        }
+        center: src.position.coordinate
+        // center { // Arcady Capitol
+        //     latitude: 51.099695
+        //     longitude: 17.028648
+        // }
         activeMapType: map.supportedMapTypes[0]
         copyrightsVisible: false
         RouteModel {
@@ -52,7 +53,7 @@ Item {
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
                 // routeQuery.addWaypoint(fromCoordinate);
-                // routeQuery.addWaypotigint(toCoordinate);
+                routeQuery.addWaypoint(toCoordinate);
                 routeQuery.addWaypoint(currentCoordinate);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
@@ -77,8 +78,7 @@ Item {
             onPositionChanged: {
                 var coord = src.position.coordinate;
                 root.currentCoordinate = coord
-                map.center.latitude = src.position.coordinate.latitude
-                map.center.longitude = src.position.coordinate.longitude
+                map.center = coord
             }
         }
 
@@ -98,12 +98,14 @@ Item {
 
             //counting distance
             for (var i = 0; i < markers.length - 1; i++) {
-                temporaryDistance += markers[i].distanceTo(markers[i+1])
-                // temporaryDistance = markers[markers.length - 1].distanceTo(toCoordinate)
+                // temporaryDistance += markers[i].distanceTo(markers[i+1])
+                temporaryDistance = markers[markers.length - 1].distanceTo(toCoordinate)
             }
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
 
+            //to chyba nie wchodzi do switcha?
+            //NIE DZIALA
             switch(root.dateString) {
                 case 'Monday':
                     viewmodel.dbModel.setMonday_time(fullRunTime * 10)
@@ -127,6 +129,8 @@ Item {
                     viewmodel.dbModel.setSunday_time(fullRunTime * 10)
                     viewmodel.dbModel.setSunday_km(fullDistance)
             }
+
+            // console.log(viewmodel.dbModel.wednesday_km ) //(viewModel.dbModel.wednesday_km / 20 > 1) ? 1 : viewModel.dbModel.wednesday_km / 20
         }
     }
 
