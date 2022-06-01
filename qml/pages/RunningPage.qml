@@ -58,7 +58,7 @@ MainPage {
 				color: Style.black75
 			}
 			Text {
-				text: "Time (km)"
+				text: "Time (min)"
 				font: Style.fontDemiBold12
 				color: Style.black75
 			}

@@ -3,10 +3,10 @@ import QtQuick 2.3
 import QtQuick.Window 2.1
 
 QtObject {
-  readonly property double scaleY: 1 
-  readonly property double scaleX: 1
-//   readonly property double scaleY: (Screen.height / 612)
-//   readonly property double scaleX: (Screen.width / 375)
+//   readonly property double scaleY: 1 
+//   readonly property double scaleX: 1
+  readonly property double scaleY: (Screen.height / 612)
+  readonly property double scaleX: (Screen.width / 375)
   readonly property color backgroundColor: "#2C3F58"
   readonly property color red: "#B81E12"
   readonly property color darkRed: "#FF0000"

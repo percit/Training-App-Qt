@@ -17,13 +17,10 @@ Item {
     //counting distance helper properties
     property double temporaryDistance: 0.0
     property variant currentCoordinate
-    // property variant markers
+    property variant markers: []
 
     property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
     property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
-    property variant markers: [
-        fromCoordinate, QtPositioning.coordinate(51.087586, 17.013730), QtPositioning.coordinate(51.060790, 16.994307), toCoordinate
-    ]
 
     //showing time helper properties
     property double timeElapsed: 0.0
@@ -54,10 +51,9 @@ Item {
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
-                routeQuery.addWaypoint(fromCoordinate);
-                routeQuery.addWaypoint(QtPositioning.coordinate(51.087586, 17.013730));
-                routeQuery.addWaypoint(QtPositioning.coordinate(51.060790, 16.994307));
-                routeQuery.addWaypoint(toCoordinate);
+                // routeQuery.addWaypoint(fromCoordinate);
+                // routeQuery.addWaypotigint(toCoordinate);
+                routeQuery.addWaypoint(currentCoordinate);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
             }
@@ -74,17 +70,15 @@ Item {
                 }
             }
         }
-
-        GeocodeModel {//retest it
-            id: geocodeModel
-            plugin: map.plugin
-            onStatusChanged: {
-                if ((status == GeocodeModel.Ready) || (status == GeocodeModel.Error))
-                    map.geocodeFinished()
-            }
-            onLocationsChanged:
-            {
-                currentCoordinate = QtPositioning.coordinate(get(0).coordinate.latitude, get(0).coordinate.longitude)
+        PositionSource {
+            id: src
+            updateInterval: 1000
+            active: true
+            onPositionChanged: {
+                var coord = src.position.coordinate;
+                root.currentCoordinate = coord
+                map.center.latitude = src.position.coordinate.latitude
+                map.center.longitude = src.position.coordinate.longitude
             }
         }
 
@@ -96,8 +90,8 @@ Item {
         repeat: true
         onTriggered: {
             console.log("biegam sobie")
-            // markers.addMarker(currentCoordinate) // every 10 second a marker is added, THIS DOESN'T WORK ON DESKTOP
-            // routeQuery.addWaypoint(currentCoordinate);
+            markers.push(currentCoordinate) // every 10 second a marker is added, THIS DOESN'T WORK ON DESKTOP
+            routeQuery.addWaypoint(currentCoordinate);
 
             //showing time
             fullRunTime++
@@ -105,6 +99,7 @@ Item {
             //counting distance
             for (var i = 0; i < markers.length - 1; i++) {
                 temporaryDistance += markers[i].distanceTo(markers[i+1])
+                // temporaryDistance = markers[markers.length - 1].distanceTo(toCoordinate)
             }
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
@@ -149,20 +144,6 @@ Item {
         }
     }
 
-    function addMarker(currentCoordinate)
-    {
-        myArray.push(currentCoordinate)
-
-
-        // marker = currentCoordinate
-        // //update list of markers
-        // var myArray = new Array()
-        // for (var i = 0; i<count; i++){
-        //     myArray.push(markers[i])
-        // }
-        // myArray.push(marker)
-        // markers = myArray
-    }
 } //item
 
 
@@ -173,3 +154,4 @@ Item {
 // refactor codu
 // moduly
 // testowanie przez gtest
+

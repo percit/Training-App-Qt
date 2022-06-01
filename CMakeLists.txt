@@ -15,7 +15,7 @@ find_package(QT NAMES Qt5 COMPONENTS Core Quick Sql Positioning Network Position
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 
 enable_testing()
-add_subdirectory(test)
+# add_subdirectory(test)
 
 set(
   PROJECT_SOURCES
