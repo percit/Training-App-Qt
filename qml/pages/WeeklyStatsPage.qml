@@ -88,31 +88,31 @@ MainPage {
 		spacing: 25
 		ProgresBar {
 			dayName: "Pn."
-			progressValue: 0.2
+			progressValue: viewModel.progressBarMonday
 		}
 		ProgresBar {
 			dayName: "Wt."
-			progressValue: 0.3
+			progressValue: viewModel.progressBarTuesday
 		}
 		ProgresBar {
 			dayName: "Śr."
-			progressValue: (viewModel.dbModel.wednesday_km / 20 > 1) ? 1 : viewModel.dbModel.wednesday_km / 20
+			progressValue: viewModel.progressBarWednesday
 		}
 		ProgresBar {
 			dayName: "Cz."
-			progressValue: 0.5
+			progressValue: viewModel.progressBarThursday
 		}
 		ProgresBar {
 			dayName: "Pt."
-			progressValue: 0.6
+			progressValue: viewModel.progressBarFriday
 		}
 		ProgresBar {
 			dayName: "Sb."
-			progressValue: 0.8
+			progressValue: viewModel.progressBarSaturday
 		}
 		ProgresBar {
 			dayName: "Nd."
-			progressValue: 1.0
+			progressValue: viewModel.progressBarSunday
 		}
 	}
 }

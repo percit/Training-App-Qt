@@ -6,7 +6,7 @@ import "../Helper.js" as Helper
 Item {
     id: root
 
-    property DataBaseViewModel viewmodel: DataBaseViewModel {}
+    property DataBaseViewModel viewModel: DataBaseViewModel {}
 
     property double fullDistance: 0.0  //distance in meters
     property double fullRunTime: timerTriggered * 10 //time in seconds
@@ -41,10 +41,6 @@ Item {
         plugin: plugin
         zoomLevel: 15
         center: src.position.coordinate
-        // center { // Arcady Capitol
-        //     latitude: 51.099695
-        //     longitude: 17.028648
-        // }
         activeMapType: map.supportedMapTypes[0]
         copyrightsVisible: false
         RouteModel {
@@ -52,9 +48,9 @@ Item {
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
-                // routeQuery.addWaypoint(fromCoordinate);
+                routeQuery.addWaypoint(fromCoordinate);
                 routeQuery.addWaypoint(toCoordinate);
-                routeQuery.addWaypoint(currentCoordinate);
+                // routeQuery.addWaypoint(currentCoordinate);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
             }
@@ -90,47 +86,45 @@ Item {
         repeat: true
         onTriggered: {
             console.log("biegam sobie")
-            markers.push(currentCoordinate) // every 10 second a marker is added, THIS DOESN'T WORK ON DESKTOP
+            markers.push(currentCoordinate) // every 10 second a marker is added
             routeQuery.addWaypoint(currentCoordinate);
 
             //showing time
             fullRunTime++
 
             //counting distance
-            for (var i = 0; i < markers.length - 1; i++) {
-                // temporaryDistance += markers[i].distanceTo(markers[i+1])
-                temporaryDistance = markers[markers.length - 1].distanceTo(toCoordinate)
-            }
+            // for (var i = 0; i < markers.length - 1; i++) {
+            //     temporaryDistance += markers[i].distanceTo(markers[i+1]) //chyba cos tu nie dziala?
+            // }
+            temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
 
-            //to chyba nie wchodzi do switcha?
-            //NIE DZIALA
             switch(root.dateString) {
                 case 'Monday':
-                    viewmodel.dbModel.setMonday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setMonday_km(fullDistance)
+                    viewModel.dbModel.setMonday_time(fullRunTime * 10)
+                    viewModel.dbModel.setMonday_km(fullDistance)
                 case 'Tuesday':
-                    viewmodel.dbModel.setTuesday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setTuesday_km(fullDistance)
+                    viewModel.dbModel.setTuesday_time(fullRunTime * 10)
+                    viewModel.dbModel.setTuesday_km(fullDistance)
                 case 'Wednesday':
-                    viewmodel.dbModel.setWednesday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setWednesday_km(fullDistance)
+                    viewModel.dbModel.setWednesday_time(fullRunTime * 10)
+                    viewModel.dbModel.setWednesday_km(fullDistance)
                 case 'Thursday':
-                    viewmodel.dbModel.setThursday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setThursday_km(fullDistance)
+                    viewModel.dbModel.setThursday_time(fullRunTime * 10)
+                    viewModel.dbModel.setThursday_km(fullDistance)
                 case 'Friday':
-                    viewmodel.dbModel.setFriday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setFriday_km(fullDistance)
+                    viewModel.dbModel.setFriday_time(fullRunTime * 10)
+                    viewModel.dbModel.setFriday_km(fullDistance)
                 case 'Saturday':
-                    viewmodel.dbModel.setSaturday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setSaturday_km(fullDistance)
+                    viewModel.dbModel.setSaturday_time(fullRunTime * 10)
+                    viewModel.dbModel.setSaturday_km(fullDistance)
                 case 'Sunday':
-                    viewmodel.dbModel.setSunday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setSunday_km(fullDistance)
+                    viewModel.dbModel.setSunday_time(fullRunTime * 10)
+                    viewModel.dbModel.setSunday_km(fullDistance)
             }
 
-            // console.log(viewmodel.dbModel.wednesday_km ) //(viewModel.dbModel.wednesday_km / 20 > 1) ? 1 : viewModel.dbModel.wednesday_km / 20
+            console.log(viewModel.progressBarFriday)
         }
     }
 
@@ -149,7 +143,6 @@ Item {
     }
 
 } //item
-
 
 
 // lista zadan:

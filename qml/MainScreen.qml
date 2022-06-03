@@ -12,7 +12,7 @@ Item {
 
 	anchors.fill: parent
 
-	property DataBaseViewModel viewmodel: DataBaseViewModel {}
+	property DataBaseViewModel viewModel: DataBaseViewModel {}
 
 	SwipeView {
 		id: pagesRow
@@ -35,17 +35,14 @@ Item {
 			MainPage {
 				id: debugPage
 				text: "DEBUG"
-				ProgresBar { }
-				property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-				property var now: new Date();
-				property string dateString: debugPage.days[ now.getDay() ];
-				// Text {
-				// 	anchors.horizontalCenter: parent.horizontalCenter
-				// 	text: debugPage.dateString
+				// ProgresBar {
+				// 	progressValue: (viewModel.dbModel.wednesday_km / 20 > 1) ? 1 : viewModel.dbModel.wednesday_km / 20
+
 				// }
-				Text { //brak tekstu
+
+				Text {
 					anchors.horizontalCenter: parent.horizontalCenter
-					text: root.viewmodel.wednesday_km
+					text: root.viewModel.dbModel.friday_km
 				}
 
 			}

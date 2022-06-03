@@ -9,6 +9,17 @@ QtObject {
     readonly property double bestPace: Math.round(dbModel.bestPace * 100) / 100
     readonly property double averageDuration: Math.round(dbModel.averageDuration * 100) / 100
     readonly property double allDuration: Math.round(dbModel.allDuration * 100) / 100
+    readonly property double weeklyGoalInMeters: 20000 //20k meters is day's standard
+
+
+    readonly property double progressBarMonday: (dbModel.monday_km / weeklyGoalInMeters > 1) ? 1 : dbModel.monday_km / weeklyGoalInMeters
+    readonly property double progressBarTuesday: (dbModel.tuesday_km / weeklyGoalInMeters > 1) ? 1 : dbModel.tuesday_km / weeklyGoalInMeters
+    readonly property double progressBarWednesday: (dbModel.wednesday_km / weeklyGoalInMeters > 1) ? 1 : dbModel.wednesday_km / weeklyGoalInMeters
+    readonly property double progressBarThursday: (dbModel.thursday_km / weeklyGoalInMeters > 1) ? 1 : dbModel.thursday_km / weeklyGoalInMeters
+    readonly property double progressBarFriday: (dbModel.friday_km / weeklyGoalInMeters > 1) ? 1 : dbModel.friday_km / weeklyGoalInMeters
+    readonly property double progressBarSaturday: (dbModel.saturday_km / weeklyGoalInMeters > 1) ? 1 : dbModel.saturday_km / weeklyGoalInMeters
+    readonly property double progressBarSunday: (dbModel.sunday_km / weeklyGoalInMeters > 1) ? 1 : dbModel.sunday_km / weeklyGoalInMeters
+
 
 
     property DbModel dbModel: DbModel {}
