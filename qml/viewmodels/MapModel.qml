@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import QtPositioning 5.6
 import QtLocation 5.11
+import DataBaseModel 1.0
 import "../Helper.js" as Helper
 
 Item {
@@ -99,32 +100,29 @@ Item {
             temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
-
             switch(root.dateString) {
                 case 'Monday':
-                    viewModel.dbModel.setMonday_time(fullRunTime * 10)
-                    viewModel.dbModel.setMonday_km(fullDistance)
+                    DbModel.setMonday_time(fullRunTime * 10)
+                    DbModel.setMonday_km(fullDistance)
                 case 'Tuesday':
-                    viewModel.dbModel.setTuesday_time(fullRunTime * 10)
-                    viewModel.dbModel.setTuesday_km(fullDistance)
+                    DbModel.setTuesday_time(fullRunTime * 10)
+                    DbModel.setTuesday_km(fullDistance)
                 case 'Wednesday':
-                    viewModel.dbModel.setWednesday_time(fullRunTime * 10)
-                    viewModel.dbModel.setWednesday_km(fullDistance)
+                    DbModel.setWednesday_time(fullRunTime * 10)
+                    DbModel.setWednesday_km(fullDistance)
                 case 'Thursday':
-                    viewModel.dbModel.setThursday_time(fullRunTime * 10)
-                    viewModel.dbModel.setThursday_km(fullDistance)
+                    DbModel.setThursday_time(fullRunTime * 10)
+                    DbModel.setThursday_km(fullDistance)
                 case 'Friday':
-                    viewModel.dbModel.setFriday_time(fullRunTime * 10)
-                    viewModel.dbModel.setFriday_km(fullDistance)
+                    DbModel.setFriday_time(fullRunTime * 10)
+                    DbModel.setFriday_km(fullDistance)
                 case 'Saturday':
-                    viewModel.dbModel.setSaturday_time(fullRunTime * 10)
-                    viewModel.dbModel.setSaturday_km(fullDistance)
+                    DbModel.setSaturday_time(fullRunTime * 10)
+                    DbModel.setSaturday_km(fullDistance)
                 case 'Sunday':
-                    viewModel.dbModel.setSunday_time(fullRunTime * 10)
-                    viewModel.dbModel.setSunday_km(fullDistance)
+                    DbModel.setSunday_time(fullRunTime * 10)
+                    DbModel.setSunday_km(fullDistance)
             }
-
-            console.log(viewModel.progressBarFriday)
         }
     }
 

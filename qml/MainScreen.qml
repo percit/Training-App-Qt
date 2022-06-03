@@ -35,16 +35,7 @@ Item {
 			MainPage {
 				id: debugPage
 				text: "DEBUG"
-				// ProgresBar {
-				// 	progressValue: (viewModel.dbModel.wednesday_km / 20 > 1) ? 1 : viewModel.dbModel.wednesday_km / 20
-
-				// }
-
-				Text {
-					anchors.horizontalCenter: parent.horizontalCenter
-					text: root.viewModel.dbModel.friday_km
-				}
-
+				ProgresBar {}
 			}
 		}
 		Repeater {
