@@ -49,9 +49,9 @@ Item {
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
-                routeQuery.addWaypoint(fromCoordinate);
-                routeQuery.addWaypoint(toCoordinate);
-                // routeQuery.addWaypoint(currentCoordinate);
+                // routeQuery.addWaypoint(fromCoordinate);
+                // routeQuery.addWaypoint(toCoordinate);
+                routeQuery.addWaypoint(currentCoordinate);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
             }
@@ -93,11 +93,11 @@ Item {
             //showing time
             fullRunTime++
 
-            //counting distance
-            // for (var i = 0; i < markers.length - 1; i++) {
-            //     temporaryDistance += markers[i].distanceTo(markers[i+1]) //chyba cos tu nie dziala?
-            // }
-            temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
+            counting distance
+            for (var i = 0; i < markers.length - 1; i++) {
+                temporaryDistance += markers[i].distanceTo(markers[i+1])
+            }
+            // temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
             switch(root.dateString) {
