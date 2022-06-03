@@ -1,12 +1,13 @@
 import QtQuick 2.3
 import QtPositioning 5.6
 import QtLocation 5.11
+import DataBaseModel 1.0
 import "../Helper.js" as Helper
 
 Item {
     id: root
 
-    property DataBaseViewModel viewmodel: DataBaseViewModel {}
+    property DataBaseViewModel viewModel: DataBaseViewModel {}
 
     property double fullDistance: 0.0  //distance in meters
     property double fullRunTime: timerTriggered * 10 //time in seconds
@@ -17,13 +18,10 @@ Item {
     //counting distance helper properties
     property double temporaryDistance: 0.0
     property variant currentCoordinate
-    // property variant markers
+    property variant markers: []
 
     property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
     property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
-    property variant markers: [
-        fromCoordinate, QtPositioning.coordinate(51.087586, 17.013730), QtPositioning.coordinate(51.060790, 16.994307), toCoordinate
-    ]
 
     //showing time helper properties
     property double timeElapsed: 0.0
@@ -43,10 +41,7 @@ Item {
         anchors.fill: parent
         plugin: plugin
         zoomLevel: 15
-        center { // Arcady Capitol
-            latitude: 51.099695
-            longitude: 17.028648
-        }
+        center: src.position.coordinate
         activeMapType: map.supportedMapTypes[0]
         copyrightsVisible: false
         RouteModel {
@@ -54,10 +49,9 @@ Item {
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
-                routeQuery.addWaypoint(fromCoordinate);
-                routeQuery.addWaypoint(QtPositioning.coordinate(51.087586, 17.013730));
-                routeQuery.addWaypoint(QtPositioning.coordinate(51.060790, 16.994307));
-                routeQuery.addWaypoint(toCoordinate);
+                // routeQuery.addWaypoint(fromCoordinate);
+                // routeQuery.addWaypoint(toCoordinate);
+                routeQuery.addWaypoint(currentCoordinate);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
             }
@@ -74,17 +68,14 @@ Item {
                 }
             }
         }
-
-        GeocodeModel {//retest it
-            id: geocodeModel
-            plugin: map.plugin
-            onStatusChanged: {
-                if ((status == GeocodeModel.Ready) || (status == GeocodeModel.Error))
-                    map.geocodeFinished()
-            }
-            onLocationsChanged:
-            {
-                currentCoordinate = QtPositioning.coordinate(get(0).coordinate.latitude, get(0).coordinate.longitude)
+        PositionSource {
+            id: src
+            updateInterval: 1000
+            active: true
+            onPositionChanged: {
+                var coord = src.position.coordinate;
+                root.currentCoordinate = coord
+                map.center = coord
             }
         }
 
@@ -96,41 +87,41 @@ Item {
         repeat: true
         onTriggered: {
             console.log("biegam sobie")
-            // markers.addMarker(currentCoordinate) // every 10 second a marker is added, THIS DOESN'T WORK ON DESKTOP
-            // routeQuery.addWaypoint(currentCoordinate);
+            markers.push(currentCoordinate) // every 10 second a marker is added
+            routeQuery.addWaypoint(currentCoordinate);
 
             //showing time
             fullRunTime++
 
-            //counting distance
+            counting distance
             for (var i = 0; i < markers.length - 1; i++) {
                 temporaryDistance += markers[i].distanceTo(markers[i+1])
             }
+            // temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
-
             switch(root.dateString) {
                 case 'Monday':
-                    viewmodel.dbModel.setMonday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setMonday_km(fullDistance)
+                    DbModel.setMonday_time(fullRunTime * 10)
+                    DbModel.setMonday_km(fullDistance)
                 case 'Tuesday':
-                    viewmodel.dbModel.setTuesday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setTuesday_km(fullDistance)
+                    DbModel.setTuesday_time(fullRunTime * 10)
+                    DbModel.setTuesday_km(fullDistance)
                 case 'Wednesday':
-                    viewmodel.dbModel.setWednesday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setWednesday_km(fullDistance)
+                    DbModel.setWednesday_time(fullRunTime * 10)
+                    DbModel.setWednesday_km(fullDistance)
                 case 'Thursday':
-                    viewmodel.dbModel.setThursday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setThursday_km(fullDistance)
+                    DbModel.setThursday_time(fullRunTime * 10)
+                    DbModel.setThursday_km(fullDistance)
                 case 'Friday':
-                    viewmodel.dbModel.setFriday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setFriday_km(fullDistance)
+                    DbModel.setFriday_time(fullRunTime * 10)
+                    DbModel.setFriday_km(fullDistance)
                 case 'Saturday':
-                    viewmodel.dbModel.setSaturday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setSaturday_km(fullDistance)
+                    DbModel.setSaturday_time(fullRunTime * 10)
+                    DbModel.setSaturday_km(fullDistance)
                 case 'Sunday':
-                    viewmodel.dbModel.setSunday_time(fullRunTime * 10)
-                    viewmodel.dbModel.setSunday_km(fullDistance)
+                    DbModel.setSunday_time(fullRunTime * 10)
+                    DbModel.setSunday_km(fullDistance)
             }
         }
     }
@@ -149,22 +140,7 @@ Item {
         }
     }
 
-    function addMarker(currentCoordinate)
-    {
-        myArray.push(currentCoordinate)
-
-
-        // marker = currentCoordinate
-        // //update list of markers
-        // var myArray = new Array()
-        // for (var i = 0; i<count; i++){
-        //     myArray.push(markers[i])
-        // }
-        // myArray.push(marker)
-        // markers = myArray
-    }
 } //item
-
 
 
 // lista zadan:
@@ -173,3 +149,4 @@ Item {
 // refactor codu
 // moduly
 // testowanie przez gtest
+

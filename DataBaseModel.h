@@ -52,8 +52,8 @@ class DataBaseModel : public QObject
 
 
 private:
-    std::array<double, 7> kmRunInDay = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
-    std::array<double, 7> runningTime = {1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0}; // for now in seconds
+    std::array<double, 7> kmRunInDay = {1.0, 2.0, 0.0, 4.0, 5.0, 6.0, 7.0};
+    std::array<double, 7> runningTime = {1000.0, 2000.0, 0.0, 4000.0, 5000.0, 6000.0, 7000.0}; // for now in seconds
 
     //    DataBase db("database9.db");
 

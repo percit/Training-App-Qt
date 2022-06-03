@@ -10,6 +10,7 @@ MainPage {
 	id: root
 
 	placeholder: false
+
 	readonly property double runningTime: Helper.roundNumber((mapModel.fullRunTime / 6), 2) //shows in minutes
     readonly property double runningDistance: Helper.roundNumber((mapModel.fullDistance / 1000), 2) //shows in km
 
@@ -58,7 +59,7 @@ MainPage {
 				color: Style.black75
 			}
 			Text {
-				text: "Time (km)"
+				text: "Time (min)"
 				font: Style.fontDemiBold12
 				color: Style.black75
 			}

@@ -28,8 +28,15 @@ int main(int argc, char *argv[])
     //    else
     //        qDebug() << "Database is not open!";
 
+    //we register database as singleton
+    qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
 
-    qmlRegisterType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel"); // to nasz database adapter, TU CHYBA POWINIEN BYC SINGLETON
+        DataBaseModel *example = new DataBaseModel();
+        return example;
+    });
+
     qRegisterMetaType<Day>();
 
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0, "Style");
