@@ -33,6 +33,14 @@ Item {
     Plugin {
         id: plugin
         name: "osm" //mapboxgl not working for routing right now, when working, use map.supportedMapTypes[3]
+        PluginParameter {
+            name: "osm.mapping.providersrepository.disabled"
+            value: "true"
+        }
+        PluginParameter {
+            name: "osm.mapping.providersrepository.address"
+            value: "http://maps-redirect.qt.io/osm/5.6/"
+        }
     }
 
     Map {
