@@ -70,12 +70,34 @@ bool DataBase::removeElement(const QString &name)
     return false;
 }
 
+std::pair<int, int> DataBase::returnDataBaseElementByName(const QString &name)
+{
+    std::pair<int, int> temp;
+    if (dayExists(name))
+    {
+        QSqlQuery queryRead;
+        queryRead.prepare("SELECT * FROM day WHERE name = (:name)");
+        queryRead.bindValue(":name", name);
+        if (!queryRead.exec())
+            qDebug() << "returnDataBaseElementByName failed: " << queryRead.lastError();
+        if (queryRead.next())
+        {
+            QString name = queryRead.value("name").toString();
+            temp.first = queryRead.value("km").toInt();
+            temp.second = queryRead.value("time").toInt();
+        }
+    }
+    else
+        qDebug() << "returnDataBaseElementByName failed:  doesnt exist";
+
+    return temp;
+}
+
 void DataBase::printAll() const
 {
     qDebug() << "Objects in db:";
     QSqlQuery query("SELECT * FROM day");
-    //    int idName = query.record().indexOf("name"); //this is temporary
-    //    QString name = query.value(idName).toString();
+    qDebug() << "\n";
     while (query.next())
     {
         qDebug() << query.value("name").toString();
