@@ -12,7 +12,7 @@ QtObject {
     readonly property double allDuration: Math.round(DbModel.allDuration * 100) / 100
     readonly property double weeklyGoalInMeters: 20000 //20k meters is day's standard
 
-
+//to sa wartosci z wektora, a nie bazy danych
     readonly property double progressBarMonday: (DbModel.monday_km / weeklyGoalInMeters > 1) ? 1 : DbModel.monday_km / weeklyGoalInMeters
     readonly property double progressBarTuesday: (DbModel.tuesday_km / weeklyGoalInMeters > 1) ? 1 : DbModel.tuesday_km / weeklyGoalInMeters
     readonly property double progressBarWednesday: (DbModel.wednesday_km / weeklyGoalInMeters > 1) ? 1 : DbModel.wednesday_km / weeklyGoalInMeters

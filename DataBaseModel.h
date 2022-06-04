@@ -2,9 +2,9 @@
 #define DATABASEMODEL_H
 #include <QList>
 #include <QObject>
-#include <QString>
 #include <QTimer>
 #include <QVariant>
+#include <utility>
 #include <algorithm>
 #include <array>
 #include "database.h"
@@ -16,7 +16,6 @@ struct Day
     qreal timeRun;
     Q_PROPERTY(qreal metersRun MEMBER metersRun)
     Q_PROPERTY(qreal timeRun MEMBER timeRun)
-
 };
 Q_DECLARE_METATYPE(Day)
 
@@ -31,8 +30,7 @@ class DataBaseModel : public QObject
     Q_PROPERTY(qreal averageDuration READ averageDuration WRITE setAverageDuration NOTIFY averageDurationChanged)
     Q_PROPERTY(qreal allDuration READ allDuration WRITE setAllDuration NOTIFY allDurationChanged)
 
-
-//this is a temporary solution
+    // this is a temporary solution
     Q_PROPERTY(int monday_km READ monday_km WRITE setMonday_km NOTIFY monday_kmChanged)
     Q_PROPERTY(int monday_time READ monday_time WRITE setMonday_time NOTIFY monday_timeChanged)
     Q_PROPERTY(int tuesday_km READ tuesday_km WRITE setTuesday_km NOTIFY tuesday_kmChanged)
@@ -48,21 +46,18 @@ class DataBaseModel : public QObject
     Q_PROPERTY(int sunday_km READ sunday_km WRITE setSunday_km NOTIFY sunday_kmChanged)
     Q_PROPERTY(int sunday_time READ sunday_time WRITE setSunday_time NOTIFY sunday_timeChanged)
 
-    //Q_PROPERTY(Day monday READ monday WRITE setMonday NOTIFY mondayChanged) // tutaj powinna byc lista
-
+    // Q_PROPERTY(Day monday READ monday WRITE setMonday NOTIFY mondayChanged) // tutaj powinna byc lista
 
 private:
-    std::array<double, 7> kmRunInDay = {1.0, 2.0, 0.0, 4.0, 5.0, 6.0, 7.0};
-    std::array<double, 7> runningTime = {1000.0, 2000.0, 0.0, 4000.0, 5000.0, 6000.0, 7000.0}; // for now in seconds
+    std::array<double, 7> kmRunInDay = {0, 0, 0, 0, 0, 0, 0};  // this is actually in meters for now
+    std::array<double, 7> runningTime = {0, 0, 0, 0, 0, 0, 0}; // for now in seconds
 
-    //    DataBase db("database9.db");
-
-    qreal m_weeklyKmRun;
-    qreal m_longestDistance;
-    qreal m_longestDuration;
-    qreal m_bestPace;
-    qreal m_averageDuration;
-    qreal m_allDuration;
+    qreal m_weeklyKmRun = 0;
+    qreal m_longestDistance = 0;
+    qreal m_longestDuration = 0;
+    qreal m_bestPace = 0;
+    qreal m_averageDuration = 0;
+    qreal m_allDuration = 0;
 
     int m_monday_km = 0;
     int m_monday_time = 0;
@@ -88,6 +83,14 @@ private:
 public:
     explicit DataBaseModel(QObject *parent = nullptr);
 
+//database functions
+    void initializeDataBase();
+    Q_INVOKABLE void updateDataBaseFile();
+    void testDataBase();
+    void printDataBase();
+    std::pair<int, int> returnDataBaseElementByName(const QString &name) const;
+
+//qproperty functions
     qreal weeklyKmRun();
     qreal longestDistance();
     qreal longestDuration();
@@ -101,7 +104,6 @@ public:
     void setBestPace(qreal newBestPace);
     void setAverageDuration(qreal newAverageDuration);
     void setAllDuration(qreal newAllDuration);
-
 
     Q_INVOKABLE void setMonday_km(int newMonday_km);
     Q_INVOKABLE void setMonday_time(int newMonday_time);
@@ -118,8 +120,7 @@ public:
     Q_INVOKABLE void setSunday_km(int newSunday_km);
     Q_INVOKABLE void setSunday_time(int newSunday_time);
 
-
-    int monday_km() const;
+    int const monday_km() const;
     int monday_time() const;
     int tuesday_km() const;
     int tuesday_time() const;

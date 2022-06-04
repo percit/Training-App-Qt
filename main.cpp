@@ -11,23 +11,6 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    //    DataBase db("database9.db");
-    //    if (db.isOpen())
-    //    {
-    //        db.createTable();
-    //        db.addElement("Monday", 10.5, 1000);
-    //        db.addElement("Tuesday", 20.5, 1500);
-    //        db.addElement("Wednesday", 30.5, 2000);
-
-    //        db.printAll();
-    //        db.removeElement("Monday");
-    //        db.printAll();
-    //        db.clearDataBase();
-    //        qDebug() << "End";
-    //    }
-    //    else
-    //        qDebug() << "Database is not open!";
-
     //we register database as singleton
     qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
