@@ -19,7 +19,7 @@ MainPage {
 		
 		anchors.top: parent.top
 		width: 375 * Style.scaleX
-		height: (parent.height - runningMenu.height - 64 * Style.scaleY) * Style.scaleY
+		height: parent.height - runningMenu.height - 64 * Style.scaleY
 	}
 
 	Rectangle {
