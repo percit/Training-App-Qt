@@ -95,11 +95,12 @@ Item {
         repeat: true
         onTriggered: {
             console.log("biegam sobie")
-            markers.push(currentCoordinate) // every 10 second a marker is added
-            routeQuery.addWaypoint(currentCoordinate);
 
             //showing time
             fullRunTime++
+
+            markers.push(currentCoordinate) // every 10 second a marker is added
+            routeQuery.addWaypoint(currentCoordinate);
 
             // counting distance
             for (var i = 0; i < markers.length - 1; i++) {
@@ -137,10 +138,11 @@ Item {
     onTrainButtonClicked: { 
         if(startTime === 0.0) { //we start running
             routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
-            DbModel.updateDataBase()
+            DbModel.updateDataBaseFile()
             timeElapsed = 0.0
             timerTriggered = 0
             fullDistance = 0.0
+            fullRunTime = 0.0
             startTime = new Date().getTime()
         }
         else { //we stop running
