@@ -33,6 +33,14 @@ Item {
     Plugin {
         id: plugin
         name: "osm" //mapboxgl not working for routing right now, when working, use map.supportedMapTypes[3]
+        PluginParameter {
+            name: "osm.mapping.providersrepository.disabled"
+            value: "true"
+        }
+        PluginParameter {
+            name: "osm.mapping.providersrepository.address"
+            value: "http://maps-redirect.qt.io/osm/5.6/"
+        }
     }
 
     Map {
@@ -87,11 +95,12 @@ Item {
         repeat: true
         onTriggered: {
             console.log("biegam sobie")
-            markers.push(currentCoordinate) // every 10 second a marker is added
-            routeQuery.addWaypoint(currentCoordinate);
 
             //showing time
             fullRunTime++
+
+            markers.push(currentCoordinate) // every 10 second a marker is added
+            routeQuery.addWaypoint(currentCoordinate);
 
             // counting distance
             for (var i = 0; i < markers.length - 1; i++) {
@@ -129,10 +138,11 @@ Item {
     onTrainButtonClicked: { 
         if(startTime === 0.0) { //we start running
             routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
-            DbModel.updateDataBase()
+            DbModel.updateDataBaseFile()
             timeElapsed = 0.0
             timerTriggered = 0
             fullDistance = 0.0
+            fullRunTime = 0.0
             startTime = new Date().getTime()
         }
         else { //we stop running
