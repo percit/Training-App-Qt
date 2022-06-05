@@ -15,10 +15,32 @@ Item {
     property var now: new Date()
     readonly property string dateString: days[ now.getDay() ]
 
+
+
+
+
     //counting distance helper properties
     property double temporaryDistance: 0.0
     property variant currentCoordinate
-    property variant markers: []
+
+    // property int temporaryValue: 0
+    // property variant coord1: QtPositioning.coordinate(51.115543, 17.129033)
+    // property variant coord2: QtPositioning.coordinate(51.115738, 17.128733)
+    // property variant coord31: QtPositioning.coordinate(51.114642, 17.130270)
+    // property variant coord32: QtPositioning.coordinate(51.114874, 17.127304)
+    // property variant coord3: QtPositioning.coordinate(51.115921, 17.128475)
+    //coord1, coord2,coord31, coord32, coord3,
+    // property variant coord4: QtPositioning.coordinate(51.116214, 17.128558)
+    // property variant coord5: QtPositioning.coordinate(51.116416, 17.128879)
+    // property variant coord6: QtPositioning.coordinate(51.116692, 17.128844)
+    // property variant coord7: QtPositioning.coordinate(51.116977, 17.129032)
+    // property variant coord8: QtPositioning.coordinate(51.117227, 17.129305)
+    // property variant coord9: QtPositioning.coordinate(51.117463, 17.129479)
+    // property variant coord10: QtPositioning.coordinate(51.117700, 17.129184)
+    // property variant markers: [ coord4, coord5, coord6, coord7, coord8, coord9, coord10]
+    
+    
+    property variant markers:[]
 
     property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
     property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
@@ -57,9 +79,12 @@ Item {
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
+                routeQuery.addWaypoint(currentCoordinate);
                 // routeQuery.addWaypoint(fromCoordinate);
                 // routeQuery.addWaypoint(toCoordinate);
-                routeQuery.addWaypoint(currentCoordinate);
+                // routeQuery.addWaypoint(markers[0]);
+                // routeQuery.addWaypoint(markers[2]);
+                // routeQuery.addWaypoint(markers[3]);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
             }
@@ -90,7 +115,7 @@ Item {
     } //map
 
     Timer {
-        interval: 10000 //10 sec
+        interval:10000 //10 sec
         running: startTime > 0
         repeat: true
         onTriggered: {
@@ -99,15 +124,22 @@ Item {
             //showing time
             fullRunTime++
 
-            markers.push(currentCoordinate) // every 10 second a marker is added
+
+            // routeQuery.addWaypoint(markers[temporaryValue]);
+            // routeModel.update()
+            // fullDistance += markers[root.temporaryValue].distanceTo(markers[root.temporaryValue+1])
+            // root.temporaryValue++
+
+
+
+            markers.push(currentCoordinate); // every 10 second a marker is added
             routeQuery.addWaypoint(currentCoordinate);
+            routeModel.update();
 
             // counting distance
-            for (var i = 0; i < markers.length - 1; i++) {
-                temporaryDistance += markers[i].distanceTo(markers[i+1])
-                // console.warn(markers[i])
+            for (var i = 1; i < markers.length - 1; i++) {
+                temporaryDistance += markers[i].distanceTo(markers[i+1]);
             }
-            // temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
             
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
@@ -155,12 +187,3 @@ Item {
     }
 
 } //item
-
-
-// lista zadan:
-// - deployment
-// easy logging
-// refactor codu
-// moduly
-// testowanie przez gtest
-
