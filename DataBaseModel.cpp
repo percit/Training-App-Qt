@@ -1,17 +1,17 @@
 #include "DataBaseModel.h"
 #include <QDebug>
 DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
-                                                m_weeklyKmRun(1),
-                                                m_longestDistance(2),
-                                                m_longestDuration(3),
-                                                m_bestPace(4),
-                                                m_averageDuration(5),
-                                                m_allDuration(6)
+                                                m_weeklyKmRun(0),
+                                                m_longestDistance(0),
+                                                m_longestDuration(0),
+                                                m_bestPace(0),
+                                                m_averageDuration(0),
+                                                m_allDuration(0)
 {
     qDebug() << "created DataBaseModel constructor";
     initializeDataBase();
-    testDataBase();
-    returnDataBaseElementByName("Friday");
+    // testDataBase();
+    // returnDataBaseElementByName("Friday");
 }
 
 qreal DataBaseModel::weeklyKmRun()
@@ -296,6 +296,7 @@ void DataBaseModel::setSaturday_time(int newSaturday_time)
 
 int DataBaseModel::sunday_km() const
 {
+    qDebug() << "sundaykm function";
     return returnDataBaseElementByName("Sunday").first;
 }
 
@@ -310,6 +311,7 @@ void DataBaseModel::setSunday_km(int newSunday_km)
 
 int DataBaseModel::sunday_time() const
 {
+        qDebug() << "sundaytime function";
     return returnDataBaseElementByName("Sunday").second;
 }
 
@@ -319,6 +321,8 @@ void DataBaseModel::setSunday_time(int newSunday_time)
         return;
     m_sunday_time = newSunday_time;
     runningTime[6] = m_sunday_time;
+
+    m_sunday_time = 10;
     emit sunday_timeChanged();
 }
 
@@ -361,6 +365,8 @@ void DataBaseModel::updateDataBaseFile()
     }
     else
         qDebug() << "Database is not open!";
+
+    qDebug() << "updateDataBaseFile";
 }
 
 void DataBaseModel::testDataBase()
@@ -396,3 +402,6 @@ void DataBaseModel::printDataBase()
     if (db.isOpen())
         db.printAll();
 }
+
+
+//jesli baza danych ma 0, to bierzemy z wektora

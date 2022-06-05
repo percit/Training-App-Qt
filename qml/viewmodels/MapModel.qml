@@ -10,7 +10,7 @@ Item {
     property DataBaseViewModel viewModel: DataBaseViewModel {}
 
     property double fullDistance: 0.0  //distance in meters
-    property double fullRunTime: timerTriggered * 10 //time in seconds
+    property double fullRunTime: 0.0 //time in seconds
     property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     property var now: new Date()
     readonly property string dateString: days[ now.getDay() ]
@@ -90,11 +90,11 @@ Item {
     } //map
 
     Timer {
-        interval: 10 * 1000 //10 sec
+        interval: 10000 //10 sec
         running: startTime > 0
         repeat: true
         onTriggered: {
-            console.log("biegam sobie")
+            console.warn("biegam sobie")
 
             //showing time
             fullRunTime++
@@ -105,10 +105,14 @@ Item {
             // counting distance
             for (var i = 0; i < markers.length - 1; i++) {
                 temporaryDistance += markers[i].distanceTo(markers[i+1])
+                // console.warn(markers[i])
             }
             // temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
+            
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
+
+            //propagating values to c++ backend
             switch(root.dateString) {
                 case 'Monday':
                     DbModel.setMonday_time(fullRunTime * 10)
@@ -132,15 +136,14 @@ Item {
                     DbModel.setSunday_time(fullRunTime * 10)
                     DbModel.setSunday_km(fullDistance)
             }
+            DbModel.updateDataBaseFile()
         }
     }
 
     onTrainButtonClicked: { 
         if(startTime === 0.0) { //we start running
             routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
-            DbModel.updateDataBaseFile()
             timeElapsed = 0.0
-            timerTriggered = 0
             fullDistance = 0.0
             fullRunTime = 0.0
             startTime = new Date().getTime()

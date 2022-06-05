@@ -11,8 +11,8 @@ MainPage {
 
 	placeholder: false
 
-	readonly property double runningTime: Helper.roundNumber((mapModel.fullRunTime / 6), 2) //shows in minutes
-    readonly property double runningDistance: Helper.roundNumber((mapModel.fullDistance / 1000), 2) //shows in km
+	readonly property string runningTime: Helper.formatTime(mapModel.fullRunTime * 10)  //Helper.roundNumber((mapModel.fullRunTime * 10 / 6), 2) //shows in minutes
+    readonly property string runningDistance: Helper.formatDistance(mapModel.fullDistance) //Helper.roundNumber((mapModel.fullDistance / 1000), 2) //shows in km
 
 	MapModel {
 		id: mapModel
@@ -42,7 +42,8 @@ MainPage {
 				color: Style.black75
 			}
 			Text {
-				text: "Distance (km)"
+				anchors.horizontalCenter: parent.horizontalCenter
+				text: "Distance"
 				font: Style.fontDemiBold12
 				color: Style.black75
 			}
@@ -59,7 +60,8 @@ MainPage {
 				color: Style.black75
 			}
 			Text {
-				text: "Time (min)"
+				anchors.horizontalCenter: parent.horizontalCenter
+				text: "Time"
 				font: Style.fontDemiBold12
 				color: Style.black75
 			}
