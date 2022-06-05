@@ -17,7 +17,7 @@ function formatTime(sec)
     value = (value > 1) ? Math.round(value) : 0
     var hours = value
     if (hours > 0) value = hours + "h:"+ minutes + "m"
-    else value = minutes + "min"
+    else value = minutes + "m " + seconds + "s"
     return value
 }
 

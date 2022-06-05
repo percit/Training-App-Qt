@@ -4,15 +4,13 @@ import QtQml.Models 2.15
 import "utils"
 import "pages"
 //temporary
-import "viewmodels" 
+import DataBaseModel 1.0
 
 
 Item {
 	id: root
 
 	anchors.fill: parent
-
-	property DataBaseViewModel viewModel: DataBaseViewModel {}
 
 	SwipeView {
 		id: pagesRow
@@ -35,7 +33,16 @@ Item {
 			MainPage {
 				id: debugPage
 				text: "DEBUG"
-				ProgresBar {}
+				Text {
+					text: DbModel.sunday_time
+				}
+				MouseArea {
+					anchors.fill: parent
+					onClicked: {
+						// console.log(DbModel.sunday_time)
+						console.log("10")
+					}
+				}
 			}
 		}
 		Repeater {
