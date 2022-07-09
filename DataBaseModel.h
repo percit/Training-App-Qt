@@ -89,6 +89,7 @@ public:
     void testDataBase();
     void printDataBase();
     std::pair<int, int> returnDataBaseElementByName(const QString &name) const;
+	void emitDayChanges();
 
 //qproperty functions
     qreal weeklyKmRun();

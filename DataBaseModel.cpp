@@ -10,8 +10,6 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
 {
     qDebug() << "created DataBaseModel constructor";
     initializeDataBase();
-    // testDataBase();
-    // returnDataBaseElementByName("Friday");
 }
 
 qreal DataBaseModel::weeklyKmRun()
@@ -130,7 +128,15 @@ int const DataBaseModel::monday_km() const
 {
     return returnDataBaseElementByName("Monday").first;
 }
-
+void DataBaseModel::emitDayChanges() {
+    emit weeklyKmRunChanged();
+    emit longestDistanceChanged();
+    emit longestDurationChanged();
+    emit bestPaceChanged();
+    emit averageDurationChanged();
+    emit allDurationChanged();
+    qDebug() << "emitDayChanges";
+}
 void DataBaseModel::setMonday_km(int newMonday_km)
 {
     if (m_monday_km == newMonday_km)
@@ -138,12 +144,7 @@ void DataBaseModel::setMonday_km(int newMonday_km)
     m_monday_km = newMonday_km;
     kmRunInDay[0] = m_monday_km;
     emit monday_kmChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+	emitDayChanges();
 }
 
 int DataBaseModel::monday_time() const
@@ -158,12 +159,7 @@ void DataBaseModel::setMonday_time(int newMonday_time)
     m_monday_time = newMonday_time;
     runningTime[0] = m_monday_time;
     emit monday_timeChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::tuesday_km() const
@@ -178,12 +174,7 @@ void DataBaseModel::setTuesday_km(int newTuesday_km)
     m_tuesday_km = newTuesday_km;
     kmRunInDay[1] = m_tuesday_km;
     emit tuesday_kmChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+	emitDayChanges();
 }
 
 int DataBaseModel::tuesday_time() const
@@ -198,12 +189,7 @@ void DataBaseModel::setTuesday_time(int newTuesday_time)
     m_tuesday_time = newTuesday_time;
     runningTime[1] = m_tuesday_time;
     emit tuesday_timeChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::wednesday_km() const
@@ -217,13 +203,8 @@ void DataBaseModel::setWednesday_km(int newWednesday_km)
         return;
     m_wednesday_km = newWednesday_km;
     kmRunInDay[2] = m_wednesday_km;
-    emit wednesday_kmChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+	emit wednesday_kmChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::wednesday_time() const
@@ -238,12 +219,7 @@ void DataBaseModel::setWednesday_time(int newWednesday_time)
     m_wednesday_time = newWednesday_time;
     runningTime[2] = m_wednesday_time;
     emit wednesday_timeChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::thursday_km() const
@@ -258,12 +234,7 @@ void DataBaseModel::setThursday_km(int newThursday_km)
     m_thursday_km = newThursday_km;
     kmRunInDay[3] = m_thursday_km;
     emit thursday_kmChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::thursday_time() const
@@ -278,12 +249,7 @@ void DataBaseModel::setThursday_time(int newThursday_time)
     m_thursday_time = newThursday_time;
     runningTime[3] = m_thursday_time;
     emit thursday_timeChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::friday_km() const
@@ -298,12 +264,7 @@ void DataBaseModel::setFriday_km(int newFriday_km)
     m_friday_km = newFriday_km;
     kmRunInDay[4] = m_friday_km;
     emit friday_kmChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::friday_time() const
@@ -318,12 +279,7 @@ void DataBaseModel::setFriday_time(int newFriday_time)
     m_friday_time = newFriday_time;
     runningTime[4] = m_friday_time;
     emit friday_timeChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::saturday_km() const
@@ -338,12 +294,7 @@ void DataBaseModel::setSaturday_km(int newSaturday_km)
     m_saturday_km = newSaturday_km;
     kmRunInDay[5] = m_saturday_km;
     emit saturday_kmChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::saturday_time() const
@@ -358,12 +309,7 @@ void DataBaseModel::setSaturday_time(int newSaturday_time)
     m_saturday_time = newSaturday_time;
     runningTime[5] = m_saturday_time;
     emit saturday_timeChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::sunday_km() const
@@ -379,12 +325,7 @@ void DataBaseModel::setSunday_km(int newSunday_km)
     m_sunday_km = newSunday_km;
     kmRunInDay[6] = m_sunday_km;
     emit sunday_kmChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 int DataBaseModel::sunday_time() const
@@ -402,12 +343,7 @@ void DataBaseModel::setSunday_time(int newSunday_time)
 
     m_sunday_time = 10;
     emit sunday_timeChanged();
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
+    emitDayChanges();
 }
 
 void DataBaseModel::initializeDataBase()
@@ -425,7 +361,7 @@ void DataBaseModel::initializeDataBase()
         db.addElement("Saturday", kmRunInDay[5], runningTime[5]);
         db.addElement("Sunday", kmRunInDay[6], runningTime[6]);
 
-        qDebug() << "End";
+        qDebug() << "Initialization complete";
     }
     else
         qDebug() << "Database is not open!";
@@ -445,7 +381,7 @@ void DataBaseModel::updateDataBaseFile()
         db.addElement("Saturday", kmRunInDay[5], runningTime[5]);
         db.addElement("Sunday", kmRunInDay[6], runningTime[6]);
 
-        qDebug() << "End";
+        qDebug() << "Updating database complete";
     }
     else
         qDebug() << "Database is not open!";
@@ -467,7 +403,7 @@ void DataBaseModel::testDataBase()
         db.addElement("Saturday", 5, 5);
         db.addElement("Sunday", 6, 6);
 
-        qDebug() << "End";
+        qDebug() << "Test done ";
     }
     else
         qDebug() << "Database is not open!";
