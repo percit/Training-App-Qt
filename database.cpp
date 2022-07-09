@@ -13,15 +13,14 @@ DataBase::DataBase(const QString &path)
 
 DataBase::~DataBase()
 {
-    if (m_db.isOpen())
-        m_db.close();
+    m_db.close();
 }
-
-bool DataBase::isOpen() const
-{
-    return m_db.isOpen();
-}
-
+/**
+ * @brief create table for day, meters, time
+ * 
+ * @return true 
+ * @return false 
+ */
 bool DataBase::createTable()
 {
     QSqlQuery query;
@@ -34,10 +33,17 @@ bool DataBase::createTable()
     }
     return false;
 }
-
+/**
+ * @brief add element to the table of database
+ * 
+ * @param name 
+ * @param km 
+ * @param time 
+ * @return true 
+ * @return false 
+ */
 bool DataBase::addElement(const QString &name, const double &km, const int &time)
 {
-
     QSqlQuery queryAdd;
 
     queryAdd.prepare("INSERT INTO day (name, km, time) VALUES (:name, :km, :time)");
@@ -46,14 +52,18 @@ bool DataBase::addElement(const QString &name, const double &km, const int &time
     queryAdd.bindValue(":km", km);
     queryAdd.bindValue(":time", time);
 
-    if (queryAdd.exec())
-        return true;
-    else
-        qWarning() << "ERROR: " << queryAdd.lastError().text();
+    if (queryAdd.exec()) return true;
+    else qWarning() << "ERROR: " << queryAdd.lastError().text();
 
     return false;
 }
-
+/**
+ * @brief remove whole day row from database
+ * 
+ * @param name 
+ * @return true 
+ * @return false 
+ */
 bool DataBase::removeElement(const QString &name)
 {
     if (dayExists(name))
@@ -69,7 +79,12 @@ bool DataBase::removeElement(const QString &name)
 
     return false;
 }
-
+/**
+ * @brief get meters and time in std::pair by using day name
+ * 
+ * @param name 
+ * @return std::pair<int, int> 
+ */
 std::pair<int, int> DataBase::returnDataBaseElementByName(const QString &name)
 {
     std::pair<int, int> temp;
@@ -105,7 +120,13 @@ void DataBase::printAll() const
         qDebug() << query.value("time").toString();
     }
 }
-
+/**
+ * @brief checking if day entry exists in database (this won't be needed due to initialization)
+ * 
+ * @param name 
+ * @return true 
+ * @return false 
+ */
 bool DataBase::dayExists(const QString &name) const
 {
     QSqlQuery checkQuery;
@@ -122,7 +143,12 @@ bool DataBase::dayExists(const QString &name) const
 
     return false;
 }
-
+/**
+ * @brief deletes all data from database
+ * 
+ * @return true 
+ * @return false 
+ */
 bool DataBase::clearDataBase()
 {
     QSqlQuery removeQuery;

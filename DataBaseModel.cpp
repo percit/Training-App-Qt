@@ -12,6 +12,10 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
     initializeDataBase();
 }
 
+/**
+ * @brief checks how many km run in a current week, checks from vector in local data
+ * @return qreal 
+ */
 qreal DataBaseModel::weeklyKmRun()
 {
     if (m_weeklyKmRun != std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
@@ -20,7 +24,10 @@ qreal DataBaseModel::weeklyKmRun()
     }
     return m_weeklyKmRun;
 }
-
+/**
+ * @brief gets most meters run in a day
+ * @return qreal 
+ */
 qreal DataBaseModel::longestDistance()
 {
     if (m_longestDistance != *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
@@ -29,7 +36,11 @@ qreal DataBaseModel::longestDistance()
     }
     return m_longestDistance;
 }
-
+/**
+ * @brief gets longest time in seconds
+ * 
+ * @return qreal 
+ */
 qreal DataBaseModel::longestDuration()
 {
     if (m_longestDuration != *(std::max_element(runningTime.begin(), runningTime.end())) / 60)
@@ -38,7 +49,11 @@ qreal DataBaseModel::longestDuration()
     }
     return m_longestDuration;
 }
-
+/**
+ * @brief best pace in m/s
+ * 
+ * @return qreal 
+ */
 qreal DataBaseModel::bestPace()
 {
     double bestPace = 0;
@@ -53,7 +68,11 @@ qreal DataBaseModel::bestPace()
     }
     return m_bestPace;
 }
-
+/**
+ * @brief average duration in seconds
+ * 
+ * @return qreal 
+ */
 qreal DataBaseModel::averageDuration()
 {
     if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 60))
@@ -62,7 +81,11 @@ qreal DataBaseModel::averageDuration()
     }
     return m_averageDuration;
 }
-
+/**
+ * @brief all duration in seconds
+ * 
+ * @return qreal 
+ */
 qreal DataBaseModel::allDuration()
 {
     return std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60; // in minutes
@@ -128,6 +151,7 @@ int const DataBaseModel::monday_km() const
 {
     return returnDataBaseElementByName("Monday").first;
 }
+
 void DataBaseModel::emitDayChanges() {
     emit weeklyKmRunChanged();
     emit longestDistanceChanged();
@@ -137,6 +161,7 @@ void DataBaseModel::emitDayChanges() {
     emit allDurationChanged();
     qDebug() << "emitDayChanges";
 }
+
 void DataBaseModel::setMonday_km(int newMonday_km)
 {
     if (m_monday_km == newMonday_km)
@@ -314,7 +339,6 @@ void DataBaseModel::setSaturday_time(int newSaturday_time)
 
 int DataBaseModel::sunday_km() const
 {
-    qDebug() << "sundaykm function";
     return returnDataBaseElementByName("Sunday").first;
 }
 
@@ -330,7 +354,6 @@ void DataBaseModel::setSunday_km(int newSunday_km)
 
 int DataBaseModel::sunday_time() const
 {
-        qDebug() << "sundaytime function";
     return returnDataBaseElementByName("Sunday").second;
 }
 
@@ -340,8 +363,6 @@ void DataBaseModel::setSunday_time(int newSunday_time)
         return;
     m_sunday_time = newSunday_time;
     runningTime[6] = m_sunday_time;
-
-    m_sunday_time = 10;
     emit sunday_timeChanged();
     emitDayChanges();
 }

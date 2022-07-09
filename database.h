@@ -20,8 +20,6 @@ public:
   DataBase(const QString &name);
   ~DataBase();
   // Database access functions
-  //  ADD ALL OF THESE TO GTEST
-  bool isOpen() const;
   bool createTable(); // tutaj powinno byc sprwdzanie, czy istnieje tablica, jesli jest to nie tworzymy wiecej
   bool addElement(const QString &day, const double &km, const int &time);
   bool removeElement(const QString &name);
