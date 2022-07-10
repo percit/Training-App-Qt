@@ -13,7 +13,7 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
 }
 
 /**
- * @brief checks how many km run in a current week, checks from vector in local data
+ * @brief checks how many meters run in a current week, checks from vector in local data
  * @return qreal 
  */
 qreal DataBaseModel::weeklyKmRun()
@@ -43,9 +43,9 @@ qreal DataBaseModel::longestDistance()
  */
 qreal DataBaseModel::longestDuration()
 {
-    if (m_longestDuration != *(std::max_element(runningTime.begin(), runningTime.end())) / 60)
-    { // this is in minutes
-        m_longestDuration = *(std::max_element(runningTime.begin(), runningTime.end())) / 60;
+    if (m_longestDuration != *(std::max_element(runningTime.begin(), runningTime.end())))
+    {
+        m_longestDuration = *(std::max_element(runningTime.begin(), runningTime.end()));
     }
     return m_longestDuration;
 }
@@ -56,7 +56,7 @@ qreal DataBaseModel::longestDuration()
  */
 qreal DataBaseModel::bestPace()
 {
-    double bestPace = 0;
+    double bestPace = 0.0;
     for (int i = 0; i < 7; ++i)
     {
         if (runningTime[i] > 0)
@@ -75,9 +75,9 @@ qreal DataBaseModel::bestPace()
  */
 qreal DataBaseModel::averageDuration()
 {
-    if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 60))
-    { // km/h
-        m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / (7 * 60);
+    if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7)
+    {
+        m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7;
     }
     return m_averageDuration;
 }
@@ -88,10 +88,9 @@ qreal DataBaseModel::averageDuration()
  */
 qreal DataBaseModel::allDuration()
 {
-    return std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60; // in minutes
-    if (m_allDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60)
-    { // km/h
-        m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 60;
+    if (m_allDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0))
+    {
+        m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0);
     }
     return m_allDuration;
 }
@@ -393,7 +392,7 @@ void DataBaseModel::updateDataBaseFile()
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.clearDataBase();                                     // temporary solution
+        db.clearDataBase();//there should be function with update, and taking day name as parameter
         db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
         db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
         db.addElement("Wednesday", kmRunInDay[2], runningTime[2]);

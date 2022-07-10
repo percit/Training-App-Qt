@@ -9,24 +9,21 @@ Item {
 
     property DataBaseViewModel viewModel: DataBaseViewModel {}
 
-    property double fullDistance: 0.0  //distance in meters
-    property double fullRunTime: 0.0 //time in seconds
-    property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+	//properties for checking which day is it
+	property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     property var now: new Date()
     readonly property string dateString: days[ now.getDay() ]
 
-    //counting distance helper properties
-    property double temporaryDistance: 0.0
+    //showing route properties
     property variant currentCoordinate
     property variant markers: []
 
-    property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
-    property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)
-
-    //showing time helper properties
-    property double timeElapsed: 0.0
-    property double startTime: 0.0
-    property int timerTriggered: 0
+    //showing time and distane properties, in meters and seconds
+    property double fullDistance: 0.0  //for database
+	property int fullRunTime: 0 //this is in 10 seconds 
+	property double temporaryDistance: 0.0
+	property double startTime: 0.0
+	readonly property int timerRefreshRate: 10
 
     signal trainButtonClicked
 
@@ -57,8 +54,6 @@ Item {
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
-                // routeQuery.addWaypoint(fromCoordinate);
-                // routeQuery.addWaypoint(toCoordinate);
                 routeQuery.addWaypoint(currentCoordinate);
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
@@ -90,24 +85,22 @@ Item {
     } //map
 
     Timer {
-        interval: 10000 //10 sec
+        interval: timerRefreshRate * 1000 //10 sec
         running: startTime > 0
         repeat: true
         onTriggered: {
-            console.warn("biegam sobie")
+            console.warn("Timer is running - Run starts")
 
-            //showing time
+            //reading time elapsed
             fullRunTime++
 
-            markers.push(currentCoordinate) // every 10 second a marker is added
-            routeQuery.addWaypoint(currentCoordinate);
+            markers.push(currentCoordinate) // current coordinate is pushed to markers array
+            routeQuery.addWaypoint(currentCoordinate);//and to the map
+			routeModel.update()
 
-            // counting distance
             for (var i = 0; i < markers.length - 1; i++) {
                 temporaryDistance += markers[i].distanceTo(markers[i+1])
-                // console.warn(markers[i])
             }
-            // temporaryDistance = fromCoordinate.distanceTo(toCoordinate)
             
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
@@ -115,25 +108,25 @@ Item {
             //propagating values to c++ backend
             switch(root.dateString) {
                 case 'Monday':
-                    DbModel.setMonday_time(fullRunTime * 10)
+                    DbModel.setMonday_time(fullRunTime * timerRefreshRate)
                     DbModel.setMonday_km(fullDistance)
                 case 'Tuesday':
-                    DbModel.setTuesday_time(fullRunTime * 10)
+                    DbModel.setTuesday_time(fullRunTime * timerRefreshRate)
                     DbModel.setTuesday_km(fullDistance)
                 case 'Wednesday':
-                    DbModel.setWednesday_time(fullRunTime * 10)
+                    DbModel.setWednesday_time(fullRunTime * timerRefreshRate)
                     DbModel.setWednesday_km(fullDistance)
                 case 'Thursday':
-                    DbModel.setThursday_time(fullRunTime * 10)
+                    DbModel.setThursday_time(fullRunTime * timerRefreshRate)
                     DbModel.setThursday_km(fullDistance)
                 case 'Friday':
-                    DbModel.setFriday_time(fullRunTime * 10)
+                    DbModel.setFriday_time(fullRunTime * timerRefreshRate)
                     DbModel.setFriday_km(fullDistance)
                 case 'Saturday':
-                    DbModel.setSaturday_time(fullRunTime * 10)
+                    DbModel.setSaturday_time(fullRunTime * timerRefreshRate)
                     DbModel.setSaturday_km(fullDistance)
                 case 'Sunday':
-                    DbModel.setSunday_time(fullRunTime * 10)
+                    DbModel.setSunday_time(fullRunTime * timerRefreshRate)
                     DbModel.setSunday_km(fullDistance)
             }
             DbModel.updateDataBaseFile()
@@ -142,14 +135,14 @@ Item {
 
     onTrainButtonClicked: { 
         if(startTime === 0.0) { //we start running
-            routeQuery.clearWaypoints() //czyscimy waypointy jak przestajemy biegac
-            timeElapsed = 0.0
+            // now we reset everything
+            routeQuery.clearWaypoints()
             fullDistance = 0.0
             fullRunTime = 0.0
+            //we start running, until second clicked() signal occurs, the time is here
             startTime = new Date().getTime()
         }
         else { //we stop running
-            timeElapsed = (new Date().getTime() - startTime) / 1000
             startTime = 0.0
         }
     }
@@ -164,3 +157,9 @@ Item {
 // moduly
 // testowanie przez gtest
 
+
+
+//obsolete code:
+
+//property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
+//property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)

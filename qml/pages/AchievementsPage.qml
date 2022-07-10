@@ -4,6 +4,7 @@ import QtQml 2.3
 import StyleSingleton 1.0
 import "../utils"
 import "../viewmodels"
+import "../Helper.js" as Helper
 
 MainPage {
 	readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
@@ -64,7 +65,7 @@ MainPage {
 				source: "qrc:/assets/route.png"
 			}
 			Text {
-				text: viewModel.longestDistance + " km"
+				text: Helper.formatDistance(viewModel.longestDistance)
 				font: Style.fontBold16
 				color: Style.green
 			}
@@ -76,7 +77,7 @@ MainPage {
 				source: "qrc:/assets/speed.png"
 			}
 			Text {
-				text: viewModel.bestPace + " min/km"
+				text: viewModel.bestPace + "km/h"
 				font: Style.fontBold16
 				color: Style.green
 			}
@@ -88,7 +89,7 @@ MainPage {
 				source: "qrc:/assets/time.png"
 			}
 			Text {
-				text: viewModel.longestDuration + " min"
+				text: Helper.formatTime(viewModel.longestDuration)
 				font: Style.fontBold16
 				color: Style.green
 			}

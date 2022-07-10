@@ -11,7 +11,7 @@ MainPage {
 
 	placeholder: false
 
-	readonly property string runningTime: Helper.formatTime(mapModel.fullRunTime * 10)  //Helper.roundNumber((mapModel.fullRunTime * 10 / 6), 2) //shows in minutes
+	readonly property string runningTime: Helper.formatTime(mapModel.fullRunTime * mapModel.timerRefreshRate)  //Helper.roundNumber((mapModel.fullRunTime * 10 / 6), 2) //shows in minutes
     readonly property string runningDistance: Helper.formatDistance(mapModel.fullDistance) //Helper.roundNumber((mapModel.fullDistance / 1000), 2) //shows in km
 
 	MapModel {

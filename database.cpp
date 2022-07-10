@@ -13,7 +13,13 @@ DataBase::DataBase(const QString &path)
 
 DataBase::~DataBase()
 {
-    m_db.close();
+    if (m_db.isOpen())
+        m_db.close();
+}
+
+bool DataBase::isOpen() const
+{
+    return m_db.isOpen();
 }
 /**
  * @brief create table for day, meters, time
