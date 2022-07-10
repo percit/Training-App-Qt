@@ -23,6 +23,7 @@ class DataBaseModel : public QObject
 {
     Q_OBJECT
 
+	//all of these are in meters, seconds, meters/seconds despite names
     Q_PROPERTY(qreal weeklyKmRun READ weeklyKmRun WRITE setWeeklyKmRun NOTIFY weeklyKmRunChanged)
     Q_PROPERTY(qreal longestDistance READ longestDistance WRITE setLongestDistance NOTIFY longestDistanceChanged)
     Q_PROPERTY(qreal longestDuration READ longestDuration WRITE setLongestDuration NOTIFY longestDurationChanged)
@@ -164,3 +165,8 @@ signals:
 };
 
 #endif // DATABASEMODEL_H
+
+//ogarnij te rzeczy z milionem funkcji
+//dodaj ten login
+//popraw kod qml i UI ladniejsze zrob
+//uzyj mapboxa
