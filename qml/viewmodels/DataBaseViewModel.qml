@@ -4,12 +4,12 @@ import "../Helper.js" as Helper
 
 
 QtObject {
-    readonly property string weeklyKmRun: Helper.formatDistance(DbModel.weeklyKmRun) // Math.round(DbModel.weeklyKmRun * 100) / 100
-    readonly property string longestDistance: Helper.formatDistance(DbModel.longestDistance) //Math.round(DbModel.longestDistance * 100) / 100
-    readonly property string longestDuration: Helper.formatDistance(DbModel.longestDuration) //Math.round(DbModel.longestDuration * 100) / 100
-    readonly property string averageDuration: Helper.formatDistance(DbModel.averageDuration) //Math.round(DbModel.averageDuration * 100) / 100
-    readonly property string allDuration: Helper.formatDistance(DbModel.allDuration) //Math.round(DbModel.allDuration * 100) / 100
-	readonly property string bestPace: Math.round(DbModel.bestPace * 3.6 * 100) / 100//tu nie trzeba helpera, tu mozna poprostu tu tak dac
+    readonly property string weeklyKmRun: Helper.formatDistance(DbModel.weeklyKmRun)
+    readonly property string longestDistance: Helper.formatDistance(DbModel.longestDistance)
+    readonly property string longestDuration: Helper.formatDistance(DbModel.longestDuration)
+    readonly property string averageDuration: Helper.formatDistance(DbModel.averageDuration)
+    readonly property string allDuration: Helper.formatDistance(DbModel.allDuration)
+	readonly property string bestPace: Math.round(DbModel.bestPace * 3.6 * 100) / 100
 	readonly property int weeklyGoalInMeters: 20000 //20k meters is day's standard, this should be set in settings of app
     readonly property int totalKcalRun: Math.round(DbModel.weeklyKmRun * 100) / 100 * 62
 
@@ -27,5 +27,3 @@ QtObject {
     // // property var week: //to jest array dni, week.push(day)
 
 }
-
-//helper cos nie dziala
