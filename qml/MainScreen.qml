@@ -25,9 +25,6 @@ Item {
 			MainPage {
 				id: debugPage
 				text: "DEBUG"
-				Text {
-					text: DbModel.sunday_time
-				}
 				MouseArea {
 					anchors.fill: parent
 					onClicked: {
