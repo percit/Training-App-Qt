@@ -41,17 +41,17 @@ MainPage {
 		spacing: 15
 		Column {
 			Text {
-				text: Math.round((viewModel.allDuration / 60) * 100) / 100
+				text: viewModel.allDuration
 				font: Style.fontBold16
 			}
 			Text {
-				text: "Total Hours"
+				text: "Total Time"
 				font: Style.fontDemiBold10
 			}
 		}
 		Column {
 			Text {
-				text: viewModel.weeklyKmRun * 62
+				text: viewModel.totalKcalRun
 				font: Style.fontBold16
 			}
 			Text {
