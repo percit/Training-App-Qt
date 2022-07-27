@@ -77,9 +77,9 @@ MainPage {
                 }
             }
             SettingsItem {
-                text: "9 setting"
+                text: "Polityka prywatności"
                 onClicked:{
-                    popupText = "text9"
+                    popupText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     popup.open()
                 }
             }
@@ -98,6 +98,8 @@ MainPage {
             text: popupText
             anchors.centerIn: parent
             font: Style.fontBold16
+            wrapMode: Text.WordWrap
+            elide: Text.ElideRight
         }
         MouseArea {
             anchors.fill: parent
