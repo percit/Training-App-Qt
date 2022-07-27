@@ -10,7 +10,7 @@ MainPage {
 
     property string popupText: ""
 
-    Flickable {//TODO fix swipeview
+    Flickable {//TODO add proper settings
         width: parent.width
         height: parent.height - 64 * Style.scaleY
         contentHeight: parent.height
