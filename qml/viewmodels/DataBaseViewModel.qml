@@ -11,6 +11,7 @@ QtObject {
     readonly property string allDuration: Helper.formatDistance(DbModel.allDuration) //Math.round(DbModel.allDuration * 100) / 100
 	readonly property string bestPace: Math.round(DbModel.bestPace * 3.6 * 100) / 100//tu nie trzeba helpera, tu mozna poprostu tu tak dac
 	readonly property int weeklyGoalInMeters: 20000 //20k meters is day's standard, this should be set in settings of app
+    readonly property int totalKcalRun: Math.round(DbModel.weeklyKmRun * 100) / 100 * 62
 
 //to sa wartosci z wektora, a nie bazy danych
     readonly property double progressBarMonday: (DbModel.monday_km / weeklyGoalInMeters > 1) ? 1 : DbModel.monday_km / weeklyGoalInMeters
@@ -26,3 +27,5 @@ QtObject {
     // // property var week: //to jest array dni, week.push(day)
 
 }
+
+//helper cos nie dziala

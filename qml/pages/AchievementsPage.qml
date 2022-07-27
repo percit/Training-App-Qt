@@ -10,12 +10,12 @@ MainPage {
 	readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
 	placeholder: false
 
-	Rectangle {
-		width: 230 * Style.scaleY; height: 230 * Style.scaleY
-		color: Style.black10
-		border.color: Style.white75
-		border.width: 10 * Style.scaleY
-		radius: width * 0.5
+	RadialProgressBar {
+	    lineWidth: 10 * Style.scaleY
+        value: viewModel.weeklyKmRun / 20
+        size: 230 * Style.scaleY
+        secondaryColor: Style.black10
+  		primaryColor: Style.green
 		anchors {
 			horizontalCenter: parent.horizontalCenter
 			top: parent.top; topMargin: 30 * Style.scaleY
@@ -30,7 +30,7 @@ MainPage {
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
-				text: viewModel.weeklyKmRun + "km"
+				text: viewModel.weeklyKmRun
 				font: Style.fontBold22
 				color: Style.black75
 			}
@@ -65,7 +65,7 @@ MainPage {
 				source: "qrc:/assets/route.png"
 			}
 			Text {
-				text: Helper.formatDistance(viewModel.longestDistance)
+				text: viewModel.longestDistance
 				font: Style.fontBold16
 				color: Style.green
 			}
@@ -89,7 +89,7 @@ MainPage {
 				source: "qrc:/assets/time.png"
 			}
 			Text {
-				text: Helper.formatTime(viewModel.longestDuration)
+				text: viewModel.longestDuration
 				font: Style.fontBold16
 				color: Style.green
 			}

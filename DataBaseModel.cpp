@@ -411,7 +411,7 @@ void DataBaseModel::updateDataBaseFile()
 
 void DataBaseModel::testDataBase()
 {
-    DataBase db("database_file.db");
+    DataBase db("database_file_test.db");
     if (db.isOpen())
     {
         db.clearDataBase();            // temporary solution

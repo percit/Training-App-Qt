@@ -20,16 +20,10 @@ Item {
 		interactive: false
 		ObjectModel {
 			id: modelObject
-			RunningPage {
-				text: "Google Maps \n"
-			}
-			AchievementsPage {
-			}
-			WeeklyStatsPage {
-			}
-			MainPage {//settings
-				text: "Page 4"
-			}
+			RunningPage {}
+			AchievementsPage {}
+			WeeklyStatsPage {}
+			SettingsPage {}
 			MainPage {
 				id: debugPage
 				text: "DEBUG"

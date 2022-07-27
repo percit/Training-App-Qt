@@ -6,6 +6,8 @@ function roundNumber(number, digits) {
 }
 
 function formatTime(sec) {
+	// if(Number.isNaN(sec)) return "0 sec"
+	parseInt(sec)
 	var value = sec
 	var seconds = value % 60
 	value /= 60
@@ -20,6 +22,7 @@ function formatTime(sec) {
 }
 
 function formatDistance(meters) {
+	parseInt(meters)
 	var dist = Math.round(meters)
 	if (dist > 1000) {
 		if (dist > 100000) {
@@ -29,10 +32,11 @@ function formatDistance(meters) {
 			dist = Math.round(dist / 100)
 			dist = dist / 10
 		}
-		dist = dist + " km"
+		dist += " km"
 	}
 	else {
-		dist = dist + " m"
+		dist += " m"
+		return dist
 	}
 	return dist
 }
