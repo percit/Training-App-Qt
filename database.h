@@ -31,5 +31,3 @@ public:
 };
 
 #endif // DATABASE_H
-
-//POPRAW NAZWY, BO UZYWASZ KM I DNI ZAMIENNIE

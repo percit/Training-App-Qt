@@ -31,7 +31,6 @@ QtObject {
   readonly property color white75: makeColorWithOpacity(white, 0.75)
 
 
-//Math.round( * scaleX)
 
     readonly property font fontNormal8:Qt.font({
         family: "Open Sans",

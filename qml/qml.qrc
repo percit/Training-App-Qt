@@ -8,6 +8,7 @@
         <file>pages/AchievementsPage.qml</file>
         <file>pages/RunningPage.qml</file>
         <file>pages/WeeklyStatsPage.qml</file>
+        <file>pages/SettingsPage.qml</file>
 
         <file>utils/BottomRow.qml</file>
         <file>utils/Icon.qml</file>
@@ -17,6 +18,7 @@
         <file>utils/TextButton.qml</file>
         <file>utils/TextWithIcon.qml</file>
         <file>utils/RadialProgressBar.qml</file>
+        <file>utils/SettingsItem.qml</file>
 
         <file>viewmodels/DataBaseViewModel.qml</file>
         <file>viewmodels/MapModel.qml</file>
@@ -32,6 +34,6 @@
         <file>assets/tasks.png</file>
         <file>assets/time.png</file>
         <file>assets/timer.png</file>
-        <file>pages/SettingsPage.qml</file>
+        <file>assets/menu.png</file>
     </qresource>
 </RCC>

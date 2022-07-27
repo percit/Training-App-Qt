@@ -149,17 +149,3 @@ Item {
 
 } //item
 
-
-// lista zadan:
-// - deployment
-// easy logging
-// refactor codu
-// moduly
-// testowanie przez gtest
-
-
-
-//obsolete code:
-
-//property variant fromCoordinate: QtPositioning.coordinate(51.099695, 17.028648)
-//property variant toCoordinate: QtPositioning.coordinate(51.054788, 16.970955)

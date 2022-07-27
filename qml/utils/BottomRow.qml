@@ -58,7 +58,7 @@ Rectangle {
 				activeSouce = BottomRow.ActiveSource.PAGE4
 				root.page4()
 			}
-			source: "qrc:/assets/run.png"
+			source: "qrc:/assets/menu.png"
 		}
 		MenuButton {
 			buttonOn: activeSouce === BottomRow.ActiveSource.PAGE5

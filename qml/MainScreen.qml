@@ -3,8 +3,6 @@ import QtQuick.Controls 2.3
 import QtQml.Models 2.15
 import "utils"
 import "pages"
-//temporary
-import DataBaseModel 1.0
 
 
 Item {
@@ -27,13 +25,9 @@ Item {
 			MainPage {
 				id: debugPage
 				text: "DEBUG"
-				Text {
-					text: DbModel.sunday_time
-				}
 				MouseArea {
 					anchors.fill: parent
 					onClicked: {
-						// console.log(DbModel.sunday_time)
 						console.log("10")
 					}
 				}
