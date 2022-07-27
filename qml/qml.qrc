@@ -4,9 +4,11 @@
         <file>MainScreen.qml</file>
         <file>Helper.js</file>
         <file>Style.qml</file>
+
         <file>pages/AchievementsPage.qml</file>
         <file>pages/RunningPage.qml</file>
         <file>pages/WeeklyStatsPage.qml</file>
+
         <file>utils/BottomRow.qml</file>
         <file>utils/Icon.qml</file>
         <file>utils/MainPage.qml</file>
@@ -14,8 +16,11 @@
         <file>utils/ProgresBar.qml</file>
         <file>utils/TextButton.qml</file>
         <file>utils/TextWithIcon.qml</file>
+        <file>utils/RadialProgressBar.qml</file>
+
         <file>viewmodels/DataBaseViewModel.qml</file>
         <file>viewmodels/MapModel.qml</file>
+
         <file>assets/achievement.png</file>
         <file>assets/person.png</file>
         <file>assets/route.png</file>
