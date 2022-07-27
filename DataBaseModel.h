@@ -82,7 +82,7 @@ private:
     int m_sunday_time = 0;
 
 public:
-    explicit DataBaseModel(QObject *parent = nullptr);
+    explicit DataBaseModel(QObject *parent = nullptr); //TU POWINIEN BYC ARGUMENT Z NAZWA BAZY DANYCH
 
 //database functions
     void initializeDataBase();
@@ -166,7 +166,3 @@ signals:
 
 #endif // DATABASEMODEL_H
 
-//ogarnij te rzeczy z milionem funkcji
-//dodaj ten login
-//popraw kod qml i UI ladniejsze zrob
-//uzyj mapboxa
