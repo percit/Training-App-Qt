@@ -36,7 +36,7 @@ MainPage {
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
-				text: "Weekly Goal 20km"
+				text: "Weekly Goal " + viewModel.weeklyGoalInMeters / 1000 + "km"
 				font: Style.fontNormal12
 				color: Style.black75
 			}

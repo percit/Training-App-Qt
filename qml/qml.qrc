@@ -19,6 +19,7 @@
         <file>utils/TextWithIcon.qml</file>
         <file>utils/RadialProgressBar.qml</file>
         <file>utils/SettingsItem.qml</file>
+        <file>utils/StyledComboBox.qml</file>
 
         <file>viewmodels/DataBaseViewModel.qml</file>
         <file>viewmodels/MapModel.qml</file>
@@ -35,5 +36,6 @@
         <file>assets/time.png</file>
         <file>assets/timer.png</file>
         <file>assets/menu.png</file>
+        <file>assets/close.png</file>
     </qresource>
 </RCC>
