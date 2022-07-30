@@ -14,7 +14,7 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
 
 /**
  * @brief checks how many meters run in a current week, checks from vector in local data
- * @return qreal 
+ * @return qreal
  */
 qreal DataBaseModel::weeklyKmRun()
 {
@@ -26,7 +26,7 @@ qreal DataBaseModel::weeklyKmRun()
 }
 /**
  * @brief gets most meters run in a day
- * @return qreal 
+ * @return qreal
  */
 qreal DataBaseModel::longestDistance()
 {
@@ -38,8 +38,8 @@ qreal DataBaseModel::longestDistance()
 }
 /**
  * @brief gets longest time in seconds
- * 
- * @return qreal 
+ *
+ * @return qreal
  */
 qreal DataBaseModel::longestDuration()
 {
@@ -51,8 +51,8 @@ qreal DataBaseModel::longestDuration()
 }
 /**
  * @brief best pace in m/s
- * 
- * @return qreal 
+ *
+ * @return qreal
  */
 qreal DataBaseModel::bestPace()
 {
@@ -70,8 +70,8 @@ qreal DataBaseModel::bestPace()
 }
 /**
  * @brief average duration in seconds
- * 
- * @return qreal 
+ *
+ * @return qreal
  */
 qreal DataBaseModel::averageDuration()
 {
@@ -83,8 +83,8 @@ qreal DataBaseModel::averageDuration()
 }
 /**
  * @brief all duration in seconds
- * 
- * @return qreal 
+ *
+ * @return qreal
  */
 qreal DataBaseModel::allDuration()
 {
@@ -93,6 +93,16 @@ qreal DataBaseModel::allDuration()
         m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0);
     }
     return m_allDuration;
+}
+
+int DataBaseModel::weeklyGoal() const
+{
+    return m_weeklyGoal;
+}
+
+int DataBaseModel::daylyGoal() const
+{
+    return m_daylyGoal;
 }
 
 void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
@@ -143,6 +153,18 @@ void DataBaseModel::setAllDuration(qreal newAllDuration)
     emit allDurationChanged();
 }
 
+void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
+{
+    m_weeklyGoal = newWeeklyGoal;
+    emit weeklyGoalChanged();
+}
+
+void DataBaseModel::setDaylyGoal(int newDaylyGoal)
+{
+    m_daylyGoal = newDaylyGoal;
+    emit weeklyGoalChanged();
+}
+
 // /////////////////////////////////////////////////////////////////////
 // DAYS
 
@@ -151,7 +173,8 @@ int const DataBaseModel::monday_km() const
     return returnDataBaseElementByName("Monday").first;
 }
 
-void DataBaseModel::emitDayChanges() {
+void DataBaseModel::emitDayChanges()
+{
     emit weeklyKmRunChanged();
     emit longestDistanceChanged();
     emit longestDurationChanged();
@@ -168,7 +191,7 @@ void DataBaseModel::setMonday_km(int newMonday_km)
     m_monday_km = newMonday_km;
     kmRunInDay[0] = m_monday_km;
     emit monday_kmChanged();
-	emitDayChanges();
+    emitDayChanges();
 }
 
 int DataBaseModel::monday_time() const
@@ -198,7 +221,7 @@ void DataBaseModel::setTuesday_km(int newTuesday_km)
     m_tuesday_km = newTuesday_km;
     kmRunInDay[1] = m_tuesday_km;
     emit tuesday_kmChanged();
-	emitDayChanges();
+    emitDayChanges();
 }
 
 int DataBaseModel::tuesday_time() const
@@ -227,7 +250,7 @@ void DataBaseModel::setWednesday_km(int newWednesday_km)
         return;
     m_wednesday_km = newWednesday_km;
     kmRunInDay[2] = m_wednesday_km;
-	emit wednesday_kmChanged();
+    emit wednesday_kmChanged();
     emitDayChanges();
 }
 
@@ -392,7 +415,7 @@ void DataBaseModel::updateDataBaseFile()
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.clearDataBase();//there should be function with update, and taking day name as parameter
+        db.clearDataBase();                                     // there should be function with update, and taking day name as parameter
         db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
         db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
         db.addElement("Wednesday", kmRunInDay[2], runningTime[2]);
