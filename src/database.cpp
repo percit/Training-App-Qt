@@ -1,4 +1,4 @@
-#include "database.h"
+#include "../inc/database.h"
 
 DataBase::DataBase(const QString &path)
 {
