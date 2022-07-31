@@ -3,15 +3,15 @@
 #include <QQmlContext>
 #include <QQmlProperty> //for reading from qml file
 #include <QQuickView>
-#include "database.h"
-#include "DataBaseModel.h"
+#include "../inc/database.h"
+#include "../inc/DataBaseModel.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    //we register database as singleton
+    // we register database as singleton
     qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)

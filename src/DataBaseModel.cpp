@@ -1,4 +1,4 @@
-#include "DataBaseModel.h"
+#include "../inc/DataBaseModel.h"
 #include <QDebug>
 DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
                                                 m_weeklyKmRun(0),
