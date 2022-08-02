@@ -13,6 +13,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(PROJECT "Training-App")
 project(${PROJECT})
 
+set(FIREBASE_CPP_SDK_DIR "/home/percit/github/firebase_cpp_sdk")
+add_subdirectory(${FIREBASE_CPP_SDK_DIR} bin/ EXCLUDE_FROM_ALL)
+
+
 
 if(NOT DEFINED HEADERS)
     file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/../inc/*.h)
@@ -34,7 +38,11 @@ add_executable(
   ${PROJECT} ${HEADERS} ${SOURCES} ${QT_RESOURCES}
 )
 endif()
-
+set(FIREBASE_LIBS
+  firebase_auth
+  firebase_database
+  firebase_app
+)
 
 # target_compile_definitions(
 #   ${PROJECT}
@@ -44,4 +52,5 @@ target_link_libraries(
   ${PROJECT}
   Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::Sql
+  ${FIREBASE_LIBS}
 )

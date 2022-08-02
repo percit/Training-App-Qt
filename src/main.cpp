@@ -6,10 +6,33 @@
 #include "../inc/database.h"
 #include "../inc/DataBaseModel.h"
 
+//this is just for testing
+#include "firebase/app.h"
+#include "firebase/auth.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
+
+
+
+    //firebase test
+    #if defined(__ANDROID__)
+    firebase::App* app =
+        firebase::App::Create(firebase::AppOptions(), my_jni_env, my_activity);
+    #else
+    firebase::App* firebase_app = firebase::App::Create(firebase::AppOptions());
+    #endif  // defined(__ANDROID__)
+
+//tu sie zakoncza
+    firebase::auth::Auth* auth = firebase::auth::Auth::GetAuth(firebase_app);
+
+    auth->SignOut();
+
+
+
+
 
     // we register database as singleton
     qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
