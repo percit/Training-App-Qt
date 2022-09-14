@@ -20,12 +20,16 @@ MainPage {
         ScrollBar.vertical: ScrollBar {}
 
         Column {
-            Text {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "User Settings"
-                color: "white"
-                font: Style.fontBold22
-                bottomPadding: 5
+            Rectangle {
+                width: 375 * Style.scaleX
+                height: 60 * Style.scaleY
+                color: Style.black10
+                Text {
+                    anchors.centerIn: parent
+                    text: "User Settings"
+                    color: "white"
+                    font: Style.fontBold22
+                }
             }
             SettingsItem {
                 text: "Change reminder time"
@@ -82,26 +86,44 @@ MainPage {
         contentItem: Rectangle {
             anchors.fill: parent
 
-            MenuButton {
+            Rectangle {
                 id: exitButton
-                width: parent.width
+
+                width: 375 * Style.scaleX
+                height: 60 * Style.scaleY
                 color: Style.black50
-                onClicked: {
-                    popup.close()
-                    dayKm.visible = false
-                    weekKm.visible = false
-                    reminderTime.visible = false
+                TextWithIcon {
+                    anchors {
+                        left: parent.left;
+                        leftMargin: 10
+                        verticalCenter: parent.verticalCenter
+                    }
+                    space: 80
+                    text: "Go back"
+                    font: Style.fontBold22
+                    mainColor: "white"
+                    source: "qrc:/assets/close.png"
                 }
-                source: "qrc:/assets/close.png"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        popup.close()
+                        popupText.text = ""
+                        dayKm.visible = false
+                        weekKm.visible = false
+                        reminderTime.visible = false
+                    }
+                }
             }
+            
             Rectangle {
                 anchors {
                     top: exitButton.bottom
                     horizontalCenter: parent.horizontalCenter
                 }
-                width: settingsPage.width - 2
-                height: settingsPage.height - 64 * Style.scaleY
-                color: Style.black10
+                width: settingsPage.width// - 2
+                height: settingsPage.height - 64 * Style.scaleY + 2
+                color: Style.black30
 
                 StyledComboBox {
                     id: dayKm
