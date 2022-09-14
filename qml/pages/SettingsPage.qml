@@ -20,8 +20,16 @@ MainPage {
         ScrollBar.vertical: ScrollBar {}
 
         Column {
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "User Settings"
+                color: "white"
+                font: Style.fontBold22
+                bottomPadding: 5
+            }
             SettingsItem {
                 text: "Change reminder time"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     dayKm.visible = true
                     popup.open()
@@ -29,6 +37,7 @@ MainPage {
             }
             SettingsItem {
                 text: "Daily minimum km"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     weekKm.visible = true
                     popup.open()
@@ -36,6 +45,7 @@ MainPage {
             }
             SettingsItem {
                 text: "Weekly minimum km"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     reminderTime.visible = true
                     popup.open()
@@ -43,6 +53,7 @@ MainPage {
             }
             SettingsItem {
                 text: "RuleBook"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     popupText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     popupText.visible = true
@@ -51,6 +62,7 @@ MainPage {
             }
             SettingsItem {
                 text: "Privacy Notice"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     popupText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     popupText.visible = true
@@ -169,7 +181,7 @@ MainPage {
                     }
                 }
 
-                Text { //only for roolbook and privacy notice
+                Text { //only for rulebook and privacy notice
                     id: popupText
                     anchors.fill: parent
                     visible: false
