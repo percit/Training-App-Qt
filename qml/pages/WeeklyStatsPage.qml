@@ -16,7 +16,7 @@ MainPage {
 			top: parent.top; topMargin: 10 * Style.scaleY
 		}
 		text: "My Progress"
-		font: Style.fontBold22 //TODO make it bigger
+		font: Style.fontBold22
 	}
 	Column {
 		anchors {
@@ -25,11 +25,11 @@ MainPage {
 		}
 		Text {
 			text: viewModel.weeklyKmRun
-			font: Style.fontBold22 //TODO make it bigger
+			font: Style.fontBold22
 		}
 		Text {
 			text: "Total km"
-			font: Style.fontNormal8//TODO make it smaller
+			font: Style.fontNormal8
 		}
 	}
 

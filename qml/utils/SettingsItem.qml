@@ -6,20 +6,33 @@ Rectangle {
 	id: root
 
     property alias text: settingsName.text
+	property alias source: mainIcon.source
 
 	width: 375 * Style.scaleX
-	height: 64 * Style.scaleY
-    color: "white"
+	height: 60 * Style.scaleY
+    color: "transparent"
 	signal clicked
 
-    border.color: Style.black75
-    border.width: 1
+	Row {
+		anchors {
+			left: parent.left;
+			leftMargin: 5
+		}
+		spacing: 10
+		Icon {
+			id: mainIcon
 
-    Text {
-        id: settingsName
-        anchors.centerIn: parent
-        font: Style.fontBold16
-    }
+			height: 40 * Style.scaleX; width: 40 * Style.scaleX
+			color: "white"
+		}
+		Text {
+			id: settingsName
+
+			anchors.verticalCenter: parent.verticalCenter
+			color: "white"
+			font: Style.fontBold16
+		}
+	}
 
 	MouseArea {
 		anchors.fill: parent

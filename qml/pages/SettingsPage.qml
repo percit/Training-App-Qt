@@ -20,29 +20,44 @@ MainPage {
         ScrollBar.vertical: ScrollBar {}
 
         Column {
+            Rectangle {
+                width: 375 * Style.scaleX
+                height: 60 * Style.scaleY
+                color: Style.black10
+                Text {
+                    anchors.centerIn: parent
+                    text: "User Settings"
+                    color: "white"
+                    font: Style.fontBold22
+                }
+            }
             SettingsItem {
                 text: "Change reminder time"
-                onClicked:{
-                    dayKm.visible = true
-                    popup.open()
-                }
-            }
-            SettingsItem {
-                text: "Daily minimum km"
-                onClicked:{
-                    weekKm.visible = true
-                    popup.open()
-                }
-            }
-            SettingsItem {
-                text: "Weekly minimum km"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     reminderTime.visible = true
                     popup.open()
                 }
             }
             SettingsItem {
+                text: "Daily minimum km"
+                source: "qrc:/assets/close.png"
+                onClicked:{
+                    dayKm.visible = true
+                    popup.open()
+                }
+            }
+            SettingsItem {
+                text: "Weekly minimum km"
+                source: "qrc:/assets/close.png"
+                onClicked:{
+                    weekKm.visible = true
+                    popup.open()
+                }
+            }
+            SettingsItem {
                 text: "RuleBook"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     popupText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     popupText.visible = true
@@ -51,6 +66,7 @@ MainPage {
             }
             SettingsItem {
                 text: "Privacy Notice"
+                source: "qrc:/assets/close.png"
                 onClicked:{
                     popupText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     popupText.visible = true
@@ -70,32 +86,50 @@ MainPage {
         contentItem: Rectangle {
             anchors.fill: parent
 
-            MenuButton {
+            Rectangle {
                 id: exitButton
-                width: parent.width
+
+                width: 375 * Style.scaleX
+                height: 60 * Style.scaleY
                 color: Style.black50
-                onClicked: {
-                    popup.close()
-                    dayKm.visible = false
-                    weekKm.visible = false
-                    reminderTime.visible = false
+                TextWithIcon {
+                    anchors {
+                        left: parent.left;
+                        leftMargin: 10
+                        verticalCenter: parent.verticalCenter
+                    }
+                    space: 80
+                    text: "Go back"
+                    font: Style.fontBold22
+                    mainColor: "white"
+                    source: "qrc:/assets/close.png"
                 }
-                source: "qrc:/assets/close.png"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        popup.close()
+                        popupText.text = ""
+                        dayKm.visible = false
+                        weekKm.visible = false
+                        reminderTime.visible = false
+                    }
+                }
             }
+            
             Rectangle {
                 anchors {
                     top: exitButton.bottom
                     horizontalCenter: parent.horizontalCenter
                 }
-                width: settingsPage.width - 2
-                height: settingsPage.height - 64 * Style.scaleY
-                color: Style.black10
+                width: settingsPage.width
+                height: settingsPage.height - 64 * Style.scaleY + 5
+                color: Style.black30
 
                 StyledComboBox {
                     id: dayKm
                     visible: false
                     anchors {
-                        top: parent.top; topMargin: 40 * Style.scaleY
+                        top: parent.top; topMargin: 100 * Style.scaleY
                         horizontalCenter: parent.horizontalCenter
                     }
                     model: ListModel {
@@ -118,7 +152,7 @@ MainPage {
                     id: weekKm
                     visible: false
                     anchors {
-                        top: parent.top; topMargin: 40 * Style.scaleY
+                        top: parent.top; topMargin: 100 * Style.scaleY
                         horizontalCenter: parent.horizontalCenter
                     }
                     model: ListModel {
@@ -139,16 +173,12 @@ MainPage {
                 }
                 StyledComboBox {
                     id: reminderTime
+                    visible: false
                     anchors {
-                        top: parent.top; topMargin: 40 * Style.scaleY
+                        top: parent.top; topMargin: 100 * Style.scaleY
                         horizontalCenter: parent.horizontalCenter
                     }
-                    visible: false
                     model: ListModel {
-                        ListElement { text: "6:00" }
-                        ListElement { text: "7:00" }
-                        ListElement { text: "8:00" }
-                        ListElement { text: "9:00" }
                         ListElement { text: "10:00" }
                         ListElement { text: "11:00" }
                         ListElement { text: "12:00" }
@@ -159,17 +189,13 @@ MainPage {
                         ListElement { text: "17:00" }
                         ListElement { text: "18:00" }
                         ListElement { text: "19:00" }
-                        ListElement { text: "20:00" }
-                        ListElement { text: "21:00" }
-                        ListElement { text: "22:00" }
-                        ListElement { text: "23:00" }
                     }
                     onActivated: {
                         console.log(currentText)
                     }
                 }
 
-                Text { //only for roolbook and privacy notice
+                Text { //only for rulebook and privacy notice
                     id: popupText
                     anchors.fill: parent
                     visible: false
