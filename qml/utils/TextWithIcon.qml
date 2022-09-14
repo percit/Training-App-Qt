@@ -2,25 +2,24 @@ import QtQuick 2.3
 import StyleSingleton 1.0
 
 Row {
-  id: root
+	id: root
 
-  property alias text: m_text.text
-  property alias source: m_icon.source
-  property color mainColor: Style.black75
-  property alias font: m_text.font
+	property alias text: m_text.text
+	property alias source: m_icon.source
+	property color mainColor: Style.black75
+	property alias font: m_text.font
+	property int space: 5
 
-  spacing: 5
-  Icon {
-    id: m_icon
+	spacing: space
+	Icon {
+		id: m_icon
 
-    anchors.verticalCenter: root.verticalCenter
-    width: m_text.height; height: m_text.height
-    color: mainColor
-  }
-  Text {
-    id: m_text
+		width: m_text.height; height: m_text.height
+		color: mainColor
+	}
+	Text {
+		id: m_text
 
-    anchors.verticalCenter: root.verticalCenter
-    color: mainColor
-  }
+		color: mainColor
+	}
 }
