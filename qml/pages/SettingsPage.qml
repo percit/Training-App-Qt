@@ -35,7 +35,7 @@ MainPage {
                 text: "Change reminder time"
                 source: "qrc:/assets/close.png"
                 onClicked:{
-                    dayKm.visible = true
+                    reminderTime.visible = true
                     popup.open()
                 }
             }
@@ -43,7 +43,7 @@ MainPage {
                 text: "Daily minimum km"
                 source: "qrc:/assets/close.png"
                 onClicked:{
-                    weekKm.visible = true
+                    dayKm.visible = true
                     popup.open()
                 }
             }
@@ -51,7 +51,7 @@ MainPage {
                 text: "Weekly minimum km"
                 source: "qrc:/assets/close.png"
                 onClicked:{
-                    reminderTime.visible = true
+                    weekKm.visible = true
                     popup.open()
                 }
             }
@@ -121,15 +121,15 @@ MainPage {
                     top: exitButton.bottom
                     horizontalCenter: parent.horizontalCenter
                 }
-                width: settingsPage.width// - 2
-                height: settingsPage.height - 64 * Style.scaleY + 2
+                width: settingsPage.width
+                height: settingsPage.height - 64 * Style.scaleY + 5
                 color: Style.black30
 
                 StyledComboBox {
                     id: dayKm
                     visible: false
                     anchors {
-                        top: parent.top; topMargin: 40 * Style.scaleY
+                        top: parent.top; topMargin: 100 * Style.scaleY
                         horizontalCenter: parent.horizontalCenter
                     }
                     model: ListModel {
@@ -152,7 +152,7 @@ MainPage {
                     id: weekKm
                     visible: false
                     anchors {
-                        top: parent.top; topMargin: 40 * Style.scaleY
+                        top: parent.top; topMargin: 100 * Style.scaleY
                         horizontalCenter: parent.horizontalCenter
                     }
                     model: ListModel {
@@ -173,16 +173,12 @@ MainPage {
                 }
                 StyledComboBox {
                     id: reminderTime
+                    visible: false
                     anchors {
-                        top: parent.top; topMargin: 40 * Style.scaleY
+                        top: parent.top; topMargin: 100 * Style.scaleY
                         horizontalCenter: parent.horizontalCenter
                     }
-                    visible: false
                     model: ListModel {
-                        ListElement { text: "6:00" }
-                        ListElement { text: "7:00" }
-                        ListElement { text: "8:00" }
-                        ListElement { text: "9:00" }
                         ListElement { text: "10:00" }
                         ListElement { text: "11:00" }
                         ListElement { text: "12:00" }
@@ -193,10 +189,6 @@ MainPage {
                         ListElement { text: "17:00" }
                         ListElement { text: "18:00" }
                         ListElement { text: "19:00" }
-                        ListElement { text: "20:00" }
-                        ListElement { text: "21:00" }
-                        ListElement { text: "22:00" }
-                        ListElement { text: "23:00" }
                     }
                     onActivated: {
                         console.log(currentText)
