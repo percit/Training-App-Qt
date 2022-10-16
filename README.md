@@ -16,9 +16,15 @@ Technology stack:
 
 TODO:
 1. Email Authentication via Firebase
-2. Settings Page
-3. Database on Firebase
-4. Fix Tests
+2. Database on Firebase
+3. Fix Tests
+
+
+How to go from Desktop/Android:
+
+Clean->Run CMake->Build->Compile (don't skip even one step)
+
+Commit c2945c71274c5eafb9bae044a8eb4130bf1aae9a is last one working on desktop and android and has no firebase
 
 ![Getting Started](images/map-image.png)
 ![Getting Started](images/progress-image.png)
