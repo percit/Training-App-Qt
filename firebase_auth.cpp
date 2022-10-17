@@ -1,0 +1,93 @@
+#include "firebase_auth.h"
+#include <QDebug>
+#include <QNetworkRequest>
+#include <QVariantMap>
+#include <QJsonObject>
+
+FirebaseAuth::FirebaseAuth(QObject *parent) : QObject(parent),
+                                              m_APIKey(QString())
+{
+    qDebug() << "created FirebaseAuth constructor";
+    m_networkManager = new QNetworkAccessManager(this);
+    connect(this, &FirebaseAuth::userSignedIn, this, &FirebaseAuth::performAuthenticatedDataBaseCall);
+}
+
+FirebaseAuth::~FirebaseAuth()
+{
+    m_networkManager->deleteLater();
+}
+
+void FirebaseAuth::signUserUp(const QString &emailAddress, const QString &password)
+{
+    QString signUpEndpoint = "" + m_APIKey;
+    QVariantMap variantPayload;
+    variantPayload["email"] = emailAddress;
+    variantPayload["password"] = password;
+    variantPayload["returnSecureToken"] = true;
+
+    QJsonDocument jsonPayload = QJsonDocument::fromVariant(variantPayload);
+
+    performPOST(signUpEndpoint, jsonPayload);
+}
+
+void FirebaseAuth::signUserIn(const QString &emailAddress, const QString &password)
+{
+    QString signInEndpoint = "" + m_APIKey;
+    QVariantMap variantPayload;
+    variantPayload["email"] = emailAddress;
+    variantPayload["password"] = password;
+    variantPayload["returnSecureToken"] = true;
+
+    QJsonDocument jsonPayload = QJsonDocument::fromVariant(variantPayload);
+
+    performPOST(signInEndpoint, jsonPayload);
+}
+
+void FirebaseAuth::setAPIKey(const QString &apiKey)
+{
+    m_APIKey = apiKey;
+}
+
+void FirebaseAuth::performPOST(const QString &url, const QJsonDocument &payload)
+{
+    QNetworkRequest newRequest((QUrl(url)));
+    newRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+    m_networkReply = m_networkManager->post(newRequest, payload.toJson());
+    connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseAuth::networkReplyReadyRead);
+}
+
+void FirebaseAuth::networkReplyReadyRead()
+{
+    QByteArray response = m_networkReply->readAll();
+    //    qDebug() << response;
+    m_networkReply->deleteLater();
+
+    parseResponse(response);
+}
+
+void FirebaseAuth::parseResponse(const QByteArray &response)
+{
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(response);
+    if (jsonDocument.object().contains("error"))
+    {
+        qDebug() << "Error occured" << response;
+    }
+    else if (jsonDocument.object().contains("kind"))
+    {
+        QString idToken = jsonDocument.object().value("idToken").toString();
+        //        qDebug() << "id token" << idToken;
+        qDebug() << "User signed in succesfully";
+        m_idToken = idToken;
+        emit userSignedIn();
+    }
+    else
+    {
+        qDebug() << "the response was" << response;
+    }
+}
+void FirebaseAuth::performAuthenticatedDataBaseCall()
+{
+    QString endpoint = "<>.json" + m_idToken;
+    m_networkReply = m_networkManager->get(QNetworkRequest(QUrl(endpoint)));
+    connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseAuth::networkReplyReadyRead);
+}

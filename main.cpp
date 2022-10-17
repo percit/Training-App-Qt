@@ -6,13 +6,19 @@
 #include "database.h"
 #include "DataBaseModel.h"
 #include "firebase_database.h"
+#include "firebase_auth.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    // FirebaseDataBase fbDatabase; this should be commented out until you make whole class with proper functions for it
+    // FirebaseDataBase fbDatabase; //this should be commented out until you make whole class with proper functions for it
+
+    // FirebaseAuth fbAuth; //the same as above, make it usable
+    // fbAuth.setAPIKey("AIzaSyC5tR1cHCZD80oEyvJeBwVvy-Y_dXI3ODg");
+    // fbAuth.signUserIn("test@email.com", "Password123");
+
 
     //we register database as singleton
     qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {

@@ -11,17 +11,17 @@ FirebaseDataBase::FirebaseDataBase(QObject *parent) : QObject(parent)
 
 
 //GET
-    // //m_networkReply = m_networkManager->get(QNetworkRequest(QUrl("<>"))); adding url for rest api
-    // connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseDataBase::networkReplyReadyRead);
+    //m_networkReply = m_networkManager->get(QNetworkRequest(QUrl("<>.json"))); adding url for rest api
+    connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseDataBase::networkReplyReadyRead);
 
 //POST
-    QVariantMap newRun;
-    newRun["Km"] = 5;
-    newRun["Time"] = 12000;
-    QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
-    QNetworkRequest newRunRequest(QUrl("<>.json"));
-    newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
-    m_networkManager->post(newRunRequest, jsonDoc.toJson());
+    // QVariantMap newRun;
+    // newRun["Km"] = 5;
+    // newRun["Time"] = 12000;
+    // QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
+    // // QNetworkRequest newRunRequest(QUrl("<>.json"))
+    // newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+    // m_networkManager->post(newRunRequest, jsonDoc.toJson());
 	//if you want to use PUT (so to replace values) you just change Run.json to more specific table, and use m_networkManager->put
 }
 
