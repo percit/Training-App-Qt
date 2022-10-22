@@ -9,6 +9,7 @@
         <file>pages/RunningPage.qml</file>
         <file>pages/WeeklyStatsPage.qml</file>
         <file>pages/SettingsPage.qml</file>
+        <file>pages/LogPage.qml</file>
 
         <file>utils/BottomRow.qml</file>
         <file>utils/Icon.qml</file>

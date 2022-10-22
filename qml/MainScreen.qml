@@ -18,6 +18,12 @@ Item {
 		interactive: false
 		ObjectModel {
 			id: modelObject
+			LogPage {
+				onChangeBottomRowVisibility: {
+					pagesRow.setCurrentIndex(1)
+					bottomRow.visible = true
+				}
+			}
 			RunningPage {}
 			AchievementsPage {}
 			WeeklyStatsPage {}
@@ -46,21 +52,24 @@ Item {
 }
 
 BottomRow {
+	id:bottomRow
+
+	visible: false
 	anchors.bottom: parent.bottom
 	onPage1: {
-		pagesRow.setCurrentIndex(0)
-	}
-	onPage2: {
 		pagesRow.setCurrentIndex(1)
 	}
-	onPage3: {
+	onPage2: {
 		pagesRow.setCurrentIndex(2)
 	}
-	onPage4: {
+	onPage3: {
 		pagesRow.setCurrentIndex(3)
 	}
-	onPage5: {
+	onPage4: {
 		pagesRow.setCurrentIndex(4)
+	}
+	onPage5: {
+		pagesRow.setCurrentIndex(5)
 	}
 }
 
