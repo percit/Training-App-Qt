@@ -15,18 +15,22 @@ int main(int argc, char *argv[])
 
     // FirebaseDataBase fbDatabase; //this should be commented out until you make whole class with proper functions for it
 
-    // FirebaseAuth fbAuth; //the same as above, make it usable
-    // fbAuth.setAPIKey("AIzaSyC5tR1cHCZD80oEyvJeBwVvy-Y_dXI3ODg");
-    // fbAuth.signUserIn("test@email.com", "Password123");
+    qmlRegisterSingletonType<FirebaseAuth>("FirebaseAuth", 1, 0, "FbAuth", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
 
+        FirebaseAuth *fbAuth = new FirebaseAuth();
+        fbAuth->setAPIKey("AIzaSyC5tR1cHCZD80oEyvJeBwVvy-Y_dXI3ODg");
+        return fbAuth;
+    });
 
     //we register database as singleton
     qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
 
-        DataBaseModel *example = new DataBaseModel();
-        return example;
+        DataBaseModel *database = new DataBaseModel();
+        return database;
     });
 
     qRegisterMetaType<Day>();
