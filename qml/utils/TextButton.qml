@@ -6,6 +6,7 @@ Rectangle {
 
   property bool buttonOn: false
   property string text: ""
+  property var fontStyle: Style.fontDemiBold12
 
   width: 70 * Style.scaleX
   height: 200 * Style.scaleY
@@ -17,7 +18,7 @@ Rectangle {
   Text {
     anchors.centerIn: parent
     text: root.text
-    font: Style.fontDemiBold12
+    font: fontStyle
   }
   MouseArea {
     anchors.fill: root
