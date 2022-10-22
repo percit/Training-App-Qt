@@ -181,7 +181,6 @@ void DataBaseModel::emitDayChanges()
     emit bestPaceChanged();
     emit averageDurationChanged();
     emit allDurationChanged();
-    qDebug() << "emitDayChanges";
 }
 
 void DataBaseModel::setMonday_km(int newMonday_km)
