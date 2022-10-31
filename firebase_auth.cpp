@@ -19,28 +19,28 @@ FirebaseAuth::~FirebaseAuth()
 
 void FirebaseAuth::signUserUp(const QString &emailAddress, const QString &password)
 {
-    QString signUpEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + m_APIKey;
-    QVariantMap variantPayload;
-    variantPayload["email"] = emailAddress;
-    variantPayload["password"] = password;
-    variantPayload["returnSecureToken"] = true;
+    qDebug() << emailAddress << ' ' << password;
+    // QString signUpEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + m_APIKey;
+    // QVariantMap variantPayload;
+    // variantPayload["email"] = emailAddress;
+    // variantPayload["password"] = password;
+    // variantPayload["returnSecureToken"] = true;
+    // QJsonDocument jsonPayload = QJsonDocument::fromVariant(variantPayload);
 
-    QJsonDocument jsonPayload = QJsonDocument::fromVariant(variantPayload);
-
-    performPOST(signUpEndpoint, jsonPayload);
+    // performPOST(signUpEndpoint, jsonPayload);
 }
 
 void FirebaseAuth::signUserIn(const QString &emailAddress, const QString &password)
 {
-    QString signInEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + m_APIKey;
-    QVariantMap variantPayload;
-    variantPayload["email"] = emailAddress;
-    variantPayload["password"] = password;
-    variantPayload["returnSecureToken"] = true;
+    qDebug() << emailAddress << ' ' << password;
+    // QString signInEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + m_APIKey;
+    // QVariantMap variantPayload;
+    // variantPayload["email"] = emailAddress;
+    // variantPayload["password"] = password;
+    // variantPayload["returnSecureToken"] = true;
+    // QJsonDocument jsonPayload = QJsonDocument::fromVariant(variantPayload);
 
-    QJsonDocument jsonPayload = QJsonDocument::fromVariant(variantPayload);
-
-    performPOST(signInEndpoint, jsonPayload);
+    // performPOST(signInEndpoint, jsonPayload);
 }
 
 void FirebaseAuth::setAPIKey(const QString &apiKey)

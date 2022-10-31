@@ -4,12 +4,15 @@ import QtQml 2.3
 import StyleSingleton 1.0
 import "../utils"
 import "../viewmodels"
+import FirebaseAuth 1.0
 
 MainPage {
     id: root
     placeholder: false
     signal changeBottomRowVisibility
     property bool signInOn: true
+    property string password
+    property string email
 
     Rectangle {
         width: 375 * Style.scaleX
@@ -48,9 +51,6 @@ MainPage {
                 }
             }
         }
-        //tutaj trzeba dac jakich kwadracik zaleznie jaki mamy sign up/in
-        //ale przemysl, czy chcesz to
-
 
         Column {
             anchors {
@@ -69,8 +69,7 @@ MainPage {
                 font.pointSize: 14
                 placeholderText: "Input mail"
                 onTextChanged: {
-                    // backend.text = text
-                    console.log("dalem input1")
+                    email = text
                 }
             }
             Text {
@@ -84,8 +83,7 @@ MainPage {
                 font.pointSize: 14
                 placeholderText: "Input password"
                 onTextChanged: {
-                    // backend.text = text
-                    console.log("dalem input2")
+                    password = text
                 }
             }
         }
@@ -99,7 +97,15 @@ MainPage {
 			width: 300 * Style.scaleX; height: 60 * Style.scaleY
 			text: signInOn ? "Sign in" : "Sign up"
 			onClicked: {
-				root.changeBottomRowVisibility()
+                if(signInOn) {
+                    FbAuth.signUserIn(email, password)
+                }
+                else {
+                    FbAuth.signUserUp(email, password)
+                }
+                // if(no problems) {
+                    root.changeBottomRowVisibility()
+                // }
 			}
 		}
 

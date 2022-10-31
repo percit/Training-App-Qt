@@ -9,8 +9,8 @@ Item {
 
     property DataBaseViewModel viewModel: DataBaseViewModel {}
 
-	//properties for checking which day is it
-	property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+	  //properties for checking which day is it
+	  property var days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     property var now: new Date()
     readonly property string dateString: days[ now.getDay() ]
 
@@ -20,10 +20,10 @@ Item {
 
     //showing time and distane properties, in meters and seconds
     property double fullDistance: 0.0  //for database
-	property int fullRunTime: 0 //this is in 10 seconds 
-	property double temporaryDistance: 0.0
-	property double startTime: 0.0
-	readonly property int timerRefreshRate: 10
+	  property int fullRunTime: 0 //this is in 10 seconds 
+	  property double temporaryDistance: 0.0
+	  property double startTime: 0.0
+	  readonly property int timerRefreshRate: 10
 
     signal trainButtonClicked
 
@@ -96,7 +96,7 @@ Item {
 
             markers.push(currentCoordinate) // current coordinate is pushed to markers array
             routeQuery.addWaypoint(currentCoordinate);//and to the map
-			routeModel.update()
+			      routeModel.update()
 
             for (var i = 0; i < markers.length - 1; i++) {
                 temporaryDistance += markers[i].distanceTo(markers[i+1])
@@ -129,7 +129,7 @@ Item {
                     DbModel.setSunday_time(fullRunTime * timerRefreshRate)
                     DbModel.setSunday_km(fullDistance)
             }
-            DbModel.updateDataBaseFile()
+            DbModel.updateDataBaseFile() //we should start thinking about these updates, if they are not so frequent
         }
     }
 

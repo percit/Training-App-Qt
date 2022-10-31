@@ -14,8 +14,8 @@ public:
     ~FirebaseAuth();
 
     void setAPIKey(const QString &apiKey);
-    void signUserUp(const QString &emailAddress, const QString &password);
-    void signUserIn(const QString &emailAddress, const QString &password);
+    Q_INVOKABLE void signUserUp(const QString &emailAddress, const QString &password); //do obu funkcji trzeba error handling dodac
+    Q_INVOKABLE void signUserIn(const QString &emailAddress, const QString &password);
 
 public slots:
     void networkReplyReadyRead();
