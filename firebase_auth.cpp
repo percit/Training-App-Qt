@@ -43,11 +43,6 @@ void FirebaseAuth::signUserIn(const QString &emailAddress, const QString &passwo
     // performPOST(signInEndpoint, jsonPayload);
 }
 
-void FirebaseAuth::setAPIKey(const QString &apiKey)
-{
-    m_APIKey = apiKey;
-}
-
 void FirebaseAuth::performPOST(const QString &url, const QJsonDocument &payload)
 {
     QNetworkRequest newRequest((QUrl(url)));
@@ -59,7 +54,6 @@ void FirebaseAuth::performPOST(const QString &url, const QJsonDocument &payload)
 void FirebaseAuth::networkReplyReadyRead()
 {
     QByteArray response = m_networkReply->readAll();
-    //    qDebug() << response;
     m_networkReply->deleteLater();
 
     parseResponse(response);
@@ -71,18 +65,15 @@ void FirebaseAuth::parseResponse(const QByteArray &response)
     if (jsonDocument.object().contains("error"))
     {
         qDebug() << "Error occured" << response;
+        setConnectSuccesful(false);
     }
     else if (jsonDocument.object().contains("kind"))
     {
         QString idToken = jsonDocument.object().value("idToken").toString();
         //        qDebug() << "id token" << idToken;
-        qDebug() << "User signed in succesfully";
+        setConnectSuccesful(true);
         m_idToken = idToken;
         emit userSignedIn();
-    }
-    else
-    {
-        qDebug() << "the response was" << response;
     }
 }
 void FirebaseAuth::performAuthenticatedDataBaseCall()
@@ -91,3 +82,21 @@ void FirebaseAuth::performAuthenticatedDataBaseCall()
     m_networkReply = m_networkManager->get(QNetworkRequest(QUrl(endpoint)));
     connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseAuth::networkReplyReadyRead);
 }
+
+void FirebaseAuth::setAPIKey(const QString &apiKey)
+{
+    m_APIKey = apiKey;
+}
+
+void FirebaseAuth::setConnectSuccesful(const bool newConnectSuccesful)
+{
+    m_connectSuccesful = newConnectSuccesful;
+    emit connectSuccesfulChanged();
+}
+
+bool FirebaseAuth::connectSuccesful() const
+{
+    return m_connectSuccesful;
+}
+
+
