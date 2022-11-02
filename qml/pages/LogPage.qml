@@ -99,18 +99,25 @@ MainPage {
 			onClicked: {
                 if(signInOn) {
                     FbAuth.signUserIn(email, password)
+                    logTimer.start()
                 }
                 else {
                     FbAuth.signUserUp(email, password)
+                    logTimer.start()
                 }
-                // if(no problems) {
-                    root.changeBottomRowVisibility()
-                // }
 			}
 		}
-
-
     }
-
+    Timer {
+        id: logTimer
+        interval: 500 
+        running: false
+        repeat: false
+        onTriggered: {
+            // if (FbAuth.connectSuccesful) { //uncomment only if signUserIn/Up are uncommented (firebase_auth.cpp)
+                root.changeBottomRowVisibility()
+            // }
+        }
+    }
 }
 
