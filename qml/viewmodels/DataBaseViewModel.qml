@@ -1,7 +1,7 @@
 import QtQuick 2.3
 import DataBaseModel 1.0
 import "../Helper.js" as Helper
-
+import FirebaseDataBase 1.0
 
 QtObject {
     readonly property string weeklyKmRun: Helper.formatDistance(DbModel.weeklyKmRun)
@@ -27,4 +27,5 @@ QtObject {
     // // property var day: [fullDistance, fullRunTime]
     // // property var week: //to jest array dni, week.push(day)
 
+    readonly property string weeklyKmRunFb: FbDatabase.weeklyKmRun
 }

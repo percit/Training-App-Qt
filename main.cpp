@@ -3,7 +3,6 @@
 #include <QQmlContext>
 #include <QQmlProperty> //for reading from qml file
 #include <QQuickView>
-#include "database.h"
 #include "DataBaseModel.h"
 #include "firebase_database.h"
 #include "firebase_auth.h"
@@ -13,7 +12,6 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    // FirebaseDataBase fbDatabase; //this should be commented out until you make whole class with proper functions for it
 
     qmlRegisterSingletonType<FirebaseAuth>("FirebaseAuth", 1, 0, "FbAuth", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
@@ -21,7 +19,16 @@ int main(int argc, char *argv[])
 
         FirebaseAuth *fbAuth = new FirebaseAuth();
         fbAuth->setAPIKey("AIzaSyC5tR1cHCZD80oEyvJeBwVvy-Y_dXI3ODg");
+        fbAuth->signUserIn("test@email.com", "Password123");
         return fbAuth;
+    });
+
+    qmlRegisterSingletonType<FirebaseDataBase>("FirebaseDataBase", 1, 0, "FbDatabase", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+
+        FirebaseDataBase *fbDatabase = new FirebaseDataBase();
+        return fbDatabase;
     });
 
     //we register database as singleton

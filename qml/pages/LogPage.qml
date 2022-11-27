@@ -116,6 +116,7 @@ MainPage {
         onTriggered: {
             // if (FbAuth.connectSuccesful) { //uncomment only if signUserIn/Up are uncommented (firebase_auth.cpp)
                 root.changeBottomRowVisibility()
+                //TODO it gave weak password, you need to accomodate that
             // }
         }
     }
