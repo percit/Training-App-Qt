@@ -31,7 +31,7 @@ class DataBaseModel : public QObject
     Q_PROPERTY(qreal averageDuration READ averageDuration WRITE setAverageDuration NOTIFY averageDurationChanged)
     Q_PROPERTY(qreal allDuration READ allDuration WRITE setAllDuration NOTIFY allDurationChanged)
     Q_PROPERTY(int weeklyGoal READ weeklyGoal WRITE setWeeklyGoal NOTIFY weeklyGoalChanged) // how many meters we want to run in a week
-    Q_PROPERTY(int daylyGoal READ daylyGoal WRITE setDaylyGoal NOTIFY weeklyGoalChanged)    // or day
+    Q_PROPERTY(int dailyGoal READ dailyGoal WRITE setDailyGoal NOTIFY dailyGoalChanged)    // or day
 
     // this is a temporary solution
     Q_PROPERTY(int monday_km READ monday_km WRITE setMonday_km NOTIFY monday_kmChanged)
@@ -62,7 +62,7 @@ private:
     qreal m_averageDuration = 0;
     qreal m_allDuration = 0;
     int m_weeklyGoal = 0;
-    int m_daylyGoal = 0;
+    int m_dailyGoal = 0;
 
     int m_monday_km = 0;
     int m_monday_time = 0;
@@ -126,7 +126,7 @@ public:
     Q_INVOKABLE void setSunday_km(int newSunday_km);
     Q_INVOKABLE void setSunday_time(int newSunday_time);
     Q_INVOKABLE void setWeeklyGoal(int newWeeklyGoal);
-    Q_INVOKABLE void setDaylyGoal(int newDaylyGoal);
+    Q_INVOKABLE void setDailyGoal(int newDailyGoal);
 
     int const monday_km() const;
     int monday_time() const;
@@ -144,7 +144,7 @@ public:
     int sunday_time() const;
 
     int weeklyGoal() const;
-    int daylyGoal() const;
+    int dailyGoal() const;
 
 public slots:
 
@@ -172,6 +172,7 @@ signals:
     void sunday_kmChanged();
     void sunday_timeChanged();
     void weeklyGoalChanged();
+    void dailyGoalChanged();
 };
 
 #endif // DATABASEMODEL_H
