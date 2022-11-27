@@ -4,17 +4,22 @@ import QtQml.Models 2.15
 import "utils"
 import "pages"
 
+//delete later, this is just for testing
+import "viewmodels"
+import FirebaseDataBase 1.0
 
 Item {
 	id: root
 
 	anchors.fill: parent
 
+	readonly property DataBaseViewModel viewModel: DataBaseViewModel {}//TODO DELETE LATER
+
 	SwipeView {
 		id: pagesRow
 
 		anchors.fill: parent
-		currentIndex: 0
+		currentIndex: 5//0
 		interactive: false
 		ObjectModel {
 			id: modelObject
@@ -34,7 +39,8 @@ Item {
 				MouseArea {
 					anchors.fill: parent
 					onClicked: {
-						console.log("10")
+						//console.log(viewModel.weeklyKmRunFb)
+						FbDatabase.testFirebaseFunc()
 					}
 				}
 			}
