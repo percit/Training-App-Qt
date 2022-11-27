@@ -149,7 +149,7 @@ collection and use of information in accordance with this Privacy Policy."
                         ListElement { text: "10" }
                     }
                     onActivated: {
-                        DbModel.setDaylyGoal(currentText)
+                        DbModel.setDailyGoal(currentText)
                     }
                 }
                 StyledComboBox {

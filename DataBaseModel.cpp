@@ -100,9 +100,9 @@ int DataBaseModel::weeklyGoal() const
     return m_weeklyGoal;
 }
 
-int DataBaseModel::daylyGoal() const
+int DataBaseModel::dailyGoal() const
 {
-    return m_daylyGoal;
+    return m_dailyGoal;
 }
 
 void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
@@ -159,10 +159,10 @@ void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
     emit weeklyGoalChanged();
 }
 
-void DataBaseModel::setDaylyGoal(int newDaylyGoal)
+void DataBaseModel::setDailyGoal(int newDailyGoal)
 {
-    m_daylyGoal = newDaylyGoal;
-    emit weeklyGoalChanged();
+    m_dailyGoal = newDailyGoal;
+    emit dailyGoalChanged();
 }
 
 // /////////////////////////////////////////////////////////////////////
