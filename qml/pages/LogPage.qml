@@ -118,6 +118,14 @@ MainPage {
                 root.changeBottomRowVisibility()
                 //TODO it gave weak password, you need to accomodate that
             // }
+
+            DbModel.clearAllData();
+            FbDatabase.testFirebaseFuncWithMail("test1"); // tutaj trzeba wyciagnac jakos ta czesc maila regexem
+            DbModel.setLongestDuration(FbDatabase.longestDuration);
+            DbModel.setLongestDistance(FbDatabase.longestDistance);
+            DbModel.setBestPace(FbDatabase.bestPace);
+            DbModel.setDailyGoal(FbDatabase.dailyGoal);
+            DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
         }
     }
 }

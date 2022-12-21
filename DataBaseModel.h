@@ -86,11 +86,12 @@ private:
     int m_sunday_time = 0;
 
 public:
-    explicit DataBaseModel(QObject *parent = nullptr); // TU POWINIEN BYC ARGUMENT Z NAZWA BAZY DANYCH
+    explicit DataBaseModel(QObject *parent = nullptr);
 
     // database functions
     void initializeDataBase();
     Q_INVOKABLE void updateDataBaseFile();
+    Q_INVOKABLE void clearAllData();//this is before loading firebase model
     void testDataBase();
     void printDataBase();
     std::pair<int, int> returnDataBaseElementByName(const QString &name) const;
@@ -104,12 +105,14 @@ public:
     qreal averageDuration();
     qreal allDuration();
 
-    void setWeeklyKmRun(qreal newWeeklyKmRun);
-    void setLongestDistance(qreal newLongestDistance);
-    void setLongestDuration(qreal newLongestDuration);
-    void setBestPace(qreal newBestPace);
-    void setAverageDuration(qreal newAverageDuration);
-    void setAllDuration(qreal newAllDuration);
+    Q_INVOKABLE void setWeeklyKmRun(qreal newWeeklyKmRun);
+    Q_INVOKABLE void setLongestDistance(qreal newLongestDistance);
+    Q_INVOKABLE void setLongestDuration(qreal newLongestDuration);
+    Q_INVOKABLE void setBestPace(qreal newBestPace);
+    Q_INVOKABLE void setAverageDuration(qreal newAverageDuration);
+    Q_INVOKABLE void setAllDuration(qreal newAllDuration);
+    Q_INVOKABLE void setWeeklyGoal(int newWeeklyGoal);
+    Q_INVOKABLE void setDailyGoal(int newDailyGoal);
 
     Q_INVOKABLE void setMonday_km(int newMonday_km);
     Q_INVOKABLE void setMonday_time(int newMonday_time);
@@ -125,8 +128,6 @@ public:
     Q_INVOKABLE void setSaturday_time(int newSaturday_time);
     Q_INVOKABLE void setSunday_km(int newSunday_km);
     Q_INVOKABLE void setSunday_time(int newSunday_time);
-    Q_INVOKABLE void setWeeklyGoal(int newWeeklyGoal);
-    Q_INVOKABLE void setDailyGoal(int newDailyGoal);
 
     int const monday_km() const;
     int monday_time() const;
