@@ -35,20 +35,14 @@ void FirebaseDataBase::networkReplyReadyRead()
     QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
     QJsonObject jsonObj = jsonResponse.object();
     QVariantMap map = jsonObj.toVariantMap();
-    m_weeklyKmRun = map["weeklyKmRun"].toInt();
     m_longestDistance = map["longestDistance"].toInt();
     m_longestDuration = map["longestDuration"].toInt();
     m_bestPace = map["bestPace"].toInt();
-    m_averageDuration = map["averageDuration"].toInt();
-    m_allDuration = map["allDuration"].toInt();
     m_weeklyGoal = map["weeklyGoal"].toInt();
     m_dailyGoal = map["dailyGoal"].toInt();
-    qDebug() << weeklyKmRun();
     qDebug() << longestDistance();
     qDebug() << longestDuration();
     qDebug() << bestPace();
-    qDebug() << averageDuration();
-    qDebug() << allDuration();
     qDebug() << weeklyGoal();
     qDebug() << dailyGoal();
 
@@ -77,13 +71,20 @@ void FirebaseDataBase::testFirebaseFuncWithMail(const QString& mailName)
     }
 }
 
-int FirebaseDataBase::weeklyKmRun()
+void FirebaseDataBase::postValues(const QString& mailName)
 {
-    return m_weeklyKmRun;
-}
-
-void FirebaseDataBase::setWeeklyKmRun(int newWeeklyKmRun) {
-    m_weeklyKmRun = newWeeklyKmRun;
+    qDebug() << "postValues func";
+    QVariantMap newRun;
+    newRun["longestDistance"] = m_longestDistance;
+    newRun["longestDuration"] = m_longestDuration;
+    newRun["bestPace"] = m_bestPace;
+    newRun["weeklyGoal"] = m_weeklyGoal;
+    newRun["dailyGoal"] = m_dailyGoal;
+    QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
+    QNetworkRequest newRunRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/Run.json"));
+    newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+    m_networkManager->post(newRunRequest, jsonDoc.toJson());
+	// if you want to use PUT (so to replace values) you just change Run.json to more specific table, and use m_networkManager->put 
 }
 
 int FirebaseDataBase::longestDistance()
@@ -99,16 +100,6 @@ int FirebaseDataBase::longestDuration()
 int FirebaseDataBase::bestPace()
 {
     return m_bestPace;
-}
-
-int FirebaseDataBase::averageDuration()
-{
-    return m_averageDuration;
-}
-
-int FirebaseDataBase::allDuration()
-{
-    return m_allDuration;
 }
 
 int FirebaseDataBase::weeklyGoal()
@@ -139,18 +130,6 @@ void FirebaseDataBase::setBestPace(int newBestPace)
     emit bestPaceChanged();
 }
 
-void FirebaseDataBase::setAverageDuration(int newAverageDuration)
-{
-    m_averageDuration = newAverageDuration;
-    emit averageDurationChanged();
-}
-
-void FirebaseDataBase::setAllDuration(int newAllDuration)
-{
-    m_allDuration = newAllDuration;
-    emit allDurationChanged();
-}
-
 void FirebaseDataBase::setWeeklyGoal(int newWeeklyGoal)
 {
     m_weeklyGoal = newWeeklyGoal;
@@ -162,17 +141,3 @@ void FirebaseDataBase::setDailyGoal(int newDailyGoal)
     m_dailyGoal = newDailyGoal;
     emit dailyGoalChanged();
 }
-
-//to networkReply->readAll() to chyba jest to cos, co mozna wyciagnac info jakies
-
-
-//mam pare pomyslow
-//na firebase sa tylko rekordy, daily i weekly
-//update tych wartosci zachodzi raz dziennie, o polnocy
-
-
-//co do kont to moge dac maila jako argument funkcji
-//a potem na bazie tego robic url 
-//a nazwe konta przetrzymywac w sql
-//zamiast run.json bedzie np nazwa_maila.json, ale ucinam tylko to az to @
-

@@ -431,6 +431,25 @@ void DataBaseModel::updateDataBaseFile()
     qDebug() << "updateDataBaseFile";
 }
 
+void DataBaseModel::clearAllData()
+{
+    setMonday_km(0);
+    setMonday_time(0);
+    setTuesday_km(0);
+    setTuesday_time(0);
+    setWednesday_km(0);
+    setWednesday_time(0);
+    setThursday_km(0);
+    setThursday_time(0);
+    setFriday_km(0);
+    setFriday_time(0);
+    setSaturday_km(0);
+    setSaturday_time(0);
+    setSunday_km(0);
+    setSunday_time(0);
+    initializeDataBase();//clear database
+}
+
 void DataBaseModel::testDataBase()
 {
     DataBase db("database_file_test.db");

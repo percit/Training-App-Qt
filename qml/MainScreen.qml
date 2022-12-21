@@ -4,16 +4,10 @@ import QtQml.Models 2.15
 import "utils"
 import "pages"
 
-//delete later, this is just for testing
-import "viewmodels"
-import FirebaseDataBase 1.0
-
 Item {
 	id: root
 
 	anchors.fill: parent
-
-	readonly property DataBaseViewModel viewModel: DataBaseViewModel {}//TODO DELETE LATER
 
 	SwipeView {
 		id: pagesRow
@@ -33,17 +27,7 @@ Item {
 			AchievementsPage {}
 			WeeklyStatsPage {}
 			SettingsPage {}
-			MainPage {
-				id: debugPage
-				text: "DEBUG"
-				MouseArea {
-					anchors.fill: parent
-					onClicked: {
-						//console.log(viewModel.weeklyKmRunFb)
-						FbDatabase.testFirebaseFuncWithMail("test1")
-					}
-				}
-			}
+			DebugPage {}
 		}
 		Repeater {
 			model: modelObject
