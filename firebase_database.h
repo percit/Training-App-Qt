@@ -23,7 +23,8 @@ public:
 public slots:
     void networkReplyReadyRead();
 
-    Q_INVOKABLE void testFirebaseFunc(); 
+    Q_INVOKABLE void testFirebaseFunc();
+    Q_INVOKABLE void testFirebaseFuncWithMail(const QString&); 
 
 //methods for Q_PROPERTY
     void setWeeklyKmRun(int newWeeklyKmRun);

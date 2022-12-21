@@ -40,7 +40,7 @@ Item {
 					anchors.fill: parent
 					onClicked: {
 						//console.log(viewModel.weeklyKmRunFb)
-						FbDatabase.testFirebaseFunc()
+						FbDatabase.testFirebaseFuncWithMail("test1")
 					}
 				}
 			}
