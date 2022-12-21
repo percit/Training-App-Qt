@@ -67,6 +67,17 @@ void FirebaseDataBase::testFirebaseFunc()
     }
 }
 
+void FirebaseDataBase::testFirebaseFuncWithMail(const QString& mailName)
+{
+    m_networkReply = m_networkManager->get(QNetworkRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/" + mailName +".json")));
+    if (m_networkReply->error() == QNetworkReply::NoError) {
+        connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseDataBase::networkReplyReadyRead);
+    }
+    else {
+        qDebug() << "Failure" <<m_networkReply->errorString();
+    }
+}
+
 int FirebaseDataBase::weeklyKmRun()
 {
     return m_weeklyKmRun;
