@@ -44,13 +44,17 @@ MainPage {
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                console.log("reload Button")
-                FbDatabase.setLongestDistance(DbModel.longestDistance);
-                FbDatabase.setLongestDuration(DbModel.longestDuration);
-                FbDatabase.setLongestDistance(DbModel.longestDistance);
-                FbDatabase.setBestPace(DbModel.bestPace);
-                FbDatabase.setDailyGoal(DbModel.dailyGoal);
-                FbDatabase.setWeeklyGoal(DbModel.weeklyGoal);
+
+                console.log(extractEmailUsername("john.doe@example.com"));
+                console.log(extractEmailUsername("test1@gmail.com"));
+
+                // console.log("reload Button")
+                // FbDatabase.setLongestDistance(DbModel.longestDistance);
+                // FbDatabase.setLongestDuration(DbModel.longestDuration);
+                // FbDatabase.setLongestDistance(DbModel.longestDistance);
+                // FbDatabase.setBestPace(DbModel.bestPace);
+                // FbDatabase.setDailyGoal(DbModel.dailyGoal);
+                // FbDatabase.setWeeklyGoal(DbModel.weeklyGoal);
 
                 // FbDatabase.postValues("test1");//TODO I suppose it should work, I have no internet, so no way to test it
                 // FbDatabase.putValues("test2");
@@ -60,6 +64,16 @@ MainPage {
             }
         }   
     }
+    function extractEmailUsername(email) {
+    const regex = /^([^@]+)@/;
+    const matches = regex.exec(email);
+    if (matches) {
+        return matches[1];
+    }
+    return null;
+    }
+
+
 }
 
 

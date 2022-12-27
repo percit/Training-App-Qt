@@ -118,10 +118,10 @@ MainPage {
                 root.changeBottomRowVisibility()
                 //TODO it gave weak password, you need to accomodate that
             // }
-
-            if (!signInOn) FbDatabase.postValues("test1"); //TODO RETEST and get proper mail
-            FbDatabase.putValues("test1");
-            readFirebaseData("test1");
+            const mailAfterRegex = extractEmailUsername(mail);
+            if (!signInOn) FbDatabase.postValues(mailAfterRegex); //TODO RETEST
+            FbDatabase.putValues(mailAfterRegex);
+            readFirebaseData(mailAfterRegex);
             DbModel.clearAllData();
             DbModel.setLongestDuration(FbDatabase.longestDuration);//TODO retest
             DbModel.setLongestDistance(FbDatabase.longestDistance);
@@ -129,6 +129,14 @@ MainPage {
             DbModel.setDailyGoal(FbDatabase.dailyGoal);
             DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
         }
+    }
+    function extractEmailUsername(email) {
+        const regex = /^([^@]+)@/;
+        const matches = regex.exec(email);
+        if (matches) {
+            return matches[1];
+        }
+        return null;
     }
 }
 
