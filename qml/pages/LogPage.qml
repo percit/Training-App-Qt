@@ -119,7 +119,7 @@ MainPage {
                 //TODO it gave weak password, you need to accomodate that
             // }
 
-            if (!signInOn) FbDatabase.postValues("test1"); //TODO RETEST
+            if (!signInOn) FbDatabase.postValues("test1"); //TODO RETEST and get proper mail
             FbDatabase.putValues("test1");
             readFirebaseData("test1");
             DbModel.clearAllData();
