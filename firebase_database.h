@@ -21,8 +21,9 @@ public slots:
     void networkReplyReadyRead();
 
     Q_INVOKABLE void testFirebaseFunc();
-    Q_INVOKABLE void testFirebaseFuncWithMail(const QString&); 
+    Q_INVOKABLE void readFirebaseData(const QString&); 
     Q_INVOKABLE void postValues(const QString&);
+    Q_INVOKABLE void putValues(const QString&);
 
 //methods for Q_PROPERTY
     void setLongestDistance(int newLongestDistance);

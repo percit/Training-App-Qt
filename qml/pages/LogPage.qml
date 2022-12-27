@@ -114,14 +114,16 @@ MainPage {
         running: false
         repeat: false
         onTriggered: {
-            // if (FbAuth.connectSuccesful) { //uncomment only if signUserIn/Up are uncommented (firebase_auth.cpp)
+            // if (FbAuth.connectSuccesful) { //TODO fix and retest it
                 root.changeBottomRowVisibility()
                 //TODO it gave weak password, you need to accomodate that
             // }
 
+            if (!signInOn) FbDatabase.postValues("test1"); //TODO RETEST
+            FbDatabase.putValues("test1");
+            readFirebaseData("test1");
             DbModel.clearAllData();
-            FbDatabase.testFirebaseFuncWithMail("test1"); // tutaj trzeba wyciagnac jakos ta czesc maila regexem
-            DbModel.setLongestDuration(FbDatabase.longestDuration);
+            DbModel.setLongestDuration(FbDatabase.longestDuration);//TODO retest
             DbModel.setLongestDistance(FbDatabase.longestDistance);
             DbModel.setBestPace(FbDatabase.bestPace);
             DbModel.setDailyGoal(FbDatabase.dailyGoal);
