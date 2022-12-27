@@ -41,26 +41,25 @@ Item {
 	}
 }
 
-BottomRow {
-	id:bottomRow
+	BottomRow {
+		id:bottomRow
 
-	visible: false
-	anchors.bottom: parent.bottom
-	onPage1: {
-		pagesRow.setCurrentIndex(1)
+		visible: false
+		anchors.bottom: parent.bottom
+		onPage1: {
+			pagesRow.setCurrentIndex(1)
+		}
+		onPage2: {
+			pagesRow.setCurrentIndex(2)
+		}
+		onPage3: {
+			pagesRow.setCurrentIndex(3)
+		}
+		onPage4: {
+			pagesRow.setCurrentIndex(4)
+		}
+		onPage5: {
+			pagesRow.setCurrentIndex(5)
+		}
 	}
-	onPage2: {
-		pagesRow.setCurrentIndex(2)
-	}
-	onPage3: {
-		pagesRow.setCurrentIndex(3)
-	}
-	onPage4: {
-		pagesRow.setCurrentIndex(4)
-	}
-	onPage5: {
-		pagesRow.setCurrentIndex(5)
-	}
-}
-
 }

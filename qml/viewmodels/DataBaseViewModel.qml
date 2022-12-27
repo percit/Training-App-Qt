@@ -53,4 +53,21 @@ QtObject {
     // // property var week: //to jest array dni, week.push(day)
 
     readonly property string weeklyKmRunFb: FbDatabase.longestDistance
+
+
+    readonly property Timer refreshFirebaseTimer : Timer {//TODO retest
+        interval: 3600000 //24h
+        running: true
+        repeat: true
+        onTriggered: {
+            FbDatabase.setLongestDistance(DbModel.longestDistance);
+            FbDatabase.setLongestDuration(DbModel.longestDuration);
+            FbDatabase.setLongestDistance(DbModel.longestDistance);
+            FbDatabase.setBestPace(DbModel.bestPace);
+            FbDatabase.setDailyGoal(DbModel.dailyGoal);
+            FbDatabase.setWeeklyGoal(DbModel.weeklyGoal);
+            FbDatabase.putValues("test2")
+        }
+    }
 }
+
