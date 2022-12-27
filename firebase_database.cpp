@@ -60,7 +60,7 @@ void FirebaseDataBase::testFirebaseFunc()
     }
 }
 
-void FirebaseDataBase::testFirebaseFuncWithMail(const QString& mailName)
+void FirebaseDataBase::readFirebaseData(const QString& mailName)
 {
     m_networkReply = m_networkManager->get(QNetworkRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/" + mailName +".json")));
     if (m_networkReply->error() == QNetworkReply::NoError) {
@@ -81,10 +81,25 @@ void FirebaseDataBase::postValues(const QString& mailName)
     newRun["weeklyGoal"] = m_weeklyGoal;
     newRun["dailyGoal"] = m_dailyGoal;
     QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
-    QNetworkRequest newRunRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/Run.json"));
+    QNetworkRequest newRunRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/"+mailName+".json"));
     newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
     m_networkManager->post(newRunRequest, jsonDoc.toJson());
-	// if you want to use PUT (so to replace values) you just change Run.json to more specific table, and use m_networkManager->put 
+    putValues(mailName); //this is a bit of a hack, bc this produces some string, that I don't want rn
+}
+
+void FirebaseDataBase::putValues(const QString& mailName)
+{
+    qDebug() << "putValues func";
+    QVariantMap newRun;
+    newRun["longestDistance"] = m_longestDistance;
+    newRun["longestDuration"] = m_longestDuration;
+    newRun["bestPace"] = m_bestPace;
+    newRun["weeklyGoal"] = m_weeklyGoal;
+    newRun["dailyGoal"] = m_dailyGoal;
+    QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
+    QNetworkRequest newRunRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/"+mailName+".json"));
+    newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
+    m_networkManager->put(newRunRequest, jsonDoc.toJson());
 }
 
 int FirebaseDataBase::longestDistance()
