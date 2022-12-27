@@ -114,10 +114,29 @@ MainPage {
         running: false
         repeat: false
         onTriggered: {
-            // if (FbAuth.connectSuccesful) { //uncomment only if signUserIn/Up are uncommented (firebase_auth.cpp)
+            // if (FbAuth.connectSuccesful) { //TODO fix and retest it
                 root.changeBottomRowVisibility()
+                //TODO it gave weak password, you need to accomodate that
             // }
+            const mailAfterRegex = extractEmailUsername(mail);
+            if (!signInOn) FbDatabase.postValues(mailAfterRegex); //TODO RETEST
+            FbDatabase.putValues(mailAfterRegex);
+            readFirebaseData(mailAfterRegex);
+            DbModel.clearAllData();
+            DbModel.setLongestDuration(FbDatabase.longestDuration);//TODO retest
+            DbModel.setLongestDistance(FbDatabase.longestDistance);
+            DbModel.setBestPace(FbDatabase.bestPace);
+            DbModel.setDailyGoal(FbDatabase.dailyGoal);
+            DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
         }
+    }
+    function extractEmailUsername(email) {
+        const regex = /^([^@]+)@/;
+        const matches = regex.exec(email);
+        if (matches) {
+            return matches[1];
+        }
+        return null;
     }
 }
 

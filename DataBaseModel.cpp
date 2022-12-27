@@ -100,9 +100,9 @@ int DataBaseModel::weeklyGoal() const
     return m_weeklyGoal;
 }
 
-int DataBaseModel::daylyGoal() const
+int DataBaseModel::dailyGoal() const
 {
-    return m_daylyGoal;
+    return m_dailyGoal;
 }
 
 void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
@@ -159,10 +159,10 @@ void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
     emit weeklyGoalChanged();
 }
 
-void DataBaseModel::setDaylyGoal(int newDaylyGoal)
+void DataBaseModel::setDailyGoal(int newDailyGoal)
 {
-    m_daylyGoal = newDaylyGoal;
-    emit weeklyGoalChanged();
+    m_dailyGoal = newDailyGoal;
+    emit dailyGoalChanged();
 }
 
 // /////////////////////////////////////////////////////////////////////
@@ -429,6 +429,25 @@ void DataBaseModel::updateDataBaseFile()
         qDebug() << "Database is not open!";
 
     qDebug() << "updateDataBaseFile";
+}
+
+void DataBaseModel::clearAllData()
+{
+    setMonday_km(0);
+    setMonday_time(0);
+    setTuesday_km(0);
+    setTuesday_time(0);
+    setWednesday_km(0);
+    setWednesday_time(0);
+    setThursday_km(0);
+    setThursday_time(0);
+    setFriday_km(0);
+    setFriday_time(0);
+    setSaturday_km(0);
+    setSaturday_time(0);
+    setSunday_km(0);
+    setSunday_time(0);
+    initializeDataBase();//clear database
 }
 
 void DataBaseModel::testDataBase()

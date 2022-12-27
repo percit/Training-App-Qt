@@ -4,7 +4,6 @@ import QtQml.Models 2.15
 import "utils"
 import "pages"
 
-
 Item {
 	id: root
 
@@ -28,16 +27,7 @@ Item {
 			AchievementsPage {}
 			WeeklyStatsPage {}
 			SettingsPage {}
-			MainPage {
-				id: debugPage
-				text: "DEBUG"
-				MouseArea {
-					anchors.fill: parent
-					onClicked: {
-						console.log("10")
-					}
-				}
-			}
+			DebugPage {}
 		}
 		Repeater {
 			model: modelObject
@@ -51,26 +41,25 @@ Item {
 	}
 }
 
-BottomRow {
-	id:bottomRow
+	BottomRow {
+		id:bottomRow
 
-	visible: false
-	anchors.bottom: parent.bottom
-	onPage1: {
-		pagesRow.setCurrentIndex(1)
+		visible: false
+		anchors.bottom: parent.bottom
+		onPage1: {
+			pagesRow.setCurrentIndex(1)
+		}
+		onPage2: {
+			pagesRow.setCurrentIndex(2)
+		}
+		onPage3: {
+			pagesRow.setCurrentIndex(3)
+		}
+		onPage4: {
+			pagesRow.setCurrentIndex(4)
+		}
+		onPage5: {
+			pagesRow.setCurrentIndex(5)
+		}
 	}
-	onPage2: {
-		pagesRow.setCurrentIndex(2)
-	}
-	onPage3: {
-		pagesRow.setCurrentIndex(3)
-	}
-	onPage4: {
-		pagesRow.setCurrentIndex(4)
-	}
-	onPage5: {
-		pagesRow.setCurrentIndex(5)
-	}
-}
-
 }
