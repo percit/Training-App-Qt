@@ -13,21 +13,21 @@
 
 class DataBase
 {
-private:
-  QSqlDatabase m_db;
-
 public:
   DataBase(const QString &name);
   ~DataBase();
-  // Database access functions
+
   bool isOpen() const;
-  bool createTable(); // tutaj powinno byc sprwdzanie, czy istnieje tablica, jesli jest to nie tworzymy wiecej
+  void createTable();
   bool addElement(const QString &day, const double &km, const int &time);
   bool removeElement(const QString &name);
   std::pair<int, int> returnDataBaseElementByName(const QString &name);
   bool dayExists(const QString &name) const;
   void printAll() const;
   bool clearDataBase();
+
+private:
+  QSqlDatabase m_db;
 };
 
 #endif // DATABASE_H

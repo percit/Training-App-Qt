@@ -32,6 +32,24 @@ TODO:
 2. Database on Firebase - retest and fix if necessary, change from name@gmail.com -> name as parameter to name-gmail as parameter
 3. Add async where it's needed
 4. Add Design Patterns 
+5. Add CI/CD
+6. Clean up structure, so header to header folder
+
+
+
+Testing:
+1. Test all database functions: adding, checking databases, also after killing app, add pretty function to every fail to this database
+2. Recheck if all clickable stuff works, also if it gives proper values to database, use __PRETTY_FUNCTION__
+3. Recheck why so many warnings from database and map
+4. Check if logging in and registing actually works
+5. Test if map actually tracks data and puts in everywhere else all those maxes and so on
+
+
+Warnings:
+1. QSqlDatabasePrivate::addDatabase: duplicate connection name 'qt_sql_default_connection', old connection removed.
+Database: connection ok
+2. ERROR:  void DataBase::createTable() "No query Unable to fetch row"
+
 
 
 
