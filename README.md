@@ -50,9 +50,6 @@ Test if map actually tracks data and puts in everywhere else all those maxes and
 
 # Warnings:
 
-QSqlDatabasePrivate::addDatabase: duplicate connection name 'qt_sql_default_connection', old connection removed.
-Database: connection ok
-
 ERROR:  void DataBase::createTable() "No query Unable to fetch row"
 
 qrc:/viewmodels/MapModel.qml:55:20: QML RouteQuery: Invalid coordinate as waypoint

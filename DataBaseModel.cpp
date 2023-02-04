@@ -8,7 +8,6 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
                                                 m_averageDuration(0),
                                                 m_allDuration(0)
 {
-    qDebug() << "created DataBaseModel constructor";
     initializeDataBase();
 }
 
@@ -393,7 +392,7 @@ void DataBaseModel::initializeDataBase()
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.clearDataBase(); // temporary solution
+        db.clearDataBase();
         db.createTable();
         db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
         db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
@@ -414,7 +413,7 @@ void DataBaseModel::updateDataBaseFile()
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.clearDataBase();                                     // there should be function with update, and taking day name as parameter
+        db.clearDataBase();
         db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
         db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
         db.addElement("Wednesday", kmRunInDay[2], runningTime[2]);
@@ -452,7 +451,7 @@ void DataBaseModel::testDataBase()
     DataBase db("database_file_test.db");
     if (db.isOpen())
     {
-        db.clearDataBase();            // temporary solution
+        db.clearDataBase();
         db.addElement("Monday", 0, 0); // day, meters, time
         db.addElement("Tuesday", 1, 1);
         db.addElement("Wednesday", 2, 2);
