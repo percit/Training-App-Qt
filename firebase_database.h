@@ -13,7 +13,6 @@ class FirebaseDataBase : public QObject
     Q_PROPERTY(int weeklyGoal READ weeklyGoal WRITE setWeeklyGoal NOTIFY weeklyGoalChanged) // how many meters we want to run in a week
     Q_PROPERTY(int dailyGoal READ dailyGoal WRITE setDailyGoal NOTIFY dailyGoalChanged)    // or day
 
-
 public:
     explicit FirebaseDataBase(QObject *parent = nullptr);
     ~FirebaseDataBase();
