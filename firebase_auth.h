@@ -9,7 +9,6 @@ class FirebaseAuth : public QObject
 {
     Q_OBJECT
 
-
     Q_PROPERTY(bool connectSuccesful READ connectSuccesful WRITE setConnectSuccesful NOTIFY connectSuccesfulChanged)
 public:
     explicit FirebaseAuth(QObject *parent = nullptr);
@@ -17,14 +16,14 @@ public:
 
     void setAPIKey(const QString &apiKey);
     bool connectSuccesful() const;
-    void setConnectSuccesful(const bool newConnectSuccesful);
+    void setConnectSuccesful(bool newConnectSuccesful);
 
     Q_INVOKABLE void signUserUp(const QString &emailAddress, const QString &password);
     Q_INVOKABLE void signUserIn(const QString &emailAddress, const QString &password);
 
 public slots:
     void networkReplyReadyRead();
-    void performAuthenticatedDataBaseCall(); // this should be preferably in another class
+    void performAuthenticatedDataBaseCall();
 
 signals:
     void userSignedIn();
