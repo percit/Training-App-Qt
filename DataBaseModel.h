@@ -17,7 +17,7 @@ struct Day
     Q_PROPERTY(qreal metersRun MEMBER metersRun)
     Q_PROPERTY(qreal timeRun MEMBER timeRun)
 };
-Q_DECLARE_METATYPE(Day)
+Q_DECLARE_METATYPE(Day) //TODO: fix this, this should really be a list of structs
 
 class DataBaseModel : public QObject
 {
@@ -49,11 +49,9 @@ class DataBaseModel : public QObject
     Q_PROPERTY(int sunday_km READ sunday_km WRITE setSunday_km NOTIFY sunday_kmChanged)
     Q_PROPERTY(int sunday_time READ sunday_time WRITE setSunday_time NOTIFY sunday_timeChanged)
 
-    // Q_PROPERTY(Day monday READ monday WRITE setMonday NOTIFY mondayChanged) // tutaj powinna byc lista
-
 private:
-    std::array<double, 7> kmRunInDay = {0, 0, 0, 0, 0, 0, 0};  // this is actually in meters for now
-    std::array<double, 7> runningTime = {0, 0, 0, 0, 0, 0, 0}; // for now in seconds
+    std::array<double, 7> kmRunInDay = {0, 0, 0, 0, 0, 0, 0};  // in meters actually TODO: change naming everywhere to metersRunInDay
+    std::array<double, 7> runningTime = {0, 0, 0, 0, 0, 0, 0}; // for now in seconds TODO: runningTimeSec
 
     qreal m_weeklyKmRun = 0;
     qreal m_longestDistance = 0;
