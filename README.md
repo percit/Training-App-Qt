@@ -2,7 +2,7 @@
 
 This is a multiplatform Running app build with MVVM pattern
 
-Technology stack:
+# Technology stack:
 
 1. C++ - backend
 2. Qt Quick - app GUI
@@ -13,42 +13,50 @@ Technology stack:
 7. CMake - build automation
 
 
-Running App:
+# Running app:
 
 In SETUP.md there is a tutorial how to set it up
 
 Clean->Run CMake->Build->Compile (sometimes just compile doesn't work, so you have to click build first)
 
 
-Running Tests:
+# Running tests:
 
 For now, just comment out the main and uncomment catch_main.cpp, then "cmake .. && make -j16 && ./Training_App
 
 In the future there will be a cmake flag for this to change from testing to normal
 
 
-TODO:
+# TODO:
 1. Email Authentication via Firebase - retest and fix
 2. Database on Firebase - retest and fix if necessary, change from name@gmail.com -> name as parameter to name-gmail as parameter
 3. Add async where it's needed
 4. Add Design Patterns 
 5. Add CI/CD
-6. Clean up structure, so header to header folder
 
 
 
-Testing:
-1. Test all database functions: adding, checking databases, also after killing app, add pretty function to every fail to this database
-2. Recheck if all clickable stuff works, also if it gives proper values to database, use __PRETTY_FUNCTION__
-3. Recheck why so many warnings from database and map
-4. Check if logging in and registing actually works
-5. Test if map actually tracks data and puts in everywhere else all those maxes and so on
+# Testing:
+
+Test if database values are persistant after killing app (and rebuilding)
+
+Recheck if all clickable stuff works, also if it gives proper values to database
+
+Check if logging in and registing actually works
+
+Test if map actually tracks data and puts in everywhere else all those maxes and so on
 
 
-Warnings:
-1. QSqlDatabasePrivate::addDatabase: duplicate connection name 'qt_sql_default_connection', old connection removed.
+
+# Warnings:
+
+QSqlDatabasePrivate::addDatabase: duplicate connection name 'qt_sql_default_connection', old connection removed.
 Database: connection ok
-2. ERROR:  void DataBase::createTable() "No query Unable to fetch row"
+
+ERROR:  void DataBase::createTable() "No query Unable to fetch row"
+
+qrc:/viewmodels/MapModel.qml:55:20: QML RouteQuery: Invalid coordinate as waypoint
+qt.positioning.geoclue2: Unable to start the client: "org.freedesktop.DBus.Error.AccessDenied" "Geolocation disabled for UID 1000"
 
 
 

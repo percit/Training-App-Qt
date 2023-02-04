@@ -18,7 +18,7 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
  */
 qreal DataBaseModel::weeklyKmRun()
 {
-    if (m_weeklyKmRun != std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
+    if (m_weeklyKmRun < std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
     {
         m_weeklyKmRun = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
     }
@@ -30,7 +30,7 @@ qreal DataBaseModel::weeklyKmRun()
  */
 qreal DataBaseModel::longestDistance()
 {
-    if (m_longestDistance != *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
+    if (m_longestDistance < *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
     {
         m_longestDistance = *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
     }
@@ -43,7 +43,7 @@ qreal DataBaseModel::longestDistance()
  */
 qreal DataBaseModel::longestDuration()
 {
-    if (m_longestDuration != *(std::max_element(runningTime.begin(), runningTime.end())))
+    if (m_longestDuration < *(std::max_element(runningTime.begin(), runningTime.end())))
     {
         m_longestDuration = *(std::max_element(runningTime.begin(), runningTime.end()));
     }
@@ -75,7 +75,7 @@ qreal DataBaseModel::bestPace()
  */
 qreal DataBaseModel::averageDuration()
 {
-    if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7)
+    if (m_averageDuration < std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7)
     {
         m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7;
     }
@@ -88,7 +88,7 @@ qreal DataBaseModel::averageDuration()
  */
 qreal DataBaseModel::allDuration()
 {
-    if (m_allDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0))
+    if (m_allDuration < std::accumulate(runningTime.begin(), runningTime.end(), 0))
     {
         m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0);
     }
@@ -425,10 +425,7 @@ void DataBaseModel::updateDataBaseFile()
 
         qDebug() << "Updating database complete";
     }
-    else
-        qDebug() << "Database is not open!";
-
-    qDebug() << "updateDataBaseFile";
+    else qDebug() << "Database is not open!";
 }
 
 void DataBaseModel::clearAllData()
@@ -480,6 +477,5 @@ std::pair<int, int> DataBaseModel::returnDataBaseElementByName(const QString &na
 void DataBaseModel::printDataBase()
 {
     DataBase db("database_file.db");
-    if (db.isOpen())
-        db.printAll();
+    if (db.isOpen()) db.printAll();
 }
