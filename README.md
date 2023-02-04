@@ -13,18 +13,29 @@ Technology stack:
 7. CMake - build automation
 
 
+Running App:
+
+In SETUP.md there is a tutorial how to set it up
+
+Clean->Run CMake->Build->Compile (sometimes just compile doesn't work, so you have to click build first)
+
+
+Running Tests:
+
+For now, just comment out the main and uncomment catch_main.cpp, then "cmake .. && make -j16 && ./Training_App
+
+In the future there will be a cmake flag for this to change from testing to normal
+
 
 TODO:
-1. Email Authentication via Firebase
-2. Database on Firebase
-3. Fix Tests
+1. Email Authentication via Firebase - retest and fix
+2. Database on Firebase - retest and fix if necessary, change from name@gmail.com -> name as parameter to name-gmail as parameter
+3. Add async where it's needed
+4. Add Design Patterns 
 
 
-How to go from Desktop/Android:
 
-Clean->Run CMake->Build->Compile (don't skip even one step)
-
-Commit c2945c71274c5eafb9bae044a8eb4130bf1aae9a is last one working on desktop and android and has no firebase
+Commit c2945c71274c5eafb9bae044a8eb4130bf1aae9a is last one working on desktop and android and has no firebase, this should be fixed with a flag, or design pattern
 
 ![Getting Started](images/map-image.png)
 ![Getting Started](images/progress-image.png)

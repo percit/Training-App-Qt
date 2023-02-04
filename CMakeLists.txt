@@ -8,14 +8,13 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick  OpenGL REQUIRED)
 
 enable_testing()
-#add_subdirectory(test) testy wgl nie dzialaja, trzeba naprawic cmake w
 
 set(
   PROJECT_SOURCES
@@ -24,6 +23,8 @@ set(
   DataBaseModel.cpp
   firebase_database.cpp
   firebase_auth.cpp
+  catch/catch_main.cpp
+  Tests.cpp
   qml/qml.qrc
 )
 
