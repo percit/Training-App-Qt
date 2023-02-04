@@ -2,7 +2,7 @@
 
 This is a multiplatform Running app build with MVVM pattern
 
-Technology stack:
+# Technology stack:
 
 1. C++ - backend
 2. Qt Quick - app GUI
@@ -13,27 +13,17 @@ Technology stack:
 7. CMake - build automation
 
 
-Running App:
+# Running app:
 
 In SETUP.md there is a tutorial how to set it up
 
 Clean->Run CMake->Build->Compile (sometimes just compile doesn't work, so you have to click build first)
 
-
-Running Tests:
+# Running tests:
 
 For now, just comment out the main and uncomment catch_main.cpp, then "cmake .. && make -j16 && ./Training_App
 
 In the future there will be a cmake flag for this to change from testing to normal
-
-
-TODO:
-1. Email Authentication via Firebase - retest and fix
-2. Database on Firebase - retest and fix if necessary, change from name@gmail.com -> name as parameter to name-gmail as parameter
-3. Add async where it's needed
-4. Add Design Patterns 
-
-
 
 Commit c2945c71274c5eafb9bae044a8eb4130bf1aae9a is last one working on desktop and android and has no firebase, this should be fixed with a flag, or design pattern
 

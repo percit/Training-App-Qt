@@ -8,7 +8,6 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
                                                 m_averageDuration(0),
                                                 m_allDuration(0)
 {
-    qDebug() << "created DataBaseModel constructor";
     initializeDataBase();
 }
 
@@ -18,7 +17,7 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
  */
 qreal DataBaseModel::weeklyKmRun()
 {
-    if (m_weeklyKmRun != std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
+    if (m_weeklyKmRun < std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
     {
         m_weeklyKmRun = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
     }
@@ -30,7 +29,7 @@ qreal DataBaseModel::weeklyKmRun()
  */
 qreal DataBaseModel::longestDistance()
 {
-    if (m_longestDistance != *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
+    if (m_longestDistance < *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
     {
         m_longestDistance = *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
     }
@@ -43,7 +42,7 @@ qreal DataBaseModel::longestDistance()
  */
 qreal DataBaseModel::longestDuration()
 {
-    if (m_longestDuration != *(std::max_element(runningTime.begin(), runningTime.end())))
+    if (m_longestDuration < *(std::max_element(runningTime.begin(), runningTime.end())))
     {
         m_longestDuration = *(std::max_element(runningTime.begin(), runningTime.end()));
     }
@@ -75,7 +74,7 @@ qreal DataBaseModel::bestPace()
  */
 qreal DataBaseModel::averageDuration()
 {
-    if (m_averageDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7)
+    if (m_averageDuration < std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7)
     {
         m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7;
     }
@@ -88,7 +87,7 @@ qreal DataBaseModel::averageDuration()
  */
 qreal DataBaseModel::allDuration()
 {
-    if (m_allDuration != std::accumulate(runningTime.begin(), runningTime.end(), 0))
+    if (m_allDuration < std::accumulate(runningTime.begin(), runningTime.end(), 0))
     {
         m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0);
     }
@@ -393,7 +392,7 @@ void DataBaseModel::initializeDataBase()
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.clearDataBase(); // temporary solution
+        db.clearDataBase();
         db.createTable();
         db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
         db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
@@ -414,7 +413,7 @@ void DataBaseModel::updateDataBaseFile()
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.clearDataBase();                                     // there should be function with update, and taking day name as parameter
+        db.clearDataBase();
         db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
         db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
         db.addElement("Wednesday", kmRunInDay[2], runningTime[2]);
@@ -425,10 +424,7 @@ void DataBaseModel::updateDataBaseFile()
 
         qDebug() << "Updating database complete";
     }
-    else
-        qDebug() << "Database is not open!";
-
-    qDebug() << "updateDataBaseFile";
+    else qDebug() << "Database is not open!";
 }
 
 void DataBaseModel::clearAllData()
@@ -455,7 +451,7 @@ void DataBaseModel::testDataBase()
     DataBase db("database_file_test.db");
     if (db.isOpen())
     {
-        db.clearDataBase();            // temporary solution
+        db.clearDataBase();
         db.addElement("Monday", 0, 0); // day, meters, time
         db.addElement("Tuesday", 1, 1);
         db.addElement("Wednesday", 2, 2);
@@ -480,6 +476,5 @@ std::pair<int, int> DataBaseModel::returnDataBaseElementByName(const QString &na
 void DataBaseModel::printDataBase()
 {
     DataBase db("database_file.db");
-    if (db.isOpen())
-        db.printAll();
+    if (db.isOpen()) db.printAll();
 }

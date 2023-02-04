@@ -8,20 +8,7 @@
 
 FirebaseDataBase::FirebaseDataBase(QObject *parent) : QObject(parent)
 {
-    qDebug() << "created FirebaseDataBase constructor";
     m_networkManager = new QNetworkAccessManager(this);
-
-
-//POST
-    // QVariantMap newRun;
-    // newRun["Km"] = 5;
-    // newRun["Time"] = 12000;
-    // QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
-    // // QNetworkRequest newRunRequest(QUrl("<>"))
-    // QNetworkRequest newRunRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/Run.json"));
-    // newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
-    // m_networkManager->post(newRunRequest, jsonDoc.toJson());
-	// // if you want to use PUT (so to replace values) you just change Run.json to more specific table, and use m_networkManager->put
 }
 
 FirebaseDataBase::~FirebaseDataBase()
@@ -57,7 +44,7 @@ void FirebaseDataBase::testFirebaseFunc()
         connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseDataBase::networkReplyReadyRead);
     }
     else {
-        qDebug() << "Failure" <<m_networkReply->errorString();
+        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << m_networkReply->errorString();
     }
 }
 
@@ -68,13 +55,12 @@ void FirebaseDataBase::readFirebaseData(const QString& mailName)
         connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseDataBase::networkReplyReadyRead);
     }
     else {
-        qDebug() << "Failure" <<m_networkReply->errorString();
+        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << m_networkReply->errorString();
     }
 }
 
 void FirebaseDataBase::postValues(const QString& mailName)
 {
-    qDebug() << "postValues func";
     QVariantMap newRun;
     newRun["longestDistance"] = m_longestDistance;
     newRun["longestDuration"] = m_longestDuration;
@@ -85,12 +71,11 @@ void FirebaseDataBase::postValues(const QString& mailName)
     QNetworkRequest newRunRequest(QUrl("https://running-app-fd699-default-rtdb.europe-west1.firebasedatabase.app/"+mailName+".json"));
     newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
     m_networkManager->post(newRunRequest, jsonDoc.toJson());
-    putValues(mailName); //this is a bit of a hack, bc this produces some string, that I don't want rn
+    putValues(mailName); //this is a bit of a hack, bc firebase produces some weird string, that I don't want rn TODO: find solution when free time
 }
 
 void FirebaseDataBase::putValues(const QString& mailName)
 {
-    qDebug() << "putValues func";
     QVariantMap newRun;
     newRun["longestDistance"] = m_longestDistance;
     newRun["longestDuration"] = m_longestDuration;

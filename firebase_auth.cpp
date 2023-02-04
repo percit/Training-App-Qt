@@ -7,7 +7,6 @@
 FirebaseAuth::FirebaseAuth(QObject *parent) : QObject(parent),
                                               m_APIKey(QString())
 {
-    qDebug() << "created FirebaseAuth constructor";
     m_networkManager = new QNetworkAccessManager(this);
     connect(this, &FirebaseAuth::userSignedIn, this, &FirebaseAuth::performAuthenticatedDataBaseCall);
 }
@@ -64,7 +63,7 @@ void FirebaseAuth::parseResponse(const QByteArray &response)
     QJsonDocument jsonDocument = QJsonDocument::fromJson(response);
     if (jsonDocument.object().contains("error"))
     {
-        qDebug() << "Error occured" << response;
+        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << response;
         setConnectSuccesful(false);
     }
     else if (jsonDocument.object().contains("kind"))
@@ -88,7 +87,7 @@ void FirebaseAuth::setAPIKey(const QString &apiKey)
     m_APIKey = apiKey;
 }
 
-void FirebaseAuth::setConnectSuccesful(const bool newConnectSuccesful)
+void FirebaseAuth::setConnectSuccesful(bool newConnectSuccesful)
 {
     m_connectSuccesful = newConnectSuccesful;
     emit connectSuccesfulChanged();
