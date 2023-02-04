@@ -8,7 +8,6 @@
 
 FirebaseDataBase::FirebaseDataBase(QObject *parent) : QObject(parent)
 {
-    qDebug() << "created FirebaseDataBase constructor";
     m_networkManager = new QNetworkAccessManager(this);
 }
 

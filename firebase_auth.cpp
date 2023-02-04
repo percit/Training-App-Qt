@@ -7,7 +7,6 @@
 FirebaseAuth::FirebaseAuth(QObject *parent) : QObject(parent),
                                               m_APIKey(QString())
 {
-    qDebug() << "created FirebaseAuth constructor";
     m_networkManager = new QNetworkAccessManager(this);
     connect(this, &FirebaseAuth::userSignedIn, this, &FirebaseAuth::performAuthenticatedDataBaseCall);
 }
