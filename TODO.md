@@ -4,12 +4,11 @@
 3. Add async where it's needed
 4. Add Design Patterns 
 5. Add CI/CD
+6. Fix building on Android (preferably on CI)
 
 
 
 # Testing:
-
-Test if database values are persistant after killing app (and rebuilding) THEY ARE NOT TODO FIX THIS
 
 Recheck if all clickable stuff works, also if it gives proper values to database
 
@@ -22,4 +21,5 @@ Test if map actually tracks data and puts in everywhere else all those maxes and
 
 
 
-fix database and make it persistent, bc now it isn't
+
+i budowanie na androida tez nie dziala, ale narazie olej

@@ -20,7 +20,8 @@ MainPage {
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                DbModel.setLongestDuration(123);
+                DbModel.setMonday_km(123);
+                DbModel.updateDataBaseFile() 
             }
         }   
     }
@@ -31,11 +32,13 @@ MainPage {
         anchors.top: logButton.bottom
         Text {
             id: buttonText
+            color: "white"
+            anchors.centerIn: parent
         }
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                buttonText.text = DbModel.longestDuration
+                buttonText.text = DbModel.monday_km
             }
         }   
     }
