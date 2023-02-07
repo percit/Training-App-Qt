@@ -15,6 +15,7 @@ MainPage {
     property bool signInOn: true
     property string password
     property string email
+    readonly property bool testBench: true
 
     Rectangle {
         width: 375 * Style.scaleX
@@ -116,23 +117,35 @@ MainPage {
         running: false
         repeat: false
         onTriggered: {
-            // if (FbAuth.connectSuccesful) { //TODO fix and retest it
+            if (FbAuth.connectSuccesful || root.testBench) { //TODO fix and retest it
+                console.log("connect succesfull")
                 root.changeBottomRowVisibility()
                 //TODO it gave weak password, you need to accomodate that
-            // }
-            const mailAfterRegex = extractEmailUsername(root.email);
-            if (!signInOn) //TODO what is this exactly for???
-            {
-                FbDatabase.postValues(mailAfterRegex); //TODO RETEST
             }
-            FbDatabase.putValues(mailAfterRegex);
-            FbDatabase.readFirebaseData(mailAfterRegex);
-            DbModel.clearAllData();
-            DbModel.setLongestDuration(FbDatabase.longestDuration);//TODO retest
-            DbModel.setLongestDistance(FbDatabase.longestDistance);
-            DbModel.setBestPace(FbDatabase.bestPace);
-            DbModel.setDailyGoal(FbDatabase.dailyGoal);
-            DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
+            const mailAfterRegex = extractEmailUsername(root.email);
+
+            //this else could be async
+            if (!signInOn) //make a table in firebase if signing up
+            {
+                FbDatabase.postValues(mailAfterRegex);
+                DbModel.clearAllData();
+            }
+            else 
+            {
+                FbDatabase.readFirebaseData(mailAfterRegex);
+                DbModel.clearAllData();
+                DbModel.setLongestDuration(FbDatabase.longestDuration);
+                DbModel.setLongestDistance(FbDatabase.longestDistance);
+                DbModel.setBestPace(FbDatabase.bestPace);
+                DbModel.setDailyGoal(FbDatabase.dailyGoal);
+                DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
+                DbModel.updateDataBaseFile(FbDatabase.weeklyGoal);
+            }
+
+            //here starts testing
+            console.log("testy:")
+            console.log(DbModel.longestDuration)
+
         }
     }
     function extractEmailUsername(mail) {
