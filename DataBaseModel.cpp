@@ -8,7 +8,7 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
                                                 m_averageDuration(0),
                                                 m_allDuration(0)
 {
-    initializeDataBase();
+    // initializeDataBase();
 }
 
 /**
