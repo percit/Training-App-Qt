@@ -1,10 +1,12 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQml 2.3
-import StyleSingleton 1.0
 import "../utils"
 import "../viewmodels"
+import StyleSingleton 1.0
 import FirebaseAuth 1.0
+import FirebaseDataBase 1.0
+import DataBaseModel 1.0
 
 MainPage {
     id: root
@@ -118,10 +120,13 @@ MainPage {
                 root.changeBottomRowVisibility()
                 //TODO it gave weak password, you need to accomodate that
             // }
-            const mailAfterRegex = extractEmailUsername(mail);
-            if (!signInOn) FbDatabase.postValues(mailAfterRegex); //TODO RETEST
+            const mailAfterRegex = extractEmailUsername(root.email);
+            if (!signInOn) //TODO what is this exactly for???
+            {
+                FbDatabase.postValues(mailAfterRegex); //TODO RETEST
+            }
             FbDatabase.putValues(mailAfterRegex);
-            readFirebaseData(mailAfterRegex);
+            FbDatabase.readFirebaseData(mailAfterRegex);
             DbModel.clearAllData();
             DbModel.setLongestDuration(FbDatabase.longestDuration);//TODO retest
             DbModel.setLongestDistance(FbDatabase.longestDistance);
@@ -130,9 +135,9 @@ MainPage {
             DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
         }
     }
-    function extractEmailUsername(email) {
+    function extractEmailUsername(mail) {
         const regex = /^([^@]+)@/;
-        const matches = regex.exec(email);
+        const matches = regex.exec(mail);
         if (matches) {
             return matches[1];
         }
