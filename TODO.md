@@ -10,16 +10,10 @@
 
 # Testing:
 
-Recheck if all clickable stuff works, also if it gives proper values to database
 
 Check if logging in and registing actually works
 
 Test if map actually tracks data and puts in everywhere else all those maxes and so on
-
-
-
-
-
 
 
 i budowanie na androida tez nie dziala, ale narazie olej
