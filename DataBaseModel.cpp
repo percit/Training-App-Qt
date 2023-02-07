@@ -443,7 +443,8 @@ void DataBaseModel::clearAllData()
     setSaturday_time(0);
     setSunday_km(0);
     setSunday_time(0);
-    initializeDataBase();//clear database
+    updateDataBaseFile();
+    // initializeDataBase();//i don't this this is needed TODO RETEST
 }
 
 void DataBaseModel::testDataBase()
