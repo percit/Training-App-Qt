@@ -39,6 +39,7 @@ MainPage {
             anchors.fill: parent
             onClicked:{
                 buttonText.text = DbModel.monday_km
+                console.log(DbModel.weeklyGoal)
             }
         }   
     }

@@ -94,16 +94,6 @@ qreal DataBaseModel::allDuration()
     return m_allDuration;
 }
 
-int DataBaseModel::weeklyGoal() const
-{
-    return m_weeklyGoal;
-}
-
-int DataBaseModel::dailyGoal() const
-{
-    return m_dailyGoal;
-}
-
 void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
 {
     if (qFuzzyCompare(m_weeklyKmRun, newWeeklyKmRun))
@@ -387,6 +377,16 @@ void DataBaseModel::setSunday_time(int newSunday_time)
     emitDayChanges();
 }
 
+int DataBaseModel::weeklyGoal() const
+{
+    return returnDataBaseElementByName("Goal").first;
+}
+
+int DataBaseModel::dailyGoal() const
+{
+    return returnDataBaseElementByName("Goal").second;
+}
+
 void DataBaseModel::initializeDataBase()
 {
     DataBase db("database_file.db");
@@ -421,6 +421,7 @@ void DataBaseModel::updateDataBaseFile()
         db.addElement("Friday", kmRunInDay[4], runningTime[4]);
         db.addElement("Saturday", kmRunInDay[5], runningTime[5]);
         db.addElement("Sunday", kmRunInDay[6], runningTime[6]);
+        db.addElement("Goal", m_weeklyGoal, m_dailyGoal);
 
         qDebug() << "Updating database complete";
     }
