@@ -14,7 +14,6 @@ QtObject {
     readonly property int daylyGoalInMeters: DbModel.daylyGoal * 1000
     readonly property int totalKcalRun: Math.round(DbModel.weeklyKmRun * 100) / 100 * 62
 
-//to sa wartosci z wektora, a nie bazy danych
     readonly property double progressBarMonday: (DbModel.monday_km / daylyGoalInMeters > 1) ? 1 : DbModel.monday_km / daylyGoalInMeters
     readonly property double progressBarTuesday: (DbModel.tuesday_km / daylyGoalInMeters > 1) ? 1 : DbModel.tuesday_km / daylyGoalInMeters
     readonly property double progressBarWednesday: (DbModel.wednesday_km / daylyGoalInMeters > 1) ? 1 : DbModel.wednesday_km / daylyGoalInMeters
@@ -23,18 +22,12 @@ QtObject {
     readonly property double progressBarSaturday: (DbModel.saturday_km / daylyGoalInMeters > 1) ? 1 : DbModel.saturday_km / daylyGoalInMeters
     readonly property double progressBarSunday: (DbModel.sunday_km / daylyGoalInMeters > 1) ? 1 : DbModel.sunday_km / daylyGoalInMeters
 
-    // // property var monday: d.dbModel.monday[fullDistance, fullRunTime]
-    // // property var day: [fullDistance, fullRunTime]
-    // // property var week: //to jest array dni, week.push(day)
-
-    readonly property string weeklyKmRunFb: FbDatabase.longestDistance
-
-
-    readonly property Timer refreshFirebaseTimer : Timer {//TODO retest
+    readonly property Timer refreshFirebaseTimer : Timer {
         interval: 3600000 //24h
         running: true
         repeat: true
         onTriggered: {
+            DbModel.updateAllMaxes();
             FbDatabase.setLongestDistance(DbModel.longestDistance);
             FbDatabase.setLongestDuration(DbModel.longestDuration);
             FbDatabase.setLongestDistance(DbModel.longestDistance);

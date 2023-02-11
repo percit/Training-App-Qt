@@ -11,167 +11,214 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
     // initializeDataBase();
 }
 
-/**
- * @brief checks how many meters run in a current week, checks from vector in local data
- * @return qreal
- */
-qreal DataBaseModel::weeklyKmRun()
+void DataBaseModel::updateAllMaxes() 
 {
-    return m_weeklyKmRun;//returnDataBaseElementByName("WeeklyKmRun").first;
-}
-
-void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
-{
-
-    // qreal databaseValue = returnDataBaseElementByName("WeeklyKmRun").first;
-    // qreal stdValue = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
-
-    // m_weeklyKmRun = 0;//std::max_element({databaseValue, stdValue, newWeeklyKmRun, m_weeklyKmRun});
-
-    // DataBase db("database_file.db");
-    // if (db.isOpen())
-    // {
-    //     db.updateElement("WeeklyKmRun", m_weeklyKmRun, 0, 7); // day, meters, time
-    //     qDebug() << "Updating database complete";
-    // }
-    // else qDebug() << "Database is not open!";
-
-    // emit weeklyKmRunChanged();
-}
-/**
- * @brief gets most meters run in a day
- * @return qreal
- */
-qreal DataBaseModel::longestDistance()
-{
-    if (m_longestDistance < *(std::max_element(kmRunInDay.begin(), kmRunInDay.end())))
+    qreal newLongestDistance = *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
+    if(newLongestDistance > longestDistance())
     {
-        m_longestDistance = *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
+        setLongestDistance(newLongestDistance);
     }
-    return m_longestDistance;
-}
-
-void DataBaseModel::setLongestDistance(qreal newLongestDistance)
-{
-    if (qFuzzyCompare(m_longestDistance, newLongestDistance))
-        return;
-    m_longestDistance = newLongestDistance;
-    emit longestDistanceChanged();
-}
-/**
- * @brief gets longest time in seconds
- *
- * @return qreal
- */
-qreal DataBaseModel::longestDuration()
-{
-    if (m_longestDuration < *(std::max_element(runningTime.begin(), runningTime.end())))
+    
+    qreal newLongestDuration = *(std::max_element(runningTime.begin(), runningTime.end()));
+    if(newLongestDuration > longestDuration())
     {
-        m_longestDuration = *(std::max_element(runningTime.begin(), runningTime.end()));
+        setLongestDuration(newLongestDuration);
     }
-    return m_longestDuration;
-}
 
-void DataBaseModel::setLongestDuration(qreal newLongestDuration)
-{
-    if (qFuzzyCompare(m_longestDuration, newLongestDuration))
-        return;
-    m_longestDuration = newLongestDuration;
-    emit longestDurationChanged();
-}
+    qreal newWeeklyKmRun = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
+    if(newWeeklyKmRun > weeklyKmRun())
+    {
+        setWeeklyKmRun(newWeeklyKmRun);
+    }
 
-/**
- * @brief best pace in m/s
- *
- * @return qreal
- */
-qreal DataBaseModel::bestPace()
-{
-    double bestPace = 0.0;
+    qreal newBestPace = 0;
     for (int i = 0; i < 7; ++i)
     {
-        if (runningTime[i] > 0)
-            bestPace = std::max(kmRunInDay[i] / runningTime[i], bestPace);
+        if (runningTime[i] > 0) newBestPace = std::max(kmRunInDay[i] / runningTime[i], newBestPace);
     }
-    if (m_bestPace != bestPace)
+    if(newBestPace > bestPace())
     {
-        m_bestPace = bestPace;
+        setBestPace(newBestPace);
     }
-    return m_bestPace;
+
+    qreal newAverageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7;
+    if(newAverageDuration > averageDuration())
+    {
+        setAverageDuration(newAverageDuration);
+    }
+
+    qreal newAllDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0);
+    if(newAllDuration > allDuration())
+    {
+        setAllDuration(newAllDuration);
+    }
 }
 
-void DataBaseModel::setBestPace(qreal newBestPace)
+void DataBaseModel::emitDayChanges()
 {
-    if (qFuzzyCompare(m_bestPace, newBestPace))
-        return;
-    m_bestPace = newBestPace;
+    emit weeklyKmRunChanged();
+    emit longestDistanceChanged();
+    emit longestDurationChanged();
     emit bestPaceChanged();
-}
-
-/**
- * @brief average duration in seconds
- *
- * @return qreal
- */
-qreal DataBaseModel::averageDuration()
-{
-    if (m_averageDuration < std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7)
-    {
-        m_averageDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0) / 7;
-    }
-    return m_averageDuration;
-}
-
-void DataBaseModel::setAverageDuration(qreal newAverageDuration)
-{
-    if (qFuzzyCompare(m_averageDuration, newAverageDuration))
-        return;
-    m_averageDuration = newAverageDuration;
     emit averageDurationChanged();
-}
-/**
- * @brief all duration in seconds
- *
- * @return qreal
- */
-qreal DataBaseModel::allDuration()
-{
-    if (m_allDuration < std::accumulate(runningTime.begin(), runningTime.end(), 0))
-    {
-        m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0);
-    }
-    return m_allDuration;
-}
-
-void DataBaseModel::setAllDuration(qreal newAllDuration)
-{
-    if (qFuzzyCompare(m_allDuration, newAllDuration))
-        return;
-    m_allDuration = newAllDuration;
     emit allDurationChanged();
 }
+void DataBaseModel::initializeDataBase()
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.clearDataBase();
+        db.createTable();
+        db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
+        db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
+        db.addElement("Wednesday", kmRunInDay[2], runningTime[2]);
+        db.addElement("Thursday", kmRunInDay[3], runningTime[3]);
+        db.addElement("Friday", kmRunInDay[4], runningTime[4]);
+        db.addElement("Saturday", kmRunInDay[5], runningTime[5]);
+        db.addElement("Sunday", kmRunInDay[6], runningTime[6]);
+        db.addElement("Goal", m_weeklyGoal, m_dailyGoal);
+        db.addElement("LongestRun", m_longestDistance, m_longestDuration);
+        db.addElement("Duration", m_averageDuration, m_allDuration);
+        db.addElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace);
+
+        qDebug() << "Initialization complete";
+    }
+    else
+        qDebug() << "Database is not open!";
+}
+
+void DataBaseModel::clearAllData()
+{
+    setMonday(0, 0);
+    setTuesday(0, 0);
+    setWednesday(0, 0);
+    setThursday(0, 0);
+    setFriday(0, 0);
+    setSaturday(0, 0);
+    setSunday(0, 0);
+    // initializeDataBase();//i don't this this is needed TODO RETEST
+}
+
+std::pair<int, int> DataBaseModel::returnDataBaseElementByName(const QString &name) const
+{
+    std::pair<int, int> day;
+    DataBase db("database_file.db");
+    return db.returnDataBaseElementByName(name);
+}
+
+void DataBaseModel::printDataBase()
+{
+    DataBase db("database_file.db");
+    if (db.isOpen()) db.printAll();
+}
+
 
 void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
 {
-    m_weeklyGoal = newWeeklyGoal;
+    m_weeklyGoal = std::max(m_weeklyGoal, newWeeklyGoal);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Goal", m_weeklyGoal, m_dailyGoal, 8); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
     emit weeklyGoalChanged();
-}
-
-int DataBaseModel::weeklyGoal() const
-{
-    return returnDataBaseElementByName("Goal").first;
 }
 
 void DataBaseModel::setDailyGoal(int newDailyGoal)
 {
-    m_dailyGoal = newDailyGoal;
+    m_dailyGoal = std::max(m_dailyGoal, newDailyGoal);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Goal", m_weeklyGoal, m_dailyGoal, 8); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
     emit dailyGoalChanged();
 }
 
-int DataBaseModel::dailyGoal() const
+void DataBaseModel::setLongestDistance(qreal newLongestDistance)
 {
-    return returnDataBaseElementByName("Goal").second;
+    m_longestDistance = std::max(m_longestDistance, newLongestDistance);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("LongestRun", m_longestDuration, m_averageDuration, 9); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    emit longestDistanceChanged();
 }
+
+void DataBaseModel::setLongestDuration(qreal newLongestDuration)
+{
+    m_longestDuration = std::max(m_longestDuration, newLongestDuration);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("LongestRun", m_longestDuration, m_averageDuration, 9); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    emit longestDurationChanged();
+}
+
+void DataBaseModel::setAverageDuration(qreal newAverageDuration)
+{
+    m_averageDuration = std::max(m_averageDuration, newAverageDuration);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Duration", m_averageDuration, m_allDuration, 10); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    emit averageDurationChanged();
+}
+
+void DataBaseModel::setAllDuration(qreal newAllDuration)
+{
+    m_allDuration = std::max(m_allDuration, newAllDuration);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Duration", m_averageDuration, m_allDuration, 10); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    emit allDurationChanged();
+}
+
+void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
+{
+    m_weeklyKmRun = std::max(m_weeklyKmRun, newWeeklyKmRun);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace, 11); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+
+    emit weeklyKmRunChanged();
+}
+
+void DataBaseModel::setBestPace(qreal newBestPace)
+{
+    m_bestPace = std::max(m_bestPace, newBestPace);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace, 11); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    emit bestPaceChanged();
+}
+
 // /////////////////////////////////////////////////////////////////////
 // DAYS
 
@@ -280,63 +327,44 @@ void DataBaseModel::setSunday(int new_km, int new_time)
     emit sunday_timeChanged();
 }
 
-void DataBaseModel::emitDayChanges()
+int DataBaseModel::weeklyGoal() const
 {
-    emit weeklyKmRunChanged();
-    emit longestDistanceChanged();
-    emit longestDurationChanged();
-    emit bestPaceChanged();
-    emit averageDurationChanged();
-    emit allDurationChanged();
-}
-void DataBaseModel::initializeDataBase()
-{
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.clearDataBase();
-        db.createTable();
-        db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
-        db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
-        db.addElement("Wednesday", kmRunInDay[2], runningTime[2]);
-        db.addElement("Thursday", kmRunInDay[3], runningTime[3]);
-        db.addElement("Friday", kmRunInDay[4], runningTime[4]);
-        db.addElement("Saturday", kmRunInDay[5], runningTime[5]);
-        db.addElement("Sunday", kmRunInDay[6], runningTime[6]);
-        db.addElement("Goal", m_weeklyGoal, m_dailyGoal); //musze chociaz raz dodac te wszystkie maxy
-        db.addElement("LongestRun", m_longestDistance, m_longestDuration);
-        db.addElement("Duration", m_averageDuration, m_allDuration);
-        db.addElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace);
-
-        qDebug() << "Initialization complete";
-    }
-    else
-        qDebug() << "Database is not open!";
+    return returnDataBaseElementByName("Goal").first;
 }
 
-void DataBaseModel::clearAllData()
+int DataBaseModel::dailyGoal() const
 {
-    setMonday(0, 0);
-    setTuesday(0, 0);
-    setWednesday(0, 0);
-    setThursday(0, 0);
-    setFriday(0, 0);
-    setSaturday(0, 0);
-    setSunday(0, 0);
-    // initializeDataBase();//i don't this this is needed TODO RETEST
+    return returnDataBaseElementByName("Goal").second;
 }
 
-std::pair<int, int> DataBaseModel::returnDataBaseElementByName(const QString &name) const
+qreal DataBaseModel::weeklyKmRun()
 {
-    std::pair<int, int> day;
-    DataBase db("database_file.db");
-    return db.returnDataBaseElementByName(name);
+    return returnDataBaseElementByName("WeeklyKmRun_BestPace").first;
 }
 
-void DataBaseModel::printDataBase()
+qreal DataBaseModel::bestPace()
 {
-    DataBase db("database_file.db");
-    if (db.isOpen()) db.printAll();
+    return returnDataBaseElementByName("WeeklyKmRun_BestPace").second;
+}
+
+qreal DataBaseModel::longestDistance()
+{
+    return returnDataBaseElementByName("LongestRun").first;
+}
+
+qreal DataBaseModel::longestDuration()
+{
+    return returnDataBaseElementByName("LongestRun").second;
+}
+
+qreal DataBaseModel::averageDuration()
+{
+    return returnDataBaseElementByName("Duration").first;
+}
+
+qreal DataBaseModel::allDuration()
+{
+    return returnDataBaseElementByName("Duration").second;
 }
 
 int DataBaseModel::monday_km() const
