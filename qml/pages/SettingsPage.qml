@@ -150,7 +150,6 @@ collection and use of information in accordance with this Privacy Policy."
                     }
                     onActivated: {
                         DbModel.setDailyGoal(currentText)
-                        DbModel.updateDataBaseFile()
                     }
                 }
                 StyledComboBox {
@@ -174,7 +173,6 @@ collection and use of information in accordance with this Privacy Policy."
                     }
                     onActivated: {
                         DbModel.setWeeklyGoal(currentText)
-                        DbModel.updateDataBaseFile()
                     }
                 }
                 StyledComboBox {

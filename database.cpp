@@ -62,6 +62,21 @@ void DataBase::addElement(const QString &name, const double &km, const int &time
         if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
     }
 }
+void DataBase::updateElement(const QString &name, double km, int time, int id)
+{
+    if (QSqlDatabase::contains("MyDBConnection"))
+    {
+        QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
+        query.prepare("UPDATE day SET name = :name, km = :km, time = :time WHERE id = :id");
+
+        query.bindValue(":name", name);
+        query.bindValue(":km", km);
+        query.bindValue(":time", time);
+        query.bindValue(":id", id);
+
+        if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
+    }
+}
 /**
  * @brief remove whole day row from database
  * 
@@ -83,7 +98,7 @@ bool DataBase::removeElement(const QString &name)
         }
     }
     else
-        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << "Person doesn't exist";
+        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << "Day doesn't exist";
 
     return false;
 }
@@ -115,7 +130,7 @@ std::pair<int, int> DataBase::returnDataBaseElementByName(const QString &name)
 
     }
     else
-        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << "Person doesn't exist";
+        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << "Day doesn't exist";
 
     return temp;
 }

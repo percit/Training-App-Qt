@@ -40,8 +40,6 @@ int main(int argc, char *argv[])
         return database;
     });
 
-    qRegisterMetaType<Day>();
-
     qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0, "Style");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

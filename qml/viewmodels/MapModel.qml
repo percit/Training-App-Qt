@@ -108,28 +108,20 @@ Item {
             //propagating values to c++ backend
             switch(root.dateString) {
                 case 'Monday':
-                    DbModel.setMonday_time(fullRunTime * timerRefreshRate)
-                    DbModel.setMonday_km(fullDistance)
+                    DbModel.setMonday(fullDistance, fullRunTime * timerRefreshRate)
                 case 'Tuesday':
-                    DbModel.setTuesday_time(fullRunTime * timerRefreshRate)
-                    DbModel.setTuesday_km(fullDistance)
+                    DbModel.setTuesday(fullDistance, fullRunTime * timerRefreshRate)
                 case 'Wednesday':
-                    DbModel.setWednesday_time(fullRunTime * timerRefreshRate)
-                    DbModel.setWednesday_km(fullDistance)
+                    DbModel.setWednesday(fullDistance, fullRunTime * timerRefreshRate)
                 case 'Thursday':
-                    DbModel.setThursday_time(fullRunTime * timerRefreshRate)
-                    DbModel.setThursday_km(fullDistance)
+                    DbModel.setThursday(fullDistance, fullRunTime * timerRefreshRate)
                 case 'Friday':
-                    DbModel.setFriday_time(fullRunTime * timerRefreshRate)
-                    DbModel.setFriday_km(fullDistance)
+                    DbModel.setFriday(fullDistance, fullRunTime * timerRefreshRate)
                 case 'Saturday':
-                    DbModel.setSaturday_time(fullRunTime * timerRefreshRate)
-                    DbModel.setSaturday_km(fullDistance)
+                    DbModel.setSaturday(fullDistance, fullRunTime * timerRefreshRate)
                 case 'Sunday':
-                    DbModel.setSunday_time(fullRunTime * timerRefreshRate)
-                    DbModel.setSunday_km(fullDistance)
+                    DbModel.setSunday(fullDistance, fullRunTime * timerRefreshRate)
             }
-            DbModel.updateDataBaseFile() //we should start thinking about these updates, if they are not so frequent
         }
     }
 

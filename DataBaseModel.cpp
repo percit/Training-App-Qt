@@ -17,11 +17,26 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
  */
 qreal DataBaseModel::weeklyKmRun()
 {
-    if (m_weeklyKmRun < std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0))
-    {
-        m_weeklyKmRun = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
-    }
-    return m_weeklyKmRun;
+    return m_weeklyKmRun;//returnDataBaseElementByName("WeeklyKmRun").first;
+}
+
+void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
+{
+
+    // qreal databaseValue = returnDataBaseElementByName("WeeklyKmRun").first;
+    // qreal stdValue = std::accumulate(kmRunInDay.begin(), kmRunInDay.end(), 0);
+
+    // m_weeklyKmRun = 0;//std::max_element({databaseValue, stdValue, newWeeklyKmRun, m_weeklyKmRun});
+
+    // DataBase db("database_file.db");
+    // if (db.isOpen())
+    // {
+    //     db.updateElement("WeeklyKmRun", m_weeklyKmRun, 0, 7); // day, meters, time
+    //     qDebug() << "Updating database complete";
+    // }
+    // else qDebug() << "Database is not open!";
+
+    // emit weeklyKmRunChanged();
 }
 /**
  * @brief gets most meters run in a day
@@ -34,6 +49,14 @@ qreal DataBaseModel::longestDistance()
         m_longestDistance = *(std::max_element(kmRunInDay.begin(), kmRunInDay.end()));
     }
     return m_longestDistance;
+}
+
+void DataBaseModel::setLongestDistance(qreal newLongestDistance)
+{
+    if (qFuzzyCompare(m_longestDistance, newLongestDistance))
+        return;
+    m_longestDistance = newLongestDistance;
+    emit longestDistanceChanged();
 }
 /**
  * @brief gets longest time in seconds
@@ -48,6 +71,15 @@ qreal DataBaseModel::longestDuration()
     }
     return m_longestDuration;
 }
+
+void DataBaseModel::setLongestDuration(qreal newLongestDuration)
+{
+    if (qFuzzyCompare(m_longestDuration, newLongestDuration))
+        return;
+    m_longestDuration = newLongestDuration;
+    emit longestDurationChanged();
+}
+
 /**
  * @brief best pace in m/s
  *
@@ -67,6 +99,15 @@ qreal DataBaseModel::bestPace()
     }
     return m_bestPace;
 }
+
+void DataBaseModel::setBestPace(qreal newBestPace)
+{
+    if (qFuzzyCompare(m_bestPace, newBestPace))
+        return;
+    m_bestPace = newBestPace;
+    emit bestPaceChanged();
+}
+
 /**
  * @brief average duration in seconds
  *
@@ -80,6 +121,14 @@ qreal DataBaseModel::averageDuration()
     }
     return m_averageDuration;
 }
+
+void DataBaseModel::setAverageDuration(qreal newAverageDuration)
+{
+    if (qFuzzyCompare(m_averageDuration, newAverageDuration))
+        return;
+    m_averageDuration = newAverageDuration;
+    emit averageDurationChanged();
+}
 /**
  * @brief all duration in seconds
  *
@@ -92,46 +141,6 @@ qreal DataBaseModel::allDuration()
         m_allDuration = std::accumulate(runningTime.begin(), runningTime.end(), 0);
     }
     return m_allDuration;
-}
-
-void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
-{
-    if (qFuzzyCompare(m_weeklyKmRun, newWeeklyKmRun))
-        return;
-    m_weeklyKmRun = newWeeklyKmRun;
-    emit weeklyKmRunChanged();
-}
-
-void DataBaseModel::setLongestDistance(qreal newLongestDistance)
-{
-    if (qFuzzyCompare(m_longestDistance, newLongestDistance))
-        return;
-    m_longestDistance = newLongestDistance;
-    emit longestDistanceChanged();
-}
-
-void DataBaseModel::setLongestDuration(qreal newLongestDuration)
-{
-    if (qFuzzyCompare(m_longestDuration, newLongestDuration))
-        return;
-    m_longestDuration = newLongestDuration;
-    emit longestDurationChanged();
-}
-
-void DataBaseModel::setBestPace(qreal newBestPace)
-{
-    if (qFuzzyCompare(m_bestPace, newBestPace))
-        return;
-    m_bestPace = newBestPace;
-    emit bestPaceChanged();
-}
-
-void DataBaseModel::setAverageDuration(qreal newAverageDuration)
-{
-    if (qFuzzyCompare(m_averageDuration, newAverageDuration))
-        return;
-    m_averageDuration = newAverageDuration;
-    emit averageDurationChanged();
 }
 
 void DataBaseModel::setAllDuration(qreal newAllDuration)
@@ -148,18 +157,127 @@ void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
     emit weeklyGoalChanged();
 }
 
+int DataBaseModel::weeklyGoal() const
+{
+    return returnDataBaseElementByName("Goal").first;
+}
+
 void DataBaseModel::setDailyGoal(int newDailyGoal)
 {
     m_dailyGoal = newDailyGoal;
     emit dailyGoalChanged();
 }
 
+int DataBaseModel::dailyGoal() const
+{
+    return returnDataBaseElementByName("Goal").second;
+}
 // /////////////////////////////////////////////////////////////////////
 // DAYS
 
-int const DataBaseModel::monday_km() const
+void DataBaseModel::setMonday(int new_km, int new_time)
 {
-    return returnDataBaseElementByName("Monday").first;
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Monday", new_km, new_time, 1); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    runningTime[0] = new_km;
+    kmRunInDay[0] = new_time;
+    emit monday_kmChanged();
+    emit monday_timeChanged();
+}
+
+void DataBaseModel::setTuesday(int new_km, int new_time)
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Tuesday", new_km, new_time, 2); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    runningTime[1] = new_km;
+    kmRunInDay[1] = new_time;
+    emit tuesday_kmChanged();
+    emit tuesday_timeChanged();
+}
+
+void DataBaseModel::setWednesday(int new_km, int new_time)
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Wednesday", new_km, new_time, 3); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    runningTime[2] = new_km;
+    kmRunInDay[2] = new_time;
+    emit wednesday_kmChanged();
+    emit wednesday_timeChanged();
+}
+
+void DataBaseModel::setThursday(int new_km, int new_time)
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Thursday", new_km, new_time, 4); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    runningTime[3] = new_km;
+    kmRunInDay[3] = new_time;
+    emit thursday_kmChanged();
+    emit thursday_timeChanged();
+}
+
+void DataBaseModel::setFriday(int new_km, int new_time)
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Friday", new_km, new_time, 5); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    runningTime[4] = new_km;
+    kmRunInDay[4] = new_time;
+    emit friday_kmChanged();
+    emit friday_timeChanged();
+}
+
+void DataBaseModel::setSaturday(int new_km, int new_time)
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Monday", new_km, new_time, 6); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    runningTime[5] = new_km;
+    kmRunInDay[5] = new_time;
+    emit saturday_kmChanged();
+    emit saturday_timeChanged();
+}
+
+void DataBaseModel::setSunday(int new_km, int new_time)
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateElement("Monday", new_km, new_time, 7); // day, meters, time
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    runningTime[6] = new_km;
+    kmRunInDay[6] = new_time;
+    emit sunday_kmChanged();
+    emit sunday_timeChanged();
 }
 
 void DataBaseModel::emitDayChanges()
@@ -171,222 +289,6 @@ void DataBaseModel::emitDayChanges()
     emit averageDurationChanged();
     emit allDurationChanged();
 }
-
-void DataBaseModel::setMonday_km(int newMonday_km)
-{
-    if (m_monday_km == newMonday_km)
-        return;
-    m_monday_km = newMonday_km;
-    kmRunInDay[0] = m_monday_km;
-    emit monday_kmChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::monday_time() const
-{
-    return returnDataBaseElementByName("Monday").second;
-}
-
-void DataBaseModel::setMonday_time(int newMonday_time)
-{
-    if (m_monday_time == newMonday_time)
-        return;
-    m_monday_time = newMonday_time;
-    runningTime[0] = m_monday_time;
-    emit monday_timeChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::tuesday_km() const
-{
-    return returnDataBaseElementByName("Tuesday").first;
-}
-
-void DataBaseModel::setTuesday_km(int newTuesday_km)
-{
-    if (m_tuesday_km == newTuesday_km)
-        return;
-    m_tuesday_km = newTuesday_km;
-    kmRunInDay[1] = m_tuesday_km;
-    emit tuesday_kmChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::tuesday_time() const
-{
-    return returnDataBaseElementByName("Tuesday").second;
-}
-
-void DataBaseModel::setTuesday_time(int newTuesday_time)
-{
-    if (m_tuesday_time == newTuesday_time)
-        return;
-    m_tuesday_time = newTuesday_time;
-    runningTime[1] = m_tuesday_time;
-    emit tuesday_timeChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::wednesday_km() const
-{
-    return returnDataBaseElementByName("Wednesday").first;
-}
-
-void DataBaseModel::setWednesday_km(int newWednesday_km)
-{
-    if (m_wednesday_km == newWednesday_km)
-        return;
-    m_wednesday_km = newWednesday_km;
-    kmRunInDay[2] = m_wednesday_km;
-    emit wednesday_kmChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::wednesday_time() const
-{
-    return returnDataBaseElementByName("Wednesday").second;
-}
-
-void DataBaseModel::setWednesday_time(int newWednesday_time)
-{
-    if (m_wednesday_time == newWednesday_time)
-        return;
-    m_wednesday_time = newWednesday_time;
-    runningTime[2] = m_wednesday_time;
-    emit wednesday_timeChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::thursday_km() const
-{
-    return returnDataBaseElementByName("Thursday").first;
-}
-
-void DataBaseModel::setThursday_km(int newThursday_km)
-{
-    if (m_thursday_km == newThursday_km)
-        return;
-    m_thursday_km = newThursday_km;
-    kmRunInDay[3] = m_thursday_km;
-    emit thursday_kmChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::thursday_time() const
-{
-    return returnDataBaseElementByName("Thursday").second;
-}
-
-void DataBaseModel::setThursday_time(int newThursday_time)
-{
-    if (m_thursday_time == newThursday_time)
-        return;
-    m_thursday_time = newThursday_time;
-    runningTime[3] = m_thursday_time;
-    emit thursday_timeChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::friday_km() const
-{
-    return returnDataBaseElementByName("Friday").first;
-}
-
-void DataBaseModel::setFriday_km(int newFriday_km)
-{
-    if (m_friday_km == newFriday_km)
-        return;
-    m_friday_km = newFriday_km;
-    kmRunInDay[4] = m_friday_km;
-    emit friday_kmChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::friday_time() const
-{
-    return returnDataBaseElementByName("Friday").second;
-}
-
-void DataBaseModel::setFriday_time(int newFriday_time)
-{
-    if (m_friday_time == newFriday_time)
-        return;
-    m_friday_time = newFriday_time;
-    runningTime[4] = m_friday_time;
-    emit friday_timeChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::saturday_km() const
-{
-    return returnDataBaseElementByName("Saturday").first;
-}
-
-void DataBaseModel::setSaturday_km(int newSaturday_km)
-{
-    if (m_saturday_km == newSaturday_km)
-        return;
-    m_saturday_km = newSaturday_km;
-    kmRunInDay[5] = m_saturday_km;
-    emit saturday_kmChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::saturday_time() const
-{
-    return returnDataBaseElementByName("Saturday").second;
-}
-
-void DataBaseModel::setSaturday_time(int newSaturday_time)
-{
-    if (m_saturday_time == newSaturday_time)
-        return;
-    m_saturday_time = newSaturday_time;
-    runningTime[5] = m_saturday_time;
-    emit saturday_timeChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::sunday_km() const
-{
-    return returnDataBaseElementByName("Sunday").first;
-}
-
-void DataBaseModel::setSunday_km(int newSunday_km)
-{
-    if (m_sunday_km == newSunday_km)
-        return;
-    m_sunday_km = newSunday_km;
-    kmRunInDay[6] = m_sunday_km;
-    emit sunday_kmChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::sunday_time() const
-{
-    return returnDataBaseElementByName("Sunday").second;
-}
-
-void DataBaseModel::setSunday_time(int newSunday_time)
-{
-    if (m_sunday_time == newSunday_time)
-        return;
-    m_sunday_time = newSunday_time;
-    runningTime[6] = m_sunday_time;
-    emit sunday_timeChanged();
-    emitDayChanges();
-}
-
-int DataBaseModel::weeklyGoal() const
-{
-    return returnDataBaseElementByName("Goal").first;
-}
-
-int DataBaseModel::dailyGoal() const
-{
-    return returnDataBaseElementByName("Goal").second;
-}
-
 void DataBaseModel::initializeDataBase()
 {
     DataBase db("database_file.db");
@@ -401,6 +303,10 @@ void DataBaseModel::initializeDataBase()
         db.addElement("Friday", kmRunInDay[4], runningTime[4]);
         db.addElement("Saturday", kmRunInDay[5], runningTime[5]);
         db.addElement("Sunday", kmRunInDay[6], runningTime[6]);
+        db.addElement("Goal", m_weeklyGoal, m_dailyGoal); //musze chociaz raz dodac te wszystkie maxy
+        db.addElement("LongestRun", m_longestDistance, m_longestDuration);
+        db.addElement("Duration", m_averageDuration, m_allDuration);
+        db.addElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace);
 
         qDebug() << "Initialization complete";
     }
@@ -408,64 +314,16 @@ void DataBaseModel::initializeDataBase()
         qDebug() << "Database is not open!";
 }
 
-void DataBaseModel::updateDataBaseFile()
-{
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.clearDataBase();
-        db.addElement("Monday", kmRunInDay[0], runningTime[0]); // day, meters, time
-        db.addElement("Tuesday", kmRunInDay[1], runningTime[1]);
-        db.addElement("Wednesday", kmRunInDay[2], runningTime[2]);
-        db.addElement("Thursday", kmRunInDay[3], runningTime[3]);
-        db.addElement("Friday", kmRunInDay[4], runningTime[4]);
-        db.addElement("Saturday", kmRunInDay[5], runningTime[5]);
-        db.addElement("Sunday", kmRunInDay[6], runningTime[6]);
-        db.addElement("Goal", m_weeklyGoal, m_dailyGoal);
-
-        qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
-}
-
 void DataBaseModel::clearAllData()
 {
-    setMonday_km(0);
-    setMonday_time(0);
-    setTuesday_km(0);
-    setTuesday_time(0);
-    setWednesday_km(0);
-    setWednesday_time(0);
-    setThursday_km(0);
-    setThursday_time(0);
-    setFriday_km(0);
-    setFriday_time(0);
-    setSaturday_km(0);
-    setSaturday_time(0);
-    setSunday_km(0);
-    setSunday_time(0);
-    updateDataBaseFile();
+    setMonday(0, 0);
+    setTuesday(0, 0);
+    setWednesday(0, 0);
+    setThursday(0, 0);
+    setFriday(0, 0);
+    setSaturday(0, 0);
+    setSunday(0, 0);
     // initializeDataBase();//i don't this this is needed TODO RETEST
-}
-
-void DataBaseModel::testDataBase()
-{
-    DataBase db("database_file_test.db");
-    if (db.isOpen())
-    {
-        db.clearDataBase();
-        db.addElement("Monday", 0, 0); // day, meters, time
-        db.addElement("Tuesday", 1, 1);
-        db.addElement("Wednesday", 2, 2);
-        db.addElement("Thursday", 3, 3);
-        db.addElement("Friday", 4, 4);
-        db.addElement("Saturday", 5, 5);
-        db.addElement("Sunday", 6, 6);
-
-        qDebug() << "Test done ";
-    }
-    else
-        qDebug() << "Database is not open!";
 }
 
 std::pair<int, int> DataBaseModel::returnDataBaseElementByName(const QString &name) const
@@ -480,3 +338,75 @@ void DataBaseModel::printDataBase()
     DataBase db("database_file.db");
     if (db.isOpen()) db.printAll();
 }
+
+int DataBaseModel::monday_km() const
+{
+    return returnDataBaseElementByName("Monday").first;
+}
+
+int DataBaseModel::monday_time() const
+{
+    return returnDataBaseElementByName("Monday").second;
+}
+
+int DataBaseModel::tuesday_km() const
+{
+    return returnDataBaseElementByName("Tuesday").first;
+}
+
+int DataBaseModel::tuesday_time() const
+{
+    return returnDataBaseElementByName("Tuesday").second;
+}
+
+int DataBaseModel::wednesday_km() const
+{
+    return returnDataBaseElementByName("Wednesday").first;
+}
+
+int DataBaseModel::wednesday_time() const
+{
+    return returnDataBaseElementByName("Wednesday").second;
+}
+
+int DataBaseModel::thursday_km() const
+{
+    return returnDataBaseElementByName("Thursday").first;
+}
+
+int DataBaseModel::thursday_time() const
+{
+    return returnDataBaseElementByName("Thursday").second;
+}
+
+int DataBaseModel::friday_km() const
+{
+    return returnDataBaseElementByName("Friday").first;
+}
+
+int DataBaseModel::friday_time() const
+{
+    return returnDataBaseElementByName("Friday").second;
+}
+
+int DataBaseModel::saturday_km() const
+{
+    return returnDataBaseElementByName("Saturday").first;
+}
+
+int DataBaseModel::saturday_time() const
+{
+    return returnDataBaseElementByName("Saturday").second;
+}
+
+int DataBaseModel::sunday_km() const
+{
+    return returnDataBaseElementByName("Sunday").first;
+}
+
+int DataBaseModel::sunday_time() const
+{
+    return returnDataBaseElementByName("Sunday").second;
+}
+
+

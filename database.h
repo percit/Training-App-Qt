@@ -20,6 +20,7 @@ public:
   bool isOpen() const;
   static void createTable();
   void addElement(const QString &day, const double &km, const int &time);
+  void updateElement(const QString &day, double km, int time, int id);
   bool removeElement(const QString &name);
   std::pair<int, int> returnDataBaseElementByName(const QString &name);
   bool dayExists(const QString &name) const;
