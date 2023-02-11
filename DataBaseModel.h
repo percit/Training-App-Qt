@@ -56,20 +56,13 @@ public:
     explicit DataBaseModel(QObject *parent = nullptr);
 
     // database functions
-    void initializeDataBase();
-    Q_INVOKABLE void clearAllData();//this is before loading firebase model
-    void printDataBase();
     std::pair<int, int> returnDataBaseElementByName(const QString &name) const;
+    void initializeDataBase();
+    void printDataBase();
     void emitDayChanges();
 
-    // qproperty functions
-    qreal weeklyKmRun();
-    qreal longestDistance();
-    qreal longestDuration();
-    qreal bestPace();
-    qreal averageDuration();
-    qreal allDuration();
-
+    Q_INVOKABLE void clearAllData();//this is before loading firebase model
+    Q_INVOKABLE void updateAllMaxes();//this is before loading firebase model
     Q_INVOKABLE void setWeeklyKmRun(qreal newWeeklyKmRun);
     Q_INVOKABLE void setLongestDistance(qreal newLongestDistance);
     Q_INVOKABLE void setLongestDuration(qreal newLongestDuration);
@@ -87,6 +80,16 @@ public:
     Q_INVOKABLE void setSaturday(int new_km, int new_time);
     Q_INVOKABLE void setSunday(int new_km, int new_time);
 
+    // qproperty functions
+    qreal weeklyKmRun();
+    qreal longestDistance();
+    qreal longestDuration();
+    qreal bestPace();
+    qreal averageDuration();
+    qreal allDuration();
+    int weeklyGoal() const;
+    int dailyGoal() const;
+
     int monday_km() const;
     int monday_time() const;
     int tuesday_km() const;
@@ -101,9 +104,6 @@ public:
     int saturday_time() const;
     int sunday_km() const;
     int sunday_time() const;
-
-    int weeklyGoal() const;
-    int dailyGoal() const;
 
 public slots:
 
@@ -135,11 +135,3 @@ signals:
 };
 
 #endif // DATABASEMODEL_H
-
-
-    // qreal longestDistance(); //to jest max
-    // qreal longestDuration(); //to jest max
-    // qreal bestPace(); //max
-    // qreal weeklyKmRun(); //to tez tylko tydzien
-    // qreal averageDuration(); //to tylko z tyg
-    // qreal allDuration(); //to tylko z tygodnia
