@@ -139,7 +139,6 @@ MainPage {
                 DbModel.setBestPace(FbDatabase.bestPace);
                 DbModel.setDailyGoal(FbDatabase.dailyGoal);
                 DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
-                DbModel.updateDataBaseFile(FbDatabase.weeklyGoal);
             }
 
             //here starts testing

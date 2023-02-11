@@ -20,8 +20,7 @@ MainPage {
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                DbModel.setMonday_km(123);
-                DbModel.updateDataBaseFile() 
+                DbModel.setMonday(1234, 1234)
             }
         }   
     }
@@ -34,12 +33,13 @@ MainPage {
             id: buttonText
             color: "white"
             anchors.centerIn: parent
+            text: DbModel.monday_km
         }
         MouseArea {
             anchors.fill: parent
             onClicked:{
                 buttonText.text = DbModel.monday_km
-                console.log(DbModel.weeklyGoal)
+                // console.log(DbModel.monday_time)
             }
         }   
     }
