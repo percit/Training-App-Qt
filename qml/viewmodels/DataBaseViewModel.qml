@@ -34,7 +34,7 @@ QtObject {
             FbDatabase.setBestPace(DbModel.bestPace);
             FbDatabase.setDailyGoal(DbModel.dailyGoal);
             FbDatabase.setWeeklyGoal(DbModel.weeklyGoal);
-            FbDatabase.putValues("test2")
+            FbDatabase.putValues(DbModel.mail)
         }
     }
 }

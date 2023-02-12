@@ -16,7 +16,7 @@ ComboBox {
         contentItem: Rectangle {
             width:parent.width
             height:parent.height
-            color: "transparent"//Style.black10
+            color: "transparent"
 
             Text {
                 text: modelData

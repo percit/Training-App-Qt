@@ -20,7 +20,7 @@ MainPage {
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                DbModel.setMonday(1234, 1234)
+                // DbModel.setTuesday(098, 1234098)
             }
         }   
     }
@@ -38,8 +38,7 @@ MainPage {
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                buttonText.text = DbModel.monday_km
-                // console.log(DbModel.monday_time)
+                // buttonText.text = DbModel.tuesday_km
             }
         }   
     }

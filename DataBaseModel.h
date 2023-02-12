@@ -22,8 +22,8 @@ class DataBaseModel : public QObject
     Q_PROPERTY(qreal allDuration READ allDuration WRITE setAllDuration NOTIFY allDurationChanged)
     Q_PROPERTY(int weeklyGoal READ weeklyGoal WRITE setWeeklyGoal NOTIFY weeklyGoalChanged) // how many meters we want to run in a week
     Q_PROPERTY(int dailyGoal READ dailyGoal WRITE setDailyGoal NOTIFY dailyGoalChanged)    // or day
+    Q_PROPERTY(QString mail READ mail WRITE setMail NOTIFY mailChanged)
 
-    // this is a temporary solution
     Q_PROPERTY(int monday_km READ monday_km NOTIFY monday_kmChanged)
     Q_PROPERTY(int monday_time READ monday_time NOTIFY monday_timeChanged)
     Q_PROPERTY(int tuesday_km READ tuesday_km NOTIFY tuesday_kmChanged)
@@ -51,18 +51,20 @@ private:
     qreal m_allDuration = 0;
     int m_weeklyGoal = 0;
     int m_dailyGoal = 0;
+    QString m_mail;
 
 public:
     explicit DataBaseModel(QObject *parent = nullptr);
 
     // database functions
     std::pair<int, int> returnDataBaseElementByName(const QString &name) const;
+    QString returnMail(const QString &name);
     void initializeDataBase();
     void printDataBase();
     void emitDayChanges();
 
-    Q_INVOKABLE void clearAllData();//this is before loading firebase model
-    Q_INVOKABLE void updateAllMaxes();//this is before loading firebase model
+    Q_INVOKABLE void clearAllData();
+    Q_INVOKABLE void updateAllMaxes();
     Q_INVOKABLE void setWeeklyKmRun(qreal newWeeklyKmRun);
     Q_INVOKABLE void setLongestDistance(qreal newLongestDistance);
     Q_INVOKABLE void setLongestDuration(qreal newLongestDuration);
@@ -71,6 +73,7 @@ public:
     Q_INVOKABLE void setAllDuration(qreal newAllDuration);
     Q_INVOKABLE void setWeeklyGoal(int newWeeklyGoal);
     Q_INVOKABLE void setDailyGoal(int newDailyGoal);
+    Q_INVOKABLE void setMail(QString newMail);
 
     Q_INVOKABLE void setMonday(int new_km, int new_time);
     Q_INVOKABLE void setTuesday(int new_km, int new_time);
@@ -89,6 +92,7 @@ public:
     qreal allDuration();
     int weeklyGoal() const;
     int dailyGoal() const;
+    QString mail();
 
     int monday_km() const;
     int monday_time() const;
@@ -108,8 +112,7 @@ public:
 public slots:
 
 signals:
-
-    void weeklyKmRunChanged(); //to akurat jest potrzebne
+    void weeklyKmRunChanged();
     void longestDistanceChanged();
     void longestDurationChanged();
     void bestPaceChanged();
@@ -132,6 +135,7 @@ signals:
     void sunday_timeChanged();
     void weeklyGoalChanged();
     void dailyGoalChanged();
+    void mailChanged();
 };
 
 #endif // DATABASEMODEL_H

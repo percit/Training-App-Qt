@@ -12,6 +12,9 @@ This is a multiplatform Running app build with MVVM pattern
 6. GTest - testing
 7. CMake - build automation
 
+# To build this, you have to update REST API Urls for your own firebase
+
+They are in firebase_auth.cpp and firebase_database.cpp
 
 # Running app:
 

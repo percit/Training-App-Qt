@@ -61,7 +61,7 @@ MainPage {
 		}
 		Column {
 			Text {
-				text: viewModel.averageDuration + " min"
+				text: viewModel.averageDuration
 				font: Style.fontBold16
 			}
 			Text {
@@ -76,7 +76,7 @@ MainPage {
 			top: parent.top; topMargin: 250 * Style.scaleY
 		}
 		text: "Weekly Chart"
-		font: Style.fontBold16 //TODO make it bigger
+		font: Style.fontBold16
 	}
 
 

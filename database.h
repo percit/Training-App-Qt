@@ -26,6 +26,9 @@ public:
   bool dayExists(const QString &name) const;
   void printAll() const;
   bool clearDataBase();
+  void addMail(const QString &day, const QString &mail);
+  void updateMail(const QString &day, const QString &mail, int id);
+  QString returnMail(const QString &name);
 
 private:
   QSqlDatabase m_db;
