@@ -81,6 +81,7 @@ void DataBaseModel::initializeDataBase()
         db.addElement("LongestRun", m_longestDistance, m_longestDuration);
         db.addElement("Duration", m_averageDuration, m_allDuration);
         db.addElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace);
+        db.addMail("Mail", m_mail);
 
         qDebug() << "Initialization complete";
     }
@@ -97,14 +98,29 @@ void DataBaseModel::clearAllData()
     setFriday(0, 0);
     setSaturday(0, 0);
     setSunday(0, 0);
-    // initializeDataBase();//i don't this this is needed TODO RETEST
+
+    setWeeklyKmRun(0);
+    setLongestDistance(0);
+    setLongestDuration(0);
+    setBestPace(0);
+    setAverageDuration(0);
+    setAllDuration(0);
+    setWeeklyGoal(0);
+    setDailyGoal(0);
+    setMail("");
+    qDebug() << "CLEAR ALL DATA";
 }
 
 std::pair<int, int> DataBaseModel::returnDataBaseElementByName(const QString &name) const
 {
-    std::pair<int, int> day;
     DataBase db("database_file.db");
     return db.returnDataBaseElementByName(name);
+}
+
+QString DataBaseModel::returnMail(const QString &name)
+{
+    DataBase db("database_file.db");
+    return db.returnMail(name);
 }
 
 void DataBaseModel::printDataBase()
@@ -112,7 +128,6 @@ void DataBaseModel::printDataBase()
     DataBase db("database_file.db");
     if (db.isOpen()) db.printAll();
 }
-
 
 void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
 {
@@ -219,6 +234,19 @@ void DataBaseModel::setBestPace(qreal newBestPace)
     emit bestPaceChanged();
 }
 
+void DataBaseModel::setMail(QString newMail)
+{
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.updateMail("Mail", newMail, 12); // day, meters, time
+        qDebug() << "setmail";
+        qDebug() << "Updating database complete";
+    }
+    else qDebug() << "Database is not open!";
+    emit mailChanged();
+}
+
 // /////////////////////////////////////////////////////////////////////
 // DAYS
 
@@ -302,7 +330,7 @@ void DataBaseModel::setSaturday(int new_km, int new_time)
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.updateElement("Monday", new_km, new_time, 6); // day, meters, time
+        db.updateElement("Saturday", new_km, new_time, 6); // day, meters, time
         qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
@@ -317,7 +345,7 @@ void DataBaseModel::setSunday(int new_km, int new_time)
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.updateElement("Monday", new_km, new_time, 7); // day, meters, time
+        db.updateElement("Sunday", new_km, new_time, 7); // day, meters, time
         qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
@@ -365,6 +393,11 @@ qreal DataBaseModel::averageDuration()
 qreal DataBaseModel::allDuration()
 {
     return returnDataBaseElementByName("Duration").second;
+}
+
+QString DataBaseModel::mail()
+{
+    return returnMail("Mail");
 }
 
 int DataBaseModel::monday_km() const

@@ -117,7 +117,7 @@ MainPage {
         running: false
         repeat: false
         onTriggered: {
-            if (FbAuth.connectSuccesful || root.testBench) { //TODO fix and retest it
+            if (FbAuth.connectSuccesful || root.testBench) {
                 console.log("connect succesfull")
                 root.changeBottomRowVisibility()
                 //TODO it gave weak password, you need to accomodate that
@@ -125,10 +125,11 @@ MainPage {
             const mailAfterRegex = extractEmailUsername(root.email);
 
             //this else could be async
-            if (!signInOn) //make a table in firebase if signing up
+            if (!root.signInOn) //make a table in firebase if signing up
             {
                 FbDatabase.postValues(mailAfterRegex);
                 DbModel.clearAllData();
+                DbModel.setMail(mailAfterRegex);
             }
             else 
             {
@@ -139,12 +140,8 @@ MainPage {
                 DbModel.setBestPace(FbDatabase.bestPace);
                 DbModel.setDailyGoal(FbDatabase.dailyGoal);
                 DbModel.setWeeklyGoal(FbDatabase.weeklyGoal);
+                DbModel.setMail(mailAfterRegex);
             }
-
-            //here starts testing
-            console.log("testy:")
-            console.log(DbModel.longestDuration)
-
         }
     }
     function extractEmailUsername(mail) {
