@@ -22,6 +22,7 @@ set(
   main.cpp
   database.cpp
   DataBaseModel.cpp
+  firebase_database.cpp
   qml/qml.qrc
 )
 

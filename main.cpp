@@ -5,11 +5,14 @@
 #include <QQuickView>
 #include "database.h"
 #include "DataBaseModel.h"
+#include "firebase_database.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
+
+    // FirebaseDataBase fbDatabase; this should be commented out until you make whole class with proper functions for it
 
     //we register database as singleton
     qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
