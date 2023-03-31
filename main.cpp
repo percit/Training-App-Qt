@@ -12,13 +12,12 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-
     qmlRegisterSingletonType<FirebaseAuth>("FirebaseAuth", 1, 0, "FbAuth", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
 
         FirebaseAuth *fbAuth = new FirebaseAuth();
-        fbAuth->setAPIKey("AIzaSyC5tR1cHCZD80oEyvJeBwVvy-Y_dXI3ODg");
+        fbAuth->setAPIKey("");
         fbAuth->signUserIn("test@email.com", "Password123");
         return fbAuth;
     });
