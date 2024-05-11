@@ -64,18 +64,18 @@ void DataBase::addElement(const QString &name, const double &km, const int &time
 }
 void DataBase::updateElement(const QString &name, double km, int time, int id)
 {
-    if (QSqlDatabase::contains("MyDBConnection"))
-    {
-        QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-        query.prepare("UPDATE day SET name = :name, km = :km, time = :time WHERE id = :id");
+    // if (QSqlDatabase::contains("MyDBConnection"))
+    // {
+    //     QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
+    //     query.prepare("UPDATE day SET name = :name, km = :km, time = :time WHERE id = :id");
 
-        query.bindValue(":name", name);
-        query.bindValue(":km", km);
-        query.bindValue(":time", time);
-        query.bindValue(":id", id);
+    //     query.bindValue(":name", name);
+    //     query.bindValue(":km", km);
+    //     query.bindValue(":time", time);
+    //     query.bindValue(":id", id);
 
-        if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
-    }
+    //     if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
+    // }
 }
 /**
  * @brief remove whole day row from database
@@ -111,25 +111,25 @@ bool DataBase::removeElement(const QString &name)
 std::pair<int, int> DataBase::returnDataBaseElementByName(const QString &name)
 {
     std::pair<int, int> temp;
-    if (dayExists(name))
-    {
-        if (QSqlDatabase::contains("MyDBConnection"))
-        {
-            QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-            query.prepare("SELECT * FROM day WHERE name = (:name)");
-            query.bindValue(":name", name);
-            if (!query.exec())
-                qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();
-            if (query.next())
-            {
-                QString name = query.value("name").toString();
-                temp.first = query.value("km").toInt();
-                temp.second = query.value("time").toInt();
-            }
-        }
-    }
-    else
-        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << name << " doesn't exist";
+    // if (dayExists(name))
+    // {
+    //     if (QSqlDatabase::contains("MyDBConnection"))
+    //     {
+    //         QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
+    //         query.prepare("SELECT * FROM day WHERE name = (:name)");
+    //         query.bindValue(":name", name);
+    //         if (!query.exec())
+    //             qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();
+    //         if (query.next())
+    //         {
+    //             QString name = query.value("name").toString();
+    //             temp.first = query.value("km").toInt();
+    //             temp.second = query.value("time").toInt();
+    //         }
+    //     }
+    // }
+    // else
+    //     qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << name << " doesn't exist";
 
     return temp;
 }
@@ -207,17 +207,17 @@ void DataBase::addMail(const QString &name, const QString &mail)
 }
 void DataBase::updateMail(const QString &name, const QString &mail, int id)
 {
-    if (QSqlDatabase::contains("MyDBConnection"))
-    {
-        QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-        query.prepare("UPDATE day SET name = :name, mail = :mail WHERE id = :id");
+    // if (QSqlDatabase::contains("MyDBConnection"))
+    // {
+    //     QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
+    //     query.prepare("UPDATE day SET name = :name, mail = :mail WHERE id = :id");
 
-        query.bindValue(":name", name);
-        query.bindValue(":mail", mail);
-        query.bindValue(":id", id);
+    //     query.bindValue(":name", name);
+    //     query.bindValue(":mail", mail);
+    //     query.bindValue(":id", id);
 
-        if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
-    }
+    //     if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
+    // }
 }
 QString DataBase::returnMail(const QString &name)
 {

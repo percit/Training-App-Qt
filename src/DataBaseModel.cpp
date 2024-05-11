@@ -108,7 +108,7 @@ void DataBaseModel::clearAllData()
     setWeeklyGoal(0);
     setDailyGoal(0);
     setMail("");
-    qDebug() << "CLEAR ALL DATA";
+    // qDebug() << "CLEAR ALL DATA";
 }
 
 std::pair<int, int> DataBaseModel::returnDataBaseElementByName(const QString &name) const
@@ -136,7 +136,7 @@ void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
     if (db.isOpen())
     {
         db.updateElement("Goal", m_weeklyGoal, m_dailyGoal, 8); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit weeklyGoalChanged();
@@ -149,7 +149,7 @@ void DataBaseModel::setDailyGoal(int newDailyGoal)
     if (db.isOpen())
     {
         db.updateElement("Goal", m_weeklyGoal, m_dailyGoal, 8); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit dailyGoalChanged();
@@ -162,7 +162,7 @@ void DataBaseModel::setLongestDistance(qreal newLongestDistance)
     if (db.isOpen())
     {
         db.updateElement("LongestRun", m_longestDuration, m_averageDuration, 9); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit longestDistanceChanged();
@@ -175,7 +175,7 @@ void DataBaseModel::setLongestDuration(qreal newLongestDuration)
     if (db.isOpen())
     {
         db.updateElement("LongestRun", m_longestDuration, m_averageDuration, 9); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit longestDurationChanged();
@@ -188,7 +188,7 @@ void DataBaseModel::setAverageDuration(qreal newAverageDuration)
     if (db.isOpen())
     {
         db.updateElement("Duration", m_averageDuration, m_allDuration, 10); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit averageDurationChanged();
@@ -201,7 +201,7 @@ void DataBaseModel::setAllDuration(qreal newAllDuration)
     if (db.isOpen())
     {
         db.updateElement("Duration", m_averageDuration, m_allDuration, 10); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit allDurationChanged();
@@ -214,7 +214,7 @@ void DataBaseModel::setWeeklyKmRun(qreal newWeeklyKmRun)
     if (db.isOpen())
     {
         db.updateElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace, 11); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
 
@@ -228,7 +228,7 @@ void DataBaseModel::setBestPace(qreal newBestPace)
     if (db.isOpen())
     {
         db.updateElement("WeeklyKmRun_BestPace", m_weeklyKmRun, m_bestPace, 11); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit bestPaceChanged();
@@ -240,8 +240,8 @@ void DataBaseModel::setMail(QString newMail)
     if (db.isOpen())
     {
         db.updateMail("Mail", newMail, 12); // day, meters, time
-        qDebug() << "setmail";
-        qDebug() << "Updating database complete";
+        // qDebug() << "setmail";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit mailChanged();
@@ -256,7 +256,7 @@ void DataBaseModel::setMonday(int new_km, int new_time)
     if (db.isOpen())
     {
         db.updateElement("Monday", new_km, new_time, 1); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     runningTime[0] = new_km;
@@ -271,7 +271,7 @@ void DataBaseModel::setTuesday(int new_km, int new_time)
     if (db.isOpen())
     {
         db.updateElement("Tuesday", new_km, new_time, 2); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     runningTime[1] = new_km;
@@ -286,7 +286,7 @@ void DataBaseModel::setWednesday(int new_km, int new_time)
     if (db.isOpen())
     {
         db.updateElement("Wednesday", new_km, new_time, 3); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     runningTime[2] = new_km;
@@ -301,7 +301,7 @@ void DataBaseModel::setThursday(int new_km, int new_time)
     if (db.isOpen())
     {
         db.updateElement("Thursday", new_km, new_time, 4); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     runningTime[3] = new_km;
@@ -316,7 +316,7 @@ void DataBaseModel::setFriday(int new_km, int new_time)
     if (db.isOpen())
     {
         db.updateElement("Friday", new_km, new_time, 5); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     runningTime[4] = new_km;
@@ -331,7 +331,7 @@ void DataBaseModel::setSaturday(int new_km, int new_time)
     if (db.isOpen())
     {
         db.updateElement("Saturday", new_km, new_time, 6); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     runningTime[5] = new_km;
@@ -346,7 +346,7 @@ void DataBaseModel::setSunday(int new_km, int new_time)
     if (db.isOpen())
     {
         db.updateElement("Sunday", new_km, new_time, 7); // day, meters, time
-        qDebug() << "Updating database complete";
+        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     runningTime[6] = new_km;
