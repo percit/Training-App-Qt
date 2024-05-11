@@ -15,42 +15,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick OpenGL REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick OpenGL REQUIRED)
 
+add_subdirectory(src)
+
 option(BUILD_TESTS "Build tests" OFF)
 if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
-
-set(
-  PROJECT_SOURCES
-  main.cpp
-  database.cpp
-  DataBaseModel.cpp
-  firebase_database.cpp
-  firebase_auth.cpp
-  catch/catch_main.cpp
-  qml/qml.qrc
-)
-
-if(ANDROID)
-add_library(
-  Training-app SHARED
-  ${PROJECT_SOURCES}
-)
-else()
-add_executable(
-  Training-app
-  ${PROJECT_SOURCES}
-)
-endif()
-
-
-target_compile_definitions(
-  Training-app
-  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-)
-target_link_libraries(
-  Training-app
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick
-  Qt${QT_VERSION_MAJOR}::Sql
-)
