@@ -7,10 +7,8 @@
 #include "firebase_database.h"
 #include "firebase_auth.h"
 
-int main(int argc, char *argv[])
-{
-    QGuiApplication app(argc, argv);
-    QQmlApplicationEngine engine;
+int main(int argc, char *argv[]) {
+  QGuiApplication app(argc, argv);
 
     qmlRegisterSingletonType<FirebaseAuth>("FirebaseAuth", 1, 0, "FbAuth", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
@@ -45,16 +43,16 @@ int main(int argc, char *argv[])
         return database;
     });
 
-    qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0, "Style");
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(
-        &engine, &QQmlApplicationEngine::objectCreated,
-        &app, [url](QObject *obj, const QUrl &objUrl)
-        {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1); },
-        Qt::QueuedConnection);
-    engine.load(url);
+  qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0,
+                           "Style");
+
+    QQuickView view;
+    view.connect(view.engine(), &QQmlEngine::quit, &app, &QCoreApplication::quit);
+    view.setSource(QUrl("qrc:/main.qml"));
+    if (view.status() == QQuickView::Error)
+        return -1;
+    view.setResizeMode(QQuickView::SizeRootObjectToView);
+    view.show();
 
     return app.exec();
 }
