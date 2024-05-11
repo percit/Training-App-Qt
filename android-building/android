@@ -1,0 +1,77 @@
+https://github.com/a12e/docker-qt/blob/master/6.5-android.Dockerfile to wyglada zajebiscie
+
+
+
+
+
+https://gitlab.com/vikingsoftware/qt5.12.4androiddocker/-/blob/master/README.md?ref_type=heads to sie zbudowalo, brzmi najciekawiej, ale nie moge tego odpalic, pozniej sprobuj ponownie to zrobic
+
+
+
+
+-DANDROID_ABI:STRING=armeabi-v7a
+
+
+
+
+USUN RESZTE KONTENEROW JAK JUZ ZROBISZ TAK ZEBY DZIALALO
+
+# Co do androida
+
+
+https://stackoverflow.com/questions/28684647/developing-a-qt-app-for-android-from-the-command-line to wyglada na zajebisty link
+
+https://doc.qt.io/qt-5/android-getting-started.html ten link mowi, ze potrzebujesz jednak sdk osobno
+
+~/Qt/<qt_version>/android_<abi>/bin/qt-cmake \
+    -DANDROID_SDK_ROOT=~/Android/Sdk \
+    -DANDROID_NDK_ROOT=~/Android/Sdk/ndk/26.1.10909125 \
+    -S <source_dir> -B <build_dir> \
+    -GNinja
+
+
+https://salsa.debian.org/bastif/qt-android tu ciekawy repo
+
+- 5.15.2 nie zbudowal sie na androida nawet bez modulow z aqt
+- 5.13.2 sie zbudowal bez modulow
+- nie umiem jeszcze zbudowac apk z komend
+- znalazlem androiddeployqt w /opt/qt/5.13.2/android_armv7/bin/androiddeployqt
+
+
+/opt/qt/5.13.2/android_armv7/bin/androiddeployqt --output android --verbose --input android-libMyProject.so-deployment-settings.json 
+
+
+
+# linki jak budowac przy pomocy cli
+https://github.com/LaurentGomila/qt-android-cmake
+https://stackoverflow.com/questions/28684647/developing-a-qt-app-for-android-from-the-command-line 
+
+ /opt/Qt-amd64-6.4.2/bin/qt-cmake ..
+    - make
+
+https://stackoverflow.com/questions/77832431/not-able-to-setup-qt-creator-for-android-development
+https://doc.qt.io/qt-6/android-building-projects-from-commandline.html
+# gotowe konternery do przetestowania
+https://bugfreeblog.duckdns.org/docker-qt-tags => nie moge tego odpalic
+https://hub.docker.com/r/carlonluca/qt-dev => nie moge tego odpalic
+https://hub.docker.com/layers/homdx/qt-android-docker/5.12.4/images/sha256-e1ee6ac48153fa0d06c0cc6bca0c12a630537b034af00c11b13996d1eae1e943 => nie chce sie odpalic (zawiesilo sie)
+https://raymii.org/s/blog/Qt_5.15_LTS_Docker_Image_for_Android_with_OpenSSL.html => pobieral sie wiecznosc, dalem se spokoj
+
+# dockerfiles
+https://aqtinstall.readthedocs.io/en/latest/getting_started.html#installing-qt-for-android => nie moge nic z tym zbudowac, brakuje ndk i sdk chyba, ale sam kontener sie zbuduje z 5.13
+https://github.com/bbernhard/qt-android-docker => sam docker nie chcial sie zbudowac
+https://gitlab.com/vikingsoftware/qt5.12.4androiddocker/-/blob/master/Dockerfile?ref_type=heads
+
+
+android_armv7, android_arm64_v8a, android_x86, android_x86_64 for android
+#qtquick3d android qtvirtualkeyboard qtquicktimeline cmake ninja openssl
+
+Qt5.15.x (https://tutorialforlinux.com/2021/07/17/step-by-step-qt-creator-manjaro-installation/2/  )
+Qt -> Qt 5.15.x -> Desktop GCC 64 bit
+Qt -> Qt 5.15.x -> Android 
+Qt -> Qt 5.15.x -> Qt Quick 3D 
+Qt -> Qt 5.15.x -> Qt Virtual Keyboard
+Qt -> Qt 5.15.x -> Qt Quick Timeline
+Qt -> Developer and Designer Tools -> CMake
+Qt -> Developer and Designer Tools -> Ninja
+Qt -> Developer and Designer Tools -> OpenSSL
