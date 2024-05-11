@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd build
-cmake ..
+cmake .. -DBUILD_TESTS=ON
 ninja -j16
