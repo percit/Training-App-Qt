@@ -105,23 +105,9 @@ Item {
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
 
-            //propagating values to c++ backend
-            switch(root.dateString) {
-                case 'Monday':
-                    DbModel.setMonday(fullDistance, fullRunTime * timerRefreshRate)
-                case 'Tuesday':
-                    DbModel.setTuesday(fullDistance, fullRunTime * timerRefreshRate)
-                case 'Wednesday':
-                    DbModel.setWednesday(fullDistance, fullRunTime * timerRefreshRate)
-                case 'Thursday':
-                    DbModel.setThursday(fullDistance, fullRunTime * timerRefreshRate)
-                case 'Friday':
-                    DbModel.setFriday(fullDistance, fullRunTime * timerRefreshRate)
-                case 'Saturday':
-                    DbModel.setSaturday(fullDistance, fullRunTime * timerRefreshRate)
-                case 'Sunday':
-                    DbModel.setSunday(fullDistance, fullRunTime * timerRefreshRate)
-            }
+
+            // propagating values to c++ backend
+            DbModel.setWeek(root.dateString, fullDistance, fullRunTime * timerRefreshRate)
         }
     }
 

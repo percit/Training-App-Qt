@@ -48,7 +48,7 @@ private:
     QNetworkAccessManager *m_networkManager;
     QNetworkReply *m_networkReply;
 
-    int m_weeklyKmRun = 0;
+    int m_weeklyMetersRun = 0;
     int m_longestDistance = 0;
     int m_longestDuration = 0;
     int m_bestPace = 0;

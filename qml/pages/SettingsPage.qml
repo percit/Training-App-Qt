@@ -149,7 +149,7 @@ collection and use of information in accordance with this Privacy Policy."
                         ListElement { text: "10" }
                     }
                     onActivated: {
-                        DbModel.setDailyGoal(currentText)
+                        DbModel.setDailyGoal(currentText * 1000) //change km to meters
                     }
                 }
                 StyledComboBox {
@@ -172,7 +172,7 @@ collection and use of information in accordance with this Privacy Policy."
                         ListElement { text: "50" }
                     }
                     onActivated: {
-                        DbModel.setWeeklyGoal(currentText)
+                        DbModel.setWeeklyGoal(currentText * 1000) //change km to meters
                     }
                 }
                 StyledComboBox {
