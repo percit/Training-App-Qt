@@ -78,6 +78,7 @@ signals:
     void mailChanged();
 
 private:
+    void insertDataToDatabase(QString name, int firstValue, int secondValue, int id);
     int m_weeklyMetersRun = 0;
     int m_longestDistance = 0;
     int m_longestDuration = 0;
