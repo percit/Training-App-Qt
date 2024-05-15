@@ -32,7 +32,7 @@ void DataBase::createTable()
     if (QSqlDatabase::contains("MyDBConnection"))
     {
         QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-        query.prepare("CREATE TABLE day(id INTEGER PRIMARY KEY, name TEXT, km INT, time INT);");
+        query.prepare("CREATE TABLE day(id INTEGER PRIMARY KEY, name TEXT, meters INT, time INT);");
         if (!query.exec())
         {
             qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();
@@ -43,39 +43,39 @@ void DataBase::createTable()
  * @brief add element to the table of database
  * 
  * @param name 
- * @param km 
+ * @param meters 
  * @param time 
  * @return true 
  * @return false 
  */
-void DataBase::addElement(const QString &name, const double &km, const int &time)
+void DataBase::addElement(const QString &name, const double &meters, const int &time)
 {
     if (QSqlDatabase::contains("MyDBConnection"))
     {
         QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-        query.prepare("INSERT INTO day (name, km, time) VALUES (:name, :km, :time)");
+        query.prepare("INSERT INTO day (name, meters, time) VALUES (:name, :meters, :time)");
 
         query.bindValue(":name", name);
-        query.bindValue(":km", km);
+        query.bindValue(":meters", meters);
         query.bindValue(":time", time);
 
         if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
     }
 }
-void DataBase::updateElement(const QString &name, double km, int time, int id)
+void DataBase::updateElement(const QString &name, double meters, int time, int id)
 {
-    if (QSqlDatabase::contains("MyDBConnection"))
-    {
-        QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-        query.prepare("UPDATE day SET name = :name, km = :km, time = :time WHERE id = :id");
+    // if (QSqlDatabase::contains("MyDBConnection"))
+    // {
+    //     QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
+    //     query.prepare("UPDATE day SET name = :name, meters = :meters, time = :time WHERE id = :id");
 
-        query.bindValue(":name", name);
-        query.bindValue(":km", km);
-        query.bindValue(":time", time);
-        query.bindValue(":id", id);
+    //     query.bindValue(":name", name);
+    //     query.bindValue(":meters", meters);
+    //     query.bindValue(":time", time);
+    //     query.bindValue(":id", id);
 
-        if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
-    }
+    //     if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
+    // }
 }
 /**
  * @brief remove whole day row from database
@@ -111,25 +111,25 @@ bool DataBase::removeElement(const QString &name)
 std::pair<int, int> DataBase::returnDataBaseElementByName(const QString &name)
 {
     std::pair<int, int> temp;
-    if (dayExists(name))
-    {
-        if (QSqlDatabase::contains("MyDBConnection"))
-        {
-            QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-            query.prepare("SELECT * FROM day WHERE name = (:name)");
-            query.bindValue(":name", name);
-            if (!query.exec())
-                qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();
-            if (query.next())
-            {
-                QString name = query.value("name").toString();
-                temp.first = query.value("km").toInt();
-                temp.second = query.value("time").toInt();
-            }
-        }
-    }
-    else
-        qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << name << " doesn't exist";
+    // if (dayExists(name))
+    // {
+    //     if (QSqlDatabase::contains("MyDBConnection"))
+    //     {
+    //         QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
+    //         query.prepare("SELECT * FROM day WHERE name = (:name)");
+    //         query.bindValue(":name", name);
+    //         if (!query.exec())
+    //             qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();
+    //         if (query.next())
+    //         {
+    //             QString name = query.value("name").toString();
+    //             temp.first = query.value("meters").toInt();
+    //             temp.second = query.value("time").toInt();
+    //         }
+    //     }
+    // }
+    // else
+    //     qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << name << " doesn't exist";
 
     return temp;
 }
@@ -144,7 +144,7 @@ void DataBase::printAll() const
         while (query.next())
         {
             qDebug() << query.value("name").toString();
-            qDebug() << query.value("km").toString();
+            qDebug() << query.value("meters").toString();
             qDebug() << query.value("time").toString();
         }
     }
@@ -207,17 +207,17 @@ void DataBase::addMail(const QString &name, const QString &mail)
 }
 void DataBase::updateMail(const QString &name, const QString &mail, int id)
 {
-    if (QSqlDatabase::contains("MyDBConnection"))
-    {
-        QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
-        query.prepare("UPDATE day SET name = :name, mail = :mail WHERE id = :id");
+    // if (QSqlDatabase::contains("MyDBConnection"))
+    // {
+    //     QSqlQuery query(QSqlDatabase::database("MyDBConnection"));
+    //     query.prepare("UPDATE day SET name = :name, mail = :mail WHERE id = :id");
 
-        query.bindValue(":name", name);
-        query.bindValue(":mail", mail);
-        query.bindValue(":id", id);
+    //     query.bindValue(":name", name);
+    //     query.bindValue(":mail", mail);
+    //     query.bindValue(":id", id);
 
-        if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
-    }
+    //     if (!query.exec()) qWarning() << "ERROR: " << __PRETTY_FUNCTION__ << query.lastError().text();   
+    // }
 }
 QString DataBase::returnMail(const QString &name)
 {

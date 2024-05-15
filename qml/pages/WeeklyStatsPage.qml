@@ -28,7 +28,7 @@ MainPage {
 			font: Style.fontBold22
 		}
 		Text {
-			text: "Total km"
+			text: "Total distance"
 			font: Style.fontNormal8
 		}
 	}

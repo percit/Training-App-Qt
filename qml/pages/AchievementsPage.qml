@@ -12,7 +12,7 @@ MainPage {
 
 	RadialProgressBar {
 	    lineWidth: 10 * Style.scaleY
-        value: viewModel.weeklyKmRun / 20
+        value: viewModel.radialProgressBarValue
         size: 230 * Style.scaleY
         secondaryColor: Style.black10
   		primaryColor: Style.green
@@ -36,7 +36,7 @@ MainPage {
 			}
 			Text {
 				anchors.horizontalCenter: parent.horizontalCenter
-				text: "Weekly Goal " + viewModel.weeklyGoalInMeters / 1000 + "km"
+				text: "Weekly Goal " + viewModel.weeklyGoalInKm
 				font: Style.fontNormal12
 				color: Style.black75
 			}

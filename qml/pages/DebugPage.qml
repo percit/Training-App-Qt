@@ -10,6 +10,7 @@ import FirebaseDataBase 1.0
 
 MainPage {
 	id: root
+    readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
 
 	placeholder: false
 
@@ -20,7 +21,6 @@ MainPage {
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                // DbModel.setTuesday(098, 1234098)
             }
         }   
     }
@@ -33,12 +33,13 @@ MainPage {
             id: buttonText
             color: "white"
             anchors.centerIn: parent
-            text: DbModel.monday_km
+            text: viewModel.weeklyGoalInKm
         }
         MouseArea {
             anchors.fill: parent
             onClicked:{
-                // buttonText.text = DbModel.tuesday_km
+                console.log(viewModel.weeklyGoalInKm)
+                console.log(DbModel.weeklyGoal)
             }
         }   
     }

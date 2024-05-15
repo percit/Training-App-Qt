@@ -118,7 +118,7 @@ MainPage {
         repeat: false
         onTriggered: {
             if (FbAuth.connectSuccesful || root.testBench) {
-                console.log("connect succesfull")
+                // console.log("connect succesfull")
                 root.changeBottomRowVisibility()
                 //TODO it gave weak password, you need to accomodate that
             }
