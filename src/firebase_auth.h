@@ -15,6 +15,7 @@ public:
     ~FirebaseAuth();
 
     void setAPIKey(const QString &apiKey);
+    void setFirebaseUrl(const QString &firebaseUrl);
     bool connectSuccesful() const;
     void setConnectSuccesful(bool newConnectSuccesful);
 
@@ -35,6 +36,7 @@ private:
 
     QString m_APIKey;
     QString m_idToken;
+    QString m_firebaseUrl;
     bool m_connectSuccesful = false;
     QNetworkAccessManager *m_networkManager;
     QNetworkReply *m_networkReply;

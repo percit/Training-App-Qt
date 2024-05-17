@@ -16,9 +16,14 @@ FirebaseAuth::~FirebaseAuth()
     m_networkManager->deleteLater();
 }
 
+void FirebaseAuth::setFirebaseUrl(const QString &firebaseUrl)
+{
+    m_firebaseUrl = firebaseUrl;
+}
+
 void FirebaseAuth::signUserUp(const QString &emailAddress, const QString &password)
 {
-    // QString signUpEndpoint = "" + m_APIKey;
+    // QString signUpEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + m_APIKey;
     // QVariantMap variantPayload;
     // variantPayload["email"] = emailAddress;
     // variantPayload["password"] = password;
@@ -31,7 +36,7 @@ void FirebaseAuth::signUserUp(const QString &emailAddress, const QString &passwo
 
 void FirebaseAuth::signUserIn(const QString &emailAddress, const QString &password)
 {
-    // QString signInEndpoint = "" + m_APIKey;
+    // QString signInEndpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + m_APIKey;
     // QVariantMap variantPayload;
     // variantPayload["email"] = emailAddress;
     // variantPayload["password"] = password;
@@ -77,7 +82,7 @@ void FirebaseAuth::parseResponse(const QByteArray &response)
 }
 void FirebaseAuth::performAuthenticatedDataBaseCall()
 {
-    QString endpoint = "<>.json" + m_idToken;
+    QString endpoint = m_firebaseUrl + ".json" + m_idToken;
     m_networkReply = m_networkManager->get(QNetworkRequest(QUrl(endpoint)));
     connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseAuth::networkReplyReadyRead);
 }
