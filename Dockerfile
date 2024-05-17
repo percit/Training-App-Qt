@@ -17,7 +17,7 @@ RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install cmake \
     mesa-common-dev libxkbcommon-dev libvulkan-dev libegl-dev \
     libxcb-icccm4 libxcb-image0 libxcb-keysyms1-dev libxcb-render-util0 libxcb-shape0 \
     gcc-12 clang-format clang-tidy python3-pip -yq libgtest-dev libgmock-dev g++-12 libstdc++-12-dev \
-    ninja-build libxcb-xinerama0 libxcb-cursor0 libnss3
+    ninja-build libxcb-xinerama0 libxcb-cursor0 libnss3 sqlite3
 RUN pip install -U pip; \
     pip install -U aqtinstall
 
