@@ -11,7 +11,7 @@ Rectangle {
 	property alias source: mainIcon.source
 
 	color: "transparent"
-	Icon {
+	CustomIcon {
 		id: mainIcon
 
 		height: 40 * Style.scaleX; width: 40 * Style.scaleX

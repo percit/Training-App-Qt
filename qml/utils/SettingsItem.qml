@@ -19,7 +19,7 @@ Rectangle {
 			leftMargin: 5
 		}
 		spacing: 10
-		Icon {
+		CustomIcon {
 			id: mainIcon
 
 			height: 40 * Style.scaleX; width: 40 * Style.scaleX

@@ -14,6 +14,12 @@ MainPage {
 
 	placeholder: false
 
+    CustomIcon {
+        anchors.centerIn: parent
+        source: "qrc:/assets/route.png"
+        color: "blue"
+    }
+
     Rectangle {
         id:logButton
         color: "white"

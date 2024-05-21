@@ -1,13 +1,17 @@
 import QtQuick 2.3
 import Qt5Compat.GraphicalEffects
-
-Image {
-    id: root
+Item {
     property color color: "transparent"
+    property alias source: root.source
+
+    Image {
+        id: root
+        width: parent.width
+        height: parent.height
+    }
     ColorOverlay {
         anchors.fill: root
         source: root
         color: "#ff0000"
     }
 }
-

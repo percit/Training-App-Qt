@@ -1,6 +1,6 @@
 import QtQuick 2.3
 import QtPositioning 5.6
-import QtLocation 5.11
+import QtLocation 6.5
 import DataBaseModel 1.0
 import "../Helper.js" as Helper
 
@@ -42,7 +42,7 @@ Item {
 
     Map {
         id: map
-        gesture.enabled: true
+        // gesture.enabled: true //no sign of it in qt 6.5
         anchors.fill: parent
         plugin: plugin
         zoomLevel: 15
@@ -54,7 +54,12 @@ Item {
             plugin: plugin
             query: RouteQuery {id: routeQuery }
             Component.onCompleted: {
-                routeQuery.addWaypoint(currentCoordinate);
+                routeQuery.addWaypoint(currentCoordinate); //
+                //Could not find any constructor for value type QGeoCoordinate to call with value undefined
+// "Could not convert argument 0 at"
+// 	 "expression for onCompleted@qrc:/viewmodels/MapModel.qml:57"
+// qrc:/viewmodels/MapModel.qml:57: TypeError: Passing incompatible arguments to C++ functions from JavaScript is not allowed.
+//todo chyba nie dzialaja rzeczy z geo
                 routeQuery.travelModes = RouteQuery.PedestrianTravel
                 update();
             }

@@ -11,7 +11,7 @@ Row {
 	property int space: 5
 
 	spacing: space
-	Icon {
+	CustomIcon {
 		id: m_icon
 
 		width: m_text.height; height: m_text.height

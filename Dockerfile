@@ -4,10 +4,9 @@ FROM os AS install_qt
 
 ARG INSTALL_DIR=/root
 ARG WORKSPACE_DIR=/workspace
-ARG QT_VER=5.15.2
+ARG QT_VER=6.5.2
 ARG QT_ARCH=gcc_64
-ARG QT_MODULES=""
-# qtquick3d qtvirtualkeyboard qtquicktimeline was here
+ARG QT_MODULES="qtpositioning qtlocation qt5compat qtshadertools"
 ARG USER_ID=1000
 
 WORKDIR $INSTALL_DIR

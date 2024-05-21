@@ -12,8 +12,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt5 COMPONENTS Core Quick Sql Positioning Network PositioningQuick OpenGL REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick OpenGL REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Core Quick Sql Positioning Network PositioningQuick OpenGL Core5Compat REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick OpenGL Core5Compat REQUIRED)
 
 add_subdirectory(src)
 

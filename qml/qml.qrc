@@ -13,7 +13,6 @@
         <file>pages/DebugPage.qml</file>
 
         <file>utils/BottomRow.qml</file>
-        <file>utils/Icon.qml</file>
         <file>utils/MainPage.qml</file>
         <file>utils/MenuButton.qml</file>
         <file>utils/ProgresBar.qml</file>
@@ -22,6 +21,7 @@
         <file>utils/RadialProgressBar.qml</file>
         <file>utils/SettingsItem.qml</file>
         <file>utils/StyledComboBox.qml</file>
+        <file>utils/CustomIcon.qml</file>
 
         <file>viewmodels/DataBaseViewModel.qml</file>
         <file>viewmodels/MapModel.qml</file>
