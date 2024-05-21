@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QString>
 
 class FirebaseDataBase : public QObject
 {
@@ -16,6 +17,8 @@ class FirebaseDataBase : public QObject
 public:
     explicit FirebaseDataBase(QObject *parent = nullptr);
     ~FirebaseDataBase();
+
+    void setFirebaseUrl(const QString &firebaseUrl);
 public slots:
     void networkReplyReadyRead();
 
@@ -54,7 +57,7 @@ private:
     int m_bestPace = 0;
     int m_weeklyGoal = 0;
     int m_dailyGoal = 0;
-
+    QString m_firebaseUrl;
 };
 
 #endif // FIREBASEDATABASE_H

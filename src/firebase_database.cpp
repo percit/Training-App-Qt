@@ -16,6 +16,11 @@ FirebaseDataBase::~FirebaseDataBase()
     m_networkManager->deleteLater();
 }
 
+void FirebaseDataBase::setFirebaseUrl(const QString &firebaseUrl)
+{
+    m_firebaseUrl = firebaseUrl;
+}
+
 void FirebaseDataBase::networkReplyReadyRead()
 {
     QString strReply = (QString)m_networkReply->readAll();
@@ -39,7 +44,7 @@ void FirebaseDataBase::networkReplyReadyRead()
 
 void FirebaseDataBase::testFirebaseFunc()
 {
-    m_networkReply = m_networkManager->get(QNetworkRequest(QUrl("<>.json")));
+    m_networkReply = m_networkManager->get(QNetworkRequest(QUrl(m_firebaseUrl + ".json")));
     if (m_networkReply->error() == QNetworkReply::NoError) {
         connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseDataBase::networkReplyReadyRead);
     }
@@ -50,7 +55,7 @@ void FirebaseDataBase::testFirebaseFunc()
 
 void FirebaseDataBase::readFirebaseData(const QString& mailName)
 {
-    m_networkReply = m_networkManager->get(QNetworkRequest(QUrl("<>" + mailName +".json")));
+    m_networkReply = m_networkManager->get(QNetworkRequest(QUrl(m_firebaseUrl + mailName +".json")));
     if (m_networkReply->error() == QNetworkReply::NoError) {
         connect(m_networkReply, &QNetworkReply::readyRead, this, &FirebaseDataBase::networkReplyReadyRead);
     }
@@ -68,7 +73,7 @@ void FirebaseDataBase::postValues(const QString& mailName)
     newRun["weeklyGoal"] = m_weeklyGoal;
     newRun["dailyGoal"] = m_dailyGoal;
     QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
-    QNetworkRequest newRunRequest(QUrl("<>"+mailName+".json"));
+    QNetworkRequest newRunRequest(QUrl(m_firebaseUrl+mailName+".json"));
     newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
     m_networkManager->post(newRunRequest, jsonDoc.toJson());
     putValues(mailName); //this is a bit of a hack, bc firebase produces some weird string, that I don't want rn TODO: find solution when free time
@@ -83,7 +88,7 @@ void FirebaseDataBase::putValues(const QString& mailName)
     newRun["weeklyGoal"] = m_weeklyGoal;
     newRun["dailyGoal"] = m_dailyGoal;
     QJsonDocument jsonDoc = QJsonDocument::fromVariant(newRun);
-    QNetworkRequest newRunRequest(QUrl("<>"+mailName+".json"));
+    QNetworkRequest newRunRequest(QUrl(m_firebaseUrl+mailName+".json"));
     newRunRequest.setHeader(QNetworkRequest::ContentTypeHeader, QString("application/json"));
     m_networkManager->put(newRunRequest, jsonDoc.toJson());
 }

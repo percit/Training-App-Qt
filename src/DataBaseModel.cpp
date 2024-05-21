@@ -10,7 +10,7 @@ DataBaseModel::DataBaseModel(QObject *parent) : QObject(parent),
                                                 m_weekMeters(7, 0),
                                                 m_weekTime(7, 0)
 {
-    // initializeDataBase();
+    initializeDataBase();
 }
 
 void DataBaseModel::updateAllMaxes() 
@@ -67,29 +67,28 @@ void DataBaseModel::emitDayChanges()
 }
 void DataBaseModel::initializeDataBase()
 {
-    
-    // DataBase db("database_file.db");
-    // if (db.isOpen())
-    // {
-    //     db.clearDataBase();
-    //     db.createTable();
-    //     db.addElement("Monday", m_weekMeters[0], m_weekTime[0]); // day, meters, time
-    //     db.addElement("Tuesday", m_weekMeters[1], m_weekTime[1]);
-    //     db.addElement("Wednesday", m_weekMeters[2], m_weekTime[2]);
-    //     db.addElement("Thursday", m_weekMeters[3], m_weekTime[3]);
-    //     db.addElement("Friday", m_weekMeters[4], m_weekTime[4]);
-    //     db.addElement("Saturday", m_weekMeters[5], m_weekTime[5]);
-    //     db.addElement("Sunday", m_weekMeters[6], m_weekTime[6]);
-    //     db.addElement("Goal", m_weeklyGoal, m_dailyGoal);
-    //     db.addElement("LongestRun", m_longestDistance, m_longestDuration);
-    //     db.addElement("Duration", m_averageDuration, m_allDuration);
-    //     db.addElement("weeklyMetersRun_BestPace", m_weeklyMetersRun, m_bestPace);
-    //     db.addMail("Mail", m_mail);
+    DataBase db("database_file.db");
+    if (db.isOpen())
+    {
+        db.clearDataBase();
+        db.createTable();
+        db.addElement("Monday", m_weekMeters[0], m_weekTime[0]); // day, meters, time
+        db.addElement("Tuesday", m_weekMeters[1], m_weekTime[1]);
+        db.addElement("Wednesday", m_weekMeters[2], m_weekTime[2]);
+        db.addElement("Thursday", m_weekMeters[3], m_weekTime[3]);
+        db.addElement("Friday", m_weekMeters[4], m_weekTime[4]);
+        db.addElement("Saturday", m_weekMeters[5], m_weekTime[5]);
+        db.addElement("Sunday", m_weekMeters[6], m_weekTime[6]);
+        db.addElement("Goal", m_weeklyGoal, m_dailyGoal);//this is ugly, but I don't have to use Monday_km and so on
+        db.addElement("LongestRun", m_longestDistance, m_longestDuration);
+        db.addElement("Duration", m_averageDuration, m_allDuration);
+        db.addElement("weeklyMetersRun_BestPace", m_weeklyMetersRun, m_bestPace);
+        db.addMail("Mail", m_mail);
 
-    //     qDebug() << "Initialization complete";
-    // }
-    // else
-    //     qDebug() << "Database is not open!";
+        qDebug() << "Initialization complete";
+    }
+    else
+        qDebug() << "Database is not open!";
 }
 
 void DataBaseModel::clearAllData()
@@ -133,109 +132,69 @@ void DataBaseModel::printDataBase()
     if (db.isOpen()) db.printAll();
 }
 
-void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
-{
-    m_weeklyGoal = std::max(m_weeklyGoal, newWeeklyGoal);
-    qDebug() << newWeeklyGoal << " " << m_weeklyGoal;//to dziala
+void DataBaseModel::insertDataToDatabase(QString name, int firstValue, int secondValue, int id)
+{//we always set 2 values at once, as sqlite table was done that way
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.updateElement("Goal", m_weeklyGoal, m_dailyGoal, 8); // day, meters, time
-        // qDebug() << "Updating database complete";
+        db.updateElement(name, firstValue, secondValue, id);
     }
     else qDebug() << "Database is not open!";
+}
+
+void DataBaseModel::setWeeklyGoal(int newWeeklyGoal)
+{
+    m_weeklyGoal = std::max(m_weeklyGoal, newWeeklyGoal);
+    insertDataToDatabase("Goal", m_weeklyGoal, m_dailyGoal, 8);
     emit weeklyGoalChanged();
 }
 
 void DataBaseModel::setDailyGoal(int newDailyGoal)
 {
     m_dailyGoal = std::max(m_dailyGoal, newDailyGoal);
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement("Goal", m_weeklyGoal, m_dailyGoal, 8); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
+    insertDataToDatabase("Goal", m_weeklyGoal, m_dailyGoal, 8);
     emit dailyGoalChanged();
 }
 
 void DataBaseModel::setLongestDistance(int newLongestDistance)
 {
     m_longestDistance = std::max(m_longestDistance, newLongestDistance);
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement("LongestRun", m_longestDuration, m_averageDuration, 9); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
+    insertDataToDatabase("LongestRun", m_longestDuration, m_averageDuration, 9);
     emit longestDistanceChanged();
 }
 
 void DataBaseModel::setLongestDuration(int newLongestDuration)
 {
     m_longestDuration = std::max(m_longestDuration, newLongestDuration);
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement("LongestRun", m_longestDuration, m_averageDuration, 9); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
+    insertDataToDatabase("LongestRun", m_longestDuration, m_averageDuration, 9);
     emit longestDurationChanged();
 }
 
 void DataBaseModel::setAverageDuration(int newAverageDuration)
 {
     m_averageDuration = std::max(m_averageDuration, newAverageDuration);
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement("Duration", m_averageDuration, m_allDuration, 10); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
+    insertDataToDatabase("Duration", m_averageDuration, m_allDuration, 10);
     emit averageDurationChanged();
 }
 
 void DataBaseModel::setAllDuration(int newAllDuration)
 {
     m_allDuration = std::max(m_allDuration, newAllDuration);
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement("Duration", m_averageDuration, m_allDuration, 10); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
+    insertDataToDatabase("Duration", m_averageDuration, m_allDuration, 10);
     emit allDurationChanged();
 }
 
 void DataBaseModel::setweeklyMetersRun(int newweeklyMetersRun)
 {
     m_weeklyMetersRun = std::max(m_weeklyMetersRun, newweeklyMetersRun);
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement("weeklyMetersRun_BestPace", m_weeklyMetersRun, m_bestPace, 11); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
-
+    insertDataToDatabase("weeklyMetersRun_BestPace", m_weeklyMetersRun, m_bestPace, 11);
     emit weeklyMetersRunChanged();
 }
 
 void DataBaseModel::setBestPace(int newBestPace)
 {
     m_bestPace = std::max(m_bestPace, newBestPace);
-    DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement("weeklyMetersRun_BestPace", m_weeklyMetersRun, m_bestPace, 11); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
+    insertDataToDatabase("weeklyMetersRun_BestPace", m_weeklyMetersRun, m_bestPace, 11);
     emit bestPaceChanged();
 }
 
@@ -244,9 +203,8 @@ void DataBaseModel::setMail(QString newMail)
     DataBase db("database_file.db");
     if (db.isOpen())
     {
-        db.updateMail("Mail", newMail, 12); // day, meters, time
+        db.updateMail("Mail", newMail, 12);//todo this won't work, see updateMail function in database.cpp 
         // qDebug() << "setmail";
-        // qDebug() << "Updating database complete";
     }
     else qDebug() << "Database is not open!";
     emit mailChanged();
@@ -255,13 +213,7 @@ void DataBaseModel::setMail(QString newMail)
 void DataBaseModel::setWeek(QString day, int new_meters, int new_time) {
 
     DataBase db("database_file.db");
-    if (db.isOpen())
-    {
-        db.updateElement(day, new_meters, new_time, 1); // day, meters, time
-        // qDebug() << "Updating database complete";
-    }
-    else qDebug() << "Database is not open!";
-
+    insertDataToDatabase(day, new_meters, new_time, 1);
 
     m_weekMeters[returnNumberFromDay(day)] = new_meters;
     m_weekTime[returnNumberFromDay(day)] = new_time;
@@ -277,58 +229,48 @@ int DataBaseModel::returnNumberFromDay(QString day) {
 
 int DataBaseModel::weeklyGoal() const
 {
-    return m_weeklyGoal;
-    // return returnDataBaseElementByName("Goal").first;
+    return returnDataBaseElementByName("Goal").first;
 }
 
 int DataBaseModel::dailyGoal() const
 {
-    return m_dailyGoal;
-    // return returnDataBaseElementByName("Goal").second;
+    return returnDataBaseElementByName("Goal").second;
 }
 
 int DataBaseModel::weeklyMetersRun()
 {
-    return m_weeklyMetersRun;
-    // return returnDataBaseElementByName("weeklyMetersRun_BestPace").first;
+    return returnDataBaseElementByName("weeklyMetersRun_BestPace").first;
 }
 
 int DataBaseModel::bestPace()
 {
-    return m_bestPace;
-    // return returnDataBaseElementByName("weeklyMetersRun_BestPace").second;
+    return returnDataBaseElementByName("weeklyMetersRun_BestPace").second;
 }
 
 int DataBaseModel::longestDistance()
 {
-    return m_longestDistance;
-    // return returnDataBaseElementByName("LongestRun").first;
+    return returnDataBaseElementByName("LongestRun").first;
 }
 
 int DataBaseModel::longestDuration()
 {
-    return m_longestDuration;
-    // return returnDataBaseElementByName("LongestRun").second;
+    return returnDataBaseElementByName("LongestRun").second;
 }
 
 int DataBaseModel::averageDuration()
 {
-    return m_averageDuration;
-    // return returnDataBaseElementByName("Duration").first;
+    return returnDataBaseElementByName("Duration").first;
 }
 
 int DataBaseModel::allDuration()
 {
-    return m_allDuration;
-    // return returnDataBaseElementByName("Duration").second;
+    return returnDataBaseElementByName("Duration").second;
 }
 
 QString DataBaseModel::mail()
 {
-    return m_mail;
-    // return returnMail("Mail");
+    return returnMail("Mail"); //todo fix
 }
-
 
 QVector<int> DataBaseModel::weekMeters() const
 {

@@ -105,7 +105,6 @@ Item {
             fullDistance = temporaryDistance
             temporaryDistance = 0.0
 
-
             // propagating values to c++ backend
             DbModel.setWeek(root.dateString, fullDistance, fullRunTime * timerRefreshRate)
         }
