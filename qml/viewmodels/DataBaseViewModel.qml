@@ -1,7 +1,7 @@
-import QtQuick 2.3
-import DataBaseModel 1.0
+import QtQuick
+import DataBaseModel
 import "../Helper.js" as Helper
-import FirebaseDataBase 1.0
+import FirebaseDataBase
 
 QtObject {
     readonly property string weeklyKmRun: Helper.formatDistance(DbModel.weeklyMetersRun) //here we format meters to km

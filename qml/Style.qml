@@ -1,6 +1,6 @@
 pragma Singleton
-import QtQuick 2.3
-import QtQuick.Window 2.1
+import QtQuick
+import QtQuick.Window
 
 QtObject {
   readonly property double scaleY: 1

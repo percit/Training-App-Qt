@@ -1,7 +1,7 @@
-import QtQuick 2.3
-import QtPositioning 5.6
-import QtLocation 6.5
-import DataBaseModel 1.0
+import QtQuick
+import QtPositioning
+import QtLocation
+import DataBaseModel
 import "../Helper.js" as Helper
 
 Item {

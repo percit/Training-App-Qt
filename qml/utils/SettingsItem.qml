@@ -1,6 +1,6 @@
-import QtQuick 2.3
-import StyleSingleton 1.0
-import QtQuick.Controls 2.3
+import QtQuick
+import StyleSingleton
+import QtQuick.Controls
 
 Rectangle {
 	id: root

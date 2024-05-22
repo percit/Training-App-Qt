@@ -1,12 +1,12 @@
-import QtQuick 2.3
-import QtQuick.Controls 2.3
+import QtQuick
+import QtQuick.Controls
 import QtQml 2.3
 import "../utils"
 import "../viewmodels"
-import StyleSingleton 1.0
-import FirebaseAuth 1.0
-import FirebaseDataBase 1.0
-import DataBaseModel 1.0
+import StyleSingleton
+import FirebaseAuth
+import FirebaseDataBase
+import DataBaseModel
 
 MainPage {
     id: root

@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick
 import Qt5Compat.GraphicalEffects
 Item {
     property color color: "transparent"

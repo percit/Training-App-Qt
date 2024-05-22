@@ -1,7 +1,7 @@
-import QtQuick 2.3
-import QtQuick.Controls 2.3
-import QtQml 2.3
-import StyleSingleton 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQml
+import StyleSingleton
 import "../utils"
 import "../viewmodels"
 
