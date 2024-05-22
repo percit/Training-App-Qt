@@ -17,9 +17,9 @@ int main(int argc, char *argv[])
         Q_UNUSED(scriptEngine)
 
         FirebaseAuth *fbAuth = new FirebaseAuth();
-        fbAuth->setAPIKey("firebase console,auth, api key");
-        fbAuth->setFirebaseUrl("firebaseURL from firebase auth console");
-        fbAuth->signUserIn("test@email.com", "Password123");
+        // fbAuth->setAPIKey("firebase console,auth, api key");
+        // fbAuth->setFirebaseUrl("firebaseURL from firebase auth console");
+        // fbAuth->signUserIn("test", "Password123");
         return fbAuth;
     });
 
@@ -29,7 +29,10 @@ int main(int argc, char *argv[])
 
         FirebaseDataBase *fbDatabase = new FirebaseDataBase();
         fbDatabase->setFirebaseUrl("firebaseURL from firebase database console");
-        fbDatabase->testFirebaseFunc();
+        // fbDatabase->setDailyGoal(5); //testing, everything works
+        // fbDatabase->putValues("test");
+        // fbDatabase->readFirebaseData("test");
+        
         return fbDatabase;
     });
 

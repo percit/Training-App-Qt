@@ -133,7 +133,9 @@ MainPage {
             }
             else 
             {
-                FbDatabase.readFirebaseData(mailAfterRegex);
+                if(mailAfterRegex != null) {
+                    FbDatabase.readFirebaseData(mailAfterRegex); //if mail is null, app will give segment fault,this is for testing
+                }
                 DbModel.clearAllData();
                 DbModel.setLongestDuration(FbDatabase.longestDuration);
                 DbModel.setLongestDistance(FbDatabase.longestDistance);
