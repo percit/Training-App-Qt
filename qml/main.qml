@@ -1,6 +1,6 @@
-import QtQuick 2.3
-import QtQuick.Window 2.1
-import StyleSingleton 1.0
+import QtQuick
+import QtQuick.Window
+import StyleSingleton
 
 Window {
 	width: 375 * Style.scaleX

@@ -1,5 +1,5 @@
-import QtQuick 2.3
-import StyleSingleton 1.0
+import QtQuick
+import StyleSingleton
 
 Rectangle {
 	id: root
@@ -11,7 +11,7 @@ Rectangle {
 	property alias source: mainIcon.source
 
 	color: "transparent"
-	Icon {
+	CustomIcon {
 		id: mainIcon
 
 		height: 40 * Style.scaleX; width: 40 * Style.scaleX

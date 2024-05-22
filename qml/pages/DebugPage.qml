@@ -1,18 +1,24 @@
-import QtQuick 2.3
-import QtQuick.Controls 2.3
-import QtQml 2.3
-import StyleSingleton 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQml
 import "../utils"
 import "../viewmodels"
 import "../Helper.js" as Helper
-import DataBaseModel 1.0
-import FirebaseDataBase 1.0
+import StyleSingleton
+import DataBaseModel
+import FirebaseDataBase
 
 MainPage {
 	id: root
     readonly property DataBaseViewModel viewModel: DataBaseViewModel {}
 
 	placeholder: false
+
+    CustomIcon {
+        anchors.centerIn: parent
+        source: "qrc:/assets/route.png"
+        color: "blue"
+    }
 
     Rectangle {
         id:logButton

@@ -1,6 +1,6 @@
-import QtQuick 2.3
-import StyleSingleton 1.0
-import QtQuick.Controls 2.3
+import QtQuick
+import StyleSingleton
+import QtQuick.Controls
 
 Rectangle {
 	id: root
@@ -19,7 +19,7 @@ Rectangle {
 			leftMargin: 5
 		}
 		spacing: 10
-		Icon {
+		CustomIcon {
 			id: mainIcon
 
 			height: 40 * Style.scaleX; width: 40 * Style.scaleX

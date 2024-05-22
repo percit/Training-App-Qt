@@ -19,7 +19,7 @@ target_link_libraries(${TEST2}
     GTest::GTest
     GTest::gmock
     GTest::Main
-    Qt5::Core
+    Qt6::Core
 )
 
 add_test(

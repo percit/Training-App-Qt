@@ -4,4 +4,4 @@ build-/*
 CMakeLists.txt.user
 # qt stuff
 !.ycm_extra_conf.py
-
+database_file.db
