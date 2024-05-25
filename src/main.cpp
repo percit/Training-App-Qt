@@ -1,16 +1,18 @@
+#include "DataBaseModel.h"
+#include "firebase_auth.h"
+#include "firebase_database.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlProperty> //for reading from qml file
 #include <QQuickView>
-#include "DataBaseModel.h"
-#include "firebase_database.h"
-#include "firebase_auth.h"
 
 int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
 
-    qmlRegisterSingletonType<FirebaseAuth>("FirebaseAuth", 1, 0, "FbAuth", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+  qmlRegisterSingletonType<FirebaseAuth>(
+      "FirebaseAuth", 1, 0, "FbAuth",
+      [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
 
@@ -19,29 +21,34 @@ int main(int argc, char *argv[]) {
         // fbAuth->setFirebaseUrl("firebaseURL from firebase auth console");
         // fbAuth->signUserIn("test", "Password123");
         return fbAuth;
-    });
+      });
 
-    qmlRegisterSingletonType<FirebaseDataBase>("FirebaseDataBase", 1, 0, "FbDatabase", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+  qmlRegisterSingletonType<FirebaseDataBase>(
+      "FirebaseDataBase", 1, 0, "FbDatabase",
+      [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
 
         FirebaseDataBase *fbDatabase = new FirebaseDataBase();
-        fbDatabase->setFirebaseUrl("firebaseURL from firebase database console");
+        fbDatabase->setFirebaseUrl(
+            "firebaseURL from firebase database console");
         // fbDatabase->setDailyGoal(5); //testing, everything works
         // fbDatabase->putValues("test");
         // fbDatabase->readFirebaseData("test");
-        
-        return fbDatabase;
-    });
 
-    //we register database as singleton
-    qmlRegisterSingletonType<DataBaseModel>("DataBaseModel", 1, 0, "DbModel", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+        return fbDatabase;
+      });
+
+  // we register database as singleton
+  qmlRegisterSingletonType<DataBaseModel>(
+      "DataBaseModel", 1, 0, "DbModel",
+      [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
         Q_UNUSED(engine)
         Q_UNUSED(scriptEngine)
 
         DataBaseModel *database = new DataBaseModel();
         return database;
-    });
+      });
 
   qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0,
                            "Style");
@@ -54,6 +61,5 @@ int main(int argc, char *argv[]) {
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.show();
 
-    return app.exec();
+  return app.exec();
 }
-
