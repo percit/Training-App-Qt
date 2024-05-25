@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
         Q_UNUSED(scriptEngine)
 
         DataBaseModel *database = new DataBaseModel();
+        database->setDatabaseName("database_file.db");
         return database;
       });
 

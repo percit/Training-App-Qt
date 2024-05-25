@@ -43,6 +43,7 @@ public:
   void printDataBase();
   void emitDayChanges();
   int returnNumberFromDay(QString day);
+  void setDatabaseName(QString name);
 
   Q_INVOKABLE void clearAllData();
   Q_INVOKABLE void updateAllMaxes();
@@ -96,6 +97,7 @@ private:
   int m_weeklyGoal = 0;
   int m_dailyGoal = 0;
   QString m_mail;
+  QString m_databaseName;
   QVector<int> m_weekMeters;
   QVector<int> m_weekTime;
 };
