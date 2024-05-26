@@ -5,6 +5,7 @@ set(
   DataBaseModel.cpp
   firebase_database.cpp
   firebase_auth.cpp
+  NotificationClient.cpp
   ../qml/qml.qrc
 )
 
@@ -12,6 +13,7 @@ if(ANDROID)
 add_library(
   Training-app SHARED
   ${PROJECT_SOURCES}
+  NotificationClient.java
 )
 else()
 add_executable(

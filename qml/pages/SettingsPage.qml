@@ -4,7 +4,7 @@ import QtQml
 import StyleSingleton
 import DataBaseModel
 import "../utils"
-
+import NotificationClient
 
 MainPage {
 	placeholder: false
@@ -194,8 +194,8 @@ collection and use of information in accordance with this Privacy Policy."
                         ListElement { text: "18:00" }
                         ListElement { text: "19:00" }
                     }
-                    onActivated: {
-                        // todo implement a popup reminder
+                    onActivated: {                      
+                        NotificationClient.setNotification("GO RUN", getHour(reminderTime.text)) //todo test on android
                     }
                 }
 
@@ -210,5 +210,9 @@ collection and use of information in accordance with this Privacy Policy."
                 }
             }
         }
+    }
+    function getHour(timeText) {
+        var parts = timeText.split(":");
+        return parseInt(parts[0], 10);
     }
 }
