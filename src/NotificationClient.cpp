@@ -1,8 +1,8 @@
 #include "NotificationClient.h"
 #ifdef Q_OS_ANDROID
-#include <QtCore/qjniobject.h>
-#include <QtCore/qcoreapplication.h>
-#include <QtCore/private/qandroidextras_p.h>
+// #include <QtCore/qjniobject.h>
+// #include <QtCore/qcoreapplication.h>
+// #include <QtCore/private/qandroidextras_p.h> //tego nie moze wyszukac 
 #endif
 #include <QTimer>
 #include <QDateTime>
@@ -14,14 +14,14 @@ NotificationClient::NotificationClient(QObject *parent)
     : QObject(parent)
 {
 #ifdef Q_OS_ANDROID
-    if (QNativeInterface::QAndroidApplication::sdkVersion() >= __ANDROID_API_T__) {
-        const auto notificationPermission = "android.permission.POST_NOTIFICATIONS"_L1;
-        auto requestResult = QtAndroidPrivate::requestPermission(notificationPermission);
-        if (requestResult.result() != QtAndroidPrivate::Authorized) {
-            qWarning() << "Failed to acquire permission to post notifications "
-                          "(required for Android 13+)";
-        }
-    }
+    // if (QNativeInterface::QAndroidApplication::sdkVersion() >= __ANDROID_API_T__) {
+    //     const auto notificationPermission = "android.permission.POST_NOTIFICATIONS"_L1;
+    //     auto requestResult = QtAndroidPrivate::requestPermission(notificationPermission);
+    //     if (requestResult.result() != QtAndroidPrivate::Authorized) {
+    //         qWarning() << "Failed to acquire permission to post notifications "
+    //                       "(required for Android 13+)";
+    //     }
+    // }
 #endif
 }
 
@@ -53,12 +53,12 @@ QString NotificationClient::notification() const
 void NotificationClient::updateAndroidNotification()
 {
 #ifdef Q_OS_ANDROID
-    QJniObject javaNotification = QJniObject::fromString(m_notification);
-    QJniObject::callStaticMethod<void>(
-                    "org/qtproject/example/androidnotifier/NotificationClient",
-                    "notify",
-                    "(Landroid/content/Context;Ljava/lang/String;)V",
-                    QNativeInterface::QAndroidApplication::context(),
-                    javaNotification.object<jstring>());
+    // QJniObject javaNotification = QJniObject::fromString(m_notification);
+    // QJniObject::callStaticMethod<void>(
+    //                 "org/qtproject/example/androidnotifier/NotificationClient",
+    //                 "notify",
+    //                 "(Landroid/content/Context;Ljava/lang/String;)V",
+    //                 QNativeInterface::QAndroidApplication::context(),
+    //                 javaNotification.object<jstring>());
 #endif
 }

@@ -6,4 +6,4 @@ docker run -it --rm \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
 -v $PWD:/workspace \
 -w /workspace/build \
---name qt-android-docker qt5-android:1.0.0
+--name qt-android-docker qt6-android:1.0.0

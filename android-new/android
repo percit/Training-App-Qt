@@ -1,3 +1,19 @@
+https://forum.qt.io/topic/142457/qt-6-with-cmake-for-android-how tutaj jest opis co do problemow z qt for android i jak je rozwiazac
+
+
+
+
+
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+
+
+
+
+# ponizej stare rzeczy: 
+
+
+
 https://github.com/a12e/docker-qt/blob/master/6.5-android.Dockerfile to wyglada zajebiscie
 
 

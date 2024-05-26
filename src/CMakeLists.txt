@@ -22,6 +22,11 @@ add_executable(
 )
 endif()
 
+# if(ANDROID)
+#   include(AddQtAndroidApk.cmake)
+#   add_qt_android_apk(Training-app-apk Training-app)
+# endif()
+
 
 target_compile_definitions(
   Training-app

@@ -7,3 +7,4 @@ CMakeFiles
 # qt stuff
 !.ycm_extra_conf.py
 database_file.db
+build_android/*
