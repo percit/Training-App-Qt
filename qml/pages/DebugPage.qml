@@ -7,6 +7,7 @@ import "../Helper.js" as Helper
 import StyleSingleton
 import DataBaseModel
 import FirebaseDataBase
+import NotificationClient
 
 MainPage {
 	id: root
@@ -27,6 +28,8 @@ MainPage {
         MouseArea {
             anchors.fill: parent
             onClicked:{
+                console.log("logButton clicked")
+                NotificationClient.runTest()
             }
         }   
     }

@@ -5,6 +5,7 @@ set(
   DataBaseModel.cpp
   firebase_database.cpp
   firebase_auth.cpp
+  NotificationClient.cpp
   ../qml/qml.qrc
 )
 
@@ -21,11 +22,13 @@ target_link_libraries(
 )
 
 if(ANDROID)
-qt_add_executable(
-  Training-app
-  ${PROJECT_SOURCES}
-  # NotificationClient.java
-)
+  qt_standard_project_setup()
+  qt_add_executable(
+    Training-app
+    ${PROJECT_SOURCES}
+    android/src/org/qtproject/example/androidnotifier/NotificationClient.java
+    android/AndroidManifest.xml
+  )
 else()
 add_executable(
   Training-app
@@ -44,9 +47,17 @@ target_link_libraries(
   Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::Sql
   Qt${QT_VERSION_MAJOR}::Core5Compat
+  Qt${QT_VERSION_MAJOR}::CorePrivate # for notifications
 )
 
-set(trainng_app_resource_files
+if(ANDROID)
+  set_property(TARGET Training-app APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+            ${CMAKE_CURRENT_SOURCE_DIR}/android)
+  qt_finalize_executable(Training-app)
+endif()
+
+
+set(training_app_resource_files
     "../qml/MainScreen.qml"
     "../qml/Helper.js"
     "../qml/Style.qml"
@@ -89,3 +100,9 @@ qt_add_resources(Training-app "Training-app"
     FILES
         ${trainng_app_resource_files}
 )
+
+install(TARGETS Training-app
+    BUNDLE  DESTINATION .
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+) # this is needed for installing with qt creator
