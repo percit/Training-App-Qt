@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
 
         DataBaseModel *database = new DataBaseModel();
         database->setDatabaseName("database_file.db");
+        // database->initializeDataBase();
         return database;
       });
 
