@@ -1,7 +1,29 @@
 
 ./tools/build-desktop.sh && ./build/src/Training-app
 
+
+
+
+# dodaj faktyczne testy do tego co sie da
+testy napisane, ale mam problem z linkowaniem, bo mam undefined wszedzie, moze poszukaj projektow z dysku twardego, zeby porownac
+
+
+# firebase - //this is a bit of a hack, bc firebase produces some weird string, that I don't want rn TODO: find solution when free time
+
+
+
+# firebase
+- przetestuj firebase auth
+- z jakiegos powodu to zmieniam maila na regex np test@gmail.com, tak nie powinno byc i tego nie powinienem tak ogarniac
+
+
 # docker do budowania na androida (znalazlem nowy link do dockerfile)
+ten link ponizej jedynie co dal to libke
+1. https://doc.qt.io/qt-6/android-getting-started.html sprobuj zbudowac caly projekt na qtcreatorze
+2. jesli nie dziala to zrob hello world z androida przez qt creator i popraw cmake
+3. wtedy popraw dockera
+
+
 https://github.com/state-of-the-art/qt6-docker/tree/master/6.5-android-aqt to poprobuj, bo to nizej to pewnie nie odpisze typ
 generalnie to jakos dziala i buduje, ale zamiast apk, to buduje .so
 
@@ -18,22 +40,6 @@ wyczyscic historie gita
 
 
 https://dominikberner.ch/cmake-android-apk-and-qt/ to tez znalazlem
-
-
-# dodaj faktyczne testy do tego co sie da
-testy napisane, ale mam problem z linkowaniem, bo mam undefined wszedzie, moze poszukaj projektow z dysku twardego, zeby porownac
-
-
-# firebase - //this is a bit of a hack, bc firebase produces some weird string, that I don't want rn TODO: find solution when free time
-
-
-
-# firebase
-- przetestuj firebase auth
-- z jakiegos powodu to zmieniam maila na regex np test@gmail.com, tak nie powinno byc i tego nie powinienem tak ogarniac
-
-
-
 
 # we settingspage.qml jest ustawianie czasu powiadomienia, mozesz to zaimplementowac
 https://forum.qt.io/topic/93962/push-notifications-in-qt/15
