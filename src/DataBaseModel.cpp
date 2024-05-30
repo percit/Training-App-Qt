@@ -4,7 +4,6 @@ DataBaseModel::DataBaseModel(QObject *parent)
     : QObject(parent), m_weeklyMetersRun(0), m_longestDistance(0),
       m_longestDuration(0), m_bestPace(0), m_averageDuration(0),
       m_allDuration(0), m_weekMeters(7, 0), m_weekTime(7, 0) {
-  initializeDataBase();
 }
 
 void DataBaseModel::updateAllMaxes() {
