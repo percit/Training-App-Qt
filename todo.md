@@ -46,6 +46,8 @@ https://forum.qt.io/topic/93962/push-notifications-in-qt/15
 generalnie to dodalem ten kod, ale musze przetestowac na androidzie, ale wyglada chyba git?
 
 # bazy danych powinny byc tworzone przez design patterny i solid
+dlaczego ja w databasemodel ciagle tworze obiekt Database db(nazwa) ???
+
 ostateczne rozwiazanie
 - interfejs database, ktory ogarnia podstawowe info
 - potem firebase i sqldatabase klasy, ktore implementuja te wszystkie updateElement itd
