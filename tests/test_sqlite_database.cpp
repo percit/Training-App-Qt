@@ -1,10 +1,22 @@
 #include <gtest/gtest.h>
 #include "../src/DataBaseModel.h"
+#include "database.h"
+#include "sharedPtr.h"
+
+TEST(MyTestSuite, TestLink)
+{
+  SharedPtr<int> p;
+  p.makeShared(42);
+  ASSERT_NE(p.get(), nullptr);
+  DataBase ("nazwa.db");
+
+}
 
 TEST(MyTestSuite, TestBasicSetters)
 {
   // DataBaseModel *database = new DataBaseModel();
   // database->setDatabaseName("test_database.db");
+  // database->initializeDataBase();
   // database->setweeklyMetersRun(100);
   // database->setLongestDistance(200);
   // database->setLongestDuration(300);
