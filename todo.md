@@ -20,6 +20,11 @@ testy napisane, ale mam problem z linkowaniem, bo mam undefined wszedzie, moze p
 # docker do budowania na androida (znalazlem nowy link do dockerfile)
 ten link ponizej jedynie co dal to libke
 1. https://doc.qt.io/qt-6/android-getting-started.html sprobuj zbudowac caly projekt na qtcreatorze
+- pobralem qt creator
+- brakuje javy to pobralem stad: https://doc.qt.io/qt-6/android-getting-started.html
+- to co qt creator sam skonfiguruje to uzywam stad: https://doc.qt.io/qtcreator/creator-developing-android.html#specifying-android-device-settings
+- udalo sie zrobic setup, ale nie moge zbudowac apk, bo musze ustawic telefon do budowania
+
 2. jesli nie dziala to zrob hello world z androida przez qt creator i popraw cmake
 3. wtedy popraw dockera
 
