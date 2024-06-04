@@ -4,46 +4,9 @@
 
 
 
-
-
-
-
-
-
-
-
-# przejrzyj to skalowanie w calqlatr
-
-
 # docker do budowania na androida (znalazlem nowy link do dockerfile)
-- udalo sie zbudowac apk, ale apka sie crashuje na starcie
-
--
-
-- jeszcze opcja, zeby zbudowac w qtcreatorze i wrzucic apke przez kabel
-zbudowana w qt creatorze, ale bez kabla tez crashuje
-musisz ustawic telefon zeby moc na nim debugowac
 
 
-
-
-
-
-\1. https://doc.qt.io/qt-6/android-getting-started.html sprobuj zbudowac caly projekt na qtcreatorze
-- pobralem qt creator
-- brakuje javy to pobralem stad: https://doc.qt.io/qt-6/android-getting-started.html
-- to co qt creator sam skonfiguruje to uzywam stad: https://doc.qt.io/qtcreator/creator-developing-android.html#specifying-android-device-settings
-CO DO QTCREATORA TO PRZY ANDROID TO MUISSZ DODAC POSITIONING I QT5 COMPAT
-
-
-
-
-Managing Android Virtual Devices (AVD) o to poszukaj w tym linku z doc.qt, to sie przyda
-
-2. jesli nie dziala to zrob hello world z androida przez qt creator i popraw cmake
-3. wtedy popraw dockera
-
-# jak android dziala
 takze jak wszystko bedzie dzialac to przetestuj czy dziala na desktop, wyczysc pliki i znowu wszystko sprawdz przed rebasem
 
 jesli dziala to trzeba dodac moduly do qt
@@ -75,7 +38,7 @@ wyczyscic historie gita
 
 
 
-
+# napraw mapy
 
 
 # dodaj faktyczne testy do tego co sie da
@@ -92,6 +55,7 @@ testy napisane, ale mam problem z linkowaniem, bo mam undefined wszedzie, moze p
 
 
 # we settingspage.qml jest ustawianie czasu powiadomienia, mozesz to zaimplementowac
+odkomentuj w src/cmakelists ta jave i te wszystkie notification
 https://forum.qt.io/topic/93962/push-notifications-in-qt/15
 generalnie to dodalem ten kod, ale musze przetestowac na androidzie, ale wyglada chyba git?
 
