@@ -8,7 +8,7 @@ TEST(MyTestSuite, TestLink)
   SharedPtr<int> p;
   p.makeShared(42);
   ASSERT_NE(p.get(), nullptr);
-  DataBase ("nazwa.db");
+  // DataBase ("nazwa.db");
 
 }
 
