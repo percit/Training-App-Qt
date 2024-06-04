@@ -8,6 +8,18 @@ set(
   ../qml/qml.qrc
 )
 
+add_library(database_lib
+  STATIC
+  database.cpp
+  DataBaseModel.cpp
+)
+target_link_libraries(
+  database_lib
+  PRIVATE
+  Qt${QT_VERSION_MAJOR}::Core
+  Qt${QT_VERSION_MAJOR}::Sql
+)
+
 if(ANDROID)
 qt_add_executable(
   Training-app
