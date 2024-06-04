@@ -9,11 +9,12 @@ set(
   ../qml/qml.qrc
 )
 
+
 if(ANDROID)
-add_library(
-  Training-app SHARED
+qt_add_executable(
+  Training-app
   ${PROJECT_SOURCES}
-  NotificationClient.java
+  # NotificationClient.java
 )
 else()
 add_executable(
@@ -22,19 +23,27 @@ add_executable(
 )
 endif()
 
-# if(ANDROID)
-#   include(AddQtAndroidApk.cmake)
-#   add_qt_android_apk(Training-app-apk Training-app)
-# endif()
+set_target_properties(Training-app PROPERTIES
+    WIN32_EXECUTABLE TRUE
+    MACOSX_BUNDLE TRUE
+)
 
 
-target_compile_definitions(
+target_compile_definitions( #nie wiem czy to jest potrzebne
   Training-app
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
 target_link_libraries(
   Training-app
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick
+  PRIVATE
+  Qt${QT_VERSION_MAJOR}::Core
+  Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::Sql
   Qt${QT_VERSION_MAJOR}::Core5Compat
 )
+
+# install(TARGETS Training-app
+#     RUNTIME DESTINATION "destination"
+#     BUNDLE DESTINATION "destination"
+#     LIBRARY DESTINATION "destination"
+# )
