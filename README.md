@@ -12,23 +12,16 @@ This is a multiplatform Running app build with MVVM pattern
 6. GTest - testing
 7. CMake - build automation
 
-# To build this, you have to update REST API Urls for your own firebase
+# To build this, you have to update REST API Urls for your own firebase in main.cpp
 
-They are in firebase_auth.cpp and firebase_database.cpp
+# Building and running the app:
 
-# Running app:
+In SETUP.md there is a tutorial how to set it up and build
 
-In SETUP.md there is a tutorial how to set it up
 
-Clean->Run CMake->Build->Compile (sometimes just compile doesn't work, so you have to click build first)
+# Building and running tests:
 
-# Running tests:
-
-For now, just comment out the main and uncomment catch_main.cpp, then "cmake .. && make -j16 && ./Training_App
-
-In the future there will be a cmake flag for this to change from testing to normal
-
-Commit c2945c71274c5eafb9bae044a8eb4130bf1aae9a is last one working on desktop and android and has no firebase, this should be fixed with a flag, or design pattern
+./build/tests/<test_name>
 
 ![Getting Started](images/map-image.png)
 ![Getting Started](images/progress-image.png)

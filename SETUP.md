@@ -1,113 +1,29 @@
-# Training-App-Qt
+# To build with QtCreator
+- Download Qt 6.7 for Android https://doc.qt.io/qt-6/android-getting-started.html
+- download java (instructions here: https://doc.qt.io/qt-6/android-getting-started.html)
+- download Qt Positioning, Qt Location and Qt5 Compat using Qt Meintenance tool
+- https://doc.qt.io/qtcreator/creator-developing-android.html#specifying-android-device-settings configure qt for android with this instruction
 
-# Setup
+It builds few minutes, so don't worry
 
-## Qt5
-
-Qt5.15.x (https://tutorialforlinux.com/2021/07/17/step-by-step-qt-creator-manjaro-installation/2/  )
-
-Qt -> Qt 5.15.x -> Desktop GCC 64 bit
-
-Qt -> Qt 5.15.x -> Android 
-
-Qt -> Qt 5.15.x -> Qt Quick 3D 
-
-Qt -> Qt 5.15.x -> Qt Virtual Keyboard
-
-Qt -> Qt 5.15.x -> Qt Quick Timeline
-
-Qt -> Developer and Designer Tools -> CMake
-
-Qt -> Developer and Designer Tools -> Ninja
-
-Qt -> Developer and Designer Tools -> OpenSSL
-
-## Android Studio
-
-SDK Manager (at the bottom) -> Appearance & Behavior -> Android SDK
-
-### SDK Platforms
-
-Android 10.0
-
-### SDK Tools
-
-Android SDK Build-Tools 33-rc1
-
-Android SDK Command-line Tools
-
-Android Emulator
-
-Android SDK Platform-Tools
-
-### Click Package Details
-32.1.0.rc1
-
-32.0.0
-
-30.0.2
-
-NDK -> 21.3.6528147
-
-
-## Configure Qt Creator for Android
-
-sudo pacman -S jre11-openjdk-headless jre11-openjdk jdk11-openjdk openjdk11-doc openjdk11-src
-
-to get "jre" you have to download android studio from their site as .tar, and it will ask you to download sth
-
-Options -> Devices -> Android
-
-Android JDK location: /home/percit/Documents/android-studio/jre
-
-Android SDK Locations: home/percit/Android/Sdk
-
-Android NDK list: home/percit/Android/Sdk/ndk/21.3.6528147
-
-OpenSSL binaries location: home/percit/Android/Sdk/android_openssl (this needs to be downloaded via a button)
-
-
-#### some steps I needed to make, to make sure it works
-
-sudo pacman -S qt5
-
-adb kill server         (it asked me to download sth, I did)
-
-sudo adb start-server
+# To deploy to phone:
 
 
 
-## Add this to .zshrc / .bashrc
+
+- Enable Developer Mode and USB Debugging:
+- On your Android phone, enable Developer Mode and USB debugging. This can typically be done by going to Settings > About phone and tapping the Build number several times. Then, go to Settings > Developer options and enable USB debugging.
+- Make sure your device is in File Transfer mode (or MTP mode).
+- in Run in Kits for android turn debugger settings for cpp and android on if you want logs
+- I have encountered an issue that libplugins_position_qtposition_android_armeabi-v7a.so would not copy to build/Android_Qt_6_7_1_Clang_armeabi_v7a-Debug/src/android-build/libs/armeabi-v7a so I did it by hand
 
 
 
-paths:
+# To build with docker
+Desktop:
+- sudo ./tools/docker-build.sh
+- sudo ./tools/run-docker.sh
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-
-export ANDROID_HOME=/home/percit/Android
-
-export ANDROID_SDK=/home/percit/Android/Sdk
-
-export ANDROID_NDK=/home/percit/Android/Sdk/ndk/21.3.6528147
-
-export ANDROID_NDK_TOOLCHAIN_ROOT=/home/percit/Android/Sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake
-
-export Qt5_host=home/percit/Qt/5.15.2
-
-export Qt5_android=/home/percit/Qt/5.15.2/android
-
-
-export PATH=$PATH:$JAVA_HOME/bin
-
-export PATH=$PATH:$ANDROID_HOME
-
-export PATH=$PATH:$ANDROID_SDK
-
-export PATH=$PATH:$ANDROID_NDK 
-
-export PATH=$PATH:$ANDROID_NDK_TOOLCHAIN_ROOT
-
-export PATH=$PATH:$Qt5_host
-
-export PATH=$PATH:$Qt5_android
+Android
+- sudo ./apk-build/docker-android-build.sh
+- sudo ./apk-build/run-android-docker.sh

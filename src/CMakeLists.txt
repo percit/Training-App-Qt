@@ -9,7 +9,6 @@ set(
   ../qml/qml.qrc
 )
 
-
 if(ANDROID)
 qt_add_executable(
   Training-app
@@ -22,12 +21,6 @@ add_executable(
   ${PROJECT_SOURCES}
 )
 endif()
-
-set_target_properties(Training-app PROPERTIES
-    WIN32_EXECUTABLE TRUE
-    MACOSX_BUNDLE TRUE
-)
-
 
 target_compile_definitions(
   Training-app
