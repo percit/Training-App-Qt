@@ -4,6 +4,80 @@
 
 
 
+
+
+
+
+
+
+
+
+# przejrzyj to skalowanie w calqlatr
+
+
+# docker do budowania na androida (znalazlem nowy link do dockerfile)
+- udalo sie zbudowac apk, ale apka sie crashuje na starcie
+
+-
+
+- jeszcze opcja, zeby zbudowac w qtcreatorze i wrzucic apke przez kabel
+zbudowana w qt creatorze, ale bez kabla tez crashuje
+musisz ustawic telefon zeby moc na nim debugowac
+
+
+
+
+
+
+\1. https://doc.qt.io/qt-6/android-getting-started.html sprobuj zbudowac caly projekt na qtcreatorze
+- pobralem qt creator
+- brakuje javy to pobralem stad: https://doc.qt.io/qt-6/android-getting-started.html
+- to co qt creator sam skonfiguruje to uzywam stad: https://doc.qt.io/qtcreator/creator-developing-android.html#specifying-android-device-settings
+CO DO QTCREATORA TO PRZY ANDROID TO MUISSZ DODAC POSITIONING I QT5 COMPAT
+
+
+
+
+Managing Android Virtual Devices (AVD) o to poszukaj w tym linku z doc.qt, to sie przyda
+
+2. jesli nie dziala to zrob hello world z androida przez qt creator i popraw cmake
+3. wtedy popraw dockera
+
+# jak android dziala
+takze jak wszystko bedzie dzialac to przetestuj czy dziala na desktop, wyczysc pliki i znowu wszystko sprawdz przed rebasem
+
+jesli dziala to trzeba dodac moduly do qt
+zmienic nazwy
+dodac skrypty do budowania i odpalania
+wyczyscic historie gita
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # dodaj faktyczne testy do tego co sie da
 testy napisane, ale mam problem z linkowaniem, bo mam undefined wszedzie, moze poszukaj projektow z dysku twardego, zeby porownac
 
@@ -16,36 +90,6 @@ testy napisane, ale mam problem z linkowaniem, bo mam undefined wszedzie, moze p
 - przetestuj firebase auth
 - z jakiegos powodu to zmieniam maila na regex np test@gmail.com, tak nie powinno byc i tego nie powinienem tak ogarniac
 
-
-# docker do budowania na androida (znalazlem nowy link do dockerfile)
-ten link ponizej jedynie co dal to libke
-1. https://doc.qt.io/qt-6/android-getting-started.html sprobuj zbudowac caly projekt na qtcreatorze
-- pobralem qt creator
-- brakuje javy to pobralem stad: https://doc.qt.io/qt-6/android-getting-started.html
-- to co qt creator sam skonfiguruje to uzywam stad: https://doc.qt.io/qtcreator/creator-developing-android.html#specifying-android-device-settings
-- udalo sie zrobic setup, ale nie moge zbudowac apk, bo musze ustawic telefon do budowania
-Managing Android Virtual Devices (AVD) o to poszukaj w tym linku z doc.qt, to sie przyda
-
-2. jesli nie dziala to zrob hello world z androida przez qt creator i popraw cmake
-3. wtedy popraw dockera
-
-
-https://github.com/state-of-the-art/qt6-docker/tree/master/6.5-android-aqt to poprobuj, bo to nizej to pewnie nie odpisze typ
-generalnie to jakos dziala i buduje, ale zamiast apk, to buduje .so
-
-
-jesli dziala to trzeba dodac moduly do qt
-zmienic nazwy
-dodac skrypty do budowania i odpalania
-wyczyscic historie gita
-
-
-
-- to tak, zbudowalem kontener, ale jak probuje cos budowac, to build folder jest pusty
-- napisalem do tworcy w tej sprawie, moze pomoze: https://github.com/a12e/docker-qt/issues/8
-
-
-https://dominikberner.ch/cmake-android-apk-and-qt/ to tez znalazlem
 
 # we settingspage.qml jest ustawianie czasu powiadomienia, mozesz to zaimplementowac
 https://forum.qt.io/topic/93962/push-notifications-in-qt/15
