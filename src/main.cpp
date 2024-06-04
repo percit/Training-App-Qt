@@ -10,7 +10,6 @@
 
 int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
-  QQmlApplicationEngine engine;
 
   qmlRegisterSingletonType<FirebaseAuth>(
       "FirebaseAuth", 1, 0, "FbAuth",
@@ -67,15 +66,14 @@ int main(int argc, char *argv[]) {
 
   qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0,
                            "Style");
-  const QUrl url(QStringLiteral("qrc:/main.qml"));
-  QObject::connect(
-      &engine, &QQmlApplicationEngine::objectCreated, &app,
-      [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-          QCoreApplication::exit(-1);
-      },
-      Qt::QueuedConnection);
-  engine.load(url);
+
+    QQuickView view;
+    view.connect(view.engine(), &QQmlEngine::quit, &app, &QCoreApplication::quit);
+    view.setSource(QUrl("qrc:/main.qml"));
+    if (view.status() == QQuickView::Error)
+        return -1;
+    view.setResizeMode(QQuickView::SizeRootObjectToView);
+    view.show();
 
   return app.exec();
 }

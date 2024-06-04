@@ -9,3 +9,23 @@ z jakiegos powodu libplugins_position_qtposition_android_armeabi-v7a.so sie nie 
 
 
 moze dodaj do clocks positioning i jakis pusty import i sprobuj zbudowac => to moze byc qtbug
+
+
+w qt meintainence musialem jeszcze location module pobrac
+
+
+okej, to udalo mi sie zbudowac przy pomocy qt creatora, na dokerze tez chyba zadziala
+
+taski:
+- odpal clocks z tym positioning na qtcreatorze do telefonu i zobacz czy dziala => dziala, weird
+- zbuduj apk z poziomu dockera
+- zbuduj apke teraz na desktopie, czy dalej dziala
+
+
+
+# wersja z qtcreatorem
+\1. https://doc.qt.io/qt-6/android-getting-started.html sprobuj zbudowac caly projekt na qtcreatorze
+- pobralem qt creator
+- brakuje javy to pobralem stad: https://doc.qt.io/qt-6/android-getting-started.html
+- to co qt creator sam skonfiguruje to uzywam stad: https://doc.qt.io/qtcreator/creator-developing-android.html#specifying-android-device-settings
+CO DO QTCREATORA TO PRZY ANDROID TO MUISSZ DODAC POSITIONING I QT5 COMPAT

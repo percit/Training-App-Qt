@@ -29,7 +29,7 @@ set_target_properties(Training-app PROPERTIES
 )
 
 
-target_compile_definitions( #nie wiem czy to jest potrzebne
+target_compile_definitions(
   Training-app
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
@@ -85,9 +85,3 @@ qt_add_resources(Training-app "Training-app"
     FILES
         ${trainng_app_resource_files}
 )
-
-# install(TARGETS Training-app
-#     RUNTIME DESTINATION "destination"
-#     BUNDLE DESTINATION "destination"
-#     LIBRARY DESTINATION "destination"
-# )
