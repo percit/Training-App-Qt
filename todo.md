@@ -3,41 +3,6 @@
 
 
 
-
-# docker do budowania na androida (znalazlem nowy link do dockerfile)
-
-
-takze jak wszystko bedzie dzialac to przetestuj czy dziala na desktop, wyczysc pliki i znowu wszystko sprawdz przed rebasem
-
-jesli dziala to trzeba dodac moduly do qt
-zmienic nazwy
-dodac skrypty do budowania i odpalania
-wyczyscic historie gita
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # napraw mapy
 
 
