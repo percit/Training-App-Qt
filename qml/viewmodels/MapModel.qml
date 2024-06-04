@@ -40,52 +40,52 @@ Item {
         }
     }
 
-    Map {
+    Map { //map doesn't work on android and desktop for now
         id: map
-        // gesture.enabled: true //no sign of it in qt 6.5
-        anchors.fill: parent
-        plugin: plugin
-        zoomLevel: 15
-        center: src.position.coordinate
-        activeMapType: map.supportedMapTypes[0]
-        copyrightsVisible: false
-        RouteModel {
-            id: routeModel
-            plugin: plugin
-            query: RouteQuery {id: routeQuery }
-            Component.onCompleted: {
-                routeQuery.addWaypoint(currentCoordinate); //
-                //Could not find any constructor for value type QGeoCoordinate to call with value undefined
-// "Could not convert argument 0 at"
-// 	 "expression for onCompleted@qrc:/viewmodels/MapModel.qml:57"
-// qrc:/viewmodels/MapModel.qml:57: TypeError: Passing incompatible arguments to C++ functions from JavaScript is not allowed.
-//todo chyba nie dzialaja rzeczy z geo
-                routeQuery.travelModes = RouteQuery.PedestrianTravel
-                update();
-            }
-        }
+//         // gesture.enabled: true //no sign of it in qt 6.5
+//         anchors.fill: parent
+//         plugin: plugin
+//         zoomLevel: 15
+//         center: src.position.coordinate
+//         activeMapType: map.supportedMapTypes[0]
+//         copyrightsVisible: false
+//         RouteModel {
+//             id: routeModel
+//             plugin: plugin
+//             query: RouteQuery {id: routeQuery }
+//             Component.onCompleted: {
+//                 // routeQuery.addWaypoint(currentCoordinate); //
+//                 //Could not find any constructor for value type QGeoCoordinate to call with value undefined
+// // "Could not convert argument 0 at"
+// // 	 "expression for onCompleted@qrc:/viewmodels/MapModel.qml:57"
+// // qrc:/viewmodels/MapModel.qml:57: TypeError: Passing incompatible arguments to C++ functions from JavaScript is not allowed.
+// //todo chyba nie dzialaja rzeczy z geo
+//                 // routeQuery.travelModes = RouteQuery.PedestrianTravel
+//                 // update();
+//             }
+//         }
 
-        MapItemView {
-            model: routeModel
-            delegate: Component{
-                MapRoute {
-                    route: routeData
-                    line.color: "green"
-                    line.width: 4
-                    smooth: true
-                }
-            }
-        }
-        PositionSource {
-            id: src
-            updateInterval: 1000
-            active: true
-            onPositionChanged: {
-                var coord = src.position.coordinate;
-                root.currentCoordinate = coord
-                map.center = coord
-            }
-        }
+//         MapItemView {
+//             model: routeModel
+//             delegate: Component{
+//                 MapRoute {
+//                     route: routeData
+//                     line.color: "green"
+//                     line.width: 4
+//                     smooth: true
+//                 }
+//             }
+//         }
+//         PositionSource {
+//             id: src
+//             updateInterval: 1000
+//             active: true
+//             onPositionChanged: {
+//                 var coord = src.position.coordinate;
+//                 root.currentCoordinate = coord
+//                 map.center = coord
+//             }
+//         }
 
     } //map
 

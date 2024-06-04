@@ -1,45 +1,47 @@
 #ifndef FIREBASEAUTH_H
 #define FIREBASEAUTH_H
-#include <QObject>
+#include <QJsonDocument>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QJsonDocument>
+#include <QObject>
 
-class FirebaseAuth : public QObject
-{
-    Q_OBJECT
+class FirebaseAuth : public QObject {
+  Q_OBJECT
 
-    Q_PROPERTY(bool connectSuccesful READ connectSuccesful WRITE setConnectSuccesful NOTIFY connectSuccesfulChanged)
+  Q_PROPERTY(bool connectSuccesful READ connectSuccesful WRITE
+                 setConnectSuccesful NOTIFY connectSuccesfulChanged)
 public:
-    explicit FirebaseAuth(QObject *parent = nullptr);
-    ~FirebaseAuth();
+  explicit FirebaseAuth(QObject *parent = nullptr);
+  ~FirebaseAuth();
 
-    void setAPIKey(const QString &apiKey);
-    void setFirebaseUrl(const QString &firebaseUrl);
-    bool connectSuccesful() const;
-    void setConnectSuccesful(bool newConnectSuccesful);
+  void setAPIKey(const QString &apiKey);
+  void setFirebaseUrl(const QString &firebaseUrl);
+  bool connectSuccesful() const;
+  void setConnectSuccesful(bool newConnectSuccesful);
 
-    Q_INVOKABLE void signUserUp(const QString &emailAddress, const QString &password);
-    Q_INVOKABLE void signUserIn(const QString &emailAddress, const QString &password);
+  Q_INVOKABLE void signUserUp(const QString &emailAddress,
+                              const QString &password);
+  Q_INVOKABLE void signUserIn(const QString &emailAddress,
+                              const QString &password);
 
 public slots:
-    void networkReplyReadyRead();
-    void performAuthenticatedDataBaseCall();
+  void networkReplyReadyRead();
+  void performAuthenticatedDataBaseCall();
 
 signals:
-    void userSignedIn();
-    void connectSuccesfulChanged();
+  void userSignedIn();
+  void connectSuccesfulChanged();
 
 private:
-    void performPOST(const QString &url, const QJsonDocument &payload);
-    void parseResponse(const QByteArray &response);
+  void performPOST(const QString &url, const QJsonDocument &payload);
+  void parseResponse(const QByteArray &response);
 
-    QString m_APIKey;
-    QString m_idToken;
-    QString m_firebaseUrl;
-    bool m_connectSuccesful = false;
-    QNetworkAccessManager *m_networkManager;
-    QNetworkReply *m_networkReply;
+  QString m_APIKey;
+  QString m_idToken;
+  QString m_firebaseUrl;
+  bool m_connectSuccesful = false;
+  QNetworkAccessManager *m_networkManager;
+  QNetworkReply *m_networkReply;
 };
 
 #endif // FIREBASEAUTH_H

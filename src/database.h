@@ -4,15 +4,14 @@
 #include <string>
 #include <utility>
 
+#include <QDebug>
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QDebug>
 
-class DataBase
-{
+class DataBase {
 public:
   DataBase(const QString &name);
   ~DataBase();
