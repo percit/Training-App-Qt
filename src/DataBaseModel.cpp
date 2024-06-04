@@ -47,6 +47,10 @@ void DataBaseModel::updateAllMaxes() {
   }
 }
 
+void DataBaseModel::setDatabaseName(QString name) {
+  m_databaseName = name;
+}
+
 void DataBaseModel::emitDayChanges() {
   emit weeklyMetersRunChanged();
   emit longestDistanceChanged();
@@ -56,7 +60,7 @@ void DataBaseModel::emitDayChanges() {
   emit allDurationChanged();
 }
 void DataBaseModel::initializeDataBase() {
-  DataBase db("database_file.db");
+  DataBase db(m_databaseName);
   if (db.isOpen()) {
     db.clearDataBase();
     db.createTable();
@@ -104,17 +108,17 @@ void DataBaseModel::clearAllData() {
 
 std::pair<int, int>
 DataBaseModel::returnDataBaseElementByName(const QString &name) const {
-  DataBase db("database_file.db");
+  DataBase db(m_databaseName);
   return db.returnDataBaseElementByName(name);
 }
 
 QString DataBaseModel::returnMail(const QString &name) {
-  DataBase db("database_file.db");
+  DataBase db(m_databaseName);
   return db.returnMail(name);
 }
 
 void DataBaseModel::printDataBase() {
-  DataBase db("database_file.db");
+  DataBase db(m_databaseName);
   if (db.isOpen())
     db.printAll();
 }
@@ -123,7 +127,7 @@ void DataBaseModel::insertDataToDatabase(
     QString name, int firstValue, int secondValue,
     int id) { // we always set 2 values at once, as sqlite table was done that
               // way
-  DataBase db("database_file.db");
+  DataBase db(m_databaseName);
   if (db.isOpen()) {
     db.updateElement(name, firstValue, secondValue, id);
   } else
@@ -181,7 +185,7 @@ void DataBaseModel::setBestPace(int newBestPace) {
 }
 
 void DataBaseModel::setMail(QString newMail) {
-  DataBase db("database_file.db");
+  DataBase db(m_databaseName);
   if (db.isOpen()) {
     db.updateMail(
         "Mail", newMail,
@@ -194,7 +198,7 @@ void DataBaseModel::setMail(QString newMail) {
 
 void DataBaseModel::setWeek(QString day, int new_meters, int new_time) {
 
-  DataBase db("database_file.db");
+  DataBase db(m_databaseName);
   insertDataToDatabase(day, new_meters, new_time, 1);
 
   m_weekMeters[returnNumberFromDay(day)] = new_meters;
