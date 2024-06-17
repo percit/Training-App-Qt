@@ -1,34 +1,33 @@
 pragma Singleton
 import QtQuick
-import QtQuick.Window
 
 QtObject {
-  readonly property double scaleY: 1
-  readonly property double scaleX: 1
-//   readonly property double scaleY: (Screen.height / 612)
-//   readonly property double scaleX: (Screen.width / 375)
-  readonly property color backgroundColor: "#2C3F58"
-  readonly property color red: "#B81E12"
-  readonly property color darkRed: "#FF0000"
-  readonly property color green: "#41C864"
-  readonly property color yellow: "#FFC531"
+    readonly property double scaleY: 1
+    readonly property double scaleX: 1
+    //   readonly property double scaleY: (Screen.height / 612)
+    //   readonly property double scaleX: (Screen.width / 375)
+    readonly property color backgroundColor: "#2C3F58"
+    readonly property color red: "#B81E12"
+    readonly property color darkRed: "#FF0000"
+    readonly property color green: "#41C864"
+    readonly property color yellow: "#FFC531"
 
 
 
-  function makeColorWithOpacity(color, opacity) {
-	return Qt.rgba(color.r, color.g, color.b, opacity)
-  }
-  readonly property color black: "#150C00"
-  readonly property color white: "#FFFFFF"
+    function makeColorWithOpacity(color, opacity) {
+        return Qt.rgba(color.r, color.g, color.b, opacity)
+    }
+    readonly property color black: "#150C00"
+    readonly property color white: "#FFFFFF"
   
-  readonly property color black10: makeColorWithOpacity(black, 0.10)
-  readonly property color white10: makeColorWithOpacity(white, 0.10)
-  readonly property color black30: makeColorWithOpacity(black, 0.30)
-  readonly property color white30: makeColorWithOpacity(white, 0.30)
-  readonly property color black50: makeColorWithOpacity(black, 0.50)
-  readonly property color white50: makeColorWithOpacity(white, 0.50)
-  readonly property color black75: makeColorWithOpacity(black, 0.75)
-  readonly property color white75: makeColorWithOpacity(white, 0.75)
+    readonly property color black10: makeColorWithOpacity(black, 0.10)
+    readonly property color white10: makeColorWithOpacity(white, 0.10)
+    readonly property color black30: makeColorWithOpacity(black, 0.30)
+    readonly property color white30: makeColorWithOpacity(white, 0.30)
+    readonly property color black50: makeColorWithOpacity(black, 0.50)
+    readonly property color white50: makeColorWithOpacity(white, 0.50)
+    readonly property color black75: makeColorWithOpacity(black, 0.75)
+    readonly property color white75: makeColorWithOpacity(white, 0.75)
 
 
 

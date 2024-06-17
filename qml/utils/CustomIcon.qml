@@ -1,5 +1,6 @@
 import QtQuick
 import Qt5Compat.GraphicalEffects
+
 Item {
     property color color: "transparent"
     property alias source: root.source
