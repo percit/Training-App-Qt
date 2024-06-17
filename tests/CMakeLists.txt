@@ -1,18 +1,23 @@
 find_package(GTest REQUIRED)
 
-set(TEST1 "test1")
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
+set(TEST1 "test_sqlite_database")
 add_executable(${TEST1}
-    ../tests/test1.cpp
+    test_sqlite_database.cpp
 )
 
 target_link_libraries(${TEST1}
     GTest::GTest
     GTest::Main
+    Qt6::Core
+    Qt6::Sql
+    database_lib
 )
 
 set(TEST2 "test2")
 add_executable(${TEST2}
-    ../tests/test2.cpp
+    test2.cpp
 )
 
 target_link_libraries(${TEST2}

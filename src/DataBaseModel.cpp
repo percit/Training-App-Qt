@@ -147,13 +147,13 @@ void DataBaseModel::setDailyGoal(int newDailyGoal) {
 
 void DataBaseModel::setLongestDistance(int newLongestDistance) {
   m_longestDistance = std::max(m_longestDistance, newLongestDistance);
-  insertDataToDatabase("LongestRun", m_longestDuration, m_averageDuration, 9);
+  insertDataToDatabase("LongestRun", m_longestDistance, m_longestDuration, 9);
   emit longestDistanceChanged();
 }
 
 void DataBaseModel::setLongestDuration(int newLongestDuration) {
   m_longestDuration = std::max(m_longestDuration, newLongestDuration);
-  insertDataToDatabase("LongestRun", m_longestDuration, m_averageDuration, 9);
+  insertDataToDatabase("LongestRun", m_longestDistance, m_longestDuration, 9);
   emit longestDurationChanged();
 }
 
