@@ -1,6 +1,7 @@
 #include "DataBaseModel.h"
 #include "firebase_auth.h"
 #include "firebase_database.h"
+#include "NotificationClient.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -51,6 +52,17 @@ int main(int argc, char *argv[]) {
         // database->initializeDataBase();
         return database;
       });
+
+  qmlRegisterSingletonType<NotificationClient>(
+      "NotificationClient", 1, 0, "NotificationClient",
+      [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+
+        NotificationClient *client = new NotificationClient();
+        return client;
+      });
+
 
   qmlRegisterSingletonType(QUrl("qrc:/Style.qml"), "StyleSingleton", 1, 0,
                            "Style");

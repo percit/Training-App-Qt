@@ -16,6 +16,7 @@ find_package(QT NAMES Qt6 COMPONENTS Core Quick Sql Positioning Network Position
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Sql Positioning Network PositioningQuick OpenGL Core5Compat REQUIRED)
 
 add_subdirectory(src)
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/lqtutils)
 
 option(BUILD_TESTS "Build tests" OFF)
 if(BUILD_TESTS)

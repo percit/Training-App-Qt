@@ -15,7 +15,7 @@ Item {
     readonly property string dateString: days[ now.getDay() ]
 
     //showing route properties
-    property variant currentCoordinate
+    property variant currentCoordinate: src.position.coordinate
     property variant markers: []
 
     //showing time and distane properties, in meters and seconds
@@ -39,55 +39,69 @@ Item {
             value: "http://maps-redirect.qt.io/osm/5.6/"
         }
     }
-
-    Map { //map doesn't work on android and desktop for now
+    Map { //gestures are working only on mobile, not with mouse
         id: map
-//         // gesture.enabled: true //no sign of it in qt 6.5
-//         anchors.fill: parent
-//         plugin: plugin
-//         zoomLevel: 15
-//         center: src.position.coordinate
-//         activeMapType: map.supportedMapTypes[0]
-//         copyrightsVisible: false
-//         RouteModel {
-//             id: routeModel
-//             plugin: plugin
-//             query: RouteQuery {id: routeQuery }
-//             Component.onCompleted: {
-//                 // routeQuery.addWaypoint(currentCoordinate); //
-//                 //Could not find any constructor for value type QGeoCoordinate to call with value undefined
-// // "Could not convert argument 0 at"
-// // 	 "expression for onCompleted@qrc:/viewmodels/MapModel.qml:57"
-// // qrc:/viewmodels/MapModel.qml:57: TypeError: Passing incompatible arguments to C++ functions from JavaScript is not allowed.
-// //todo chyba nie dzialaja rzeczy z geo
-//                 // routeQuery.travelModes = RouteQuery.PedestrianTravel
-//                 // update();
-//             }
-//         }
+        anchors.fill: parent
+        plugin: plugin
+        zoomLevel: 15
+        center: src.position.coordinate
+        activeMapType: map.supportedMapTypes[0]
+        copyrightsVisible: false
+        RouteModel {
+            id: routeModel
+            plugin: plugin
+            query: RouteQuery {id: routeQuery }
+            Component.onCompleted: {
+                routeQuery.addWaypoint(currentCoordinate);
 
-//         MapItemView {
-//             model: routeModel
-//             delegate: Component{
-//                 MapRoute {
-//                     route: routeData
-//                     line.color: "green"
-//                     line.width: 4
-//                     smooth: true
-//                 }
-//             }
-//         }
-//         PositionSource {
-//             id: src
-//             updateInterval: 1000
-//             active: true
-//             onPositionChanged: {
-//                 var coord = src.position.coordinate;
-//                 root.currentCoordinate = coord
-//                 map.center = coord
-//             }
-//         }
-
+                routeQuery.travelModes = RouteQuery.PedestrianTravel
+                update();
+            }
+        }
+        PinchHandler {
+            id: pinch
+            target: null
+            onActiveChanged: if (active) {
+                map.startCentroid = map.toCoordinate(pinch.centroid.position, false)
+            }
+            onScaleChanged: (delta) => {
+                map.zoomLevel += Math.log2(delta)
+                map.alignCoordinateToPoint(map.startCentroid, pinch.centroid.position)
+            }
+            onRotationChanged: (delta) => {
+                map.bearing -= delta
+                map.alignCoordinateToPoint(map.startCentroid, pinch.centroid.position)
+            }
+            grabPermissions: PointerHandler.TakeOverForbidden
+        }
+        MapItemView {
+            model: routeModel
+            delegate: Component{
+                MapRoute {
+                    route: routeData
+                    line.color: "green"
+                    line.width: 4
+                    smooth: true
+                }
+            }
+        }
+        PositionSource {
+            id: src
+            updateInterval: 1000
+            active: true
+            onPositionChanged: {
+                var coord = src.position.coordinate;
+                root.currentCoordinate = coord
+                map.center = coord
+            }
+        }
+        DragHandler {
+            id: drag
+            target: null
+            onTranslationChanged: (delta) => map.pan(-delta.x, -delta.y)
+        }
     } //map
+
 
     Timer {
         interval: timerRefreshRate * 1000 //10 sec
@@ -98,7 +112,7 @@ Item {
 
             //reading time elapsed
             fullRunTime++
-
+            //line below is giving errors on desktop, as it is not supported (no need to get permissions on desktop)
             markers.push(currentCoordinate) // current coordinate is pushed to markers array
             routeQuery.addWaypoint(currentCoordinate);//and to the map
 			      routeModel.update()
@@ -128,6 +142,5 @@ Item {
             startTime = 0.0
         }
     }
-
 } //item
 
