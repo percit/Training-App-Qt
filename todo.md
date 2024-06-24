@@ -2,29 +2,6 @@
 ./tools/build-desktop.sh && ./build/src/Training-app
 
 
-# we settingspage.qml jest ustawianie czasu powiadomienia, mozesz to zaimplementowac
-okej to notyfikacje dzialaja, trzeba tez przetestowac ten czas czy timer sie dobrze odpala
-
-generalnie to tez problem, ze to sie nie odpala codziennie, a powinno(nawet jak sie nie wybierze godziny, to powinno byc default)
-
-
-- udalo mi sie zbudowac apk, wlasnie testuje
-- jak odpale ten test to apka sie crashuje, bede musial debugowac przez qtcreator
-
-
-
-odkomentuj w src/cmakelists ta jave i te wszystkie notification
-https://forum.qt.io/topic/93962/push-notifications-in-qt/15
-generalnie to dodalem ten kod, ale musze przetestowac na androidzie, ale wyglada chyba git?
-https://bugfreeblog.duckdns.org/2024/02/showing-local-notifications-in-qt.html =>
-- duzo rzeczy ktorych nie potrzebuje
-- musze miec caly projekt jako dependency (o ile dziala)
-- probowalem dodac tylko to co potrzebuje,ale masa bledow ktorych nie rozumiem
-
-
-
-generalnie to te funkcje z notyfikacjami powinny byc w ifdefach, a ifelse dac z "to dziala tylko na androidzie"
-
 # firebase
 - przetestuj firebase auth
 - z jakiegos powodu to zmieniam maila na regex np test@gmail.com, tak nie powinno byc i tego nie powinienem tak ogarniac
@@ -59,3 +36,8 @@ tok myslenia:
 
 
 # przetestuj wszystko co sie da recznie
+- rysowanie map
+- maxy
+- powiadomienia (raz dziennie i powinno sie powtarzac) plus jesli samemu nie ustawisz to powinno byc o 12 
+- wykresy
+- przeklikac wszedzie
