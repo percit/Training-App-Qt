@@ -12,6 +12,9 @@ to wymaga duzo czytania dokumentacji firebase jak to ma dzialac i jak to profesj
 
 
 # bazy danych powinny byc tworzone przez design patterny i solid
+co do tego sqlite w training app to spytaj chat gpt jak najlepiej trzymac lokalne dane, czy np tylko miec firebase, a jesli tak to jak trzymac dane lokalnie?
+
+
 takze jak bedziesz przepisywal, to przepisz najpierw jedna baze danych, a dopiero potem druga
 takze mozesz wyedytowac jak wyglada ta baza danych, zeby byl i mail itd (albo poczytaj jak sie robi tak cos zwykle, ze nie musi byc baza danych lokalna, tylko jakis json) 
 dlaczego ja w databasemodel ciagle tworze obiekt Database db(nazwa) ???
@@ -33,7 +36,7 @@ tok myslenia:
 -  ogarnij jak naprawde powinna byc tworzona baza danych, takze takie lokalne storage jak powinno byc ogarniete, bo to co robisz z sqlitem teraz jest tak naprawde meh, nawet maila tutaj nie wrzucisz, moze json jako local storage?
 
 
-
+# mozesz dodac orbit profiler i wlaczac lub wylaczac go w zaleznosci od potrzeb (aka flaga w cmake)
 
 # przetestuj wszystko co sie da recznie
 - rysowanie map
